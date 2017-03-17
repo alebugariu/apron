@@ -1,0 +1,10 @@
+Error: external call with symbolic argument: fprintf
+File: /host/apron/apron/ap_linexpr0.c
+Line: 219
+assembly.ll line: 59648
+Stack: 
+	#000059648 in ap_linexpr0_fprint (stream=47464061023232, a=97054624, name_of_dim=0) at /host/apron/apron/ap_linexpr0.c:219
+	#100056580 in ap_lincons0_fprint (stream=47464061023232, cons=96800288, name_of_dim=0) at /host/apron/apron/ap_lincons0.c:22
+	#200057467 in ap_lincons0_array_fprint (stream=47464061023232, array=96744080, name_of_dim=0) at /host/apron/apron/ap_lincons0.c:218
+	#300081514 in create_octagon (man=96767904, top=96776384, octagonNumber=96635184, dim, nbcons) at /host/apron/octagons/tests/test_oct.c:66
+	#400081592 in main (argc=1, argv=81668384) at /host/apron/octagons/tests/test_oct.c:89

@@ -1,0 +1,2 @@
+KLEE: ERROR: /host/apron/octagons/oct_representation.c:351: failed external call: ap_manager_alloc
+KLEE: NOTE: now ignoring this error at this location

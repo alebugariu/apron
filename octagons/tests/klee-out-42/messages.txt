@@ -1,0 +1,5 @@
+KLEE: ERROR: /host/apron/octagons/oct_hmat.c:63: concretized symbolic size
+KLEE: NOTE: now ignoring this error at this location
+KLEE: ERROR: /host/apron/apron/ap_lincons0.c:169: concretized symbolic size
+KLEE: NOTE: now ignoring this error at this location
+KLEE: halting execution, dumping remaining states

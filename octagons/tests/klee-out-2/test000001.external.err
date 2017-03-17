@@ -1,0 +1,7 @@
+Error: failed external call: ap_manager_alloc
+File: /host/apron/octagons/oct_representation.c
+Line: 351
+assembly.ll line: 14469
+Stack: 
+	#000014469 in oct_manager_alloc () at /host/apron/octagons/oct_representation.c:351
+	#100029061 in main (argc=1, argv=54166288) at /host/apron/octagons/tests/test_oct.c:85

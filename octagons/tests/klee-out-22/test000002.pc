@@ -1,0 +1,23 @@
+array number of constraints[8] : w32 -> w8 = symbolic
+array number of variables[2] : w32 -> w8 = symbolic
+(query [(Eq false
+             (Eq 0
+                 (And w32 (ZExt w32 (Sle 3
+                                         N0:(ZExt w32 N1:(ReadLSB w16 0 number of variables))))
+                          (ZExt w32 (Slt N0 10)))))
+         (Eq false
+             (Eq 0
+                 (And w32 (ZExt w32 (Ult 0
+                                         N2:(ReadLSB w64 0 number of constraints)))
+                          (ZExt w32 (Ult N2 10)))))
+         (Eq 192
+             (Mul w64 8
+                      (Select w64 (Eq false
+                                      (Eq 0
+                                          N3:(Mul w64 (Mul w64 2 N4:(ZExt w64 N1))
+                                                      (Add w64 1 N4))))
+                                  N3
+                                  1)))
+         (Eq false
+             (Eq 24 (Mul w64 24 N2)))]
+        false)

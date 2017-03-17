@@ -1,0 +1,21 @@
+klee -allow-external-sym-calls -max-instruction-time=5 test.bc
+PID: 23651
+Started: 2017-03-02 13:23:53
+BEGIN searcher description
+<InterleavedSearcher> containing 2 searchers:
+RandomPathSearcher
+WeightedRandomSearcher::CoveringNew
+</InterleavedSearcher>
+END searcher description
+Finished: 2017-03-02 13:55:01
+Elapsed: 00:31:08
+KLEE: done: explored paths = 8
+KLEE: done: avg. constructs per query = 220
+KLEE: done: total queries = 3377
+KLEE: done: valid queries = 3357
+KLEE: done: invalid queries = 20
+KLEE: done: query cex = 3377
+
+KLEE: done: total instructions = 245027
+KLEE: done: completed paths = 8
+KLEE: done: generated tests = 8

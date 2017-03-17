@@ -1,0 +1,14 @@
+Error: concretized symbolic size
+File: /host/apron/apron/ap_lincons0.c
+Line: 169
+assembly.ll line: 57227
+Stack: 
+	#000057227 in ap_lincons0_array_make (size) at /host/apron/apron/ap_lincons0.c:169
+	#100081346 in create_constraints (dim, nbcons, octagonNumber=79072912) at /host/apron/octagons/tests/test_oct.c:38
+	#200081502 in create_octagon (man=79207680, top=79217248, octagonNumber=79072912, dim, nbcons) at /host/apron/octagons/tests/test_oct.c:65
+	#300081591 in main (argc=1, argv=64108544) at /host/apron/octagons/tests/test_oct.c:89
+Info: 
+  size expr: (Mul w64 24
+                       (ReadLSB w64 0 number of constraints))
+  concretization : 24
+  unbound example: 48

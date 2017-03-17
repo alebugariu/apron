@@ -1,0 +1,20 @@
+Error: concretized symbolic size
+File: /host/apron/octagons/oct_hmat.c
+Line: 63
+assembly.ll line: 1972
+Stack: 
+	#000001972 in hmat_alloc (pr=49990784, dim) at /host/apron/octagons/oct_hmat.c:63
+	#100002083 in hmat_alloc_top (pr=49990784, dim) at /host/apron/octagons/oct_hmat.c:87
+	#200013649 in oct_top (man=83277248, intdim, realdim=0) at /host/apron/octagons/oct_representation.c:127
+	#300081427 in main (argc=1, argv=55419568) at /host/apron/octagons/tests/test_oct.c:86
+Info: 
+  size expr: (Mul w64 8
+                       (Select w64 (Eq false
+                                       (Eq 0
+                                           N0:(Mul w64 (Mul w64 2
+                                                                N1:(ZExt w64 (ReadLSB w16 0 number of variables)))
+                                                       (Add w64 1 N1))))
+                                   N0
+                                   1))
+  concretization : 192
+  unbound example: 672

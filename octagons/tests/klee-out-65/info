@@ -1,0 +1,18 @@
+klee -allow-external-sym-calls -search=bfs -max-depth=4 test.bc
+PID: 18217
+Started: 2017-03-02 12:10:05
+BEGIN searcher description
+BFSSearcher
+END searcher description
+Finished: 2017-03-02 12:10:07
+Elapsed: 00:00:02
+KLEE: done: explored paths = 6
+KLEE: done: avg. constructs per query = 117
+KLEE: done: total queries = 188
+KLEE: done: valid queries = 170
+KLEE: done: invalid queries = 18
+KLEE: done: query cex = 188
+
+KLEE: done: total instructions = 15562
+KLEE: done: completed paths = 6
+KLEE: done: generated tests = 6
