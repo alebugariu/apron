@@ -1,2 +1,0 @@
-KLEE: ERROR: /host/apron/octagons/oct_representation.c:338: failed external call: ap_fpu_init
-KLEE: NOTE: now ignoring this error at this location

@@ -117,7 +117,6 @@ bool hmat_add_lincons(oct_internal_t* pr, bound_t* b, size_t intdim, size_t dim,
 		      ap_lincons0_array_t* ar, bool* exact,
 		      bool* respect_closure)
 {
-  printf("Beginning of HMAT\n");
   size_t i, j, k, ui, uj;
   size_t var_pending = 0; /* delay incremental closure as long as possible */
   int closure_pending = 0;
@@ -156,7 +155,6 @@ bool hmat_add_lincons(oct_internal_t* pr, bound_t* b, size_t intdim, size_t dim,
       bound_add_uint(pr->tmp[0], pr->tmp[0], 1);
       bound_sub_uint(pr->tmp[1], pr->tmp[1], 1);
     }
-    printf("U Type: %d\n", u.type);
 
     switch (u.type) {
 
@@ -202,7 +200,6 @@ bool hmat_add_lincons(oct_internal_t* pr, bound_t* b, size_t intdim, size_t dim,
 	  var_pending!=u.i && var_pending!=u.j) {
 	if (hmat_close_incremental(b,dim,var_pending)) return true;
       }
-      printf("HMAT not true for dim=%zu and v=%zu\n", dim, var_pending);
       closure_pending = 1;
       var_pending = (var_pending==u.j) ? u.j : u.i;
 
@@ -488,7 +485,6 @@ oct_t* oct_meet_lincons_array(ap_manager_t* man,
     respect_closure = (m==a->closed) && (pr->funopt->algorithm>=0);
 
     if (!destructive) m = hmat_copy(pr,m,a->dim);
-    printf("Before HMAT\n");
     /* go */
     if (hmat_add_lincons(pr,m,a->intdim,a->dim,array,&exact,&respect_closure)) {
       /* empty */

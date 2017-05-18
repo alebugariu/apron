@@ -1,3 +1,0 @@
-klee -max-time 100 -allow-external-sym-calls test.bc
-PID: 17776
-Started: 2017-02-24 11:19:13

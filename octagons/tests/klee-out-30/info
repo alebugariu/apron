@@ -1,3 +1,0 @@
-klee -allow-external-sym-calls test.bc
-PID: 28515
-Started: 2017-02-24 16:52:06

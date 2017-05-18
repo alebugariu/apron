@@ -1,7 +1,0 @@
-Error: failed external call: ap_fpu_init
-File: /host/apron/octagons/oct_representation.c
-Line: 338
-assembly.ll line: 14407
-Stack: 
-	#000014407 in oct_manager_alloc () at /host/apron/octagons/oct_representation.c:338
-	#100029074 in main (argc=1, argv=56721216) at /host/apron/octagons/tests/test_oct.c:85

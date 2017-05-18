@@ -119,7 +119,6 @@ bool hmat_close(bound_t* m, size_t dim)
 
 bool hmat_close_incremental(bound_t* m, size_t dim, size_t v)
 {
-  printf("HMAT close incremental with dim=%zu and v=%zu\n", dim, v);
   size_t i,j,k;
   bound_t *c;
   bound_t ij,ik,ik2;
@@ -132,22 +131,17 @@ bool hmat_close_incremental(bound_t* m, size_t dim, size_t v)
     size_t ii = 2*v+1;
     size_t br  = k<ii ? k : ii;
     for (i=2*v;i<2*v+2;i++) {
-    	printf("i=%zu v=%zu\n", i, v);
     	/* v in first end-point position */
     	c = m+matpos(i,0);
     	bound_set(ik,m[matpos2(i,k)]);
     	bound_set(ik2,m[matpos2(i,kk)]);
     	for (j=0;j<=br;j++,c++) {
-    		printf("Before add: k=%zu j=%zu br=%zu\n", k, j, br);
     		bound_add(ij,ik,m[matpos(k,j)]);    /* ik+kj */
-    		printf("After add: k=%zu j=%zu br=%zu\n", k, j, br);
     		bound_bmin(*c,ij);
     		bound_add(ij,ik2,m[matpos(kk,j)]);  /* ik2+k2j */
     		bound_bmin(*c,ij);
-    		printf("Last instruction in for: k=%zu j=%zu br=%zu\n", k, j, br);
     	}
         for (;j<=ii;j++,c++) {
-        	printf("In for j=%zu ii=%zu\n", j, ii);
         	bound_add(ij,ik,m[matpos(j^1,kk)]); /* ik+kj */
         	bound_bmin(*c,ij);
         	bound_add(ij,ik2,m[matpos(j^1,k)]); /* ik2+k2j */
@@ -172,7 +166,6 @@ bool hmat_close_incremental(bound_t* m, size_t dim, size_t v)
         }
     }
   }
-  printf("HMAT close incremental after first for \n");
   /* incremental Floyd-Warshall : v in pivot position */
   for (k=2*v;k<2*v+2;k++) {
     size_t kk = k^1;
@@ -198,7 +191,6 @@ bool hmat_close_incremental(bound_t* m, size_t dim, size_t v)
   }
   
   bound_clear(ik); bound_clear(ik2); bound_clear(ij);
-  printf("HMAT close incremental end\n");
   return hmat_s_step(m,dim);
 }
 

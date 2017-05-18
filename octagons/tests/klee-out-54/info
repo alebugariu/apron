@@ -1,3 +1,0 @@
-klee -allow-external-sym-calls -search=dfs test.bc
-PID: 3264
-Started: 2017-03-01 13:12:17

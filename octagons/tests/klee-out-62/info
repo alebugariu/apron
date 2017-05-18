@@ -1,3 +1,0 @@
-klee -allow-external-sym-calls -search=bfs -max-depth=10 test.bc
-PID: 14890
-Started: 2017-03-02 09:56:10
