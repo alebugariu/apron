@@ -1,2 +1,2 @@
-*.[bc]
+*.bc
 octagons/tests/klee-out-*
