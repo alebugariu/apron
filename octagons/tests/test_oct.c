@@ -2,6 +2,7 @@
 #include <klee/klee.h>
 #include "oct.h"
 #include "oct_internal.h"
+#include "test_oct.h"
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
@@ -29,13 +30,19 @@ ap_linexpr0_t * create_linexpr0(unsigned short int dim, int v1, int v2,
 	return linexpr0;
 }
 
-ap_lincons0_array_t create_constraints(unsigned short int dim, size_t nbcons,
-		char * octagonNumber) {
+ap_lincons0_array_t create_constraints(unsigned short int dim, char * octagonNumber) {
 	size_t i;
-	ap_lincons0_array_t lincons0 = ap_lincons0_array_make(nbcons);
+	size_t nbcons;
+
+	char buffer_nbcons[80] = "number of constraints for octagon ";
 	char buffer_type[80] = "type for octagon ";
 	char buffer_sym[80] = "symbolic variables for octagon ";
 	char buffer_scalar[80] = "scalar value for octagon ";
+
+	klee_make_symbolic(&nbcons, sizeof(nbcons), strcat(buffer_nbcons, octagonNumber));
+	klee_assume(nbcons >= MIN_NBCONS & nbcons <= MAX_NBCONS);
+	ap_lincons0_array_t lincons0 = ap_lincons0_array_make(nbcons);
+
 	int symbolicValues[nbcons][5];
 	klee_make_symbolic(symbolicValues, sizeof(symbolicValues),
 			strcat(buffer_sym, octagonNumber));
@@ -51,8 +58,8 @@ ap_lincons0_array_t create_constraints(unsigned short int dim, size_t nbcons,
 						& symbolicValues[i][0] >= 0
 						& symbolicValues[i][1] >= 0);
 
-		klee_assume(symbolicValues[i][2] == 1 | symbolicValues[i][2] == -1);
-		klee_assume(symbolicValues[i][3] == 1 | symbolicValues[i][3] == -1);
+		klee_assume(symbolicValues[i][2] == 1 | symbolicValues[i][2] == -1 | symbolicValues[i][2] == 0);
+		klee_assume(symbolicValues[i][3] == 1 | symbolicValues[i][3] == -1 | symbolicValues[i][3] == 0);
         klee_assume(symbolicValues[i][4] > 0);
 		ap_linexpr0_t * linexpr0 = create_linexpr0(dim, symbolicValues[i][0],
 				symbolicValues[i][1], symbolicValues[i][2],
@@ -147,11 +154,15 @@ void print_constraints(ap_lincons0_array_t* array) {
 }
 
 oct_t* create_octagon(ap_manager_t* man, oct_t * top,
-		char * octagonNumber, unsigned short int dim, size_t nbcons) {
-	ap_lincons0_array_t constraints = create_constraints(dim, nbcons,
-			octagonNumber);
+		char * octagonNumber, unsigned short int dim) {
+	ap_lincons0_array_t constraints = create_constraints(dim, octagonNumber);
 	oct_t* octagon = oct_meet_lincons_array(man, false, top,
 			&constraints);
 	printf("Created octagon %s!\n", octagonNumber);
 	return octagon;
+}
+
+void make_symbolic_dimension(unsigned short int *dim) {
+	klee_make_symbolic(dim, sizeof(*dim), "number of variables");
+	klee_assume(*dim > MIN_DIM & *dim < MAX_DIM);
 }
