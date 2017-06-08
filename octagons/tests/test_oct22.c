@@ -6,13 +6,6 @@
 #include <string.h>
 #include <stdio.h>
 
-bool is_meet_compatible_direct(ap_manager_t * man, oct_t * x, oct_t * y) {
-	if (oct_is_leq(man, x, y)) {
-		return oct_is_eq(man, oct_meet(man, false, x, y), x);
-	}
-	return true;
-}
-
 int main(int argc, char **argv) {
 	unsigned short int dim;
 	make_symbolic_dimension(&dim);
@@ -26,6 +19,7 @@ int main(int argc, char **argv) {
 
 	//meet == glb, join == lub
 	//meet is compatible (direct)
-	klee_assert(is_meet_compatible_direct(man, octagon1, octagon2));
+	klee_assume(oct_is_leq(man, octagon1, octagon2));
+	klee_assert(oct_is_eq(man, oct_meet(man, false, octagon1, octagon2), octagon1));
 	return 0;
 }

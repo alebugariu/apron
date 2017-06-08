@@ -6,12 +6,6 @@
 #include <string.h>
 #include <stdio.h>
 
-bool is_join_compatible_direct(ap_manager_t * man, oct_t * x, oct_t * y) {
-	if (oct_is_leq(man, x, y)) {
-		return oct_is_eq(man, oct_join(man, false, x, y), y);
-	}
-	return true;
-}
 
 int main(int argc, char **argv) {
 	unsigned short int dim;
@@ -26,7 +20,8 @@ int main(int argc, char **argv) {
 
 	//meet == glb, join == lub
 	//join is compatible (direct)
-	klee_assert(is_join_compatible_direct(man, octagon1, octagon2));
+	klee_assume(oct_is_leq(man, octagon1, octagon2));
+	klee_assert(oct_is_eq(man, oct_join(man, false, octagon1, octagon2), octagon2));
 	return 0;
 }
 

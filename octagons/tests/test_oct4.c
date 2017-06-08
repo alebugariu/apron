@@ -6,13 +6,6 @@
 #include <string.h>
 #include <stdio.h>
 
-bool is_leq_antiSymmetric(ap_manager_t * man, oct_t * x, oct_t * y) {
-	if (oct_is_leq(man, x, y) && oct_is_leq(man, y, x)) {
-		return oct_is_eq(man, x, y);
-	}
-	return true;
-}
-
 int main(int argc, char **argv) {
 	unsigned short int dim;
 	make_symbolic_dimension(&dim);
@@ -24,7 +17,8 @@ int main(int argc, char **argv) {
 	oct_t* octagon2 = create_octagon(man, top, "2", dim);
 
 	// <= is anti symmetric
-	klee_assert(is_leq_antiSymmetric(man, octagon1, octagon2));
+	klee_assume(oct_is_leq(man, octagon1, octagon2) && oct_is_leq(man, octagon2, octagon1));
+	klee_assert(oct_is_eq(man, octagon1, octagon2));
 	return 0;
 }
 
