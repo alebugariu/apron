@@ -1,4 +1,4 @@
-number ?= 24
+number ?= 39
 start ?= 0
 
 all: compile test
