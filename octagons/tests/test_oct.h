@@ -16,6 +16,6 @@
 oct_t* create_octagon(ap_manager_t* man, oct_t * top,
 		char * octagonNumber, unsigned short int dim);
 
-void make_symbolic_dimension(unsigned short int * dim);
+unsigned short int make_symbolic_dimension();
 
 #endif /* TEST_OCT_H_ */

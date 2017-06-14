@@ -7,8 +7,7 @@
 #include <stdio.h>
 
 int main(int argc, char **argv) {
-	unsigned short int dim;
-	make_symbolic_dimension(&dim);
+	unsigned short int dim = make_symbolic_dimension();
 
 	ap_manager_t * man = oct_manager_alloc();
 	oct_t * top = oct_top(man, dim, 0);
