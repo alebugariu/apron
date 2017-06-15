@@ -1,6 +1,3 @@
-number ?= 39
-start ?= 0
-
 all: compile test
 compile: 
 	cd octagons ; \
@@ -19,7 +16,7 @@ test:	octagons/tests/*.c
         number=$(start) ; while [ $${number} -le $(number) ] ; do \
 		llvm-link ../*.bc ../../apron/*.bc test_oct.bc test_oct$${number}.bc -o test$${number}.bc ; \
 		startTime=`date +%s` ; \
-                klee -allow-external-sym-calls -sym-malloc-bound=256 -max-depth=8 test$${number}.bc ; \
+                klee -allow-external-sym-calls -sym-malloc-bound=256 -max-forks=2 -solver-backend=z3 test$${number}.bc ; \
 		endTime=`date +%s` ; \
                 runtime=`expr $$endTime - $$startTime` ; \
                 echo "Execution time: $$runtime sec for test_oct$$number\n" ; \
