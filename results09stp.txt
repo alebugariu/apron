@@ -1,0 +1,1978 @@
+cd octagons/tests; \
+	rm -rf klee-out-* ; \
+	clang -I /home/klee/klee_src/include -I ../ -I ../../num -I ../../apron -emit-llvm -O0 -c -g *.c -g -DNUM_LONGDOUBLE; \
+        number=0 ; while [ ${number} -le 9 ] ; do \
+		llvm-link ../*.bc ../../apron/*.bc test_oct.bc test_oct${number}.bc -o test${number}.bc ; \
+		startTime=`date +%s` ; \
+                klee -allow-external-sym-calls -sym-malloc-bound=8192 -max-forks=100 -solver-backend=stp test${number}.bc ; \
+		endTime=`date +%s` ; \
+                runtime=`expr $endTime - $startTime` ; \
+                echo "Execution time: $runtime sec for test_oct$number\n" ; \
+		number=`expr $number + 1` ; \
+    	done; \
+        true
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-0"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(70688704, 70452464)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+KLEE: WARNING: unable to write output test case, losing it
+KLEE: WARNING: unable to write output test case, losing it
+KLEE: WARNING: unable to write output test case, losing it
+1
+KLEE: WARNING: unable to write output test case, losing it
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 1325640
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 101
+Execution time: 529 sec for test_oct0
+
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-2"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(61496688, 61262528)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+1
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 1323746
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 101
+Execution time: 491 sec for test_oct1
+
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-3"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(63913312, 63679152)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+1
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 1258737
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 101
+Execution time: 460 sec for test_oct2
+
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-7"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(63169536, 62874080)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+1
+1
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+KLEE: ERROR: /home/klee/apron/octagons/tests/test_oct3.c:20: invalid klee_assume call (provably false)
+KLEE: NOTE: now ignoring this error at this location
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 2471926
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 75
+Execution time: 1205 sec for test_oct3
+
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-14"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(67881904, 67579984)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+1
+1
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+1
+1
+KLEE: ERROR: /home/klee/apron/octagons/tests/test_oct4.c:19: invalid klee_assume call (provably false)
+KLEE: NOTE: now ignoring this error at this location
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 1713999
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 66
+Execution time: 701 sec for test_oct4
+
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-18"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(76104960, 75808032)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+1
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 1327963
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 101
+Execution time: 478 sec for test_oct5
+
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-24"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(74533008, 74232240)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+KLEE: WARNING ONCE: calling external: fmaxl(0, 0)
+1
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 1581168
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 101
+Execution time: 466 sec for test_oct6
+
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-27"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(85166224, 84864704)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+1
+1
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+KLEE: WARNING ONCE: calling external: fmaxl(0, 0)
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 1663011
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 101
+Execution time: 536 sec for test_oct7
+
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-31"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(88799376, 88497856)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+1
+1
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 1643346
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 101
+Execution time: 508 sec for test_oct8
+
+KLEE: output directory is "/home/klee/apron/octagons/tests/klee-out-35"
+Using STP solver backend
+WARNING: this target does not support the llvm.stacksave intrinsic.
+KLEE: WARNING: undefined reference to function: __finite
+KLEE: WARNING: undefined reference to function: __finitel
+KLEE: WARNING: undefined reference to function: __gmpfr_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_canonicalize
+KLEE: WARNING: undefined reference to function: __gmpq_clear
+KLEE: WARNING: undefined reference to function: __gmpq_cmp
+KLEE: WARNING: undefined reference to function: __gmpq_cmp_si
+KLEE: WARNING: undefined reference to function: __gmpq_div_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_equal
+KLEE: WARNING: undefined reference to function: __gmpq_init
+KLEE: WARNING: undefined reference to function: __gmpq_inv
+KLEE: WARNING: undefined reference to function: __gmpq_mul_2exp
+KLEE: WARNING: undefined reference to function: __gmpq_neg
+KLEE: WARNING: undefined reference to function: __gmpq_out_str
+KLEE: WARNING: undefined reference to function: __gmpq_set
+KLEE: WARNING: undefined reference to function: __gmpq_set_d
+KLEE: WARNING: undefined reference to function: __gmpq_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_si
+KLEE: WARNING: undefined reference to function: __gmpz_get_ui
+KLEE: WARNING: undefined reference to function: __gmpz_set_si
+KLEE: WARNING: undefined reference to function: __gmpz_set_ui
+KLEE: WARNING: undefined reference to function: __isinf
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_eval_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_interval_set_itv_Dl
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_tcons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_D
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPFR
+KLEE: WARNING: undefined reference to function: ap_intlinearize_texpr0_intlinear_MPQ
+KLEE: WARNING: undefined reference to function: ap_lincons0_set_itv_lincons_Dl
+KLEE: WARNING: undefined reference to function: ap_linexpr0_set_itv_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_lincons0_array_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_MPQ
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_D
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPFR
+KLEE: WARNING: undefined reference to function: ap_quasilinearize_linexpr0_array_MPQ
+KLEE: WARNING: undefined reference to function: bsearch
+KLEE: WARNING: undefined reference to function: ceill
+KLEE: WARNING: undefined reference to function: fesetround
+KLEE: WARNING: undefined reference to function: fmaxl
+KLEE: WARNING: undefined reference to function: fminl
+KLEE: WARNING: undefined reference to function: fprintf
+KLEE: WARNING: undefined reference to function: itv_array_set_ap_interval_array_Dl
+KLEE: WARNING: undefined reference to function: itv_boxize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_canonicalize_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_eval_cstlincons_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_alloc_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_free_Dl
+KLEE: WARNING: undefined reference to function: itv_internal_init_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_tcons0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_intlinearize_ap_texpr0_intlinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_init_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_array_set_ap_lincons0_array_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_ap_lincons0_Dl
+KLEE: WARNING: undefined reference to function: itv_lincons_set_bool_Dl
+KLEE: WARNING: undefined reference to function: itv_linearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_clear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_init_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_is_quasilinear_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_reinit_Dl
+KLEE: WARNING: undefined reference to function: itv_linexpr_set_ap_linexpr0_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_lincons_array_Dl
+KLEE: WARNING: undefined reference to function: itv_quasilinearize_linexpr_Dl
+KLEE: WARNING: undefined reference to function: ldexpl
+KLEE: WARNING: undefined reference to function: mpfr_clear
+KLEE: WARNING: undefined reference to function: mpfr_cmp3
+KLEE: WARNING: undefined reference to function: mpfr_cmp_d
+KLEE: WARNING: undefined reference to function: mpfr_cmp_ld
+KLEE: WARNING: undefined reference to function: mpfr_cmp_q
+KLEE: WARNING: undefined reference to function: mpfr_cmp_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_equal_p
+KLEE: WARNING: undefined reference to function: mpfr_get_d
+KLEE: WARNING: undefined reference to function: mpfr_get_ld
+KLEE: WARNING: undefined reference to function: mpfr_get_si
+KLEE: WARNING: undefined reference to function: mpfr_get_z_2exp
+KLEE: WARNING: undefined reference to function: mpfr_init
+KLEE: WARNING: undefined reference to function: mpfr_init2
+KLEE: WARNING: undefined reference to function: mpfr_neg
+KLEE: WARNING: undefined reference to function: mpfr_number_p
+KLEE: WARNING: undefined reference to function: mpfr_set4
+KLEE: WARNING: undefined reference to function: mpfr_set_d
+KLEE: WARNING: undefined reference to function: mpfr_set_erangeflag
+KLEE: WARNING: undefined reference to function: mpfr_set_inf
+KLEE: WARNING: undefined reference to function: mpfr_set_prec
+KLEE: WARNING: undefined reference to function: mpfr_set_q
+KLEE: WARNING: undefined reference to function: mpfr_set_si_2exp
+KLEE: WARNING: undefined reference to function: mpfr_set_ui_2exp
+KLEE: WARNING: undefined reference to function: mpfr_ui_div
+KLEE: WARNING: undefined reference to function: printf
+KLEE: WARNING: undefined reference to function: qsort
+KLEE: WARNING: undefined reference to function: snprintf
+KLEE: WARNING: undefined reference to function: sprintf
+KLEE: WARNING: undefined reference to variable: stderr
+KLEE: WARNING: undefined reference to variable: stdout
+KLEE: WARNING: undefined reference to function: strcat
+KLEE: WARNING: undefined reference to function: strcmp
+KLEE: WARNING: undefined reference to function: strcpy
+KLEE: WARNING: undefined reference to function: strdup
+KLEE: WARNING: undefined reference to function: strlen
+KLEE: WARNING ONCE: Alignment of memory from call "malloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: strcat(68982480, 68775424)
+1
+KLEE: WARNING ONCE: silently concretizing (reason: floating point) expression (ReadLSB w32 16 symbolic variables for octagon 1) to value 2147483647 (/home/klee/apron/octagons/tests/test_oct.c:17)
+KLEE: WARNING ONCE: Alignment of memory from call "realloc" is not modelled. Using alignment of 8.
+1
+KLEE: WARNING ONCE: calling external: __isinf(13970166044099084288)
+KLEE: WARNING ONCE: calling external: __finitel(907247767033174577643520)
+KLEE: WARNING ONCE: calling external: ceill(907247767033174577643520)
+1
+1
+1
+KLEE: WARNING ONCE: skipping fork (max-forks reached)
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+
+KLEE: done: total instructions = 1719060
+KLEE: done: completed paths = 101
+KLEE: done: generated tests = 101
+Execution time: 487 sec for test_oct9
+

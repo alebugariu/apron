@@ -7,7 +7,7 @@ def dump_result(writer, results):
 	if results is not None:
 		results['status'] = (
 			"PASS"
-			if results['completed paths'] == results['generated tests']
+			if results['error message'] == '-'
 			else "FAIL")
 		print(results)
 		writer.writerow([results[column] for column in columns])
@@ -40,7 +40,10 @@ with open(output_file, 'w') as results_fp:
 				    value = line.replace('KLEE: output directory is ', '').strip()
 				    dump_result(writer, results)
 				    results = {}
-				    results['error message']= "-"
+				    results['error message']= '-'
+				    results['completed paths']= '-'
+				    results['generated tests']= '-'
+				    results['total instructions'] = '-'
 				    results['output directory'] = value[1:-1]
 				elif line.startswith('KLEE: done: '):
 					key, value = line.split(' = ')
@@ -55,4 +58,6 @@ with open(output_file, 'w') as results_fp:
 				elif 'KLEE: ERROR: ' in line:
 					ind = line.index('KLEE: ERROR: ')
 					results['error message'] = line[ind:].strip()
+				elif 'Segmentation fault' in line:
+                                        results['error message'] = 'Segmentation fault'
 		dump_result(writer, results)
