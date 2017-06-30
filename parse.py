@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import csv
+import sys
 
 def dump_result(writer, results):
 	if results is not None:
@@ -11,7 +12,13 @@ def dump_result(writer, results):
 		print(results)
 		writer.writerow([results[column] for column in columns])
 
-with open('results.csv', 'w') as results_fp:
+if len(sys.argv) != 3:
+    print("{} input output".format(sys.argv[0]))
+    sys.exit(1)
+else:
+    _, input_file, output_file = sys.argv
+
+with open(output_file, 'w') as results_fp:
 	writer = csv.writer(results_fp)
 	columns = [
 	    'test case',
@@ -25,7 +32,7 @@ with open('results.csv', 'w') as results_fp:
 		'output directory'
 		]
 	writer.writerow(columns)
-	for test_file in ['results.txt']:
+	for test_file in [input_file]:
 		results = None
 		with open(test_file) as fp:
 			for line in fp:
