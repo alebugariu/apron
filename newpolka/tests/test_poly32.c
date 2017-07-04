@@ -19,8 +19,8 @@ int main(int argc, char **argv) {
 	int i = 0;
 	while (true) {
 		pk_t* polyhedron2 = create_polyhedron(man, top, "2", dim);
-		wideningResult = opt_pk_widening(man, polyhedron1, opt_pk_join(man, false, polyhedron1, polyhedron2));
-		if (opt_pk_is_leq(man, wideningResult, polyhedron1)) {
+		wideningResult = pk_widening(man, polyhedron1, pk_join(man, false, polyhedron1, polyhedron2));
+		if (pk_is_leq(man, wideningResult, polyhedron1)) {
 			break; // we reached a fixed point
 		}
 		polyhedron1 = wideningResult;

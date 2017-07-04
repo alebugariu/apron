@@ -1,3 +1,4 @@
 *.bc
 *.o
 octagons/tests/klee-*
+newpolka/tests/klee-*
