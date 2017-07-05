@@ -17,6 +17,7 @@ int main(int argc, char **argv) {
 
 	//meet == glb, join == lub
 	//x <= x widening y
+	klee_assume(pk_is_leq(man, polyhedron1, polyhedron2));
 	klee_assert(
 			pk_is_leq(man, polyhedron1,
 					pk_widening(man, polyhedron1, polyhedron2)));

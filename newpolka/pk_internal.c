@@ -33,7 +33,6 @@ void pk_internal_init(pk_internal_t* pk, size_t maxdims)
   pk->vector_mpqp = malloc( (maxdims+3)*sizeof(mpq_t));
   for (i=0; i<maxdims+3; i++)
     mpq_init(pk->vector_mpqp[i]);
-
   pk->vector_tmp = vector_alloc(5);
 
   pk->matrix_dimp = malloc(pk->maxdims*sizeof(ap_dim_t));

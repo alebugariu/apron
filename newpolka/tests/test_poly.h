@@ -7,7 +7,6 @@
 #define MAX_NBCONS 50
 
 #include "pk.h"
-#include "gmp.h"
 
 //for widening
 #define K 3
