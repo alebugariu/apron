@@ -5,62 +5,54 @@
 #include <stdio.h>
 #include <math.h>
 
-ap_linexpr0_t * create_linexpr0(unsigned short int dim, int v1, int v2,
-		int coeff1, int coeff2, int scalar_value) {
+ap_linexpr0_t * create_linexpr0(unsigned short int dim, int *values) {
 	ap_coeff_t *cst, *coeff;
-	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE, 2);
+	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE,
+			dim);
 	cst = &linexpr0->cst;
 
-	ap_scalar_reinit(cst->val.scalar, AP_SCALAR_DOUBLE);
-	cst->val.scalar->val.dbl = (double) scalar_value;
+	ap_scalar_reinit(cst->val.scalar, AP_SCALAR_MPQ);
+	mpq_set_si(cst->val.scalar->val.mpq, values[dim], 1);
 
-	ap_linterm_t * linterm = &linexpr0->p.linterm[0];
-	linterm->dim = v1;
-	coeff = &linterm->coeff;
-	ap_scalar_reinit(coeff->val.scalar, AP_SCALAR_DOUBLE);
-	coeff->val.scalar->val.dbl = (double) coeff1;
-
-	linterm = &linexpr0->p.linterm[1];
-	linterm->dim = v2;
-	coeff = &linterm->coeff;
-	ap_scalar_reinit(coeff->val.scalar, AP_SCALAR_DOUBLE);
-	coeff->val.scalar->val.dbl = (double) coeff2;
+	size_t i;
+	for (i = 0; i < dim; i++) {
+		ap_linterm_t * linterm = &linexpr0->p.linterm[i];
+		linterm->dim = i;
+		coeff = &linterm->coeff;
+		ap_scalar_reinit(coeff->val.scalar, AP_SCALAR_MPQ);
+		mpq_set_si(coeff->val.scalar->val.mpq, values[i], 1);
+	}
 	return linexpr0;
 }
 
 ap_lincons0_array_t create_constraints(unsigned short int dim,
 		char * polyhedronNumber) {
-	size_t i;
+	size_t i, j;
 	size_t nbcons;
 
 	char buffer_nbcons[80] = "number of constraints for polyhedron ";
 	char buffer_type[80] = "type for polyhedron ";
-	char buffer_sym[80] = "symbolic variables for polyhedron ";
-	char buffer_scalar[80] = "scalar value for polyhedron ";
+	char buffer_sym[80] = "symbolic coefficients for polyhedron ";
 
 	klee_make_symbolic(&nbcons, sizeof(nbcons),
 			strcat(buffer_nbcons, polyhedronNumber));
 	klee_assume(nbcons >= MIN_NBCONS & nbcons <= MAX_NBCONS & nbcons >= dim);
 	ap_lincons0_array_t lincons0 = ap_lincons0_array_make(nbcons);
 
-	int symbolicValues[nbcons][5];
-	klee_make_symbolic(symbolicValues, sizeof(symbolicValues),
-			strcat(buffer_sym, polyhedronNumber));
 	for (i = 0; i < nbcons; i++) {
 		ap_constyp_t type;
 		klee_make_symbolic(&type, sizeof(type),
 				strcat(buffer_type, polyhedronNumber));
 		klee_assume(type == AP_CONS_SUPEQ | type == AP_CONS_EQ);
 		lincons0.p[i].constyp = type;
-		klee_assume(
-				symbolicValues[i][0] < dim & symbolicValues[i][1] < dim
-						& symbolicValues[i][0] != symbolicValues[i][1]
-						& symbolicValues[i][0] >= 0
-						& symbolicValues[i][1] >= 0);
-		klee_assume(symbolicValues[i][4] > 0);
-		ap_linexpr0_t * linexpr0 = create_linexpr0(dim, symbolicValues[i][0],
-				symbolicValues[i][1], symbolicValues[i][2],
-				symbolicValues[i][3], symbolicValues[i][4]);
+
+		int symbolicValues[MAX_DIM + 1];
+		klee_make_symbolic(symbolicValues, sizeof(symbolicValues),
+				strcat(buffer_sym, polyhedronNumber));
+		for (j = 0; j <= dim; j++) {
+			klee_assume(symbolicValues[j] != 0);
+		}
+		ap_linexpr0_t * linexpr0 = create_linexpr0(dim, symbolicValues);
 		lincons0.p[i].linexpr0 = linexpr0;
 	}
 	return lincons0;
@@ -150,11 +142,10 @@ void print_constraints(ap_lincons0_array_t* array) {
 	}
 }
 
-pk_t* create_polyhedron(ap_manager_t* man, pk_t* top,
-		char * polyhedronNumber, unsigned short int dim) {
+pk_t* create_polyhedron(ap_manager_t* man, pk_t* top, char * polyhedronNumber,
+		unsigned short int dim) {
 	ap_lincons0_array_t constraints = create_constraints(dim, polyhedronNumber);
-	pk_t* polyhedron = pk_meet_lincons_array(man, false, top,
-			&constraints);
+	pk_t* polyhedron = pk_meet_lincons_array(man, false, top, &constraints);
 	//printf("Created polyhedron %s!\n", polyhedronNumber);
 	return polyhedron;
 }

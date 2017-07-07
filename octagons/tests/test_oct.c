@@ -37,7 +37,6 @@ ap_lincons0_array_t create_constraints(unsigned short int dim, char * octagonNum
 	char buffer_nbcons[80] = "number of constraints for octagon ";
 	char buffer_type[80] = "type for octagon ";
 	char buffer_sym[80] = "symbolic variables for octagon ";
-	char buffer_scalar[80] = "scalar value for octagon ";
 
 	klee_make_symbolic(&nbcons, sizeof(nbcons), strcat(buffer_nbcons, octagonNumber));
 	klee_assume(nbcons >= MIN_NBCONS & nbcons <= MAX_NBCONS & nbcons >= dim);
