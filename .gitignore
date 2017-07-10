@@ -1,4 +1,4 @@
 *.bc
 *.o
-octagons/tests/klee-*
-newpolka/tests/klee-*
+octagons/tests/klee/klee-*
+newpolka/tests/klee/klee-*

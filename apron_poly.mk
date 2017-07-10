@@ -18,11 +18,11 @@ compile:
 	cd ..	       
  
 test:
-	cd newpolka/tests; \
+	cd newpolka/tests/klee; \
         rm -rf klee-*; \
-	clang -I /home/klee/klee_src/include -I ../ -I ../../num -I ../../apron -emit-llvm -O0 -c -g *.c -g -DNUM_LONGLONGRAT; \
+	clang -I /home/klee/klee_src/include -I ../../ -I ../../../num -I ../../../apron -emit-llvm -O0 -c -g *.c -g -DNUM_LONGLONGRAT; \
         number=$(start) ; while [ $${number} -le $(number) ] ; do \
-		llvm-link ../*.bc ../../apron/*.bc ../../itv/itvRll.bc ../../itv/itv_linexprRll.bc ../../itv/itv_linearizeRll.bc test_poly.bc test_poly$${number}.bc -o test$${number}.bc ; \
+		llvm-link ../../*.bc ../../../apron/*.bc ../../../itv/itvRll.bc ../../../itv/itv_linexprRll.bc ../../../itv/itv_linearizeRll.bc test_poly.bc test_poly$${number}.bc -o test$${number}.bc ; \
                 startTime=`date +%s` ; \
                 klee -load=/usr/local/lib/libgmp.so.10.3.2 -allow-external-sym-calls -max-forks=300 -max-depth=7 -check-overshift=false -solver-backend=stp -sym-malloc-bound=512 test$${number}.bc ; \
                 endTime=`date +%s` ; \
