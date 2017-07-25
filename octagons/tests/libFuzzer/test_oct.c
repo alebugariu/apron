@@ -51,7 +51,7 @@ bool create_constraints(ap_lincons0_array_t *lincons0, int dim,
 			return false;
 		}
 		if (!assume_fuzzable(
-				type == AP_CONS_SUPEQ || type == ELINA_CONS_EQ)) {
+				type == AP_CONS_SUPEQ || type == AP_CONS_EQ)) {
 			return false;
 		}
 		fprintf(fp, "Type: %c\n", type == 0 ? 'e' : 's');
