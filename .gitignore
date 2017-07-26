@@ -2,3 +2,8 @@
 *.o
 octagons/tests/klee/klee-*
 newpolka/tests/klee/klee-*
+octagons/tests/libFuzzer/test*
+octagons/tests/libFuzzer/crash-*
+octagons/tests/libFuzzer/slow-*
+octagons/tests/libFuzzer/oom-*
+octagons/tests/libFuzzer/out*.txt

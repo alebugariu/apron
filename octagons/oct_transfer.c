@@ -404,7 +404,7 @@ bool hmat_add_lincons(oct_internal_t* pr, bound_t* b, size_t intdim, size_t dim,
   }
   /* apply pending incremental closure now */
   if (*respect_closure && closure_pending)
-    if (hmat_close_incremental(b,dim,var_pending)) {printf("END of HMAT\n");return true;}
+    if (hmat_close_incremental(b,dim,var_pending)) {return true;}
   return false;
 }
 
