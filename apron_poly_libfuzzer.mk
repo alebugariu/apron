@@ -1,6 +1,8 @@
 APRON=/home/apron/apron
 POLY=/home/apron/newpolka
-INCLUDES=-I $(APRON) -I /home/apron/itv -I /home/apron/num -I $(POLY)
+NUM=/home/apron/num
+INCLUDES=-I $(APRON) -I /home/apron/itv -I $(NUM) 
+POLY_INCLUDES=$(INCLUDES) -I $(POLY)
 LIBS=-L $(APRON) -L $(POLY)
 FILES=$(filter-out newpolka/test.c newpolka/test0.c newpolka/test1.c newpolka/test_environment.c newpolka/pk_approximate.c newpolka/pk_extract.c, $(wildcard newpolka/*.c))
 SRC_FILES=$(subst newpolka/, ,$(FILES))
@@ -10,17 +12,17 @@ SRC_FILES=$(subst newpolka/, ,$(FILES))
 all: compile test
 compile: 
 	cd newpolka ; \
-	clang -fsanitize=address -fsanitize-coverage=trace-pc-guard -O0 -c -g $(SRC_FILES) -DNUM_LONGLONGRAT ; \
+	clang -fsanitize=address -fsanitize-coverage=trace-pc-guard -O0 -c -g $(INCLUDES)  $(SRC_FILES) -DNUM_LONGLONGRAT ; \
 	cd .. ; \
 	cd apron ; \
-	clang -fsanitize=address -fsanitize-coverage=trace-pc-guard -O0 -c -g -DNUM_LONGDOUBLE *.c ; \
-	rm -f test_texpr0.bc ; \
+	clang -fsanitize=address -fsanitize-coverage=trace-pc-guard -O0 -c -g $(INCLUDES) -DNUM_LONGDOUBLE *.c ; \
+	rm -f test_texpr0.o ; \
 	cd .. ; \
 	cd itv ; \
-	clang -fsanitize=address -fsanitize-coverage=trace-pc-guard -O0 -c -g -DNUM_MPZ *.c ; \
-	rm -f test.bc test2.bc *_debug.bc ; \
+	clang -fsanitize=address -fsanitize-coverage=trace-pc-guard -O0 -c -g -I $(NUM) -I $(APRON) -DNUM_MPZ *.c ; \
+	rm -f test.o test2.o *_debug.o ; \
 	cd ..
- 
+
 test:
 	cd newpolka/tests/libFuzzer; \
 	clang -fsanitize-coverage=trace-pc-guard $(INCLUDES) -O0 -c -g test_poly.c -DNUM_LONGLONGRAT; \
