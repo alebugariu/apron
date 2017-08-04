@@ -1,5 +1,7 @@
 *.bc
 *.o
+*.so
+*.a
 octagons/tests/klee/klee-*
 newpolka/tests/klee/klee-*
 octagons/tests/libFuzzer/test*

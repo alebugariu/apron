@@ -6,7 +6,7 @@
 #define MIN_NBCONS 1
 #define MAX_NBCONS 50
 
-#include "opt_pk.h"
+#include "pk.h"
 
 //for widening
 #define K 100
