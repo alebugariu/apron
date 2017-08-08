@@ -157,6 +157,8 @@ void vector_gcd(pk_internal_t* pk,
     numint_abs(v[i],q[i]);
 
   do {
+	  //printf("get me out of here\n");
+	  //fflush(stdout);
     int index=0;
     vector_min_notzero(pk,size,&index,gcd);
     if (numint_sgn(gcd)==0) break;
@@ -382,7 +384,15 @@ void vector_combine(pk_internal_t* pk,
   for (j=1;j<size;j++){
     if (j!=k){
       numint_mul(pk->vector_tmp[3],pk->vector_tmp[2],q1[j]);
+      /*if(numint_sgn(q1[j])*numint_sgn(pk->vector_tmp[2])!=numint_sgn(pk->vector_tmp[3])){
+    	  printf("OVERFLOW\n");
+    	  fflush(stdout);
+      }*/
       numint_mul(pk->vector_tmp[4],pk->vector_tmp[1],q2[j]);
+      /*if(numint_sgn(q2[j])*numint_sgn(pk->vector_tmp[1])!=numint_sgn(pk->vector_tmp[4])){
+          	  printf("OVERFLOW 1\n");
+          	  fflush(stdout);
+            }*/
       numint_sub(q3[j],pk->vector_tmp[3],pk->vector_tmp[4]);
     }
   }

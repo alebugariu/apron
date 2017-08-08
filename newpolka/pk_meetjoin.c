@@ -98,6 +98,7 @@ bool poly_meet_matrix(bool meet,
 			 bitindex_size(pa->C->nbrows));
     }
     cherni_add_and_minimize(pk,meet,po,start);
+
     if (pk->exn) goto _poly_meet_matrix_exit0;
     po->status =
       meet
