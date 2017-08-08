@@ -168,7 +168,7 @@ octtest%: oct_test%.o liboct%_debug.a liboct%_debug.so
 else
 octtest%: oct_test%.o liboct%_debug.a
 endif
-	$(CC) -o $@ oct_test$*.o \
+	$(CC) $(CFLAGS) -o $@ oct_test$*.o \
 		-L. -loct$*_debug -L../newpolka -lpolkaMPQ_debug \
 		$(LDFLAGS) $(LIBS_DEBUG) $(CFLAGS_DEBUG)
 

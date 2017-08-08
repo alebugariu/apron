@@ -1,8 +1,8 @@
 include ../Makefile.config
 include ../vars.mk
 
-ICFLAGS = -flto -fuse-ld=gold -Wl,-plugin-opt=emit-llvm $(NUM_ICFLAGS) $(APRON_ICFLAGS) $(MP_ICFLAGS)
-LDFLAGS = -flto -fuse-ld=gold -Wl,-plugin-opt=emit-llvm $(NUM_LIFLAGS) $(APRON_LIFLAGS) $(MP_LIFLAGS) -lapron_debug -lgmp -lmpfr -lm
+ICFLAGS += $(NUM_ICFLAGS) $(APRON_ICFLAGS) $(MP_ICFLAGS)
+LDFLAGS += $(NUM_LIFLAGS) $(APRON_LIFLAGS) $(MP_LIFLAGS) -lapron_debug -lgmp -lmpfr -lm
 
 #---------------------------------------
 # Files
@@ -42,7 +42,7 @@ endif
 # Possible goals:
 # depend doc install
 # and the following one
-.PHONY: allMPQ allRll allD allMPFR libitv.a libitv_debug.a
+
 all: allMPQ allRll allD allMPFR libitv.a libitv_debug.a
 
 allMPQ: libitvMPQ.a libitvMPQ_debug.a
