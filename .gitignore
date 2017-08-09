@@ -9,3 +9,9 @@ octagons/tests/libFuzzer/crash-*
 octagons/tests/libFuzzer/slow-*
 octagons/tests/libFuzzer/oom-*
 octagons/tests/libFuzzer/out*.txt
+newpolka/tests/libFuzzer/test*
+newpolka/tests/libFuzzer/crash-*
+newpolka/tests/libFuzzer/slow-*
+newpolka/tests/libFuzzer/oom-*
+newpolka/tests/libFuzzer/timeout-*
+
