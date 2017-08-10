@@ -6,8 +6,8 @@
 extern int LLVMFuzzerTestOneInput(const int *data, size_t dataSize) {
 	unsigned int dataIndex = 0;
 	int dim;
-		FILE *fp;
-		fp = fopen("out31.txt", "w+");
+	FILE *fp;
+	fp = fopen("out31.txt", "w+");
 
 	if (make_fuzzable_dimension(&dim, data, dataSize, &dataIndex, fp)) {
 
@@ -21,14 +21,15 @@ extern int LLVMFuzzerTestOneInput(const int *data, size_t dataSize) {
 			pk_t* polyhedron2;
 			if (create_polyhedron(&polyhedron2, man, top, dim, data, dataSize,
 					&dataIndex, fp)) {
-
-				//meet == glb, join == lub
-				//widening approximates join
-				if (!pk_is_leq(man,
-						pk_join(man, false, polyhedron1, polyhedron2),
-						pk_widening(man, polyhedron1, polyhedron2))) {
-					fclose(fp);
-					return 1;
+				if (assume_fuzzable(pk_is_leq(man, polyhedron1, polyhedron2))) {
+					//meet == glb, join == lub
+					//widening approximates join
+					if (!pk_is_leq(man,
+							pk_join(man, false, polyhedron1, polyhedron2),
+							pk_widening(man, polyhedron1, polyhedron2))) {
+						fclose(fp);
+						return 1;
+					}
 				}
 			}
 		}

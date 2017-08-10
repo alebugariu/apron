@@ -16,15 +16,16 @@ extern int LLVMFuzzerTestOneInput(const int *data, size_t dataSize) {
 		pk_t * bottom = pk_bottom(man, dim, 0);
 
 		pk_t* polyhedron1;
-		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize, &dataIndex,
-				fp)) {
-
-			//meet == glb, join == lub
-			//bottom widening x == x
-			if (!pk_is_eq(man, pk_widening(man, bottom, polyhedron1),
-					polyhedron1)) {
-				fclose(fp);
-				return 1;
+		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize,
+				&dataIndex, fp)) {
+			if (assume_fuzzable(pk_is_leq(man, bottom, polyhedron1))) {
+				//meet == glb, join == lub
+				//bottom widening x == x
+				if (!pk_is_eq(man, pk_widening(man, bottom, polyhedron1),
+						polyhedron1)) {
+					fclose(fp);
+					return 1;
+				}
 			}
 		}
 	}
