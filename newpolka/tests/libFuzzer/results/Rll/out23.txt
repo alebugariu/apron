@@ -1,0 +1,66 @@
+Dim: 8
+Number of constraints: 32
+Type: e
+Values: 0, 1280, 0, 0, 134217728, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 262144, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 1280, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 167772160, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 1667330676, 1634557797, 1668246636, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 33554433, 0, 0, 0
+Type: e
+Values: 0, 0, 512, 256, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 33554432, 16777216, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, -256, 249
+Type: e
+Values: -2105409536, -2105376126, -2105376126, -2105376126, -2105376126, -2105376126, -2105376126, 130, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0

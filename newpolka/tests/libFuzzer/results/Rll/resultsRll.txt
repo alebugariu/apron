@@ -3,104 +3,35 @@ cd newpolka/tests/libFuzzer; \
 	clang -lstdc++ -fsanitize=address -fsanitize-coverage=trace-pc-guard -I /usr/local/include -L /home/apron/itv/ -L /home/apron/apron/ -L /home/apron/newpolka/ test_poly.c test_poly${number}.c \
 		  /home/libFuzzer.a -o test${number} -lmpfr -lgmp -lapron -litv -lpolkaRll; \
         startTime=`date +%s` ; \
-	./test${number} -max_len=10000 -detect_leaks=0 -rss_limit_mb=8192 -timeout=3600 -print_final_stats=1 MY_CORPUS/ SEED_CORPUS/; \
+./test${number} -max_len=10000 -detect_leaks=0 -rss_limit_mb=8192 -timeout=3600 -print_final_stats=1 MY_CORPUS/ SEED_CORPUS/; \
         endTime=`date +%s` ; \
         runtime=`expr $endTime - $startTime` ; \
         echo "Execution time: $runtime sec for test_poly$number\n" ; \
 	number=`expr $number + 1` ; \
     	done; \
         true
-INFO: Seed: 3295269912
-INFO: Loaded 3 modules (23401 guards): [0x2b309ba901a0, 0x2b309baa3b34), [0x2b309bce7690, 0x2b309bcea9f4), [0x7470a0, 0x74714c), 
+INFO: Seed: 2647956592
+INFO: Loaded 3 modules (23401 guards): [0x2b64b26581a0, 0x2b64b266bb34), [0x2b64b28af690, 0x2b64b28b29f4), [0x7470a0, 0x74714c), 
 Loading corpus dir: MY_CORPUS/
 Loading corpus dir: SEED_CORPUS/
-#0	READ units: 382
-#383	INITED cov: 822 ft: 3097 corp: 201/869Kb exec/s: 0 rss: 89Mb
+#0	READ units: 421
+#422	INITED cov: 822 ft: 3143 corp: 207/901Kb exec/s: 0 rss: 94Mb
 poly_check: bad satF
 test0: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 0, con 1
-Constraints
-3 10
-0 0 0 0 0 0 0 0 0 1 
-0 0 0 0 217315284281279 0 0 7409617344 -124750810733997552 0 
-1 694651626 0 0 -287073296339405 0 -11114426016 0 164795301015270864 0 
-Frames
-7 10
-0 -1161335103911975296 0 0 -1243414128609454000 0 0 0 5867512675594533 0 
-0 -9186345482860960 0 0 -22228852032 0 0 651945852843837 0 0 
-0 16 0 0 0 0 1 0 0 0 
-0 0 0 0 0 1 0 0 0 0 
-0 0 0 1 0 0 0 0 0 0 
-0 0 1 0 0 0 0 0 0 0 
-1 1 0 0 0 0 0 0 0 0 
-7 1
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0010,0000 0000,0000 0000,0000 0000,0000 
-==12228== ERROR: libFuzzer: deadly signal
-    #0 0x4c5c67 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test0+0x4c5c67)
-    #1 0x4f4ae1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
-    #2 0x4f4aad in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2b309bcfc38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2b309c868427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2b309c86a029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2b309c860bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2b309c860c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2b309baccd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2b309bacf20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2b309bacf62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
-    #11 0x4e9e8c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test0+0x4e9e8c)
-    #12 0x4ea5b0 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test0+0x4ea5b0)
-    #13 0x4f5b18 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
-    #14 0x4f5528 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
-    #15 0x4f6702 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
-    #16 0x4f68d7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
-    #17 0x4eefc8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
-    #18 0x4ea7f0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2b309c85382f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
-    #20 0x41c7a8 in _start (/home/apron/newpolka/tests/libFuzzer/test0+0x41c7a8)
-
-NOTE: libFuzzer has rudimentary signal handlers.
-      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
-SUMMARY: libFuzzer: deadly signal
-MS: 2 ChangeBit-ChangeByte-; base unit: 0836a2d9e8640be362bd39fbc5d1671940002306
-artifact_prefix='./'; Test unit written to ./crash-83bcfe062fd6deff92cdf2493c4785059d335c16
-stat::number_of_executed_units: 1220
-stat::average_exec_per_sec:     0
-stat::new_units_added:          0
-stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              133
-Execution time: 1 sec for test_poly0
-
-INFO: Seed: 5164729
-INFO: Loaded 3 modules (23401 guards): [0x2b233e4bf1a0, 0x2b233e4d2b34), [0x2b233e716690, 0x2b233e7199f4), [0x747090, 0x74713c), 
-Loading corpus dir: MY_CORPUS/
-Loading corpus dir: SEED_CORPUS/
-#0	READ units: 382
-#383	INITED cov: 840 ft: 3162 corp: 197/848Kb exec/s: 0 rss: 88Mb
-#445	NEW    cov: 840 ft: 3163 corp: 198/853Kb exec/s: 0 rss: 92Mb L: 5366 MS: 2 ShuffleBytes-ChangeBinInt-
-#484	NEW    cov: 840 ft: 3164 corp: 199/860Kb exec/s: 0 rss: 93Mb L: 6739 MS: 1 InsertByte-
-#660	NEW    cov: 840 ft: 3165 corp: 200/865Kb exec/s: 0 rss: 100Mb L: 5255 MS: 2 ChangeBinInt-ChangeBit-
-poly_check: bad satF
-test1: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 2, con 0
+cherni_checksatmat con_to_ray=0: ray 4, con 0
 Constraints
 1 10
-1 7696066445572049967 -7516983799152246784 0 6790849758165663744 -8007412065020739584 0 280856426863784913 756623233571487744 0 
+1 4112063 65536 0 0 0 0 0 0 0 
 Frames
 9 10
-0 0 0 0 0 0 0 0 0 -1 
-0 -3619123431650754560 0 0 0 0 0 0 582783421028683311 0 
-0 7711260850244614421 0 0 0 0 0 6590881611398707477 0 0 
+0 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 1 0 0 
 0 0 0 0 0 0 1 0 0 0 
-0 -4908213558323904512 0 0 0 -6717781133873942621 0 0 0 0 
-0 -13351413809152 0 0 7248921049731 0 0 0 0 0 
+0 -7170371072297009152 0 0 0 5825979634723914691 0 0 0 0 
+0 7219369433599311872 0 0 816406967980945063 0 0 0 0 0 
 0 0 0 1 0 0 0 0 0 0 
-0 876846483753009152 100413172045107447 0 0 0 0 0 0 0 
+0 13696831011356672 14121208191661243 0 0 0 0 0 0 0 
 1 1 0 0 0 0 0 0 0 0 
 9 1
 0000,0000 0000,0000 0000,0000 0000,0000 
@@ -112,18 +43,85 @@ Frames
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
 1000,0000 0000,0000 0000,0000 0000,0000 
-==12239== ERROR: libFuzzer: deadly signal
+==15402== ERROR: libFuzzer: deadly signal
+    #0 0x4c5c67 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test0+0x4c5c67)
+    #1 0x4f4ae1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4aad in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b64b28c438f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b64b3430427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b64b3432029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b64b3428bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b64b3428c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b64b2694d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b64b269720c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b64b269762c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9e8c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test0+0x4e9e8c)
+    #12 0x4ea5b0 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test0+0x4ea5b0)
+    #13 0x4f5b18 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5528 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f6702 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f68d7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4eefc8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ea7f0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b64b341b82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7a8 in _start (/home/apron/newpolka/tests/libFuzzer/test0+0x41c7a8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 1 ChangeBinInt-; base unit: 62f0c132917851540b1975e2b5a40257d2a51cb0
+artifact_prefix='./'; Test unit written to ./crash-23ef2305953c39a89f1089ca7a8c721d88387c31
+stat::number_of_executed_units: 1638
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              160
+Execution time: 1 sec for test_poly0
+
+INFO: Seed: 4005746351
+INFO: Loaded 3 modules (23401 guards): [0x2b6d2604d1a0, 0x2b6d26060b34), [0x2b6d262a4690, 0x2b6d262a79f4), [0x747090, 0x74713c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 421
+#422	INITED cov: 840 ft: 3215 corp: 201/876Kb exec/s: 0 rss: 94Mb
+poly_check: bad satF
+test1: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 1, con 0
+Constraints
+2 10
+0 0 194308502691 0 0 0 3103129600 0 426584244224 0 
+1 1 0 0 0 0 0 0 0 0 
+Frames
+8 10
+0 0 0 0 0 0 0 0 0 1 
+0 0 99481292203032576 0 0 0 0 0 99098606102941333 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 -1143340543115264 0 0 0 297295818308823999 0 0 0 
+0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 1 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+8 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0100,0000 0000,0000 0000,0000 0000,0000 
+==15413== ERROR: libFuzzer: deadly signal
     #0 0x4c5c17 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test1+0x4c5c17)
     #1 0x4f4a71 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
     #2 0x4f4a3d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2b233e72b38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2b233f297427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2b233f299029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2b233f28fbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2b233f28fc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2b233e4fbd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2b233e4fe20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2b233e4fe62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #3 0x2b6d262b938f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b6d26e25427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b6d26e27029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b6d26e1dbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b6d26e1dc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b6d26089d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b6d2608c20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b6d2608c62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
     #11 0x4e9e3c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test1+0x4e9e3c)
     #12 0x4ea544 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test1+0x4ea544)
     #13 0x4f5aa8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
@@ -132,328 +130,92 @@ Frames
     #16 0x4f6867 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
     #17 0x4eef58 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
     #18 0x4ea780 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2b233f28282f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #19 0x2b6d26e1082f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
     #20 0x41c758 in _start (/home/apron/newpolka/tests/libFuzzer/test1+0x41c758)
 
 NOTE: libFuzzer has rudimentary signal handlers.
       Combine libFuzzer with AddressSanitizer or similar for better crash reports.
 SUMMARY: libFuzzer: deadly signal
-MS: 4 CopyPart-CopyPart-ChangeBinInt-EraseBytes-; base unit: 1832056e9424f82fef1628fef7d8210e44d95af2
-artifact_prefix='./'; Test unit written to ./crash-6e1330491fcd731d0c7af9c5c58a25d0719d2e27
-stat::number_of_executed_units: 1042
-stat::average_exec_per_sec:     0
-stat::new_units_added:          3
-stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              122
-Execution time: 1 sec for test_poly1
-
-INFO: Seed: 1044005202
-INFO: Loaded 3 modules (23401 guards): [0x2b0e0ac611a0, 0x2b0e0ac74b34), [0x2b0e0aeb8690, 0x2b0e0aebb9f4), [0x747090, 0x74713c), 
-Loading corpus dir: MY_CORPUS/
-Loading corpus dir: SEED_CORPUS/
-#0	READ units: 385
-#386	INITED cov: 842 ft: 3148 corp: 193/808Kb exec/s: 0 rss: 89Mb
-#1002	NEW    cov: 842 ft: 3149 corp: 194/816Kb exec/s: 0 rss: 118Mb L: 8464 MS: 1 InsertRepeatedBytes-
-#1962	NEW    cov: 842 ft: 3150 corp: 195/821Kb exec/s: 0 rss: 166Mb L: 5560 MS: 1 CopyPart-
-poly_check: bad satF
-test2: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 0, con 1
-Constraints
-3 10
-0 0 0 0 0 0 0 0 0 1 
-0 0 0 0 12713310111523 463101084 0 0 -7298124008534016 0 
-1 694651626 0 0 -287073296339405 0 -11114426016 0 164795301015270864 0 
-Frames
-7 10
-0 -763917674236607320 0 0 591148044691255296 0 0 0 79800072634899 0 
-0 0 0 0 0 0 0 1 0 0 
-0 16 0 0 0 0 1 0 0 0 
-0 6395546786918 0 0 -1389303252 2955558245737 0 0 0 0 
-0 0 0 1 0 0 0 0 0 0 
-0 0 1 0 0 0 0 0 0 0 
-1 1 0 0 0 0 0 0 0 0 
-7 1
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0010,0000 0000,0000 0000,0000 0000,0000 
-==12250== ERROR: libFuzzer: deadly signal
-    #0 0x4c5c17 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test2+0x4c5c17)
-    #1 0x4f4a21 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
-    #2 0x4f49ed in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2b0e0aecd38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2b0e0ba39427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2b0e0ba3b029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2b0e0ba31bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2b0e0ba31c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2b0e0ac9dd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2b0e0aca020c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2b0e0aca062c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
-    #11 0x4e9e3c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test2+0x4e9e3c)
-    #12 0x4ea4fb in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test2+0x4ea4fb)
-    #13 0x4f5a58 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
-    #14 0x4f5468 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
-    #15 0x4f6642 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
-    #16 0x4f6817 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
-    #17 0x4eef08 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
-    #18 0x4ea730 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2b0e0ba2482f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
-    #20 0x41c758 in _start (/home/apron/newpolka/tests/libFuzzer/test2+0x41c758)
-
-NOTE: libFuzzer has rudimentary signal handlers.
-      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
-SUMMARY: libFuzzer: deadly signal
-MS: 5 CMP-ChangeByte-ShuffleBytes-ChangeBit-CopyPart- DE: "rss_limit_m"-; base unit: 0836a2d9e8640be362bd39fbc5d1671940002306
-artifact_prefix='./'; Test unit written to ./crash-d83e5093097bccaec8b19806091a46232eaa5225
-stat::number_of_executed_units: 2136
-stat::average_exec_per_sec:     0
-stat::new_units_added:          2
-stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              175
-Execution time: 1 sec for test_poly2
-
-INFO: Seed: 2377350282
-INFO: Loaded 3 modules (23410 guards): [0x2ba9d109d1a0, 0x2ba9d10b0b34), [0x2ba9d12f4690, 0x2ba9d12f79f4), [0x748090, 0x748160), 
-Loading corpus dir: MY_CORPUS/
-Loading corpus dir: SEED_CORPUS/
-#0	READ units: 387
-#388	INITED cov: 814 ft: 3047 corp: 183/762Kb exec/s: 0 rss: 88Mb
-poly_check: bad satF
-test3: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 6, con 1
-Constraints
-3 10
-0 0 0 0 16502357509 -332380978907843228 0 0 376946436148822016 0 
-1 0 0 0 -97 1953718124 0 0 0 0 
-1 3769464361488220160 0 0 2419277 -48727683730684 0 0 0 0 
-Frames
-8 10
-0 0 0 0 0 0 0 0 0 1 
-0 0 0 0 0 0 0 1 0 0 
-0 0 0 0 0 0 1 0 0 0 
-0 0 0 0 1953718124 97 0 0 0 0 
-0 0 0 1 0 0 0 0 0 0 
-0 0 1 0 0 0 0 0 0 0 
-1 2419277 0 0 -3769464361488220160 0 0 0 165023575090 0 
-1 1 0 0 0 0 0 0 0 0 
-8 1
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0100,0000 0000,0000 0000,0000 0000,0000 
-0010,0000 0000,0000 0000,0000 0000,0000 
-==12261== ERROR: libFuzzer: deadly signal
-    #0 0x4c5c17 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test3+0x4c5c17)
-    #1 0x4f4f11 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
-    #2 0x4f4edd in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2ba9d130938f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2ba9d1e75427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2ba9d1e77029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2ba9d1e6dbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2ba9d1e6dc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2ba9d10d9d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2ba9d10dc20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2ba9d10dc62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
-    #11 0x4e9e3c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test3+0x4e9e3c)
-    #12 0x4ea594 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test3+0x4ea594)
-    #13 0x4f5f48 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
-    #14 0x4f5958 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
-    #15 0x4f6b32 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
-    #16 0x4f6d07 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
-    #17 0x4ef3f8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
-    #18 0x4eac20 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2ba9d1e6082f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
-    #20 0x41c758 in _start (/home/apron/newpolka/tests/libFuzzer/test3+0x41c758)
-
-NOTE: libFuzzer has rudimentary signal handlers.
-      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
-SUMMARY: libFuzzer: deadly signal
-MS: 3 ChangeBinInt-ChangeBit-CopyPart-; base unit: 8c516a14b662e7ef660d75f2f42f833dec19cad9
-artifact_prefix='./'; Test unit written to ./crash-e58f54449ff7264d57d6af8a78fd668ba4c6bb33
-stat::number_of_executed_units: 601
+MS: 2 InsertByte-ChangeByte-; base unit: 62f0c132917851540b1975e2b5a40257d2a51cb0
+artifact_prefix='./'; Test unit written to ./crash-ccf8959e9bb4719a1680466bbd75f9ed756f03dc
+stat::number_of_executed_units: 504
 stat::average_exec_per_sec:     0
 stat::new_units_added:          0
 stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              99
-Execution time: 1 sec for test_poly3
+stat::peak_rss_mb:              102
+Execution time: 1 sec for test_poly1
 
-INFO: Seed: 3135453713
-INFO: Loaded 3 modules (23407 guards): [0x2b01a954a1a0, 0x2b01a955db34), [0x2b01a97a1690, 0x2b01a97a49f4), [0x7480a0, 0x748164), 
+INFO: Seed: 554192074
+INFO: Loaded 3 modules (23401 guards): [0x2ab0fc98c1a0, 0x2ab0fc99fb34), [0x2ab0fcbe3690, 0x2ab0fcbe69f4), [0x747090, 0x74713c), 
 Loading corpus dir: MY_CORPUS/
 Loading corpus dir: SEED_CORPUS/
-#0	READ units: 387
-#388	INITED cov: 814 ft: 3047 corp: 187/769Kb exec/s: 0 rss: 88Mb
-#611	NEW    cov: 814 ft: 3048 corp: 188/774Kb exec/s: 0 rss: 99Mb L: 5191 MS: 3 InsertRepeatedBytes-CMP-EraseBytes- DE: "trace_malloc"-
-#1479	NEW    cov: 814 ft: 3049 corp: 189/780Kb exec/s: 0 rss: 134Mb L: 5515 MS: 1 InsertByte-
-#1620	NEW    cov: 814 ft: 3050 corp: 190/785Kb exec/s: 0 rss: 140Mb L: 5514 MS: 2 CopyPart-CopyPart-
-#2037	NEW    cov: 814 ft: 3051 corp: 191/790Kb exec/s: 0 rss: 160Mb L: 5573 MS: 4 ChangeBit-ChangeByte-ShuffleBytes-PersAutoDict- DE: "trace_malloc"-
-#2270	NEW    cov: 814 ft: 3053 corp: 192/796Kb exec/s: 0 rss: 170Mb L: 5678 MS: 2 InsertRepeatedBytes-CMP- DE: "print_final_stats=1"-
-#2305	NEW    cov: 814 ft: 3055 corp: 193/801Kb exec/s: 0 rss: 171Mb L: 5554 MS: 2 ShuffleBytes-ChangeBit-
-#2362	NEW    cov: 814 ft: 3056 corp: 194/807Kb exec/s: 0 rss: 174Mb L: 5339 MS: 4 InsertRepeatedBytes-ChangeBinInt-ChangeBit-CMP- DE: "\x01\x00\x00\x00\x00\x00\x00\x00"-
-#2926	NEW    cov: 814 ft: 3071 corp: 195/809Kb exec/s: 2926 rss: 199Mb L: 2980 MS: 3 InsertByte-EraseBytes-ChangeBit-
-#3777	NEW    cov: 814 ft: 3072 corp: 196/815Kb exec/s: 3777 rss: 232Mb L: 5514 MS: 3 ChangeBit-ShuffleBytes-InsertByte-
-#3856	NEW    cov: 814 ft: 3073 corp: 197/820Kb exec/s: 3856 rss: 236Mb L: 5274 MS: 2 ShuffleBytes-PersAutoDict- DE: "print_final_stats=1"-
-#4094	NEW    cov: 814 ft: 3074 corp: 198/825Kb exec/s: 4094 rss: 247Mb L: 5631 MS: 5 CMP-ChangeBinInt-ChangeBit-InsertByte-InsertByte- DE: "\x00\x00\x00\x00\x00\x00\x00\x00"-
-#4105	NEW    cov: 814 ft: 3075 corp: 199/831Kb exec/s: 4105 rss: 247Mb L: 5642 MS: 1 InsertByte-
-#4400	NEW    cov: 814 ft: 3076 corp: 200/836Kb exec/s: 4400 rss: 261Mb L: 5604 MS: 1 CMP- DE: "NSt6locale5"-
-#4760	NEW    cov: 814 ft: 3079 corp: 201/843Kb exec/s: 4760 rss: 278Mb L: 6739 MS: 1 InsertByte-
-#4761	NEW    cov: 814 ft: 3080 corp: 202/850Kb exec/s: 4761 rss: 278Mb L: 6739 MS: 2 InsertByte-CopyPart-
-#5702	NEW    cov: 814 ft: 3081 corp: 203/856Kb exec/s: 2851 rss: 315Mb L: 6739 MS: 3 ShuffleBytes-ChangeByte-InsertByte-
-poly_check: bad satF
-test4: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 0, con 2
-Constraints
-3 10
-0 0 0 0 -72479806502993920 0 0 4079615751 -522190816128 -534723428352 
-0 0 0 0 67108864 249 -498 0 0 0 
-1 128235 0 0 168430601 0 0 0 0 0 
-Frames
-7 10
-0 33686019 0 0 -249 67108864 0 0 0 33751040 
-0 551911701609981 0 0 -4079615751 1099511560667136 0 0 566248488304640 0 
-0 -551911701609981 0 0 4079615751 -1099511560667136 0 72479806502993920 0 0 
-0 0 0 0 0 2 1 0 0 0 
-0 0 0 1 0 0 0 0 0 0 
-0 0 1 0 0 0 0 0 0 0 
-1 1 0 0 0 0 0 0 0 0 
-7 1
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0010,0000 0000,0000 0000,0000 0000,0000 
-==12274== ERROR: libFuzzer: deadly signal
-    #0 0x4c5c67 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test4+0x4c5c67)
-    #1 0x4f4dd1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
-    #2 0x4f4d9d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2b01a97b638f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2b01aa322427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2b01aa324029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2b01aa31abd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2b01aa31ac81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2b01a9586d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2b01a958920c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2b01a958962c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
-    #11 0x4e9e8c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test4+0x4e9e8c)
-    #12 0x4ea5b3 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test4+0x4ea5b3)
-    #13 0x4f5e08 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
-    #14 0x4f5818 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
-    #15 0x4f69f2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
-    #16 0x4f6bc7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
-    #17 0x4ef2b8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
-    #18 0x4eaae0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2b01aa30d82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
-    #20 0x41c7a8 in _start (/home/apron/newpolka/tests/libFuzzer/test4+0x41c7a8)
+#0	READ units: 421
+#422	INITED cov: 842 ft: 3201 corp: 200/847Kb exec/s: 0 rss: 93Mb
+#1436	NEW    cov: 842 ft: 3203 corp: 201/849Kb exec/s: 0 rss: 143Mb L: 2405 MS: 4 ChangeBinInt-ChangeBinInt-CMP-ChangeBinInt- DE: "\x01\x00"-
+#1454	NEW    cov: 842 ft: 3205 corp: 202/855Kb exec/s: 0 rss: 144Mb L: 5191 MS: 2 CMP-CopyPart- DE: "report_slow_units"-
+#1959	NEW    cov: 842 ft: 3206 corp: 203/863Kb exec/s: 0 rss: 166Mb L: 8594 MS: 2 ChangeBinInt-CopyPart-
+#1978	NEW    cov: 842 ft: 3208 corp: 204/868Kb exec/s: 0 rss: 167Mb L: 5223 MS: 1 InsertRepeatedBytes-
+#2383	NEW    cov: 842 ft: 3209 corp: 205/874Kb exec/s: 2383 rss: 183Mb L: 5629 MS: 1 PersAutoDict- DE: "\x01\x00"-
+#2583	NEW    cov: 842 ft: 3211 corp: 206/879Kb exec/s: 2583 rss: 193Mb L: 5568 MS: 1 CMP- DE: "\x01\x00\x00\x00\x00\x00\x00\x00"-
+ALARM: working on the last Unit for 3600 seconds
+       and the timeout value is 3600 (use -timeout=N to change)
+MS: 2 ChangeByte-CopyPart-; base unit: ba38143174362e8dc4556b88423d074ab1768eb8
+artifact_prefix='./'; Test unit written to ./timeout-64ad60c55524075d703b22b411a696a22be5d185
+==15424== ERROR: libFuzzer: timeout after 3600 seconds
+    #0 0x4c5c17 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test2+0x4c5c17)
+    #1 0x4f4996 in fuzzer::Fuzzer::AlarmCallback() /home/Fuzzer/FuzzerLoop.cpp:230:7
+    #2 0x2ab0fcbf838f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #3 0x2ab0fc9af701 in numint_sgn (/usr/local/lib/libpolkaRll.so+0xf701)
+    #4 0x2ab0fc9af526 in vector_min_notzero (/usr/local/lib/libpolkaRll.so+0xf526)
+    #5 0x2ab0fc9af2b6 in vector_gcd (/usr/local/lib/libpolkaRll.so+0xf2b6)
+    #6 0x2ab0fc9af823 in vector_normalize (/usr/local/lib/libpolkaRll.so+0xf823)
+    #7 0x2ab0fc9b0be0 in vector_combine (/usr/local/lib/libpolkaRll.so+0x10be0)
+    #8 0x2ab0fc9b28b0 in matrix_combine_rows (/usr/local/lib/libpolkaRll.so+0x128b0)
+    #9 0x2ab0fc9b5666 in cherni_conversion (/usr/local/lib/libpolkaRll.so+0x15666)
+    #10 0x2ab0fc9b7a81 in cherni_add_and_minimize (/usr/local/lib/libpolkaRll.so+0x17a81)
+    #11 0x2ab0fc9c8cf7 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28cf7)
+    #12 0x2ab0fc9cb20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #13 0x2ab0fc9cb62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #14 0x4e9e3c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test2+0x4e9e3c)
+    #15 0x4ea4fb in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test2+0x4ea4fb)
+    #16 0x4f5a58 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #17 0x4f5468 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #18 0x4f6642 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #19 0x4f6817 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #20 0x4eef08 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #21 0x4ea730 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #22 0x2ab0fd74f82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #23 0x41c758 in _start (/home/apron/newpolka/tests/libFuzzer/test2+0x41c758)
 
-NOTE: libFuzzer has rudimentary signal handlers.
-      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
-SUMMARY: libFuzzer: deadly signal
-MS: 3 ChangeBinInt-InsertByte-InsertRepeatedBytes-; base unit: 0faacf205cefc3697913b62bc846c9d40ae122c6
-artifact_prefix='./'; Test unit written to ./crash-41c349ed6f3bae9e134fcc5eb22122a88dbe6006
-stat::number_of_executed_units: 5862
-stat::average_exec_per_sec:     2931
-stat::new_units_added:          16
-stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              323
-Execution time: 2 sec for test_poly4
-
-INFO: Seed: 1272382141
-INFO: Loaded 3 modules (23401 guards): [0x2b3d16a731a0, 0x2b3d16a86b34), [0x2b3d16cca690, 0x2b3d16ccd9f4), [0x7470a0, 0x74714c), 
-Loading corpus dir: MY_CORPUS/
-Loading corpus dir: SEED_CORPUS/
-#0	READ units: 403
-#404	INITED cov: 886 ft: 3233 corp: 200/836Kb exec/s: 0 rss: 93Mb
-#871	NEW    cov: 886 ft: 3234 corp: 201/838Kb exec/s: 0 rss: 113Mb L: 2405 MS: 2 EraseBytes-ChangeBit-
-#1061	NEW    cov: 886 ft: 3235 corp: 202/848Kb exec/s: 0 rss: 121Mb L: 10000 MS: 2 ShuffleBytes-CMP- DE: "St5ctypeIcE"-
-poly_check: bad satF
-test5: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 4, con 0
-Constraints
-2 10
-0 0 0 0 -336 26683 0 -26368 21 0 
-1 1 0 0 0 -1 0 0 0 0 
-Frames
-8 10
-0 0 0 0 0 0 0 0 0 1 
-0 0 0 0 1 0 0 0 16 0 
-0 0 0 0 -1648 0 0 21 0 0 
-0 0 0 0 0 0 1 0 0 0 
-0 194300951824 0 0 770000610367 194300951824 0 0 0 0 
-0 0 0 1 0 0 0 0 0 0 
-0 0 1 0 0 0 0 0 0 0 
-1 1 0 0 0 0 0 0 0 0 
-8 1
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0100,0000 0000,0000 0000,0000 0000,0000 
-==12354== ERROR: libFuzzer: deadly signal
-    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test5+0x4c5ca7)
-    #1 0x4f4bc1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
-    #2 0x4f4b8d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2b3d16cdf38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2b3d1784b427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2b3d1784d029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2b3d17843bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2b3d17843c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2b3d16aafd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2b3d16ab220c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2b3d16ab262c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
-    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test5+0x4e9ecc)
-    #12 0x4ea63b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test5+0x4ea63b)
-    #13 0x4f5bf8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
-    #14 0x4f5608 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
-    #15 0x4f67e2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
-    #16 0x4f69b7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
-    #17 0x4ef0a8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
-    #18 0x4ea8d0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2b3d1783682f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
-    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test5+0x41c7e8)
-
-NOTE: libFuzzer has rudimentary signal handlers.
-      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
-SUMMARY: libFuzzer: deadly signal
-MS: 2 ChangeByte-CopyPart-; base unit: c2059024798643998980cc6961a80c32efbbffd1
-artifact_prefix='./'; Test unit written to ./crash-1e2100d3e570e89f50eb18e5c9ce36e4734300f3
-stat::number_of_executed_units: 1276
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 3174
 stat::average_exec_per_sec:     0
-stat::new_units_added:          2
+stat::new_units_added:          6
 stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              133
-Execution time: 1 sec for test_poly5
+stat::peak_rss_mb:              221
+Execution time: 3602 sec for test_poly2
 
-INFO: Seed: 2221145943
-INFO: Loaded 3 modules (23401 guards): [0x2afd775231a0, 0x2afd77536b34), [0x2afd7777a690, 0x2afd7777d9f4), [0x7470a0, 0x74714c), 
+INFO: Seed: 3928695236
+INFO: Loaded 3 modules (23410 guards): [0x2b79774f11a0, 0x2b7977504b34), [0x2b7977748690, 0x2b797774b9f4), [0x748090, 0x748160), 
 Loading corpus dir: MY_CORPUS/
 Loading corpus dir: SEED_CORPUS/
-#0	READ units: 405
-#406	INITED cov: 911 ft: 3294 corp: 194/832Kb exec/s: 0 rss: 94Mb
-#499	NEW    cov: 911 ft: 3296 corp: 195/837Kb exec/s: 0 rss: 98Mb L: 5255 MS: 3 ChangeByte-ChangeByte-CopyPart-
+#0	READ units: 427
+#428	INITED cov: 814 ft: 3124 corp: 201/852Kb exec/s: 0 rss: 93Mb
+#1349	NEW    cov: 814 ft: 3125 corp: 202/857Kb exec/s: 0 rss: 135Mb L: 5298 MS: 1 InsertRepeatedBytes-
+#1631	NEW    cov: 814 ft: 3127 corp: 203/863Kb exec/s: 0 rss: 148Mb L: 5570 MS: 3 ChangeBit-ChangeBit-ChangeByte-
 poly_check: bad satF
-test6: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+test3: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
 cherni_checksatmat con_to_ray=0: ray 0, con 1
 Constraints
 3 10
-0 0 0 0 0 0 0 0 0 1 
-0 0 0 0 0 -1808333846965778829 4005951868546056192 2846408745122153396 -162158688309863208 0 
-1 711602186280538349 0 0 0 6534130848521714656 -6269827278772440784 0 2426472384967240864 0 
+0 0 0 0 0 0 0 -135139821 134153212 986609 
+0 0 0 0 0 -2440809830366463645 1611898885933057693 0 -1408835926335041071 2237746870768447023 
+1 135139821 0 0 0 0 0 0 -1836388850 1701249029 
 Frames
 7 10
-0 6387147312989590688 0 0 0 1287137578229033960 0 0 7119009729687981211 0 
-0 -94174175292909440 0 0 0 6501331002923764 0 7948401386559837 0 0 
-0 16 0 0 0 0 1 0 0 0 
+0 -111491355115515 0 0 0 14948817401441 0 64657420815 0 8856388169235 
+0 24069548656950 0 0 0 -1218458818477 0 1758346149684 1771277633847 0 
+0 0 0 0 0 -1 65535 0 0 0 
 0 0 0 0 1 0 0 0 0 0 
 0 0 0 1 0 0 0 0 0 0 
 0 0 1 0 0 0 0 0 0 0 
@@ -466,72 +228,66 @@ Frames
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
 0010,0000 0000,0000 0000,0000 0000,0000 
-==12397== ERROR: libFuzzer: deadly signal
-    #0 0x4c5c57 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test6+0x4c5c57)
-    #1 0x4f4a91 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
-    #2 0x4f4a5d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2afd7778f38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2afd782fb427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2afd782fd029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2afd782f3bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2afd782f3c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2afd7755fd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2afd7756220c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2afd7756262c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
-    #11 0x4e9e7c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test6+0x4e9e7c)
-    #12 0x4ea53b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test6+0x4ea53b)
-    #13 0x4f5ac8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
-    #14 0x4f54d8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
-    #15 0x4f66b2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
-    #16 0x4f6887 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
-    #17 0x4eef78 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
-    #18 0x4ea7a0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2afd782e682f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
-    #20 0x41c798 in _start (/home/apron/newpolka/tests/libFuzzer/test6+0x41c798)
+==15644== ERROR: libFuzzer: deadly signal
+    #0 0x4c5c17 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test3+0x4c5c17)
+    #1 0x4f4f11 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4edd in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b797775d38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b79782c9427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b79782cb029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b79782c1bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b79782c1c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b797752dd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b797753020c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b797753062c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9e3c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test3+0x4e9e3c)
+    #12 0x4ea594 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test3+0x4ea594)
+    #13 0x4f5f48 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5958 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f6b32 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6d07 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef3f8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4eac20 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b79782b482f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c758 in _start (/home/apron/newpolka/tests/libFuzzer/test3+0x41c758)
 
 NOTE: libFuzzer has rudimentary signal handlers.
       Combine libFuzzer with AddressSanitizer or similar for better crash reports.
 SUMMARY: libFuzzer: deadly signal
-MS: 2 ChangeBinInt-CMP- DE: "\xff\xff"-; base unit: 0836a2d9e8640be362bd39fbc5d1671940002306
-artifact_prefix='./'; Test unit written to ./crash-fb7aca07c3f239f4450d9323aa94e038e8b694de
-stat::number_of_executed_units: 528
+MS: 2 InsertByte-CopyPart-; base unit: 05ab585b88b2156c6f276db2de808092e758a811
+artifact_prefix='./'; Test unit written to ./crash-26ae39d16fd22470b919fc284f5298bef2d4784e
+stat::number_of_executed_units: 2275
 stat::average_exec_per_sec:     0
-stat::new_units_added:          1
+stat::new_units_added:          2
 stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              102
-Execution time: 1 sec for test_poly6
+stat::peak_rss_mb:              179
+Execution time: 1 sec for test_poly3
 
-INFO: Seed: 2893625456
-INFO: Loaded 3 modules (23404 guards): [0x2abffcf6e1a0, 0x2abffcf81b34), [0x2abffd1c5690, 0x2abffd1c89f4), [0x7480a0, 0x748158), 
+INFO: Seed: 1090922704
+INFO: Loaded 3 modules (23407 guards): [0x2b17441381a0, 0x2b174414bb34), [0x2b174438f690, 0x2b17443929f4), [0x7480a0, 0x748164), 
 Loading corpus dir: MY_CORPUS/
 Loading corpus dir: SEED_CORPUS/
-#0	READ units: 406
-#407	INITED cov: 814 ft: 3081 corp: 200/844Kb exec/s: 0 rss: 91Mb
-#530	NEW    cov: 814 ft: 3082 corp: 201/846Kb exec/s: 0 rss: 96Mb L: 2005 MS: 3 CMP-CrossOver-CopyPart- DE: "close_fd_mask"-
-#604	NEW    cov: 814 ft: 3084 corp: 202/852Kb exec/s: 0 rss: 99Mb L: 5570 MS: 2 InsertRepeatedBytes-PersAutoDict- DE: "close_fd_mask"-
-#1188	NEW    cov: 814 ft: 3085 corp: 203/857Kb exec/s: 0 rss: 126Mb L: 5515 MS: 1 InsertByte-
-#1283	NEW    cov: 814 ft: 3087 corp: 204/862Kb exec/s: 0 rss: 131Mb L: 5570 MS: 1 ChangeByte-
-#1304	NEW    cov: 814 ft: 3088 corp: 205/869Kb exec/s: 0 rss: 132Mb L: 6739 MS: 2 PersAutoDict-ChangeBinInt- DE: "close_fd_mask"-
-#1889	NEW    cov: 814 ft: 3089 corp: 206/874Kb exec/s: 0 rss: 158Mb L: 5368 MS: 2 ShuffleBytes-EraseBytes-
-#2199	NEW    cov: 814 ft: 3090 corp: 207/879Kb exec/s: 0 rss: 172Mb L: 5191 MS: 2 ShuffleBytes-CopyPart-
-#2443	NEW    cov: 814 ft: 3091 corp: 208/887Kb exec/s: 0 rss: 183Mb L: 7553 MS: 1 InsertByte-
-#2558	NEW    cov: 814 ft: 3092 corp: 209/892Kb exec/s: 2558 rss: 190Mb L: 5368 MS: 1 ChangeBinInt-
+#0	READ units: 429
+#430	INITED cov: 814 ft: 3127 corp: 200/856Kb exec/s: 0 rss: 93Mb
+#769	NEW    cov: 829 ft: 3246 corp: 201/860Kb exec/s: 0 rss: 112Mb L: 3686 MS: 4 CopyPart-ShuffleBytes-ChangeBit-CopyPart-
+#1111	NEW    cov: 829 ft: 3248 corp: 202/863Kb exec/s: 0 rss: 127Mb L: 3686 MS: 1 ChangeByte-
+#1301	NEW    cov: 829 ft: 3251 corp: 203/867Kb exec/s: 0 rss: 136Mb L: 3686 MS: 1 ChangeBinInt-
 poly_check: bad satF
-test7: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 2, con 0
+test4: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 0, con 0
 Constraints
 3 10
-0 0 0 0 0 278934837 0 -252616684 0 0 
-0 0 0 0 650847953 0 0 -617468112 0 0 
-1 11784492549064704 0 0 0 0 0 20807529301875 -12589921446837875 0 
+0 0 -3502915865847405055 0 0 -58814889984 0 991137547635130368 0 -4670930562836987904 
+0 0 -5528867636613 0 0 0 0 0 3638034432 -214245429870592 
+1 1 0 0 0 0 0 0 0 0 
 Frames
 7 10
-0 0 0 0 0 0 0 0 0 1 
-0 19343875 0 0 0 0 0 0 18106368 0 
-0 20807529301875 0 0 -61843284066304 23450946969600 0 37456472782848 0 0 
+0 0 -1951458706922012672 0 0 -1013914030792882932 0 0 0 1240462271818129293 
+0 0 117629779968 0 0 -7005831731694810110 0 0 178766720250487 0 
+0 0 0 0 0 1634625894 0 97 0 0 
 0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 1 0 0 0 0 0 
 0 0 0 1 0 0 0 0 0 0 
-0 0 1 0 0 0 0 0 0 0 
 1 1 0 0 0 0 0 0 0 0 
 7 1
 0000,0000 0000,0000 0000,0000 0000,0000 
@@ -541,18 +297,197 @@ Frames
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
 0010,0000 0000,0000 0000,0000 0000,0000 
-==12424== ERROR: libFuzzer: deadly signal
+==15655== ERROR: libFuzzer: deadly signal
+    #0 0x4c5c67 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test4+0x4c5c67)
+    #1 0x4f4dd1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4d9d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b17443a438f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b1744f10427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b1744f12029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b1744f08bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b1744f08c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b1744174d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b174417720c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b174417762c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9e8c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test4+0x4e9e8c)
+    #12 0x4ea5b3 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test4+0x4ea5b3)
+    #13 0x4f5e08 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5818 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f69f2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6bc7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef2b8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4eaae0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b1744efb82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7a8 in _start (/home/apron/newpolka/tests/libFuzzer/test4+0x41c7a8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 3 CopyPart-CrossOver-CMP- DE: "print_corpus_stat"-; base unit: 9f55a44717955a87d31eeb879c235fdfc2ce7b89
+artifact_prefix='./'; Test unit written to ./crash-368844a7ac092d08d997eed19bf5c660b3613523
+stat::number_of_executed_units: 2793
+stat::average_exec_per_sec:     2793
+stat::new_units_added:          3
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              208
+Execution time: 1 sec for test_poly4
+
+INFO: Seed: 2895104700
+INFO: Loaded 3 modules (23401 guards): [0x2af8e70c41a0, 0x2af8e70d7b34), [0x2af8e731b690, 0x2af8e731e9f4), [0x7470a0, 0x74714c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 432
+#433	INITED cov: 886 ft: 3269 corp: 205/865Kb exec/s: 0 rss: 96Mb
+poly_check: bad satF
+test5: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 0, con 0
+Constraints
+3 10
+0 0 1262689066606685675 0 -7228445617339985387 -3989852839029580842 0 0 -2166266231911350272 -7413616463007636438 
+0 0 114688127239 0 0 0 -6475778069664228 828899592917021184 -8236663096314836794 7414239281467479838 
+1 1 0 0 0 0 0 0 0 -1 
+Frames
+7 10
+0 2388845001502037313 -6278657116394611954 0 3205390440639885452 0 0 0 0 2388845001502037313 
+0 0 1438112838307661394 0 -639503768266750382 0 0 0 -918163490144293141 0 
+0 0 -828899592917021184 0 -12896919155200 0 0 114688127239 0 0 
+0 0 6475778069664228 0 100757180900 0 114688127239 0 0 0 
+0 0 0 0 2 1 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+7 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0010,0000 0000,0000 0000,0000 0000,0000 
+==15666== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test5+0x4c5ca7)
+    #1 0x4f4bc1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4b8d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2af8e733038f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2af8e7e9c427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2af8e7e9e029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2af8e7e94bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2af8e7e94c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2af8e7100d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2af8e710320c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2af8e710362c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test5+0x4e9ecc)
+    #12 0x4ea63b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test5+0x4ea63b)
+    #13 0x4f5bf8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5608 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f67e2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f69b7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef0a8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ea8d0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2af8e7e8782f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test5+0x41c7e8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 2 CopyPart-InsertRepeatedBytes-; base unit: 62f0c132917851540b1975e2b5a40257d2a51cb0
+artifact_prefix='./'; Test unit written to ./crash-a8b333e1398f26b7106e3c161723d328fbd0d8b3
+stat::number_of_executed_units: 515
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              102
+Execution time: 0 sec for test_poly5
+
+INFO: Seed: 3942246956
+INFO: Loaded 3 modules (23401 guards): [0x2b8800aa61a0, 0x2b8800ab9b34), [0x2b8800cfd690, 0x2b8800d009f4), [0x7470a0, 0x74714c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 432
+#433	INITED cov: 911 ft: 3334 corp: 200/859Kb exec/s: 0 rss: 98Mb
+#479	NEW    cov: 911 ft: 3335 corp: 201/864Kb exec/s: 0 rss: 101Mb L: 5192 MS: 1 InsertByte-
+#719	NEW    cov: 911 ft: 3337 corp: 202/869Kb exec/s: 0 rss: 113Mb L: 5277 MS: 1 InsertRepeatedBytes-
+#924	NEW    cov: 911 ft: 3338 corp: 203/874Kb exec/s: 0 rss: 125Mb L: 5298 MS: 1 CopyPart-
+#1042	NEW    cov: 911 ft: 3339 corp: 204/880Kb exec/s: 0 rss: 131Mb L: 5254 MS: 4 ChangeBit-CMP-ChangeBinInt-InsertRepeatedBytes- DE: "\xff\xff"-
+ALARM: working on the last Unit for 3601 seconds
+       and the timeout value is 3600 (use -timeout=N to change)
+MS: 1 CMP- DE: "print_final_stat"-; base unit: 62f0c132917851540b1975e2b5a40257d2a51cb0
+artifact_prefix='./'; Test unit written to ./timeout-d017cae77f73274a7f2e2f92a3184b612e892a43
+==15677== ERROR: libFuzzer: timeout after 3601 seconds
+    #0 0x4c5c57 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test6+0x4c5c57)
+    #1 0x4f4a06 in fuzzer::Fuzzer::AlarmCallback() /home/Fuzzer/FuzzerLoop.cpp:230:7
+    #2 0x2b8800d1238f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #3 0x2b8800ac976a in numint_mod (/usr/local/lib/libpolkaRll.so+0xf76a)
+    #4 0x2b8800ac934e in vector_gcd (/usr/local/lib/libpolkaRll.so+0xf34e)
+    #5 0x2b8800ac9823 in vector_normalize (/usr/local/lib/libpolkaRll.so+0xf823)
+    #6 0x2b8800acabe0 in vector_combine (/usr/local/lib/libpolkaRll.so+0x10be0)
+    #7 0x2b8800acc8b0 in matrix_combine_rows (/usr/local/lib/libpolkaRll.so+0x128b0)
+    #8 0x2b8800acf7fb in cherni_conversion (/usr/local/lib/libpolkaRll.so+0x157fb)
+    #9 0x2b8800ad1a81 in cherni_add_and_minimize (/usr/local/lib/libpolkaRll.so+0x17a81)
+    #10 0x2b8800ae2cf7 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28cf7)
+    #11 0x2b8800ae520c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #12 0x2b8800ae562c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #13 0x4e9e7c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test6+0x4e9e7c)
+    #14 0x4ea53b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test6+0x4ea53b)
+    #15 0x4f5ac8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #16 0x4f54d8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #17 0x4f66b2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #18 0x4f6887 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #19 0x4eef78 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #20 0x4ea7a0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #21 0x2b880186982f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #22 0x41c798 in _start (/home/apron/newpolka/tests/libFuzzer/test6+0x41c798)
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 1299
+stat::average_exec_per_sec:     0
+stat::new_units_added:          4
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              146
+Execution time: 3602 sec for test_poly6
+
+INFO: Seed: 3018084882
+INFO: Loaded 3 modules (23404 guards): [0x2b1a653d21a0, 0x2b1a653e5b34), [0x2b1a65629690, 0x2b1a6562c9f4), [0x7480a0, 0x748158), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 436
+#437	INITED cov: 850 ft: 3275 corp: 211/890Kb exec/s: 0 rss: 95Mb
+poly_check: bad satF
+test7: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 0, con 1
+Constraints
+3 10
+0 0 1 0 0 0 0 0 0 0 
+0 0 0 0 0 0 -66458793425127 -129009882613529 0 89915559772160 
+1 1 0 0 0 0 -1 0 0 0 
+Frames
+7 10
+0 16777216 0 0 0 0 16777216 0 0 33030143 
+0 0 0 0 0 0 0 0 1 0 
+0 16252927 0 0 0 0 16252927 33030143 0 0 
+0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 1 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+7 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0010,0000 0000,0000 0000,0000 0000,0000 
+==15693== ERROR: libFuzzer: deadly signal
     #0 0x4c5c57 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test7+0x4c5c57)
     #1 0x4f4c61 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
     #2 0x4f4c2d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2abffd1da38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2abffdd46427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2abffdd48029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2abffdd3ebd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2abffdd3ec81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2abffcfaad65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2abffcfad20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2abffcfad62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #3 0x2b1a6563e38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b1a661aa427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b1a661ac029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b1a661a2bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b1a661a2c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b1a6540ed65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b1a6541120c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b1a6541162c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
     #11 0x4e9e7c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test7+0x4e9e7c)
     #12 0x4ea5a3 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test7+0x4ea5a3)
     #13 0x4f5c98 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
@@ -561,90 +496,43 @@ Frames
     #16 0x4f6a57 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
     #17 0x4ef148 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
     #18 0x4ea970 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2abffdd3182f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #19 0x2b1a6619582f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
     #20 0x41c798 in _start (/home/apron/newpolka/tests/libFuzzer/test7+0x41c798)
 
 NOTE: libFuzzer has rudimentary signal handlers.
       Combine libFuzzer with AddressSanitizer or similar for better crash reports.
 SUMMARY: libFuzzer: deadly signal
-MS: 1 CMP- DE: "print_final_"-; base unit: 0836a2d9e8640be362bd39fbc5d1671940002306
-artifact_prefix='./'; Test unit written to ./crash-ae4fa8741c6ae74b9251d4195130ff996733b599
-stat::number_of_executed_units: 2703
-stat::average_exec_per_sec:     2703
-stat::new_units_added:          9
-stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              197
-Execution time: 1 sec for test_poly7
-
-INFO: Seed: 93672384
-INFO: Loaded 3 modules (23404 guards): [0x2b395e0d81a0, 0x2b395e0ebb34), [0x2b395e32f690, 0x2b395e3329f4), [0x7480a0, 0x748158), 
-Loading corpus dir: MY_CORPUS/
-Loading corpus dir: SEED_CORPUS/
-#0	READ units: 415
-#416	INITED cov: 814 ft: 3092 corp: 203/853Kb exec/s: 0 rss: 92Mb
-ALARM: working on the last Unit for 3601 seconds
-       and the timeout value is 3600 (use -timeout=N to change)
-MS: 1 CMP- DE: "print_corpus_stat"-; base unit: ba38143174362e8dc4556b88423d074ab1768eb8
-artifact_prefix='./'; Test unit written to ./timeout-d8473b71e8b871c922b89cb95e01c75a1719f7e1
-==12443== ERROR: libFuzzer: timeout after 3601 seconds
-    #0 0x4c5c57 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test8+0x4c5c57)
-    #1 0x4f4bc6 in fuzzer::Fuzzer::AlarmCallback() /home/Fuzzer/FuzzerLoop.cpp:230:7
-    #2 0x2b395e34438f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #3 0x2b395e0fb76a in numint_mod (/usr/local/lib/libpolkaRll.so+0xf76a)
-    #4 0x2b395e0fb34e in vector_gcd (/usr/local/lib/libpolkaRll.so+0xf34e)
-    #5 0x2b395e0fb823 in vector_normalize (/usr/local/lib/libpolkaRll.so+0xf823)
-    #6 0x2b395e0fcbe0 in vector_combine (/usr/local/lib/libpolkaRll.so+0x10be0)
-    #7 0x2b395e0fe8b0 in matrix_combine_rows (/usr/local/lib/libpolkaRll.so+0x128b0)
-    #8 0x2b395e10276a in cherni_backsubstitute (/usr/local/lib/libpolkaRll.so+0x1676a)
-    #9 0x2b395e10328f in cherni_simplify (/usr/local/lib/libpolkaRll.so+0x1728f)
-    #10 0x2b395e103caa in cherni_add_and_minimize (/usr/local/lib/libpolkaRll.so+0x17caa)
-    #11 0x2b395e114cf7 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28cf7)
-    #12 0x2b395e11720c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #13 0x2b395e11762c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
-    #14 0x4e9e7c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test8+0x4e9e7c)
-    #15 0x4ea58b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test8+0x4ea58b)
-    #16 0x4f5c88 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
-    #17 0x4f5698 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
-    #18 0x4f6872 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
-    #19 0x4f6a47 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
-    #20 0x4ef138 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
-    #21 0x4ea960 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #22 0x2b395ee9b82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
-    #23 0x41c798 in _start (/home/apron/newpolka/tests/libFuzzer/test8+0x41c798)
-
-SUMMARY: libFuzzer: timeout
-stat::number_of_executed_units: 1357
+MS: 1 CopyPart-; base unit: e4eeb412fed99ae2fc3bf308cec4e260fb558c29
+artifact_prefix='./'; Test unit written to ./crash-625fb95709ccd186672f64dc5d72a42f807d40fb
+stat::number_of_executed_units: 1128
 stat::average_exec_per_sec:     0
 stat::new_units_added:          0
 stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              135
-Execution time: 3602 sec for test_poly8
+stat::peak_rss_mb:              131
+Execution time: 0 sec for test_poly7
 
-INFO: Seed: 3458963800
-INFO: Loaded 3 modules (23404 guards): [0x2b39b26881a0, 0x2b39b269bb34), [0x2b39b28df690, 0x2b39b28e29f4), [0x7480a0, 0x748158), 
+INFO: Seed: 4228863961
+INFO: Loaded 3 modules (23404 guards): [0x2ab60af0c1a0, 0x2ab60af1fb34), [0x2ab60b163690, 0x2ab60b1669f4), [0x7480a0, 0x748158), 
 Loading corpus dir: MY_CORPUS/
 Loading corpus dir: SEED_CORPUS/
-#0	READ units: 415
-#416	INITED cov: 815 ft: 3094 corp: 202/852Kb exec/s: 0 rss: 93Mb
-#1215	NEW    cov: 815 ft: 3095 corp: 203/858Kb exec/s: 0 rss: 134Mb L: 5569 MS: 4 InsertRepeatedBytes-ChangeByte-InsertByte-CMP- DE: "\xff\xff"-
-#1604	NEW    cov: 815 ft: 3096 corp: 204/863Kb exec/s: 0 rss: 152Mb L: 5255 MS: 3 ChangeBit-CopyPart-ChangeBit-
-#1928	NEW    cov: 815 ft: 3097 corp: 205/868Kb exec/s: 0 rss: 166Mb L: 5517 MS: 2 ChangeBinInt-InsertRepeatedBytes-
+#0	READ units: 436
+#437	INITED cov: 867 ft: 3299 corp: 208/879Kb exec/s: 0 rss: 94Mb
 poly_check: bad satF
-test9: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 7, con 0
+test8: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 2, con 0
 Constraints
 1 10
-1 4290559275377484813 -6097457347583344640 0 -6430051751373570048 -5586640570962411520 0 0 0 0 
+1 4112063 65536 0 0 0 0 0 0 0 
 Frames
 9 10
 0 0 0 0 0 0 0 0 0 1 
 0 0 0 0 0 0 0 0 1 0 
-0 0 0 0 0 0 0 1 0 0 
-0 0 0 0 0 0 1 0 0 0 
-0 8782173205000355840 0 0 0 7277326942147858857 0 0 0 0 
-0 -2914636000443498496 0 0 -2634801746613138803 0 0 0 0 0 
+0 6755258703567388672 0 0 0 0 0 1853601917629881081 0 0 
+0 8424135935112773632 0 0 0 0 6043515742198900659 0 0 0 
+0 4586953946725908480 0 0 0 -67594979403665557 0 0 0 0 
+0 3044213019622948864 0 0 3031813963845346031 0 0 0 0 0 
 0 0 0 1 0 0 0 0 0 0 
-0 47131439659286528 63467054309702885 0 0 0 0 0 0 0 
+0 3043140231184064 647062588778223 0 0 0 0 0 0 0 
 1 1 0 0 0 0 0 0 0 0 
 9 1
 0000,0000 0000,0000 0000,0000 0000,0000 
@@ -656,18 +544,86 @@ Frames
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
 1000,0000 0000,0000 0000,0000 0000,0000 
-==12662== ERROR: libFuzzer: deadly signal
+==15704== ERROR: libFuzzer: deadly signal
+    #0 0x4c5c57 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test8+0x4c5c57)
+    #1 0x4f4c51 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4c1d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2ab60b17838f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2ab60bce4427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2ab60bce6029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2ab60bcdcbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2ab60bcdcc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2ab60af48d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2ab60af4b20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2ab60af4b62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9e7c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test8+0x4e9e7c)
+    #12 0x4ea58b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test8+0x4ea58b)
+    #13 0x4f5c88 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5698 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f6872 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6a47 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef138 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ea960 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2ab60bccf82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c798 in _start (/home/apron/newpolka/tests/libFuzzer/test8+0x41c798)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 1 ChangeByte-; base unit: 012821b2cf4f850da321bf2aba7d391685fdcead
+artifact_prefix='./'; Test unit written to ./crash-8e621a054bfe6e86bec02c72bac59aeac23e2b66
+stat::number_of_executed_units: 693
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              110
+Execution time: 0 sec for test_poly8
+
+INFO: Seed: 979157560
+INFO: Loaded 3 modules (23404 guards): [0x2b79788131a0, 0x2b7978826b34), [0x2b7978a6a690, 0x2b7978a6d9f4), [0x7480a0, 0x748158), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 436
+#437	INITED cov: 878 ft: 3321 corp: 205/871Kb exec/s: 0 rss: 94Mb
+#493	NEW    cov: 878 ft: 3323 corp: 206/876Kb exec/s: 0 rss: 97Mb L: 5339 MS: 1 InsertRepeatedBytes-
+poly_check: bad satF
+test9: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 2, con 0
+Constraints
+2 10
+0 0 0 0 40895917119 -110228552320 81567923072 -10440694153216 0 0 
+1 8861392992823934976 0 0 2375082801323311 -2375942476398592 0 0 8979705826223247616 0 
+Frames
+8 10
+0 0 0 0 0 0 0 0 0 1 
+0 -1387504807687215 0 0 0 0 0 0 828419121999222784 0 
+0 1272314575028043 0 0 -52549765388828672 0 0 -38832146343713568 0 0 
+0 301635515768060497 0 0 -145521592357093376 0 -7605954193761390592 0 0 0 
+0 -2018386469033501 0 0 -6471711679230509056 4442859150324682752 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+8 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0100,0000 0000,0000 0000,0000 0000,0000 
+==15715== ERROR: libFuzzer: deadly signal
     #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test9+0x4c5ca7)
     #1 0x4f4db1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
     #2 0x4f4d7d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2b39b28f438f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2b39b3460427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2b39b3462029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2b39b3458bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2b39b3458c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2b39b26c4d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2b39b26c720c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2b39b26c762c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #3 0x2b7978a7f38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b79795eb427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b79795ed029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b79795e3bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b79795e3c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b797884fd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b797885220c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b797885262c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
     #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test9+0x4e9ecc)
     #12 0x4ea67c in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test9+0x4ea67c)
     #13 0x4f5de8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
@@ -676,64 +632,54 @@ Frames
     #16 0x4f6ba7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
     #17 0x4ef298 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
     #18 0x4eaac0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2b39b344b82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #19 0x2b79795d682f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
     #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test9+0x41c7e8)
 
 NOTE: libFuzzer has rudimentary signal handlers.
       Combine libFuzzer with AddressSanitizer or similar for better crash reports.
 SUMMARY: libFuzzer: deadly signal
-MS: 1 CMP- DE: "rss_limit_mb="-; base unit: 62f0c132917851540b1975e2b5a40257d2a51cb0
-artifact_prefix='./'; Test unit written to ./crash-28c1cd654f9f08fec788d4737b8c49965379c96c
-stat::number_of_executed_units: 1977
+MS: 2 ShuffleBytes-CopyPart-; base unit: bafdfcf28034fde96ba5ec157a4433137e5a27ef
+artifact_prefix='./'; Test unit written to ./crash-6bcbdcf9efa467d0ab391a53473656aec36b4920
+stat::number_of_executed_units: 764
 stat::average_exec_per_sec:     0
-stat::new_units_added:          3
+stat::new_units_added:          1
 stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              170
-Execution time: 1 sec for test_poly9
+stat::peak_rss_mb:              111
+Execution time: 0 sec for test_poly9
 
-INFO: Seed: 677946642
-INFO: Loaded 3 modules (23407 guards): [0x2afdf1a841a0, 0x2afdf1a97b34), [0x2afdf1cdb690, 0x2afdf1cde9f4), [0x7480a0, 0x748164), 
+INFO: Seed: 2061866716
+INFO: Loaded 3 modules (23407 guards): [0x2b3f0e50e1a0, 0x2b3f0e521b34), [0x2b3f0e765690, 0x2b3f0e7689f4), [0x7480a0, 0x748164), 
 Loading corpus dir: MY_CORPUS/
 Loading corpus dir: SEED_CORPUS/
-#0	READ units: 418
-#419	INITED cov: 815 ft: 3097 corp: 199/843Kb exec/s: 0 rss: 93Mb
-#987	NEW    cov: 815 ft: 3122 corp: 200/851Kb exec/s: 0 rss: 118Mb L: 8137 MS: 3 ShuffleBytes-CrossOver-CMP- DE: "\x01\x00\x00\x00\x00\x00\x00\x00"-
+#0	READ units: 437
+#438	INITED cov: 817 ft: 3220 corp: 211/889Kb exec/s: 0 rss: 95Mb
 poly_check: bad satF
 test10: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 0, con 1
+cherni_checksatmat con_to_ray=0: ray 0, con 0
 Constraints
-4 10
-0 0 0 0 0 0 0 0 0 1 
-0 0 0 0 8363504259268935015 -7116701733033106324 -333547847402127360 0 -8765861122084597760 0 
-0 0 0 0 -4877312051500182061 0 6894729554527518720 -3186763286272391488 1768348231341578448 0 
-1 369544174256634554 0 0 -7117199596926757493 0 -40012874015026080 0 -7586277213969921968 0 
+1 4
+1 328119424322523501 -3102048247445066340 3099848701360270925 
 Frames
-6 10
-0 -559084514887345536 0 0 -395588760232207664 -493564263193338372 0 0 1752338069186214477 0 
-0 -75962287220590240 0 0 -485796741924672 5028596332104464 0 5355665018220837 0 0 
-0 16 0 0 0 0 1 0 0 0 
-0 0 0 1 0 0 0 0 0 0 
-0 0 1 0 0 0 0 0 0 0 
-1 1 0 0 0 0 0 0 0 0 
-6 1
+3 4
+0 925601940696841389 0 -625743654444448717 
+0 1034016082481688780 109373141440841167 0 
+1 1 0 0 
+3 1
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0001,0000 0000,0000 0000,0000 0000,0000 
-==12673== ERROR: libFuzzer: deadly signal
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15726== ERROR: libFuzzer: deadly signal
     #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test10+0x4c5ca7)
     #1 0x4f4ff1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
     #2 0x4f4fbd in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2afdf1cf038f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2afdf285c427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2afdf285e029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2afdf2854bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2afdf2854c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2afdf1ac0d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2afdf1ac320c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2afdf1ac362c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #3 0x2b3f0e77a38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b3f0f2e6427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b3f0f2e8029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b3f0f2debd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b3f0f2dec81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b3f0e54ad65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b3f0e54d20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b3f0e54d62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
     #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test10+0x4e9ecc)
     #12 0x4ea6a1 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test10+0x4ea6a1)
     #13 0x4f6028 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
@@ -742,29 +688,81 @@ Frames
     #16 0x4f6de7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
     #17 0x4ef4d8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
     #18 0x4ead00 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2afdf284782f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #19 0x2b3f0f2d182f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
     #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test10+0x41c7e8)
 
 NOTE: libFuzzer has rudimentary signal handlers.
       Combine libFuzzer with AddressSanitizer or similar for better crash reports.
 SUMMARY: libFuzzer: deadly signal
-MS: 2 ChangeBinInt-ChangeBit-; base unit: 0836a2d9e8640be362bd39fbc5d1671940002306
-artifact_prefix='./'; Test unit written to ./crash-3e1e43c44184cdb6502e573f713e1968fdddd604
-stat::number_of_executed_units: 1786
-stat::average_exec_per_sec:     0
-stat::new_units_added:          1
+MS: 2 ShuffleBytes-CMP- DE: "rss_limit_mb="-; base unit: 8224005d318850508e44a459fdefe5c6e8115a5b
+artifact_prefix='./'; Test unit written to ./crash-e2b8a90186928c51a9fb1d9ca71eb5532ddd28c9
+stat::number_of_executed_units: 2555
+stat::average_exec_per_sec:     2555
+stat::new_units_added:          0
 stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              156
+stat::peak_rss_mb:              198
 Execution time: 1 sec for test_poly10
 
-INFO: Seed: 2072042714
-INFO: Loaded 3 modules (23401 guards): [0x2b58cbaa81a0, 0x2b58cbabbb34), [0x2b58cbcff690, 0x2b58cbd029f4), [0x7470a0, 0x74714c), 
+INFO: Seed: 3790082874
+INFO: Loaded 3 modules (23401 guards): [0x2ae15e6311a0, 0x2ae15e644b34), [0x2ae15e888690, 0x2ae15e88b9f4), [0x7470a0, 0x74714c), 
 Loading corpus dir: MY_CORPUS/
 Loading corpus dir: SEED_CORPUS/
-#0	READ units: 419
-#420	INITED cov: 884 ft: 3261 corp: 202/863Kb exec/s: 0 rss: 94Mb
+#0	READ units: 437
+#438	INITED cov: 884 ft: 3267 corp: 206/865Kb exec/s: 0 rss: 96Mb
+#451	NEW    cov: 884 ft: 3269 corp: 207/871Kb exec/s: 0 rss: 98Mb L: 5852 MS: 3 ShuffleBytes-CopyPart-CopyPart-
+#453	NEW    cov: 884 ft: 3271 corp: 208/877Kb exec/s: 0 rss: 98Mb L: 5891 MS: 5 ShuffleBytes-CopyPart-CopyPart-ChangeBinInt-InsertRepeatedBytes-
+#646	NEW    cov: 884 ft: 3272 corp: 209/882Kb exec/s: 0 rss: 107Mb L: 5355 MS: 3 InsertByte-InsertRepeatedBytes-InsertByte-
+#739	NEW    cov: 884 ft: 3273 corp: 210/887Kb exec/s: 0 rss: 113Mb L: 5592 MS: 1 ChangeByte-
+#969	NEW    cov: 884 ft: 3275 corp: 211/892Kb exec/s: 0 rss: 124Mb L: 5294 MS: 1 EraseBytes-
+#1114	NEW    cov: 884 ft: 3276 corp: 212/898Kb exec/s: 0 rss: 133Mb L: 5413 MS: 1 InsertRepeatedBytes-
+#1269	NEW    cov: 884 ft: 3277 corp: 213/903Kb exec/s: 0 rss: 142Mb L: 5448 MS: 1 CopyPart-
+#1414	NEW    cov: 884 ft: 3278 corp: 214/908Kb exec/s: 0 rss: 149Mb L: 5299 MS: 1 InsertByte-
+#1581	NEW    cov: 884 ft: 3279 corp: 215/913Kb exec/s: 0 rss: 157Mb L: 5192 MS: 3 ChangeBit-ChangeByte-InsertByte-
+ALARM: working on the last Unit for 3600 seconds
+       and the timeout value is 3600 (use -timeout=N to change)
+MS: 2 ChangeByte-ShuffleBytes-; base unit: 62f0c132917851540b1975e2b5a40257d2a51cb0
+artifact_prefix='./'; Test unit written to ./timeout-12836b9fca91a9306e8fa9e8f3f9c8c87c01e84d
+==15737== ERROR: libFuzzer: timeout after 3600 seconds
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test11+0x4c5ca7)
+    #1 0x4f4b26 in fuzzer::Fuzzer::AlarmCallback() /home/Fuzzer/FuzzerLoop.cpp:230:7
+    #2 0x2ae15e89d38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #3 0x2ae15e65476a in numint_mod (/usr/local/lib/libpolkaRll.so+0xf76a)
+    #4 0x2ae15e65434e in vector_gcd (/usr/local/lib/libpolkaRll.so+0xf34e)
+    #5 0x2ae15e654823 in vector_normalize (/usr/local/lib/libpolkaRll.so+0xf823)
+    #6 0x2ae15e655be0 in vector_combine (/usr/local/lib/libpolkaRll.so+0x10be0)
+    #7 0x2ae15e6578b0 in matrix_combine_rows (/usr/local/lib/libpolkaRll.so+0x128b0)
+    #8 0x2ae15e65a666 in cherni_conversion (/usr/local/lib/libpolkaRll.so+0x15666)
+    #9 0x2ae15e65ca81 in cherni_add_and_minimize (/usr/local/lib/libpolkaRll.so+0x17a81)
+    #10 0x2ae15e66dcf7 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28cf7)
+    #11 0x2ae15e67020c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #12 0x2ae15e67062c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #13 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test11+0x4e9ecc)
+    #14 0x4ea63b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test11+0x4ea63b)
+    #15 0x4f5be8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #16 0x4f55f8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #17 0x4f67d2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #18 0x4f69a7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #19 0x4ef098 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #20 0x4ea8c0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #21 0x2ae15f3f482f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #22 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test11+0x41c7e8)
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 2950
+stat::average_exec_per_sec:     0
+stat::new_units_added:          9
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              225
+Execution time: 3602 sec for test_poly11
+
+INFO: Seed: 2861604571
+INFO: Loaded 3 modules (23405 guards): [0x2b89f7b421a0, 0x2b89f7b55b34), [0x2b89f7d99690, 0x2b89f7d9c9f4), [0x7480b0, 0x74816c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 446
+#447	INITED cov: 880 ft: 3328 corp: 206/872Kb exec/s: 0 rss: 96Mb
 poly_check: bad satF
-test11: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+test12: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
 cherni_checksatmat con_to_ray=0: ray 4, con 0
 Constraints
 1 10
@@ -775,10 +773,10 @@ Frames
 0 0 0 0 0 0 0 0 -1 0 
 0 0 0 0 0 0 0 -1 0 0 
 0 0 0 0 0 0 1 0 0 0 
-0 1321479385923977216 0 0 0 -3759040459682102085 0 0 0 0 
-0 -4687513013203238912 0 0 -165496544561709065 0 0 0 0 0 
+0 7728892742637453312 0 0 0 -4278199348375317101 0 0 0 0 
+0 3837163089787092992 0 0 5015498207087333609 0 0 0 0 0 
 0 0 0 1 0 0 0 0 0 0 
-0 -5449100168069120 15218969837284323 0 0 0 0 0 0 0 
+0 1023106386952192 531866557462659 0 0 0 0 0 0 0 
 1 1 0 0 0 0 0 0 0 0 
 9 1
 0000,0000 0000,0000 0000,0000 0000,0000 
@@ -790,86 +788,18 @@ Frames
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
 1000,0000 0000,0000 0000,0000 0000,0000 
-==12684== ERROR: libFuzzer: deadly signal
-    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test11+0x4c5ca7)
-    #1 0x4f4bb1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
-    #2 0x4f4b7d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2b58cbd1438f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2b58cc880427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2b58cc882029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2b58cc878bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2b58cc878c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2b58cbae4d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2b58cbae720c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2b58cbae762c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
-    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test11+0x4e9ecc)
-    #12 0x4ea63b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test11+0x4ea63b)
-    #13 0x4f5be8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
-    #14 0x4f55f8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
-    #15 0x4f67d2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
-    #16 0x4f69a7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
-    #17 0x4ef098 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
-    #18 0x4ea8c0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2b58cc86b82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
-    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test11+0x41c7e8)
-
-NOTE: libFuzzer has rudimentary signal handlers.
-      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
-SUMMARY: libFuzzer: deadly signal
-MS: 3 ChangeBinInt-ChangeByte-CMP- DE: "\xff\xff\xff\xff\xff\xff\xff\xff"-; base unit: 62f0c132917851540b1975e2b5a40257d2a51cb0
-artifact_prefix='./'; Test unit written to ./crash-39404200685bf163788a84083ca348816c14c110
-stat::number_of_executed_units: 1683
-stat::average_exec_per_sec:     1683
-stat::new_units_added:          0
-stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              157
-Execution time: 1 sec for test_poly11
-
-INFO: Seed: 3619622448
-INFO: Loaded 3 modules (23405 guards): [0x2ba46dc401a0, 0x2ba46dc53b34), [0x2ba46de97690, 0x2ba46de9a9f4), [0x7480b0, 0x74816c), 
-Loading corpus dir: MY_CORPUS/
-Loading corpus dir: SEED_CORPUS/
-#0	READ units: 419
-#420	INITED cov: 815 ft: 3122 corp: 202/859Kb exec/s: 0 rss: 92Mb
-#1467	NEW    cov: 815 ft: 3123 corp: 203/864Kb exec/s: 0 rss: 143Mb L: 5191 MS: 2 ShuffleBytes-ChangeBinInt-
-poly_check: bad satF
-test12: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 0, con 0
-Constraints
-2 10
-0 0 0 0 0 0 0 -106643131 -240907770 -128974570 
-1 153130063 0 0 0 0 0 0 0 -175978621 
-Frames
-8 10
-0 13754834463393023 0 0 0 0 0 -3556285962194518294 0 11968946318393669 
-0 0 0 0 0 0 0 1836277618 7105633 0 
-0 0 0 0 0 0 1 0 0 0 
-0 0 0 0 0 1 0 0 0 0 
-0 0 0 0 1 0 0 0 0 0 
-0 0 0 1 0 0 0 0 0 0 
-0 0 1 0 0 0 0 0 0 0 
-1 1 0 0 0 0 0 0 0 0 
-8 1
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0000,0000 0000,0000 0000,0000 0000,0000 
-0100,0000 0000,0000 0000,0000 0000,0000 
-==12695== ERROR: libFuzzer: deadly signal
+==15755== ERROR: libFuzzer: deadly signal
     #0 0x4c5cf7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test12+0x4c5cf7)
     #1 0x4f4e61 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
     #2 0x4f4e2d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2ba46deac38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2ba46ea18427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2ba46ea1a029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2ba46ea10bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2ba46ea10c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2ba46dc7cd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2ba46dc7f20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2ba46dc7f62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #3 0x2b89f7dae38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b89f891a427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b89f891c029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b89f8912bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b89f8912c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b89f7b7ed65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b89f7b8120c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b89f7b8162c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
     #11 0x4e9f1c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test12+0x4e9f1c)
     #12 0x4ea6cc in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test12+0x4ea6cc)
     #13 0x4f5e98 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
@@ -878,45 +808,45 @@ Frames
     #16 0x4f6c57 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
     #17 0x4ef348 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
     #18 0x4eab70 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2ba46ea0382f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #19 0x2b89f890582f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
     #20 0x41c838 in _start (/home/apron/newpolka/tests/libFuzzer/test12+0x41c838)
 
 NOTE: libFuzzer has rudimentary signal handlers.
       Combine libFuzzer with AddressSanitizer or similar for better crash reports.
 SUMMARY: libFuzzer: deadly signal
-MS: 1 InsertByte-; base unit: 4dd1aa930a294417aa54094470cb4f750ea419dc
-artifact_prefix='./'; Test unit written to ./crash-a4560b6e502d09120c47b3eaa2dcf991d152ae00
-stat::number_of_executed_units: 1656
-stat::average_exec_per_sec:     0
-stat::new_units_added:          1
+MS: 2 ChangeBinInt-ChangeBinInt-; base unit: 012821b2cf4f850da321bf2aba7d391685fdcead
+artifact_prefix='./'; Test unit written to ./crash-4121463b4cb95745d2cb95fd8671e0914b317d66
+stat::number_of_executed_units: 2784
+stat::average_exec_per_sec:     2784
+stat::new_units_added:          0
 stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              153
-Execution time: 0 sec for test_poly12
+stat::peak_rss_mb:              204
+Execution time: 1 sec for test_poly12
 
-INFO: Seed: 694812472
-INFO: Loaded 3 modules (23405 guards): [0x2adf16da91a0, 0x2adf16dbcb34), [0x2adf17000690, 0x2adf170039f4), [0x7480b0, 0x74816c), 
+INFO: Seed: 291559058
+INFO: Loaded 3 modules (23405 guards): [0x2b3212ce91a0, 0x2b3212cfcb34), [0x2b3212f40690, 0x2b3212f439f4), [0x7480b0, 0x74816c), 
 Loading corpus dir: MY_CORPUS/
 Loading corpus dir: SEED_CORPUS/
-#0	READ units: 420
-#421	INITED cov: 815 ft: 3123 corp: 199/841Kb exec/s: 0 rss: 93Mb
+#0	READ units: 446
+#447	INITED cov: 880 ft: 3328 corp: 207/880Kb exec/s: 0 rss: 96Mb
 poly_check: bad satF
 test13: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 0, con 0
+cherni_checksatmat con_to_ray=0: ray 7, con 0
 Constraints
-2 10
-0 0 0 0 0 0 0 -106643131 -240907770 -128974570 
-1 153130063 0 0 0 0 0 0 0 -175978621 
+1 10
+1 65536 -1 0 -8388608 0 0 0 0 -65536 
 Frames
-8 10
-0 13754834463393023 0 0 0 0 0 -3556285962194518294 0 11968946318393669 
-0 0 0 0 0 0 0 1836277618 7105633 0 
+9 10
+0 1 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 1 0 0 
 0 0 0 0 0 0 1 0 0 0 
 0 0 0 0 0 1 0 0 0 0 
-0 0 0 0 1 0 0 0 0 0 
+0 46550767744 0 0 125344689244337 0 0 0 0 0 
 0 0 0 1 0 0 0 0 0 0 
-0 0 1 0 0 0 0 0 0 0 
+0 363677873 8214589554316869632 0 0 0 0 0 0 0 
 1 1 0 0 0 0 0 0 0 0 
-8 1
+9 1
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
@@ -924,19 +854,20 @@ Frames
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
-0100,0000 0000,0000 0000,0000 0000,0000 
-==12706== ERROR: libFuzzer: deadly signal
+0000,0000 0000,0000 0000,0000 0000,0000 
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15766== ERROR: libFuzzer: deadly signal
     #0 0x4c5cf7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test13+0x4c5cf7)
     #1 0x4f4e61 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
     #2 0x4f4e2d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2adf1701538f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2adf17b81427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2adf17b83029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2adf17b79bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2adf17b79c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2adf16de5d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2adf16de820c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2adf16de862c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #3 0x2b3212f5538f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b3213ac1427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b3213ac3029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b3213ab9bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b3213ab9c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b3212d25d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b3212d2820c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b3212d2862c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
     #11 0x4e9f1c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test13+0x4e9f1c)
     #12 0x4ea6cc in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test13+0x4ea6cc)
     #13 0x4f5e98 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
@@ -945,236 +876,538 @@ Frames
     #16 0x4f6c57 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
     #17 0x4ef348 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
     #18 0x4eab70 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2adf17b6c82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #19 0x2b3213aac82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
     #20 0x41c838 in _start (/home/apron/newpolka/tests/libFuzzer/test13+0x41c838)
 
 NOTE: libFuzzer has rudimentary signal handlers.
       Combine libFuzzer with AddressSanitizer or similar for better crash reports.
 SUMMARY: libFuzzer: deadly signal
-MS: 1 InsertByte-; base unit: 4dd1aa930a294417aa54094470cb4f750ea419dc
-artifact_prefix='./'; Test unit written to ./crash-b94774476907af41a2f421881239df71320bbe19
-stat::number_of_executed_units: 452
+MS: 1 ChangeBinInt-; base unit: 357f3856b18df04c2f53a8b08d7f1f38f1686a36
+artifact_prefix='./'; Test unit written to ./crash-a712d8fd79f398a325c7e0a47611286adfa45897
+stat::number_of_executed_units: 1083
 stat::average_exec_per_sec:     0
 stat::new_units_added:          0
 stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              95
-Execution time: 0 sec for test_poly13
+stat::peak_rss_mb:              128
+Execution time: 1 sec for test_poly13
 
-test_poly14.c:29:9: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                                                opt_oct_meet(man, false, polyhedron1, polyhedron2)),
-                                                                ^
-test_poly14.c:29:9: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                                opt_oct_meet(man, false, polyhedron1, polyhedron2)),
-                                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:368:68: note: passing argument to parameter 'a2' here
-pk_t* pk_join(ap_manager_t* man, bool destructive, pk_t* a1, pk_t* a2);
-                                                                   ^
-2 warnings generated.
-/tmp/test_poly14-e0b207.o: In function `LLVMFuzzerTestOneInput':
-test_poly14.c:(.text+0x5aa): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test14: not found
-Execution time: 0 sec for test_poly14
-
-test_poly15.c:24:23: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                        if (!pk_is_eq(man, opt_oct_meet(man, false, bottom, polyhedron1),
-                                           ^
-test_poly15.c:24:23: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                        if (!pk_is_eq(man, opt_oct_meet(man, false, bottom, polyhedron1),
-                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-2 warnings generated.
-/tmp/test_poly15-ec90dd.o: In function `LLVMFuzzerTestOneInput':
-test_poly15.c:(.text+0x44f): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test15: not found
-Execution time: 0 sec for test_poly15
-
-test_poly16.c:24:23: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                        if (!pk_is_eq(man, opt_oct_meet(man, false, top, polyhedron1),
-                                           ^
-test_poly16.c:24:23: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                        if (!pk_is_eq(man, opt_oct_meet(man, false, top, polyhedron1),
-                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-2 warnings generated.
-/tmp/test_poly16-e8111d.o: In function `LLVMFuzzerTestOneInput':
-test_poly16.c:(.text+0x44f): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test16: not found
-Execution time: 0 sec for test_poly16
-
-test_poly17.c:27:7: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                                opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                ^
-test_poly17.c:27:7: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:269:41: note: passing argument to parameter 'a1' here
-bool pk_is_leq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                        ^
-2 warnings generated.
-/tmp/test_poly17-818431.o: In function `LLVMFuzzerTestOneInput':
-test_poly17.c:(.text+0x50f): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test17: not found
-Execution time: 0 sec for test_poly17
-
-test_poly18.c:27:7: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                                opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                ^
-test_poly18.c:27:7: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:269:41: note: passing argument to parameter 'a1' here
-bool pk_is_leq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                        ^
-2 warnings generated.
-/tmp/test_poly18-e26824.o: In function `LLVMFuzzerTestOneInput':
-test_poly18.c:(.text+0x50f): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test18: not found
-Execution time: 0 sec for test_poly18
-
-test_poly19.c:28:7: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                                opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                ^
-test_poly19.c:28:7: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-test_poly19.c:29:7: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                opt_oct_meet(man, false, polyhedron2, polyhedron1))) {
-                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:50: note: passing argument to parameter 'a2' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                                 ^
-3 warnings generated.
-/tmp/test_poly19-25bd9e.o: In function `LLVMFuzzerTestOneInput':
-test_poly19.c:(.text+0x598): undefined reference to `opt_oct_meet'
-test_poly19.c:(.text+0x61b): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test19: not found
-Execution time: 0 sec for test_poly19
-
-test_poly20.c:31:8: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                                        opt_oct_meet(man, false,
-                                                        ^
-test_poly20.c:31:8: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                        opt_oct_meet(man, false,
-                                                        ^~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-test_poly20.c:34:8: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                        opt_oct_meet(man, false, polyhedron1,
-                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:50: note: passing argument to parameter 'a2' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                                 ^
-3 warnings generated.
-/tmp/test_poly20-e4d0f4.o: In function `LLVMFuzzerTestOneInput':
-test_poly20.c:(.text+0x6cd): undefined reference to `opt_oct_meet'
-test_poly20.c:(.text+0x70e): undefined reference to `opt_oct_meet'
-test_poly20.c:(.text+0x7ce): undefined reference to `opt_oct_meet'
-test_poly20.c:(.text+0x7e1): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test20: not found
-Execution time: 0 sec for test_poly20
-
-test_poly21.c:24:6: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                        opt_oct_meet(man, false, polyhedron1, polyhedron1), polyhedron1)) {
-                                        ^
-test_poly21.c:24:6: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                        opt_oct_meet(man, false, polyhedron1, polyhedron1), polyhedron1)) {
-                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-2 warnings generated.
-/tmp/test_poly21-82eff4.o: In function `LLVMFuzzerTestOneInput':
-test_poly21.c:(.text+0x443): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test21: not found
-Execution time: 0 sec for test_poly21
-
-test_poly22.c:29:8: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                                        opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                        ^
-test_poly22.c:29:8: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                        opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-2 warnings generated.
-/tmp/test_poly22-a09d50.o: In function `LLVMFuzzerTestOneInput':
-test_poly22.c:(.text+0x63b): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test22: not found
-Execution time: 0 sec for test_poly22
-
-test_poly23.c:29:9: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                                                opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                                ^
-test_poly23.c:29:9: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                                opt_oct_meet(man, false, polyhedron1, polyhedron2),
-                                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-2 warnings generated.
-/tmp/test_poly23-8a87bc.o: In function `LLVMFuzzerTestOneInput':
-test_poly23.c:(.text+0x598): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test23: not found
-Execution time: 0 sec for test_poly23
-
-test_poly24.c:28:7: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                                opt_oct_meet(man, false, polyhedron1,
-                                                ^
-test_poly24.c:28:7: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                opt_oct_meet(man, false, polyhedron1,
-                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-2 warnings generated.
-/tmp/test_poly24-4b23aa.o: In function `LLVMFuzzerTestOneInput':
-test_poly24.c:(.text+0x5bc): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test24: not found
-Execution time: 0 sec for test_poly24
-
-INFO: Seed: 2631021443
-INFO: Loaded 3 modules (23409 guards): [0x2ab5c577d1a0, 0x2ab5c5790b34), [0x2ab5c59d4690, 0x2ab5c59d79f4), [0x7480a0, 0x74816c), 
+INFO: Seed: 1487464632
+INFO: Loaded 3 modules (23404 guards): [0x2b59884151a0, 0x2b5988428b34), [0x2b598866c690, 0x2b598866f9f4), [0x7480b0, 0x748168), 
 Loading corpus dir: MY_CORPUS/
 Loading corpus dir: SEED_CORPUS/
-#0	READ units: 420
-#421	INITED cov: 815 ft: 3123 corp: 201/851Kb exec/s: 0 rss: 93Mb
-#528	NEW    cov: 815 ft: 3124 corp: 202/857Kb exec/s: 0 rss: 99Mb L: 6859 MS: 2 InsertRepeatedBytes-ChangeByte-
+#0	READ units: 446
+#447	INITED cov: 861 ft: 3264 corp: 208/878Kb exec/s: 0 rss: 96Mb
+#468	NEW    cov: 861 ft: 3270 corp: 209/882Kb exec/s: 0 rss: 97Mb L: 3686 MS: 1 ChangeByte-
+#2148	NEW    cov: 861 ft: 3272 corp: 210/887Kb exec/s: 0 rss: 173Mb L: 5554 MS: 1 ChangeBinInt-
 poly_check: bad satF
-test25: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
-cherni_checksatmat con_to_ray=0: ray 0, con 0
+test14: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 7, con 0
 Constraints
-2 10
-0 0 0 0 0 0 0 -106643131 -240907770 -128974570 
-1 153130063 0 0 0 0 0 0 0 -175978621 
+1 10
+1 7129213051040249477 -2676052932071587840 0 0 0 0 0 0 0 
 Frames
-8 10
-0 13754834463393023 0 0 0 0 0 -3556285962194518294 0 11968946318393669 
-0 0 0 0 0 0 0 1836277618 7105633 0 
+9 10
+0 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 -1 0 
+0 0 0 0 0 0 0 1 0 0 
 0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 1 0 0 0 0 
+0 0 0 0 -1 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 -17639460570988544 8590940601718371 0 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+9 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15777== ERROR: libFuzzer: deadly signal
+    #0 0x4c5cf7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test14+0x4c5cf7)
+    #1 0x4f4de1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4dad in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b598868138f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b59891ed427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b59891ef029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b59891e5bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b59891e5c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b5988451d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b598845420c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b598845462c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9f1c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test14+0x4e9f1c)
+    #12 0x4ea6cc in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test14+0x4ea6cc)
+    #13 0x4f5e18 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5828 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f6a02 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6bd7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef2c8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4eaaf0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b59891d882f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c838 in _start (/home/apron/newpolka/tests/libFuzzer/test14+0x41c838)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 2 CMP-CMP- DE: "\x01\x00\x00\x00\x00\x00\x00\x00"-"rss_limit_mb"-; base unit: 62f0c132917851540b1975e2b5a40257d2a51cb0
+artifact_prefix='./'; Test unit written to ./crash-718e1f3d25886138e84157ec71805c46e7c10074
+stat::number_of_executed_units: 2774
+stat::average_exec_per_sec:     2774
+stat::new_units_added:          2
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              203
+Execution time: 1 sec for test_poly14
+
+INFO: Seed: 3255863659
+INFO: Loaded 3 modules (23401 guards): [0x2b2515edf1a0, 0x2b2515ef2b34), [0x2b2516136690, 0x2b25161399f4), [0x7470a0, 0x74714c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 448
+#449	INITED cov: 840 ft: 3153 corp: 205/875Kb exec/s: 0 rss: 96Mb
+poly_check: bad satF
+test15: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 5, con 2
+Constraints
+4 10
+0 0 0 0 -987842478080 -27889835624075421 0 31610957369180160 0 0 
+0 0 0 0 -871052272640 0 0 27873671023206030 -27889835624075421 0 
+1 0 0 0 -512 0 0 16383999 0 0 
+1 27889835624075421 0 0 12769792 0 0 -408633319059 0 0 
+Frames
+7 10
+0 0 0 0 0 0 0 0 0 1 
+0 0 0 0 16383999 0 0 512 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 
+1 12769792 0 0 -27889835624075421 987842478080 0 0 871052272640 0 
+1 1 0 0 0 0 0 0 0 0 
+7 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0010,0000 0000,0000 0000,0000 0000,0000 
+0001,0000 0000,0000 0000,0000 0000,0000 
+==15788== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test15+0x4c5ca7)
+    #1 0x4f4b91 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4b5d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b251614b38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b2516cb7427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b2516cb9029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b2516cafbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b2516cafc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b2515f1bd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b2515f1e20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b2515f1e62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test15+0x4e9ecc)
+    #12 0x4ea63b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test15+0x4ea63b)
+    #13 0x4f5bc8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f55d8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f67b2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6987 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef078 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ea8a0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b2516ca282f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test15+0x41c7e8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 2 ChangeBit-InsertRepeatedBytes-; base unit: 946ee6bb7763acd931e4e65826bf8eb0c5a8775c
+artifact_prefix='./'; Test unit written to ./crash-b290201108ff99d8ea2c39eeab1f77eed8feceb7
+stat::number_of_executed_units: 3136
+stat::average_exec_per_sec:     3136
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              228
+Execution time: 1 sec for test_poly15
+
+INFO: Seed: 911308307
+INFO: Loaded 3 modules (23401 guards): [0x2adad8ad21a0, 0x2adad8ae5b34), [0x2adad8d29690, 0x2adad8d2c9f4), [0x7470a0, 0x74714c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 448
+#449	INITED cov: 888 ft: 3320 corp: 195/824Kb exec/s: 0 rss: 100Mb
+#770	NEW    cov: 888 ft: 3321 corp: 196/830Kb exec/s: 0 rss: 116Mb L: 5193 MS: 1 InsertByte-
+#839	NEW    cov: 888 ft: 3322 corp: 197/833Kb exec/s: 0 rss: 120Mb L: 3697 MS: 5 CrossOver-InsertRepeatedBytes-ChangeByte-InsertRepeatedBytes-CrossOver-
+poly_check: bad satF
+test16: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 0, con 1
+Constraints
+3 10
+0 0 1 0 0 0 0 0 0 0 
+0 0 0 0 0 0 1236008529669 0 2590660554854 3032623961916 
+1 800469175 0 0 0 0 0 0 0 -3193401 
+Frames
+7 10
+0 1740426604548621 0 0 0 0 -506190040265758884 0 0 436261480562912675 
+0 0 0 0 0 0 572510586 0 545007221 0 
+0 0 0 0 0 0 0 1 0 0 
 0 0 0 0 0 1 0 0 0 0 
 0 0 0 0 1 0 0 0 0 0 
 0 0 0 1 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+7 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0010,0000 0000,0000 0000,0000 0000,0000 
+==15799== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test16+0x4c5ca7)
+    #1 0x4f4bc1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4b8d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2adad8d3e38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2adad98aa427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2adad98ac029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2adad98a2bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2adad98a2c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2adad8b0ed65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2adad8b1120c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2adad8b1162c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test16+0x4e9ecc)
+    #12 0x4ea63b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test16+0x4ea63b)
+    #13 0x4f5bf8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5608 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f67e2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f69b7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef0a8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ea8d0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2adad989582f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test16+0x41c7e8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 5 ChangeByte-InsertByte-ChangeBit-InsertRepeatedBytes-CopyPart-; base unit: d25beb322df9729f56c07e10d293207559f2e47a
+artifact_prefix='./'; Test unit written to ./crash-b2c92dc3d1f21e54a6225722ecfd214170ff03f8
+stat::number_of_executed_units: 1599
+stat::average_exec_per_sec:     0
+stat::new_units_added:          2
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              158
+Execution time: 1 sec for test_poly16
+
+INFO: Seed: 2326791034
+INFO: Loaded 3 modules (23404 guards): [0x2b4624dc51a0, 0x2b4624dd8b34), [0x2b462501c690, 0x2b462501f9f4), [0x7480a0, 0x748158), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 450
+#451	INITED cov: 834 ft: 3244 corp: 207/877Kb exec/s: 0 rss: 96Mb
+#2677	NEW    cov: 834 ft: 3249 corp: 208/881Kb exec/s: 2677 rss: 203Mb L: 3687 MS: 1 InsertByte-
+#2933	NEW    cov: 834 ft: 3250 corp: 209/886Kb exec/s: 2933 rss: 216Mb L: 5574 MS: 2 CopyPart-InsertByte-
+#3622	NEW    cov: 834 ft: 3251 corp: 210/892Kb exec/s: 3622 rss: 248Mb L: 5294 MS: 1 CMP- DE: "rss_limit_mb="-
+poly_check: bad satF
+test17: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 7, con 0
+Constraints
+1 10
+1 4112063 65536 0 0 0 0 0 0 0 
+Frames
+9 10
+0 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 -1 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 0 -1 0 0 0 0 
+0 0 0 0 1 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 17120381183918080 8299712637024931 0 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+9 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15810== ERROR: libFuzzer: deadly signal
+    #0 0x4c5c57 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test17+0x4c5c57)
+    #1 0x4f4c91 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4c5d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b462503138f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b4625b9d427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b4625b9f029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b4625b95bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b4625b95c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b4624e01d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b4624e0420c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b4624e0462c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9e7c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test17+0x4e9e7c)
+    #12 0x4ea5a3 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test17+0x4ea5a3)
+    #13 0x4f5cc8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f56d8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f68b2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6a87 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef178 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ea9a0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b4625b8882f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c798 in _start (/home/apron/newpolka/tests/libFuzzer/test17+0x41c798)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 1 PersAutoDict- DE: "rss_limit_mb="-; base unit: ba38143174362e8dc4556b88423d074ab1768eb8
+artifact_prefix='./'; Test unit written to ./crash-ac25984ea33dd58eddc1e04a675447fe20991eb8
+stat::number_of_executed_units: 3912
+stat::average_exec_per_sec:     3912
+stat::new_units_added:          3
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              261
+Execution time: 2 sec for test_poly17
+
+INFO: Seed: 235022623
+INFO: Loaded 3 modules (23404 guards): [0x2ae9102a01a0, 0x2ae9102b3b34), [0x2ae9104f7690, 0x2ae9104fa9f4), [0x7480a0, 0x748158), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 453
+#454	INITED cov: 834 ft: 3275 corp: 213/899Kb exec/s: 0 rss: 97Mb
+#1315	NEW    cov: 834 ft: 3276 corp: 214/904Kb exec/s: 0 rss: 138Mb L: 5191 MS: 1 CopyPart-
+#2311	NEW    cov: 834 ft: 3282 corp: 215/907Kb exec/s: 2311 rss: 186Mb L: 3719 MS: 2 InsertRepeatedBytes-CopyPart-
+#2787	NEW    cov: 874 ft: 3409 corp: 216/911Kb exec/s: 2787 rss: 209Mb L: 3688 MS: 3 InsertByte-ChangeBit-CopyPart-
+#4506	NEW    cov: 875 ft: 3429 corp: 217/915Kb exec/s: 4506 rss: 289Mb L: 3702 MS: 2 ChangeBit-InsertRepeatedBytes-
+#4860	NEW    cov: 875 ft: 3430 corp: 218/917Kb exec/s: 4860 rss: 307Mb L: 2405 MS: 1 ChangeByte-
+poly_check: bad satF
+test18: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 5, con 2
+Constraints
+4 10
+0 0 0 0 -3096151259650375149 3268284268154957583 0 -3704345771827527680 0 0 
+0 0 0 0 -309435676899728907 326639001135708569 0 0 -370434577182752768 0 
+1 0 0 0 -1818846831 1919967077 0 0 0 0 
+1 529192253118218240 0 0 6480551258853 -6840842695351 0 0 0 0 
+Frames
+7 10
+0 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 1 0 0 0 
+0 0 0 0 1919967077 1818846831 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
 0 0 1 0 0 0 0 0 0 0 
+1 1972341687477 0 0 -161058511818588160 0 0 134615272158711963 134537250825969090 0 
+1 1 0 0 0 0 0 0 0 0 
+7 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0010,0000 0000,0000 0000,0000 0000,0000 
+0001,0000 0000,0000 0000,0000 0000,0000 
+==15821== ERROR: libFuzzer: deadly signal
+    #0 0x4c5c57 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test18+0x4c5c57)
+    #1 0x4f4c91 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4c5d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2ae91050c38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2ae911078427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2ae91107a029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2ae911070bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2ae911070c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2ae9102dcd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2ae9102df20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2ae9102df62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9e7c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test18+0x4e9e7c)
+    #12 0x4ea5a3 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test18+0x4ea5a3)
+    #13 0x4f5cc8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f56d8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f68b2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6a87 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef178 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ea9a0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2ae91106382f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c798 in _start (/home/apron/newpolka/tests/libFuzzer/test18+0x41c798)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 1 CMP- DE: "use_value_profile"-; base unit: 0669394324aabbeee6bb1858282bc245af3f2fb1
+artifact_prefix='./'; Test unit written to ./crash-8451cdb5feffdc1c5a6aeb1300ab2599b46b2693
+stat::number_of_executed_units: 5330
+stat::average_exec_per_sec:     2665
+stat::new_units_added:          5
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              333
+Execution time: 3 sec for test_poly18
+
+INFO: Seed: 2978685053
+INFO: Loaded 3 modules (23404 guards): [0x2abd66fcf1a0, 0x2abd66fe2b34), [0x2abd67226690, 0x2abd672299f4), [0x7480a0, 0x748158), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 458
+#459	INITED cov: 893 ft: 3464 corp: 209/862Kb exec/s: 0 rss: 97Mb
+#571	NEW    cov: 893 ft: 3466 corp: 210/865Kb exec/s: 0 rss: 103Mb L: 3006 MS: 2 ShuffleBytes-CrossOver-
+poly_check: bad satF
+test19: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 4, con 0
+Constraints
+1 10
+1 4112063 65536 0 0 0 0 0 0 0 
+Frames
+9 10
+0 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 32385565240328192 0 0 0 -36420289262649073 0 0 0 0 
+0 -2882609150871732224 0 0 -293107211023570643 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 4066868126744576 10950440830440395 0 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+9 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15832== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test19+0x4c5ca7)
+    #1 0x4f4db1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4d7d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2abd6723b38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2abd67da7427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2abd67da9029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2abd67d9fbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2abd67d9fc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2abd6700bd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2abd6700e20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2abd6700e62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test19+0x4e9ecc)
+    #12 0x4ea67c in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test19+0x4ea67c)
+    #13 0x4f5de8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f57f8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f69d2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6ba7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef298 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4eaac0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2abd67d9282f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test19+0x41c7e8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 1 ChangeBit-; base unit: 012821b2cf4f850da321bf2aba7d391685fdcead
+artifact_prefix='./'; Test unit written to ./crash-89d38edf838055b9ae72580a7c04969efbccdf74
+stat::number_of_executed_units: 1050
+stat::average_exec_per_sec:     0
+stat::new_units_added:          1
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              126
+Execution time: 1 sec for test_poly19
+
+INFO: Seed: 4147701478
+INFO: Loaded 3 modules (23407 guards): [0x2b29d391b1a0, 0x2b29d392eb34), [0x2b29d3b72690, 0x2b29d3b759f4), [0x7480a0, 0x748164), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 459
+#460	INITED cov: 817 ft: 3285 corp: 214/886Kb exec/s: 0 rss: 97Mb
+#1521	NEW    cov: 817 ft: 3286 corp: 215/889Kb exec/s: 0 rss: 151Mb L: 3007 MS: 1 InsertByte-
+#1886	NEW    cov: 817 ft: 3287 corp: 216/889Kb exec/s: 0 rss: 170Mb L: 45 MS: 1 ChangeByte-
+#3482	NEW    cov: 817 ft: 3288 corp: 217/892Kb exec/s: 3482 rss: 245Mb L: 3006 MS: 2 ChangeByte-CopyPart-
+#3882	NEW    cov: 817 ft: 3289 corp: 218/898Kb exec/s: 3882 rss: 267Mb L: 6739 MS: 2 ShuffleBytes-CopyPart-
+#4161	NEW    cov: 817 ft: 3291 corp: 219/903Kb exec/s: 4161 rss: 279Mb L: 5191 MS: 1 ChangeByte-
+#7529	NEW    cov: 817 ft: 3292 corp: 220/908Kb exec/s: 3764 rss: 436Mb L: 5294 MS: 4 ChangeByte-ChangeBinInt-ChangeByte-ChangeBit-
+poly_check: bad satF
+test20: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 2, con 0
+Constraints
+1 10
+1 4112063 65536 0 0 0 0 0 0 0 
+Frames
+9 10
+0 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 1 0 
+0 -6348527362220490752 0 0 0 0 0 -7344400902463722739 0 0 
+0 -34248687693594624 0 0 0 0 98698939009477435 0 0 0 
+0 4142344799151620096 0 0 0 -7251905664220324201 0 0 0 0 
+0 4733022005609218048 0 0 252676344344231947 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 9209320165027904 17984860286010717 0 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+9 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15843== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test20+0x4c5ca7)
+    #1 0x4f4ff1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4fbd in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b29d3b8738f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b29d46f3427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b29d46f5029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b29d46ebbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b29d46ebc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b29d3957d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b29d395a20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b29d395a62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test20+0x4e9ecc)
+    #12 0x4ea6a1 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test20+0x4ea6a1)
+    #13 0x4f6028 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5a38 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f6c12 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6de7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef4d8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ead00 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b29d46de82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test20+0x41c7e8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 3 ShuffleBytes-ChangeBit-ChangeBit-; base unit: 012821b2cf4f850da321bf2aba7d391685fdcead
+artifact_prefix='./'; Test unit written to ./crash-ba3c5a9d9ec85936f47d581b4c482e73f29a578f
+stat::number_of_executed_units: 7828
+stat::average_exec_per_sec:     2609
+stat::new_units_added:          6
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              453
+Execution time: 3 sec for test_poly20
+
+INFO: Seed: 3501024050
+INFO: Loaded 3 modules (23401 guards): [0x2b7ff42cc1a0, 0x2b7ff42dfb34), [0x2b7ff4523690, 0x2b7ff45269f4), [0x7470a0, 0x74714c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 465
+#466	INITED cov: 880 ft: 3298 corp: 213/911Kb exec/s: 0 rss: 101Mb
+#1533	NEW    cov: 880 ft: 3299 corp: 214/916Kb exec/s: 0 rss: 150Mb L: 5192 MS: 2 ShuffleBytes-InsertByte-
+#1770	NEW    cov: 880 ft: 3300 corp: 215/923Kb exec/s: 0 rss: 162Mb L: 7640 MS: 4 InsertByte-ChangeBinInt-ChangeByte-CopyPart-
+#1966	NEW    cov: 881 ft: 3301 corp: 216/925Kb exec/s: 1966 rss: 172Mb L: 2176 MS: 5 ChangeByte-InsertByte-ChangeBinInt-CopyPart-InsertByte-
+#2138	NEW    cov: 881 ft: 3302 corp: 217/925Kb exec/s: 2138 rss: 181Mb L: 131 MS: 2 ChangeByte-ChangeBit-
+poly_check: bad satF
+test21: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 0, con 0
+Constraints
+2 10
+0 0 258102394880 0 94677363540333 92120249629990 67332040827862 0 845374496151 0 
+1 1 0 0 0 0 0 0 0 0 
+Frames
+8 10
+0 0 -536870912000 0 0 0 0 0 0 448521891219 
+0 0 -6124076693228061241 0 0 0 0 0 970529523592724480 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 9072221853461840747 0 0 0 4952130086669320192 0 0 0 
+0 0 5114625984284032617 0 0 755341669733826560 0 0 0 0 
+0 0 -5114625984284032617 0 1510683339467653120 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
 1 1 0 0 0 0 0 0 0 0 
 8 1
 0000,0000 0000,0000 0000,0000 0000,0000 
@@ -1185,144 +1418,608 @@ Frames
 0000,0000 0000,0000 0000,0000 0000,0000 
 0000,0000 0000,0000 0000,0000 0000,0000 
 0100,0000 0000,0000 0000,0000 0000,0000 
-==12816== ERROR: libFuzzer: deadly signal
+==15854== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test21+0x4c5ca7)
+    #1 0x4f4bb1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4b7d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b7ff453838f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b7ff50a4427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b7ff50a6029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b7ff509cbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b7ff509cc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b7ff4308d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b7ff430b20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b7ff430b62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test21+0x4e9ecc)
+    #12 0x4ea63b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test21+0x4ea63b)
+    #13 0x4f5be8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f55f8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f67d2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f69a7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef098 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ea8c0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b7ff508f82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test21+0x41c7e8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 3 ChangeBit-ChangeByte-InsertByte-; base unit: 62f0c132917851540b1975e2b5a40257d2a51cb0
+artifact_prefix='./'; Test unit written to ./crash-71ff40c709247977a86148bbe673fdacd8f262e4
+stat::number_of_executed_units: 2239
+stat::average_exec_per_sec:     2239
+stat::new_units_added:          4
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              189
+Execution time: 1 sec for test_poly21
+
+INFO: Seed: 985703169
+INFO: Loaded 3 modules (23405 guards): [0x2b02609ef1a0, 0x2b0260a02b34), [0x2b0260c46690, 0x2b0260c499f4), [0x7480b0, 0x74816c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 469
+#470	INITED cov: 892 ft: 3488 corp: 215/887Kb exec/s: 0 rss: 98Mb
+poly_check: bad satF
+test22: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 4, con 0
+Constraints
+1 10
+1 111892667578712064 59307192269345 0 0 0 -108455569844600832 0 108396021716877312 0 
+Frames
+9 10
+0 -18014398509481984 0 0 0 0 0 0 0 -212490724026559177 
+0 9196902673657817923 0 0 0 0 0 0 4787773297160615008 0 
+0 0 0 0 0 0 0 1 0 0 
+0 -6305785917304297159 0 0 0 0 -4331607738870661600 0 0 0 
+0 -92196382156259328 0 0 0 -23585489298731959 0 0 0 0 
+0 0 0 0 1 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 -6152133399126175007 1814579952008298496 0 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+9 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15865== ERROR: libFuzzer: deadly signal
+    #0 0x4c5cf7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test22+0x4c5cf7)
+    #1 0x4f4e61 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4e2d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b0260c5b38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b02617c7427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b02617c9029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b02617bfbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b02617bfc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b0260a2bd65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b0260a2e20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b0260a2e62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9f1c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test22+0x4e9f1c)
+    #12 0x4ea6cc in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test22+0x4ea6cc)
+    #13 0x4f5e98 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f58a8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f6a82 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6c57 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef348 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4eab70 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b02617b282f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c838 in _start (/home/apron/newpolka/tests/libFuzzer/test22+0x41c838)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 2 InsertByte-InsertByte-; base unit: 012821b2cf4f850da321bf2aba7d391685fdcead
+artifact_prefix='./'; Test unit written to ./crash-9d9859dca6803673c74109ef18f6aa55ca5e5c49
+stat::number_of_executed_units: 1377
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              146
+Execution time: 1 sec for test_poly22
+
+INFO: Seed: 2246528582
+INFO: Loaded 3 modules (23405 guards): [0x2abe5e6ed1a0, 0x2abe5e700b34), [0x2abe5e944690, 0x2abe5e9479f4), [0x7480b0, 0x74816c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 469
+#470	INITED cov: 893 ft: 3496 corp: 220/903Kb exec/s: 0 rss: 99Mb
+poly_check: bad satF
+test23: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 1, con 0
+Constraints
+2 10
+0 0 1052688063 0 1052704768 -2105409536 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+Frames
+8 10
+0 0 0 0 0 0 0 0 0 -1 
+0 0 -607458184113684480 0 0 0 0 0 5774997942316704851 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 -4442765848028905472 0 0 0 -2896422791367473227 0 0 0 
+0 0 14565670780928 0 0 6951072770769 0 0 0 0 
+0 0 -7282835390464 0 6951072770769 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+8 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0100,0000 0000,0000 0000,0000 0000,0000 
+==15876== ERROR: libFuzzer: deadly signal
+    #0 0x4c5cf7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test23+0x4c5cf7)
+    #1 0x4f4e61 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4e2d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2abe5e95938f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2abe5f4c5427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2abe5f4c7029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2abe5f4bdbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2abe5f4bdc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2abe5e729d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2abe5e72c20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2abe5e72c62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9f1c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test23+0x4e9f1c)
+    #12 0x4ea6cc in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test23+0x4ea6cc)
+    #13 0x4f5e98 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f58a8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f6a82 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6c57 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef348 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4eab70 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2abe5f4b082f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c838 in _start (/home/apron/newpolka/tests/libFuzzer/test23+0x41c838)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 2 ChangeBit-InsertByte-; base unit: ba38143174362e8dc4556b88423d074ab1768eb8
+artifact_prefix='./'; Test unit written to ./crash-78d4da156f6970b605335f895f01540ecb4f8774
+stat::number_of_executed_units: 1097
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              128
+Execution time: 1 sec for test_poly23
+
+INFO: Seed: 3417692211
+INFO: Loaded 3 modules (23404 guards): [0x2ba7bc0cc1a0, 0x2ba7bc0dfb34), [0x2ba7bc323690, 0x2ba7bc3269f4), [0x7480b0, 0x748168), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 469
+#470	INITED cov: 929 ft: 3499 corp: 217/889Kb exec/s: 0 rss: 99Mb
+#481	NEW    cov: 929 ft: 3502 corp: 218/892Kb exec/s: 0 rss: 99Mb L: 2405 MS: 1 ChangeBit-
+poly_check: bad satF
+test24: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 4, con 0
+Constraints
+1 10
+1 4112063 65536 0 0 0 0 0 0 0 
+Frames
+9 10
+0 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 3127316183871651840 0 0 0 -6161248123880602247 0 0 0 0 
+0 17518243887448064 0 0 -2211801741723032273 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 -15637347187490816 10726342894614249 0 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+9 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15887== ERROR: libFuzzer: deadly signal
+    #0 0x4c5cf7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test24+0x4c5cf7)
+    #1 0x4f4de1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4dad in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2ba7bc33838f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2ba7bcea4427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2ba7bcea6029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2ba7bce9cbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2ba7bce9cc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2ba7bc108d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2ba7bc10b20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2ba7bc10b62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9f1c in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test24+0x4e9f1c)
+    #12 0x4ea6cc in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test24+0x4ea6cc)
+    #13 0x4f5e18 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5828 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f6a02 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f6bd7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef2c8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4eaaf0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2ba7bce8f82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c838 in _start (/home/apron/newpolka/tests/libFuzzer/test24+0x41c838)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 1 ChangeBinInt-; base unit: 012821b2cf4f850da321bf2aba7d391685fdcead
+artifact_prefix='./'; Test unit written to ./crash-f81ccdb1272422e2d17033d7b3b825a422a879a0
+stat::number_of_executed_units: 746
+stat::average_exec_per_sec:     0
+stat::new_units_added:          1
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              114
+Execution time: 1 sec for test_poly24
+
+INFO: Seed: 163802251
+INFO: Loaded 3 modules (23409 guards): [0x2b01b6bd81a0, 0x2b01b6bebb34), [0x2b01b6e2f690, 0x2b01b6e329f4), [0x7480a0, 0x74816c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 470
+#471	INITED cov: 875 ft: 3417 corp: 221/909Kb exec/s: 0 rss: 99Mb
+ALARM: working on the last Unit for 3601 seconds
+       and the timeout value is 3600 (use -timeout=N to change)
+MS: 3 ChangeBinInt-ChangeByte-ChangeBit-; base unit: ba38143174362e8dc4556b88423d074ab1768eb8
+artifact_prefix='./'; Test unit written to ./timeout-972f624b563ec9ce0307f0dd25f2c411ca49ceba
+==15898== ERROR: libFuzzer: timeout after 3601 seconds
     #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test25+0x4c5ca7)
+    #1 0x4f4fb6 in fuzzer::Fuzzer::AlarmCallback() /home/Fuzzer/FuzzerLoop.cpp:230:7
+    #2 0x2b01b6e4438f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #3 0x2b01b6bfb70e in numint_sgn (/usr/local/lib/libpolkaRll.so+0xf70e)
+    #4 0x2b01b6bfb5c3 in vector_min_notzero (/usr/local/lib/libpolkaRll.so+0xf5c3)
+    #5 0x2b01b6bfb2b6 in vector_gcd (/usr/local/lib/libpolkaRll.so+0xf2b6)
+    #6 0x2b01b6bfb823 in vector_normalize (/usr/local/lib/libpolkaRll.so+0xf823)
+    #7 0x2b01b6bfcbe0 in vector_combine (/usr/local/lib/libpolkaRll.so+0x10be0)
+    #8 0x2b01b6bfe8b0 in matrix_combine_rows (/usr/local/lib/libpolkaRll.so+0x128b0)
+    #9 0x2b01b6c0276a in cherni_backsubstitute (/usr/local/lib/libpolkaRll.so+0x1676a)
+    #10 0x2b01b6c0328f in cherni_simplify (/usr/local/lib/libpolkaRll.so+0x1728f)
+    #11 0x2b01b6c03caa in cherni_add_and_minimize (/usr/local/lib/libpolkaRll.so+0x17caa)
+    #12 0x2b01b6c14cf7 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28cf7)
+    #13 0x2b01b6c1720c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #14 0x2b01b6c1762c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #15 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test25+0x4e9ecc)
+    #16 0x4ea6a1 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test25+0x4ea6a1)
+    #17 0x4f6078 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #18 0x4f5a88 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #19 0x4f6c62 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #20 0x4f6e37 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #21 0x4ef528 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #22 0x4ead50 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #23 0x2b01b799b82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #24 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test25+0x41c7e8)
+
+SUMMARY: libFuzzer: timeout
+stat::number_of_executed_units: 699
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              114
+Execution time: 3602 sec for test_poly25
+
+INFO: Seed: 3543023584
+INFO: Loaded 3 modules (23409 guards): [0x2b8b1f5751a0, 0x2b8b1f588b34), [0x2b8b1f7cc690, 0x2b8b1f7cf9f4), [0x7480a0, 0x74816c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 470
+#471	INITED cov: 850 ft: 3410 corp: 216/887Kb exec/s: 0 rss: 99Mb
+poly_check: bad satF
+test26: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 1, con 0
+Constraints
+1 10
+1 7701249585796087808 -3031669757403106939 0 4772292129402750208 8902159814904051200 0 0 3139293739558633472 0 
+Frames
+9 10
+0 0 0 0 0 0 0 0 0 1 
+0 -205195580875 0 0 0 0 0 0 -324988240079 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 -385345380041340589 0 0 0 530849305020334080 0 0 0 0 
+0 -1600579486327188167 0 0 283488024761729024 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 7255504307406929887 1131922799611346944 0 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+9 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15915== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test26+0x4c5ca7)
     #1 0x4f5041 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
     #2 0x4f500d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
-    #3 0x2ab5c59e938f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
-    #4 0x2ab5c6555427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
-    #5 0x2ab5c6557029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
-    #6 0x2ab5c654dbd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
-    #7 0x2ab5c654dc81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
-    #8 0x2ab5c57b9d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
-    #9 0x2ab5c57bc20c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
-    #10 0x2ab5c57bc62c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
-    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test25+0x4e9ecc)
-    #12 0x4ea6a1 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test25+0x4ea6a1)
+    #3 0x2b8b1f7e138f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b8b2034d427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b8b2034f029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b8b20345bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b8b20345c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b8b1f5b1d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b8b1f5b420c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b8b1f5b462c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test26+0x4e9ecc)
+    #12 0x4ea6a1 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test26+0x4ea6a1)
     #13 0x4f6078 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
     #14 0x4f5a88 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
     #15 0x4f6c62 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
     #16 0x4f6e37 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
     #17 0x4ef528 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
     #18 0x4ead50 in main /home/Fuzzer/FuzzerMain.cpp:20:10
-    #19 0x2ab5c654082f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
-    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test25+0x41c7e8)
+    #19 0x2b8b2033882f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test26+0x41c7e8)
 
 NOTE: libFuzzer has rudimentary signal handlers.
       Combine libFuzzer with AddressSanitizer or similar for better crash reports.
 SUMMARY: libFuzzer: deadly signal
-MS: 3 ShuffleBytes-ShuffleBytes-InsertByte-; base unit: b0dbb7a6ccf9a5301b360f1ba5ad119069be3643
-artifact_prefix='./'; Test unit written to ./crash-0f72df5d370f8b941096aee6560655d3505a775d
-stat::number_of_executed_units: 2649
-stat::average_exec_per_sec:     2649
-stat::new_units_added:          1
+MS: 1 CMP- DE: "dump_coverage"-; base unit: ba38143174362e8dc4556b88423d074ab1768eb8
+artifact_prefix='./'; Test unit written to ./crash-00fc38437079eb2c2b756cc97aa4c709e1de149b
+stat::number_of_executed_units: 1397
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
 stat::slowest_unit_time_sec:    0
-stat::peak_rss_mb:              209
-Execution time: 2 sec for test_poly25
+stat::peak_rss_mb:              145
+Execution time: 1 sec for test_poly26
 
-test_poly26.c:24:17: warning: implicit declaration of function 'opt_oct_meet' is invalid in C99 [-Wimplicit-function-declaration]
-                                pk_t* glb = opt_oct_meet(man, false, polyhedron1, polyhedron2);
-                                            ^
-test_poly26.c:24:11: warning: incompatible integer to pointer conversion initializing 'pk_t *' (aka 'struct pk_t *') with an expression of type 'int' [-Wint-conversion]
-                                pk_t* glb = opt_oct_meet(man, false, polyhedron1, polyhedron2);
-                                      ^     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-2 warnings generated.
-/tmp/test_poly26-ae65b2.o: In function `LLVMFuzzerTestOneInput':
-test_poly26.c:(.text+0x5be): undefined reference to `opt_oct_meet'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test26: not found
-Execution time: 0 sec for test_poly26
+INFO: Seed: 555557759
+INFO: Loaded 3 modules (23404 guards): [0x2b6b87b8a1a0, 0x2b6b87b9db34), [0x2b6b87de1690, 0x2b6b87de49f4), [0x7480a0, 0x748158), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 470
+test27: pk_widening.c:161: pk_t *pk_widening(ap_manager_t *, pk_t *, pk_t *): Assertion `pk_is_leq(man,pa,pb)' failed.
+==15926== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test27+0x4c5ca7)
+    #1 0x4f4d21 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4ced in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b6b87df638f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b6b88962427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b6b88964029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b6b8895abd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b6b8895ac81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b6b87bd39c6 in pk_widening (/usr/local/lib/libpolkaRll.so+0x359c6)
+    #9 0x4ea7f6 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test27+0x4ea7f6)
+    #10 0x4f5d58 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #11 0x4f5768 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #12 0x4f5ba6 in fuzzer::Fuzzer::ShuffleAndMinimize(std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > >*) /home/Fuzzer/FuzzerLoop.cpp:373:5
+    #13 0x4ef1bb in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:748:6
+    #14 0x4eaa30 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #15 0x2b6b8894d82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #16 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test27+0x41c7e8)
 
-test_poly27.c:28:7: warning: implicit declaration of function 'opt_oct_widening' is invalid in C99 [-Wimplicit-function-declaration]
-                                                opt_oct_widening(man, polyhedron1, polyhedron2))) {
-                                                ^
-test_poly27.c:28:7: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                opt_oct_widening(man, polyhedron1, polyhedron2))) {
-                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:269:51: note: passing argument to parameter 'a2' here
-bool pk_is_leq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                                  ^
-2 warnings generated.
-/tmp/test_poly27-570ef1.o: In function `LLVMFuzzerTestOneInput':
-test_poly27.c:(.text+0x585): undefined reference to `opt_oct_widening'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test27: not found
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix='./'; Test unit written to ./crash-27a060fe54851765713816fd48efb1d840018c84
+stat::number_of_executed_units: 133
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              66
 Execution time: 0 sec for test_poly27
 
-test_poly28.c:28:7: warning: implicit declaration of function 'opt_oct_widening' is invalid in C99 [-Wimplicit-function-declaration]
-                                                opt_oct_widening(man, polyhedron1, polyhedron2))) {
-                                                ^
-test_poly28.c:28:7: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                opt_oct_widening(man, polyhedron1, polyhedron2))) {
-                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:269:51: note: passing argument to parameter 'a2' here
-bool pk_is_leq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                                  ^
-2 warnings generated.
-/tmp/test_poly28-812e5e.o: In function `LLVMFuzzerTestOneInput':
-test_poly28.c:(.text+0x584): undefined reference to `opt_oct_widening'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test28: not found
+INFO: Seed: 1256943614
+INFO: Loaded 3 modules (23404 guards): [0x2b0e0ee0a1a0, 0x2b0e0ee1db34), [0x2b0e0f061690, 0x2b0e0f0649f4), [0x7480a0, 0x748158), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 470
+test28: pk_widening.c:161: pk_t *pk_widening(ap_manager_t *, pk_t *, pk_t *): Assertion `pk_is_leq(man,pa,pb)' failed.
+==15937== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test28+0x4c5ca7)
+    #1 0x4f4d21 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4ced in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b0e0f07638f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b0e0fbe2427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b0e0fbe4029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b0e0fbdabd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b0e0fbdac81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b0e0ee539c6 in pk_widening (/usr/local/lib/libpolkaRll.so+0x359c6)
+    #9 0x4ea7f5 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test28+0x4ea7f5)
+    #10 0x4f5d58 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #11 0x4f5768 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #12 0x4f5ba6 in fuzzer::Fuzzer::ShuffleAndMinimize(std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > >*) /home/Fuzzer/FuzzerLoop.cpp:373:5
+    #13 0x4ef1bb in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:748:6
+    #14 0x4eaa30 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #15 0x2b0e0fbcd82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #16 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test28+0x41c7e8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix='./'; Test unit written to ./crash-27a060fe54851765713816fd48efb1d840018c84
+stat::number_of_executed_units: 133
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              66
 Execution time: 0 sec for test_poly28
 
-test_poly29.c:24:23: warning: implicit declaration of function 'opt_oct_widening' is invalid in C99 [-Wimplicit-function-declaration]
-                        if (!pk_is_eq(man, opt_oct_widening(man, polyhedron1, bottom),
-                                           ^
-test_poly29.c:24:23: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                        if (!pk_is_eq(man, opt_oct_widening(man, polyhedron1, bottom),
-                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-2 warnings generated.
-/tmp/test_poly29-539a60.o: In function `LLVMFuzzerTestOneInput':
-test_poly29.c:(.text+0x3f1): undefined reference to `opt_oct_widening'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test29: not found
-Execution time: 0 sec for test_poly29
+INFO: Seed: 1952021521
+INFO: Loaded 3 modules (23401 guards): [0x2ad98b6a11a0, 0x2ad98b6b4b34), [0x2ad98b8f8690, 0x2ad98b8fb9f4), [0x7470a0, 0x74714c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 470
+test29: pk_widening.c:161: pk_t *pk_widening(ap_manager_t *, pk_t *, pk_t *): Assertion `pk_is_leq(man,pa,pb)' failed.
+==15948== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test29+0x4c5ca7)
+    #1 0x4f4b51 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4b1d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2ad98b90d38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2ad98c479427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2ad98c47b029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2ad98c471bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2ad98c471c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2ad98b6ea9c6 in pk_widening (/usr/local/lib/libpolkaRll.so+0x359c6)
+    #9 0x4ea662 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test29+0x4ea662)
+    #10 0x4f5b88 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #11 0x4f5598 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #12 0x4f59d6 in fuzzer::Fuzzer::ShuffleAndMinimize(std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > >*) /home/Fuzzer/FuzzerLoop.cpp:373:5
+    #13 0x4eefeb in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:748:6
+    #14 0x4ea860 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #15 0x2ad98c46482f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #16 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test29+0x41c7e8)
 
-test_poly30.c:24:23: warning: implicit declaration of function 'opt_oct_widening' is invalid in C99 [-Wimplicit-function-declaration]
-                        if (!pk_is_eq(man, opt_oct_widening(man, bottom, polyhedron1),
-                                           ^
-test_poly30.c:24:23: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                        if (!pk_is_eq(man, opt_oct_widening(man, bottom, polyhedron1),
-                                           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:276:40: note: passing argument to parameter 'a1' here
-bool pk_is_eq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                       ^
-2 warnings generated.
-/tmp/test_poly30-d733b4.o: In function `LLVMFuzzerTestOneInput':
-test_poly30.c:(.text+0x44d): undefined reference to `opt_oct_widening'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test30: not found
-Execution time: 0 sec for test_poly30
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix='./'; Test unit written to ./crash-c00ade750a0681157c321a116502f8d2ddf24992
+stat::number_of_executed_units: 22
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              60
+Execution time: 1 sec for test_poly29
 
-test_poly31.c:29:7: warning: implicit declaration of function 'opt_oct_widening' is invalid in C99 [-Wimplicit-function-declaration]
-                                                opt_oct_widening(man, polyhedron1, polyhedron2))) {
-                                                ^
-test_poly31.c:29:7: warning: incompatible integer to pointer conversion passing 'int' to parameter of type 'pk_t *' (aka 'struct pk_t *') [-Wint-conversion]
-                                                opt_oct_widening(man, polyhedron1, polyhedron2))) {
-                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/usr/local/include/pk.h:269:51: note: passing argument to parameter 'a2' here
-bool pk_is_leq(ap_manager_t* man, pk_t* a1, pk_t* a2);
-                                                  ^
-2 warnings generated.
-/tmp/test_poly31-7ecd2a.o: In function `LLVMFuzzerTestOneInput':
-test_poly31.c:(.text+0x614): undefined reference to `opt_oct_widening'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test31: not found
+INFO: Seed: 2555288472
+INFO: Loaded 3 modules (23401 guards): [0x2b82663291a0, 0x2b826633cb34), [0x2b8266580690, 0x2b82665839f4), [0x7470a0, 0x74714c), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 470
+#471	INITED cov: 877 ft: 3307 corp: 218/922Kb exec/s: 0 rss: 101Mb
+poly_check: bad satF
+test30: pk_meetjoin.c:110: bool poly_meet_matrix(bool, bool, ap_manager_t *, pk_t *, pk_t *, matrix_t *): Assertion `poly_check_dual(pk,po,meet)' failed.
+cherni_checksatmat con_to_ray=0: ray 4, con 0
+Constraints
+1 10
+1 4112063 65536 0 0 0 0 0 0 0 
+Frames
+9 10
+0 0 0 0 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 1 0 
+0 0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 1 0 0 0 
+0 -931616477092511744 0 0 0 6887863379610690951 0 0 0 0 
+0 -9138565468053831680 0 0 9186315740430784767 0 0 0 0 0 
+0 0 0 1 0 0 0 0 0 0 
+0 -8857190830637056 11820118524623125 0 0 0 0 0 0 0 
+1 1 0 0 0 0 0 0 0 0 
+9 1
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+0000,0000 0000,0000 0000,0000 0000,0000 
+1000,0000 0000,0000 0000,0000 0000,0000 
+==15959== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test30+0x4c5ca7)
+    #1 0x4f4bc1 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4b8d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2b826659538f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2b8267101427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2b8267103029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2b82670f9bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2b82670f9c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2b8266365d65 in poly_meet_matrix (/usr/local/lib/libpolkaRll.so+0x28d65)
+    #9 0x2b826636820c in poly_meet_itv_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b20c)
+    #10 0x2b826636862c in pk_meet_lincons_array (/usr/local/lib/libpolkaRll.so+0x2b62c)
+    #11 0x4e9ecc in create_polyhedron (/home/apron/newpolka/tests/libFuzzer/test30+0x4e9ecc)
+    #12 0x4ea63b in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test30+0x4ea63b)
+    #13 0x4f5bf8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #14 0x4f5608 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #15 0x4f67e2 in fuzzer::Fuzzer::MutateAndTestOne() /home/Fuzzer/FuzzerLoop.cpp:611:9
+    #16 0x4f69b7 in fuzzer::Fuzzer::Loop() /home/Fuzzer/FuzzerLoop.cpp:635:5
+    #17 0x4ef0a8 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:750:6
+    #18 0x4ea8d0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #19 0x2b82670ec82f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #20 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test30+0x41c7e8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 2 ChangeByte-ChangeByte-; base unit: 012821b2cf4f850da321bf2aba7d391685fdcead
+artifact_prefix='./'; Test unit written to ./crash-5681087bf60b37f9934abe9101b23f7a7baca6d9
+stat::number_of_executed_units: 788
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              118
+Execution time: 1 sec for test_poly30
+
+INFO: Seed: 3725462531
+INFO: Loaded 3 modules (23404 guards): [0x2ad10c4831a0, 0x2ad10c496b34), [0x2ad10c6da690, 0x2ad10c6dd9f4), [0x7480b0, 0x748168), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 470
+test31: pk_widening.c:161: pk_t *pk_widening(ap_manager_t *, pk_t *, pk_t *): Assertion `pk_is_leq(man,pa,pb)' failed.
+==15970== ERROR: libFuzzer: deadly signal
+    #0 0x4c5cf7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test31+0x4c5cf7)
+    #1 0x4f4e01 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4dcd in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2ad10c6ef38f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2ad10d25b427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2ad10d25d029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2ad10d253bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2ad10d253c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2ad10c4cc9c6 in pk_widening (/usr/local/lib/libpolkaRll.so+0x359c6)
+    #9 0x4ea8d5 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test31+0x4ea8d5)
+    #10 0x4f5e38 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #11 0x4f5848 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #12 0x4f5c86 in fuzzer::Fuzzer::ShuffleAndMinimize(std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > >*) /home/Fuzzer/FuzzerLoop.cpp:373:5
+    #13 0x4ef29b in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:748:6
+    #14 0x4eab10 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #15 0x2ad10d24682f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #16 0x41c838 in _start (/home/apron/newpolka/tests/libFuzzer/test31+0x41c838)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix='./'; Test unit written to ./crash-27a060fe54851765713816fd48efb1d840018c84
+stat::number_of_executed_units: 133
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              68
 Execution time: 0 sec for test_poly31
 
-test_poly32.c:29:23: warning: implicit declaration of function 'opt_oct_widening' is invalid in C99 [-Wimplicit-function-declaration]
-                                        wideningResult = opt_oct_widening(man, polyhedron1, polyhedron2);
-                                                         ^
-test_poly32.c:29:21: warning: incompatible integer to pointer conversion assigning to 'pk_t *' (aka 'struct pk_t *') from 'int' [-Wint-conversion]
-                                        wideningResult = opt_oct_widening(man, polyhedron1, polyhedron2);
-                                                       ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-2 warnings generated.
-/tmp/test_poly32-18ea23.o: In function `LLVMFuzzerTestOneInput':
-test_poly32.c:(.text+0x57f): undefined reference to `opt_oct_widening'
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-/bin/sh: 6: ./test32: not found
+INFO: Seed: 141776787
+INFO: Loaded 3 modules (23408 guards): [0x2acd430841a0, 0x2acd43097b34), [0x2acd432db690, 0x2acd432de9f4), [0x7480a0, 0x748168), 
+Loading corpus dir: MY_CORPUS/
+Loading corpus dir: SEED_CORPUS/
+#0	READ units: 470
+test32: pk_widening.c:161: pk_t *pk_widening(ap_manager_t *, pk_t *, pk_t *): Assertion `pk_is_leq(man,pa,pb)' failed.
+==15981== ERROR: libFuzzer: deadly signal
+    #0 0x4c5ca7 in __sanitizer_print_stack_trace (/home/apron/newpolka/tests/libFuzzer/test32+0x4c5ca7)
+    #1 0x4f4e91 in fuzzer::Fuzzer::CrashCallback() /home/Fuzzer/FuzzerLoop.cpp:191:5
+    #2 0x4f4e5d in fuzzer::Fuzzer::StaticCrashSignalCallback() /home/Fuzzer/FuzzerLoop.cpp:175:6
+    #3 0x2acd432f038f  (/lib/x86_64-linux-gnu/libpthread.so.0+0x1138f)
+    #4 0x2acd43e5c427 in gsignal (/lib/x86_64-linux-gnu/libc.so.6+0x35427)
+    #5 0x2acd43e5e029 in abort (/lib/x86_64-linux-gnu/libc.so.6+0x37029)
+    #6 0x2acd43e54bd6  (/lib/x86_64-linux-gnu/libc.so.6+0x2dbd6)
+    #7 0x2acd43e54c81 in __assert_fail (/lib/x86_64-linux-gnu/libc.so.6+0x2dc81)
+    #8 0x2acd430cd9c6 in pk_widening (/usr/local/lib/libpolkaRll.so+0x359c6)
+    #9 0x4ea7f0 in LLVMFuzzerTestOneInput (/home/apron/newpolka/tests/libFuzzer/test32+0x4ea7f0)
+    #10 0x4f5ec8 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /home/Fuzzer/FuzzerLoop.cpp:474:13
+    #11 0x4f58d8 in fuzzer::Fuzzer::RunOne(unsigned char const*, unsigned long, bool, fuzzer::InputInfo*) /home/Fuzzer/FuzzerLoop.cpp:403:3
+    #12 0x4f5d16 in fuzzer::Fuzzer::ShuffleAndMinimize(std::vector<std::vector<unsigned char, std::allocator<unsigned char> >, std::allocator<std::vector<unsigned char, std::allocator<unsigned char> > > >*) /home/Fuzzer/FuzzerLoop.cpp:373:5
+    #13 0x4ef32b in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /home/Fuzzer/FuzzerDriver.cpp:748:6
+    #14 0x4eaba0 in main /home/Fuzzer/FuzzerMain.cpp:20:10
+    #15 0x2acd43e4782f in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2082f)
+    #16 0x41c7e8 in _start (/home/apron/newpolka/tests/libFuzzer/test32+0x41c7e8)
+
+NOTE: libFuzzer has rudimentary signal handlers.
+      Combine libFuzzer with AddressSanitizer or similar for better crash reports.
+SUMMARY: libFuzzer: deadly signal
+MS: 0 ; base unit: 0000000000000000000000000000000000000000
+artifact_prefix='./'; Test unit written to ./crash-27a060fe54851765713816fd48efb1d840018c84
+stat::number_of_executed_units: 133
+stat::average_exec_per_sec:     0
+stat::new_units_added:          0
+stat::slowest_unit_time_sec:    0
+stat::peak_rss_mb:              68
 Execution time: 0 sec for test_poly32
 

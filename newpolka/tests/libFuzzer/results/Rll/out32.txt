@@ -1,0 +1,71 @@
+Dim: 2
+Number of constraints: 32
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 128, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 8388608, 0
+Type: e
+Values: 1, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, -6, 0
+Type: e
+Values: 0, 0, 0
+Number of constraints: 2
+Type: e
+Values: -256, -1, -1
+Type: e
+Values: 0, 0, 0
