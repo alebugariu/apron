@@ -1,0 +1,20 @@
+Dim: 2
+Number of constraints: 9
+Type: e
+Values: 0, 1280, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 1634562911, 27756, 0
+Type: e
+Values: 33554432, 0, 2162688
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 256, 0, 0
+Type: e
+Values: 0, 0, 0
