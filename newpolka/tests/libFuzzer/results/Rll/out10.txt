@@ -11,6 +11,12 @@ Values: 0, 0, 0
 Type: e
 Values: 0, 0, 0
 Type: e
+Values: 128, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
 Values: 0, 0, 0
 Type: e
 Values: 0, 0, 0
@@ -18,10 +24,52 @@ Type: e
 Values: 0, 0, 0
 Type: e
 Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: s
+Values: 0, -6, 0
+Type: e
+Values: 0, 0, 0
+Number of constraints: 2
 Type: e
 Values: 1936850944, 1768710003, 1601464685
 Type: e
 Values: 0, 0, 0
+Number of constraints: 32
 Type: e
 Values: 0, 0, 0
 Type: e
@@ -45,8 +93,6 @@ Values: 0, 0, 0
 Type: e
 Values: 0, 0, 0
 Type: e
-Values: 1935633505, 1937006964, 0
-Type: e
 Values: 0, 0, 0
 Type: e
 Values: 0, 0, 0
@@ -58,6 +104,30 @@ Type: e
 Values: 0, 0, 0
 Type: e
 Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 63743, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: -768, -1, 255
+Type: e
+Values: 512, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 13056, 0, 0
 Type: e
 Values: 0, 0, 0
 Type: e
