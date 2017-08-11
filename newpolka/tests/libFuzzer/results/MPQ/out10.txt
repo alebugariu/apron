@@ -1,136 +1,18 @@
-Dim: 2
+Dim: 8
 Number of constraints: 32
 Type: e
-Values: 0, 0, 0
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
 Type: e
-Values: 128, 0, 0
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0
+Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: s
-Values: 0, -6, 0
-Type: e
-Values: 0, 0, 0
-Number of constraints: 2
-Type: e
-Values: 0, 256, 0
-Type: e
-Values: 0, 0, 0
-Number of constraints: 32
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 63743, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
+Values: 0, 512, 256, 0, 0, 0, 0, 0, 0
