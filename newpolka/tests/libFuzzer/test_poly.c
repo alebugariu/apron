@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
-ap_linexpr0_t * create_linexpr0(unsigned short int dim, int *values) {
+ap_linexpr0_t * create_linexpr0(long dim, long *values) {
 	ap_coeff_t *cst, *coeff;
 	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE,
 			dim);
@@ -24,10 +24,10 @@ ap_linexpr0_t * create_linexpr0(unsigned short int dim, int *values) {
 	return linexpr0;
 }
 
-bool create_constraints(ap_lincons0_array_t *lincons0, int dim,
-		const int *data, size_t dataSize, unsigned int *dataIndex, FILE *fp) {
+bool create_constraints(ap_lincons0_array_t *lincons0, long dim,
+		const long *data, size_t dataSize, unsigned int *dataIndex, FILE *fp) {
 	size_t i, j;
-	int nbcons = MIN_NBCONS;
+	long nbcons = MIN_NBCONS;
 	if (!make_fuzzable(&nbcons, sizeof(nbcons), data, dataSize, dataIndex)) //number of constraints
 			{
 		return false;
@@ -36,7 +36,7 @@ bool create_constraints(ap_lincons0_array_t *lincons0, int dim,
 			nbcons >= MIN_NBCONS && nbcons <= MAX_NBCONS && nbcons >= dim)) {
 		return false;
 	}
-	fprintf(fp, "Number of constraints: %d\n", nbcons);
+	fprintf(fp, "Number of constraints: %ld\n", nbcons);
 	fflush(fp);
 	*lincons0 = ap_lincons0_array_make(nbcons);
 	for (i = 0; i < nbcons; i++) {
@@ -53,16 +53,16 @@ bool create_constraints(ap_lincons0_array_t *lincons0, int dim,
 		fflush(fp);
 		lincons0->p[i].constyp = type;
 
-		int fuzzableValues[MAX_DIM + 1];
-		if (!make_fuzzable(fuzzableValues, (dim + 1) * sizeof(int), data,
+		long fuzzableValues[MAX_DIM + 1];
+		if (!make_fuzzable(fuzzableValues, (dim + 1) * sizeof(long), data,
 				dataSize, dataIndex)) {
 			return false;
 		}
 		fprintf(fp, "Values: ");
 		for (j = 0; j < dim; j++) {
-			fprintf(fp, "%d, ", fuzzableValues[j]);
+			fprintf(fp, "%ld, ", fuzzableValues[j]);
 		}
-		fprintf(fp, "%d\n", fuzzableValues[j]);
+		fprintf(fp, "%ld\n", fuzzableValues[j]);
 		fflush(fp);
 		ap_linexpr0_t * linexpr0 = create_linexpr0(dim, fuzzableValues);
 		lincons0->p[i].linexpr0 = linexpr0;
@@ -71,7 +71,7 @@ bool create_constraints(ap_lincons0_array_t *lincons0, int dim,
 }
 
 bool create_polyhedron(pk_t** polyhedron, ap_manager_t* man,
-		pk_t * top, int dim, const int *data, size_t dataSize,
+		pk_t * top, long dim, const long *data, size_t dataSize,
 		unsigned int *dataIndex, FILE *fp) {
 	ap_lincons0_array_t constraints;
 	if (!create_constraints(&constraints, dim, data, dataSize, dataIndex, fp)) {
@@ -81,9 +81,9 @@ bool create_polyhedron(pk_t** polyhedron, ap_manager_t* man,
 	return true;
 }
 
-bool make_fuzzable(void *array, size_t size, const int *data, size_t dataSize,
+bool make_fuzzable(void *array, size_t size, const long *data, size_t dataSize,
 		unsigned int *dataIndex) {
-	int numberOfElements = dataSize / sizeof(int);
+	long numberOfElements = dataSize / sizeof(long);
 	if (numberOfElements <= *dataIndex) {
 		return false;
 	}
@@ -100,11 +100,11 @@ bool assume_fuzzable(bool condition) {
 	return condition;
 }
 
-bool make_fuzzable_dimension(int *dim, const int *data, size_t dataSize,
+bool make_fuzzable_dimension(long *dim, const long *data, size_t dataSize,
 		unsigned int *dataIndex, FILE *fp) {
 	if (make_fuzzable(dim, sizeof(int), data, dataSize, dataIndex)) {
 		if (assume_fuzzable(*dim > MIN_DIM && *dim < MAX_DIM)) {
-			fprintf(fp, "Dim: %d\n", *dim);
+			fprintf(fp, "Dim: %ld\n", *dim);
 			fflush(fp);
 			return true;
 		}
