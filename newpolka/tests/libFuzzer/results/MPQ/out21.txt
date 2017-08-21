@@ -1,1 +1,10 @@
-Dim: 12
+Dim: 2
+Number of constraints: 32
+Type: e
+Values: -256, 255, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
