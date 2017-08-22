@@ -1,66 +1,68 @@
-Dim: 8
-Number of constraints: 32
+Dim: 3
+Number of constraints: 33
 Type: e
-Values: 0, 1280, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 262144, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 1280, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 167772160, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 11258999068426240, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, -1, -117440513, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 1946157056, 1701011826, 1818324319, 6516588, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 1024, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 33554433, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 9472, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, -256, 249
+Values: 0, 0, 0, 0
 Type: e
-Values: -2105409536, -2105376126, -2105376126, -2105376126, -2105376126, -2105376126, -2105376126, 130, 0
+Values: 1677721600, 216172919586291712, 124387072, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0, 0
+Type: e
+Values: 6711899458231101951, 9288674238033784, 167504183298, 1970333429071872

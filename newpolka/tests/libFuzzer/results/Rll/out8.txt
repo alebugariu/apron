@@ -1,77 +1,10 @@
-Dim: 2
-Number of constraints: 32
+Dim: 3
+Number of constraints: 4
 Type: e
-Values: 131072, 0, 0
+Values: 9393629733677420, 0, 0, 29836210092376064
 Type: e
-Values: 0, 0, 0
+Values: 0, 0, 51712, 0
 Type: e
-Values: 0, 0, 0
+Values: 0, 0, 0, 0
 Type: e
-Values: 0, 0, 0
-Type: s
-Values: 5, 33, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: -1459617792, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: s
-Values: 0, 1879048192, 1953393010
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 8388608, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 256, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 65536, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 1191182336, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 6, 0, 0
-Number of constraints: 5
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 1768710003, 1601464685, 109
-Type: e
-Values: 0, 0, 0
-Type: e
-Values: 0, 0, 0
-Type: s
-Values: 5, 33, 0
+Values: -8963218110845083, 6857012397276725353, 9393629733677420, 0
