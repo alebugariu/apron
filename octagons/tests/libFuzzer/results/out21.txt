@@ -1,0 +1,20 @@
+Dim: 6
+Number of constraints: 9
+Type: e
+Values: 4, 1, -1, -1, 1099511627777
+Type: e
+Values: 0, 1, -1, -1, 1099511627777
+Type: e
+Values: 1, 0, -1, 0, 1099394187264
+Type: e
+Values: 0, 1, -1, -1, 1099511627777
+Type: e
+Values: 1, 0, -1, 0, 1099394187264
+Type: e
+Values: 0, 5, -1, -1, 15200748254003201
+Type: e
+Values: 0, 1, -1, -1, 1099511627777
+Type: e
+Values: 0, 1, -1, -1, 1099511627777
+Type: e
+Values: 0, 1, -1, -1, 1099511627777
