@@ -41,8 +41,8 @@ bool create_constraints(ap_lincons0_array_t *lincons0, int dim,
 	fprintf(fp, "Number of constraints: %ld\n", nbcons);
 	fflush(fp);
 	*lincons0 = ap_lincons0_array_make(nbcons);
-	fprintf(stdout, "Number of constraints: %ld\n", nbcons);
-	fflush(stdout);
+	//fprintf(stdout, "Number of constraints: %ld\n", nbcons);
+	//fflush(stdout);
 	for (i = 0; i < nbcons; i++) {
 		ap_constyp_t type;
 		if (!make_fuzzable(&type, sizeof(type), data, dataSize, dataIndex)) //type
@@ -85,18 +85,18 @@ bool create_constraints(ap_lincons0_array_t *lincons0, int dim,
 				fuzzableValues[1], fuzzableValues[2], fuzzableValues[3],
 				fuzzableValues[4]);
 		fflush(fp);
-		fprintf(stdout, "Values: %ld, %ld, %ld, %ld, %ld\n", fuzzableValues[0],
-									fuzzableValues[1], fuzzableValues[2], fuzzableValues[3],
-									fuzzableValues[4]);
-		fprintf(stdout, "Type: %c\n", type == 0 ? 'e' : 's');
-	    fflush(stdout);
+		//fprintf(stdout, "Values: %ld, %ld, %ld, %ld, %ld\n", fuzzableValues[0],
+			//						fuzzableValues[1], fuzzableValues[2], fuzzableValues[3],
+			 	 //					fuzzableValues[4]);
+		//fprintf(stdout, "Type: %c\n", type == 0 ? 'e' : 's');
+	    //fflush(stdout);
 		ap_linexpr0_t * linexpr0 = create_linexpr0(dim, fuzzableValues[0],
 				fuzzableValues[1], fuzzableValues[2], fuzzableValues[3],
 				fuzzableValues[4]);
 		lincons0->p[i].linexpr0 = linexpr0;
 	}
-	fprintf(stdout, "*************************************************\n");
-	fflush(stdout);
+	//fprintf(stdout, "*************************************************\n");
+	//fflush(stdout);
 	return true;
 }
 
@@ -108,6 +108,7 @@ bool create_octagon(oct_t** octagon, ap_manager_t* man, oct_t * top,
 		return false;
 	}
 	*octagon = oct_meet_lincons_array(man, false, top, &constraints);
+	ap_lincons0_array_clear(&constraints);
 	return true;
 }
 

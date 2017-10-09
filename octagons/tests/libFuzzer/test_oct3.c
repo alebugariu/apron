@@ -29,16 +29,25 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					// <= is transitive
 					if (assume_fuzzable(
 							oct_is_leq(man, octagon1, octagon2)
-									&& oct_is_leq(man, octagon2,
-											octagon3))) {
+									&& oct_is_leq(man, octagon2, octagon3))) {
 						if (!oct_is_leq(man, octagon1, octagon3)) {
+							oct_free(man, top);
+							oct_free(man, octagon1);
+							oct_free(man, octagon2);
+							oct_free(man, octagon3);
+							ap_manager_free(man);
 							fclose(fp);
 							return 1;
 						}
 					}
+					oct_free(man, octagon3);
 				}
+				oct_free(man, octagon2);
 			}
+			oct_free(man, octagon1);
 		}
+		oct_free(man, top);
+		ap_manager_free(man);
 	}
 	fclose(fp);
 	return 0;

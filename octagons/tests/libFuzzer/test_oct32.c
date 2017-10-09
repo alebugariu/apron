@@ -35,6 +35,11 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					octagon1 = wideningResult;
 					i++;
 					if (!(R(i))) {
+						oct_free(man, top);
+						oct_free(man, bottom);
+						oct_free(man, octagon1);
+						oct_free(man, octagon2);
+						ap_manager_free(man);
 						fclose(fp);
 						return 1;
 					}
@@ -42,7 +47,11 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					break;
 				}
 			}
+			oct_free(man, octagon1);
 		}
+		oct_free(man, top);
+		oct_free(man, bottom);
+		ap_manager_free(man);
 	}
 	fclose(fp);
 	return 0;

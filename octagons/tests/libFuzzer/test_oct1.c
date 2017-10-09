@@ -21,10 +21,17 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 
 			// x <= top
 			if (!oct_is_leq(man, octagon1, top)) {
+				oct_free(man, top);
+				oct_free(man, octagon1);
+				ap_manager_free(man);
 				fclose(fp);
 				return 1;
 			}
+			oct_free(man, octagon1);
 		}
+		oct_free(man, top);
+		ap_manager_free(man);
+		fclose(fp);
 	}
 	fclose(fp);
 	return 0;

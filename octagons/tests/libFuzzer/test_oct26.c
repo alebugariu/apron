@@ -32,17 +32,28 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					//meet == glb, join == lub
 					//meet is the greatest lower bound
 					if (assume_fuzzable(oct_is_leq(man, bound, octagon1))) {
-						if (assume_fuzzable(
-								oct_is_leq(man, bound, octagon2))) {
+						if (assume_fuzzable(oct_is_leq(man, bound, octagon2))) {
 							if (!oct_is_leq(man, bound, glb)) {
+								oct_free(man, top);
+								oct_free(man, bottom);
+								oct_free(man, octagon1);
+								oct_free(man, octagon2);
+								oct_free(man, bound);
+								ap_manager_free(man);
 								fclose(fp);
 								return 1;
 							}
 						}
 					}
+					oct_free(man, bound);
 				}
+				oct_free(man, octagon2);
 			}
+			oct_free(man, octagon1);
 		}
+		oct_free(man, top);
+		oct_free(man, bottom);
+		ap_manager_free(man);
 	}
 	fclose(fp);
 	return 0;

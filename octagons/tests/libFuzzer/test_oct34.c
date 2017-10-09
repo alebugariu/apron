@@ -27,15 +27,24 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 				//meet == glb, join == lub
 				//x <= y ==> y narrowing x <= y
 				if (assume_fuzzable(oct_is_leq(man, octagon1, octagon2))) {
-					if (!oct_is_leq(man,
-							oct_narrowing(man, octagon2, octagon1),
+					if (!oct_is_leq(man, oct_narrowing(man, octagon2, octagon1),
 							octagon2)) {
+						oct_free(man, top);
+						oct_free(man, bottom);
+						oct_free(man, octagon1);
+						oct_free(man, octagon2);
+						ap_manager_free(man);
 						fclose(fp);
 						return 1;
 					}
 				}
+				oct_free(man, octagon2);
 			}
+			oct_free(man, octagon1);
 		}
+		oct_free(man, top);
+		oct_free(man, bottom);
+		ap_manager_free(man);
 	}
 	fclose(fp);
 	return 0;
