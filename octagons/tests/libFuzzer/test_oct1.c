@@ -31,7 +31,6 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		}
 		oct_free(man, top);
 		ap_manager_free(man);
-		fclose(fp);
 	}
 	fclose(fp);
 	return 0;

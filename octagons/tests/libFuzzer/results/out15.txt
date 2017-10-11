@@ -1,5 +1,3 @@
-Dim: 6
-Number of constraints: 8
-Type: e
-Values: 1, 0, -1, 0, 1099394187264
-Type: e
+Dim: 4
+Number of constraints: 17
+Type: s
