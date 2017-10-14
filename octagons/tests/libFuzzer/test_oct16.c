@@ -23,7 +23,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 
 			//meet == glb, join == lub
 			//top meet x == x
-			if (!oct_is_eq(man, oct_meet(man, false, top, octagon1),
+			if (!oct_is_eq(man, oct_meet(man, DESTRUCTIVE, top, octagon1),
 					octagon1)) {
 				oct_free(man, top);
 				oct_free(man, bottom);

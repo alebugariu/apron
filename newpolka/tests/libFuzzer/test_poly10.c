@@ -28,11 +28,11 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					//meet == glb, join == lub
 					//join is associative
 					if (!pk_is_eq(man,
-							pk_join(man, false,
-									pk_join(man, false, polyhedron1,
+							pk_join(man, DESTRUCTIVE,
+									pk_join(man, DESTRUCTIVE, polyhedron1,
 											polyhedron2), polyhedron3),
-							pk_join(man, false, polyhedron1,
-									pk_join(man, false, polyhedron2,
+							pk_join(man, DESTRUCTIVE, polyhedron1,
+									pk_join(man, DESTRUCTIVE, polyhedron2,
 											polyhedron3)))) {
 						fclose(fp);
 						return 1;

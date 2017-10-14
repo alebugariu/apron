@@ -22,7 +22,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 			//meet == glb, join == lub
 			//join is idempotent
 			if (!pk_is_eq(man,
-					pk_join(man, false, polyhedron1, polyhedron1), polyhedron1)) {
+					pk_join(man, DESTRUCTIVE, polyhedron1, polyhedron1), polyhedron1)) {
 				fclose(fp);
 				return 1;
 			}

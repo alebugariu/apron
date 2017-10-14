@@ -20,7 +20,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 
 			//meet == glb, join == lub
 			//x join top == top
-			if (!pk_is_eq(man, pk_join(man, false, top, polyhedron1),
+			if (!pk_is_eq(man, pk_join(man, DESTRUCTIVE, top, polyhedron1),
 					top)) {
 				fclose(fp);
 				return 1;

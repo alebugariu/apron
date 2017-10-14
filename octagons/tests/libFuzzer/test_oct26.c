@@ -23,7 +23,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 			oct_t* octagon2;
 			if (create_octagon(&octagon2, man, top, dim, data, dataSize,
 					&dataIndex, fp)) {
-				oct_t* glb = oct_meet(man, false, octagon1, octagon2);
+				oct_t* glb = oct_meet(man, DESTRUCTIVE, octagon1, octagon2);
 
 				oct_t* bound;
 				if (create_octagon(&bound, man, top, dim, data, dataSize,
@@ -39,6 +39,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 								oct_free(man, octagon1);
 								oct_free(man, octagon2);
 								oct_free(man, bound);
+								oct_free(man, glb);
 								ap_manager_free(man);
 								fclose(fp);
 								return 1;
@@ -48,6 +49,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					oct_free(man, bound);
 				}
 				oct_free(man, octagon2);
+				oct_free(man, glb);
 			}
 			oct_free(man, octagon1);
 		}

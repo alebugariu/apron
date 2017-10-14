@@ -26,7 +26,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 				//meet is compatible (reciprocal)
 				if (assume_fuzzable(
 						pk_is_eq(man,
-								pk_meet(man, false, polyhedron1, polyhedron2),
+								pk_meet(man, DESTRUCTIVE, polyhedron1, polyhedron2),
 								polyhedron1))) {
 					if (!pk_is_leq(man, polyhedron1, polyhedron2)) {
 						fclose(fp);

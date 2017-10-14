@@ -77,7 +77,7 @@ bool create_polyhedron(pk_t** polyhedron, ap_manager_t* man,
 	if (!create_constraints(&constraints, dim, data, dataSize, dataIndex, fp)) {
 		return false;
 	}
-	*polyhedron = pk_meet_lincons_array(man, false, top, &constraints);
+	*polyhedron = pk_meet_lincons_array(man, DESTRUCTIVE, top, &constraints);
 	return true;
 }
 

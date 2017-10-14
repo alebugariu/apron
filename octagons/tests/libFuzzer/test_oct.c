@@ -107,7 +107,7 @@ bool create_octagon(oct_t** octagon, ap_manager_t* man, oct_t * top,
 	if (!create_constraints(&constraints, dim, data, dataSize, dataIndex, fp)) {
 		return false;
 	}
-	*octagon = oct_meet_lincons_array(man, false, top, &constraints);
+	*octagon = oct_meet_lincons_array(man, DESTRUCTIVE, top, &constraints);
 	ap_lincons0_array_clear(&constraints);
 	return true;
 }

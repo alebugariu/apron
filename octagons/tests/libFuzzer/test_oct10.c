@@ -30,11 +30,11 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					//meet == glb, join == lub
 					//join is associative
 					if (!oct_is_eq(man,
-							oct_join(man, false,
-									oct_join(man, false, octagon1, octagon2),
+							oct_join(man, DESTRUCTIVE,
+									oct_join(man, DESTRUCTIVE, octagon1, octagon2),
 									octagon3),
-							oct_join(man, false, octagon1,
-									oct_join(man, false, octagon2,
+							oct_join(man, DESTRUCTIVE, octagon1,
+									oct_join(man, DESTRUCTIVE, octagon2,
 											octagon3)))) {
 						oct_free(man, top);
 						oct_free(man, bottom);
