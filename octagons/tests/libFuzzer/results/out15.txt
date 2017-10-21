@@ -1,3 +1,3 @@
-Dim: 4
-Number of constraints: 17
-Type: s
+Dim: 2
+Number of constraints: 5
+Type: e
