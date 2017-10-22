@@ -1,1 +1,11 @@
-Dim: 4
+Dim: 2
+Number of constraints: 2
+Type: e
+Values: 0, 1, 0, -1, 576462951326679039
+Type: e
+Values: 0, 1, -1, 0, 2199023255551
+Number of constraints: 2
+Type: e
+Values: 0, 1, 0, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, 0, 4294967295

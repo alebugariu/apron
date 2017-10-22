@@ -1,7 +1,7 @@
-Dim: 4
+Dim: 13
 Number of constraints: 17
 Type: e
-Values: 0, 1, -1, -1, 2199023255551
+Values: 10, 1, -1, -1, 2199023255551
 Type: e
 Values: 0, 1, -1, -1, 2199023255551
 Type: e
@@ -25,3 +25,12 @@ Values: 0, 1, -1, -1, 2199023255551
 Type: e
 Values: 0, 1, -1, -1, 2199023255551
 Type: e
+Values: 8, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 1352914698239
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 3, 1, -1, -1, 2199023255551

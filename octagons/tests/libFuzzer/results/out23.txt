@@ -1,7 +1,6 @@
-Dim: 4
+Dim: 2
 Number of constraints: 17
-Type: s
+Type: e
 Values: 0, 1, -1, -1, 2199023255551
-Type: s
+Type: e
 Values: 0, 1, -1, -1, 2199023255551
-Type: s

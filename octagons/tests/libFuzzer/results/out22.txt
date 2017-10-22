@@ -1,0 +1,51 @@
+Dim: 4
+Number of constraints: 17
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, 1, 2199023255551
+Type: e
+Values: 0, 3, -1, -1, 216174981137039359
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Number of constraints: 7
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
+Type: e
+Values: 0, 1, -1, 0, 2199023255551
+Type: e
+Values: 0, 1, -1, -1, 2199023255551
