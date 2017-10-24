@@ -4,27 +4,25 @@
 #include <stdio.h>
 #include <math.h>
 
-ap_linexpr0_t * create_linexpr0(long dim, long *values) {
+ap_linexpr0_t * create_linexpr0(int dim, long *values) {
 	ap_coeff_t *cst, *coeff;
 	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE,
 			dim);
 	cst = &linexpr0->cst;
 
-	ap_scalar_reinit(cst->val.scalar, AP_SCALAR_MPQ);
-	mpq_set_si(cst->val.scalar->val.mpq, values[dim], 1);
+	ap_scalar_set_double(cst->val.scalar, values[dim]);
 
 	size_t i;
 	for (i = 0; i < dim; i++) {
 		ap_linterm_t * linterm = &linexpr0->p.linterm[i];
 		linterm->dim = i;
 		coeff = &linterm->coeff;
-		ap_scalar_reinit(coeff->val.scalar, AP_SCALAR_MPQ);
-		mpq_set_si(coeff->val.scalar->val.mpq, values[i], 1);
+		ap_scalar_set_double(cst->val.scalar, values[i]);
 	}
 	return linexpr0;
 }
 
-bool create_constraints(ap_lincons0_array_t *lincons0, long dim,
+bool create_constraints(ap_lincons0_array_t *lincons0, int dim,
 		const long *data, size_t dataSize, unsigned int *dataIndex, FILE *fp) {
 	size_t i, j;
 	long nbcons = MIN_NBCONS;
@@ -71,7 +69,7 @@ bool create_constraints(ap_lincons0_array_t *lincons0, long dim,
 }
 
 bool create_polyhedron(pk_t** polyhedron, ap_manager_t* man,
-		pk_t * top, long dim, const long *data, size_t dataSize,
+		pk_t * top, int dim, const long *data, size_t dataSize,
 		unsigned int *dataIndex, FILE *fp) {
 	ap_lincons0_array_t constraints;
 	if (!create_constraints(&constraints, dim, data, dataSize, dataIndex, fp)) {
@@ -100,11 +98,11 @@ bool assume_fuzzable(bool condition) {
 	return condition;
 }
 
-bool make_fuzzable_dimension(long *dim, const long *data, size_t dataSize,
+bool make_fuzzable_dimension(int *dim, const long *data, size_t dataSize,
 		unsigned int *dataIndex, FILE *fp) {
 	if (make_fuzzable(dim, sizeof(int), data, dataSize, dataIndex)) {
 		if (assume_fuzzable(*dim > MIN_DIM && *dim < MAX_DIM)) {
-			fprintf(fp, "Dim: %ld\n", *dim);
+			fprintf(fp, "Dim: %d\n", *dim);
 			fflush(fp);
 			return true;
 		}

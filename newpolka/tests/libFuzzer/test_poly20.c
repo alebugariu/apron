@@ -5,9 +5,9 @@
 
 extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 	unsigned int dataIndex = 0;
-	long dim;
-		FILE *fp;
-		fp = fopen("out20.txt", "w+");
+	int dim;
+	FILE *fp;
+	fp = fopen("out20.txt", "w+");
 
 	if (make_fuzzable_dimension(&dim, data, dataSize, &dataIndex, fp)) {
 
@@ -22,8 +22,8 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 			if (create_polyhedron(&polyhedron2, man, top, dim, data, dataSize,
 					&dataIndex, fp)) {
 				pk_t* polyhedron3;
-				if (create_polyhedron(&polyhedron3, man, top, dim, data, dataSize,
-						&dataIndex, fp)) {
+				if (create_polyhedron(&polyhedron3, man, top, dim, data,
+						dataSize, &dataIndex, fp)) {
 
 					//meet == glb, join == lub
 					//meet is associative
@@ -34,12 +34,24 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 							pk_meet(man, DESTRUCTIVE, polyhedron1,
 									pk_meet(man, DESTRUCTIVE, polyhedron2,
 											polyhedron3)))) {
+						pk_free(man, top);
+						pk_free(man, bottom);
+						pk_free(man, polyhedron1);
+						pk_free(man, polyhedron2);
+						pk_free(man, polyhedron3);
+						ap_manager_free(man);
 						fclose(fp);
 						return 1;
 					}
+					pk_free(man, polyhedron3);
 				}
+				pk_free(man, polyhedron2);
 			}
+			pk_free(man, polyhedron1);
 		}
+		pk_free(man, top);
+		pk_free(man, bottom);
+		ap_manager_free(man);
 	}
 	fclose(fp);
 	return 0;

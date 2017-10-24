@@ -5,9 +5,9 @@
 
 extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 	unsigned int dataIndex = 0;
-	long dim;
-		FILE *fp;
-		fp = fopen("out25.txt", "w+");
+	int dim;
+	FILE *fp;
+	fp = fopen("out25.txt", "w+");
 
 	if (make_fuzzable_dimension(&dim, data, dataSize, &dataIndex, fp)) {
 
@@ -32,14 +32,28 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 						if (assume_fuzzable(
 								pk_is_leq(man, polyhedron2, bound))) {
 							if (!pk_is_leq(man, lub, bound)) {
+								pk_free(man, top);
+								pk_free(man, bottom);
+								pk_free(man, polyhedron1);
+								pk_free(man, polyhedron2);
+								pk_free(man, lub);
+								pk_free(man, bound);
+								ap_manager_free(man);
 								fclose(fp);
 								return 1;
 							}
 						}
 					}
+					pk_free(man, bound);
+					pk_free(man, lub);
 				}
+				pk_free(man, polyhedron2);
 			}
+			pk_free(man, polyhedron1);
 		}
+		pk_free(man, top);
+		pk_free(man, bottom);
+		ap_manager_free(man);
 	}
 	fclose(fp);
 	return 0;

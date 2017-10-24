@@ -5,7 +5,7 @@
 
 extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 	unsigned int dataIndex = 0;
-	long dim;
+	int dim;
 	FILE *fp;
 	fp = fopen("out32.txt", "w+");
 
@@ -18,21 +18,28 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		//meet == glb, join == lub
 		//widening reaches a fixed point
 		pk_t* polyhedron1;
-		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize, &dataIndex,
-				fp)) {
+		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize,
+				&dataIndex, fp)) {
 			pk_t* wideningResult;
 			int i = 0;
 			while (true) {
 				pk_t* polyhedron2;
-				if (create_polyhedron(&polyhedron2, man, top, dim, data, dataSize,
-						&dataIndex, fp)) {
-					wideningResult = pk_widening(man, polyhedron1, pk_join(man, DESTRUCTIVE, polyhedron1, polyhedron2));
+				if (create_polyhedron(&polyhedron2, man, top, dim, data,
+						dataSize, &dataIndex, fp)) {
+					wideningResult = pk_widening(man, polyhedron1,
+							pk_join(man, DESTRUCTIVE, polyhedron1,
+									polyhedron2));
 					if (pk_is_leq(man, wideningResult, polyhedron1)) {
 						break; // we reached a fixed point
 					}
 					polyhedron1 = wideningResult;
 					i++;
 					if (!(R(i))) {
+						pk_free(man, top);
+						pk_free(man, bottom);
+						pk_free(man, polyhedron1);
+						pk_free(man, polyhedron2);
+						ap_manager_free(man);
 						fclose(fp);
 						return 1;
 					}
@@ -40,7 +47,11 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					break;
 				}
 			}
+			pk_free(man, polyhedron1);
 		}
+		pk_free(man, top);
+		pk_free(man, bottom);
+		ap_manager_free(man);
 	}
 	fclose(fp);
 	return 0;

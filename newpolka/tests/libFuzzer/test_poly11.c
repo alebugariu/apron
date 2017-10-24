@@ -5,7 +5,7 @@
 
 extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 	unsigned int dataIndex = 0;
-	long dim;
+	int dim;
 	FILE *fp;
 	fp = fopen("out11.txt", "w+");
 
@@ -16,17 +16,26 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		pk_t * bottom = pk_bottom(man, dim, 0);
 
 		pk_t* polyhedron1;
-		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize, &dataIndex,
-				fp)) {
+		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize,
+				&dataIndex, fp)) {
 
 			//meet == glb, join == lub
 			//join is idempotent
 			if (!pk_is_eq(man,
-					pk_join(man, DESTRUCTIVE, polyhedron1, polyhedron1), polyhedron1)) {
+					pk_join(man, DESTRUCTIVE, polyhedron1, polyhedron1),
+					polyhedron1)) {
+				pk_free(man, top);
+				pk_free(man, bottom);
+				pk_free(man, polyhedron1);
+				ap_manager_free(man);
 				fclose(fp);
 				return 1;
 			}
+			pk_free(man, polyhedron1);
 		}
+		pk_free(man, top);
+		pk_free(man, bottom);
+		ap_manager_free(man);
 	}
 	fclose(fp);
 	return 0;

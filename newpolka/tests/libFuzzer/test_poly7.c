@@ -5,7 +5,7 @@
 
 extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 	unsigned int dataIndex = 0;
-	long dim;
+	int dim;
 	FILE *fp;
 	fp = fopen("out7.txt", "w+");
 
@@ -15,8 +15,8 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		pk_t * top = pk_top(man, dim, 0);
 
 		pk_t* polyhedron1;
-		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize, &dataIndex,
-				fp)) {
+		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize,
+				&dataIndex, fp)) {
 			pk_t* polyhedron2;
 			if (create_polyhedron(&polyhedron2, man, top, dim, data, dataSize,
 					&dataIndex, fp)) {
@@ -25,11 +25,19 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 				//x <= x join y
 				if (!pk_is_leq(man, polyhedron1,
 						pk_join(man, DESTRUCTIVE, polyhedron1, polyhedron2))) {
+					pk_free(man, top);
+					pk_free(man, polyhedron1);
+					pk_free(man, polyhedron2);
+					ap_manager_free(man);
 					fclose(fp);
 					return 1;
 				}
+				pk_free(man, polyhedron2);
 			}
+			pk_free(man, polyhedron1);
 		}
+		pk_free(man, top);
+		ap_manager_free(man);
 	}
 	fclose(fp);
 	return 0;
