@@ -70,6 +70,7 @@ int main(int argc, char **argv) {
 	ap_linexpr0_t * linexpr6 = create_linexpr0(dim, 0, 4, 0, 1, 1);
 	lincons0.p[6].linexpr0 = linexpr6;
 
+	//This test case doesn't fail with Apron, only with Elina.
 	if (create_octagon(&octagon1, man, top, dim, lincons0)) {
 		oct_t * meet_result = oct_meet(man, false, top, octagon1);
 		printf("top meet octagon == octagon: ");
