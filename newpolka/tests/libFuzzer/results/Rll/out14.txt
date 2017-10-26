@@ -1,0 +1,10 @@
+Dim: 3
+Number of constraints: 4
+Type: e
+Values: 9393629733677420, 0, 0, 29836210092376064
+Type: e
+Values: 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0
+Type: e
+Values: 0, 0, 0, 0
