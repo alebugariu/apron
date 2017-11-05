@@ -13,15 +13,16 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 
 		ap_manager_t * man = pk_manager_alloc(false);
 		pk_t * top = pk_top(man, dim, 0);
+		pk_t * bottom = pk_bottom(man, dim, 0);
 
 		pk_t* polyhedron1;
-		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize,
+		if (create_polyhedron(&polyhedron1, man, top, bottom, dim, data, dataSize,
 				&dataIndex, fp)) {
 			pk_t* polyhedron2;
-			if (create_polyhedron(&polyhedron2, man, top, dim, data, dataSize,
+			if (create_polyhedron(&polyhedron2, man, top, bottom, dim, data, dataSize,
 					&dataIndex, fp)) {
 				pk_t* polyhedron3;
-				if (create_polyhedron(&polyhedron3, man, top, dim, data,
+				if (create_polyhedron(&polyhedron3, man, top, bottom, dim, data,
 						dataSize, &dataIndex, fp)) {
 
 					// <= is transitive
@@ -31,6 +32,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 											polyhedron3))) {
 						if (!pk_is_leq(man, polyhedron1, polyhedron3)) {
 							pk_free(man, top);
+							pk_free(man, bottom);
 							pk_free(man, polyhedron1);
 							pk_free(man, polyhedron2);
 							pk_free(man, polyhedron3);
@@ -46,6 +48,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 			pk_free(man, polyhedron1);
 		}
 		pk_free(man, top);
+		pk_free(man, bottom);
 		ap_manager_free(man);
 	}
 	fclose(fp);

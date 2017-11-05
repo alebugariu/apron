@@ -16,15 +16,15 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		pk_t * bottom = pk_bottom(man, dim, 0);
 
 		pk_t* polyhedron1;
-		if (create_polyhedron(&polyhedron1, man, top, dim, data, dataSize,
+		if (create_polyhedron(&polyhedron1, man, top, bottom, dim, data, dataSize,
 				&dataIndex, fp)) {
 			pk_t* polyhedron2;
-			if (create_polyhedron(&polyhedron2, man, top, dim, data, dataSize,
+			if (create_polyhedron(&polyhedron2, man, top, bottom, dim, data, dataSize,
 					&dataIndex, fp)) {
 				pk_t* glb = pk_meet(man, DESTRUCTIVE, polyhedron1, polyhedron2);
 
 				pk_t* bound;
-				if (create_polyhedron(&bound, man, top, dim, data, dataSize,
+				if (create_polyhedron(&bound, man, top, bottom, dim, data, dataSize,
 						&dataIndex, fp)) {
 
 					//meet == glb, join == lub
