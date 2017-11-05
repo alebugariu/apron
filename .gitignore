@@ -14,4 +14,5 @@ newpolka/tests/libFuzzer/crash-*
 newpolka/tests/libFuzzer/slow-*
 newpolka/tests/libFuzzer/oom-*
 newpolka/tests/libFuzzer/timeout-*
+newpolka/tests/libFuzzer/failing_tests/Rll/test*
 
