@@ -1,0 +1,4 @@
+Dim: 2
+Started with bottom!
+Number of constraints: 7
+Type: e

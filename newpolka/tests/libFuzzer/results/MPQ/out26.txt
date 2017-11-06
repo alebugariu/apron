@@ -1,0 +1,9 @@
+Dim: 2
+Started with bottom!
+Number of constraints: 16
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 

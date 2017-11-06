@@ -1,0 +1,5 @@
+Dim: 3
+Started with bottom!
+Number of constraints: 3
+Type: e
+Values: -1, -1, -1, -1
