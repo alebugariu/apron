@@ -1,10 +1,21 @@
-Dim: 3
-Number of constraints: 4
+Dim: 2
+Started with bottom!
+Number of constraints: 2
 Type: e
-Values: 9393629733677420, 0, 0, 29836210092376064
+Values: 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0
+Values: 0, 0, 0
+Number of operators: 2
+PROJECT
+Projected variable: 0
+PROJECT
+Projected variable: 0
+Successfully created!
+Started with bottom!
+Number of constraints: 2
 Type: e
-Values: 0, 0, 0, 0
+Values: 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0
+Values: 0, 0, 0
+Number of operators: 0
+Successfully created!

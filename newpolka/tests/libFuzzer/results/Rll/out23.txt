@@ -1,16 +1,13 @@
-Dim: 7
-Number of constraints: 7
+Dim: 2
+Started with bottom!
+Number of constraints: 34
 Type: e
-Values: 0, 67108864, 72057594037927936, 0, 0, 0, 0, 0
+Values: -1, -1, -1
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0
 Type: e
-Values: 117440512, 7598698479870803968, 8675445210990208365, 111482039923817, 1152921504606847488, 35184372088832, 0, 0
+Values: 2, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 562949953421312, 0, 0, 0
+Values: 0, 0, 0
 Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0
-Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0
-Type: e
-Values: 0, 0, 0, 0, 0, 0, 0, 0
+Values: 0, 

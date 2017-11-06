@@ -1,6 +1,25 @@
 Dim: 2
-Number of constraints: 2
+Started with bottom!
+Number of constraints: 29
 Type: e
-Values: 7306086942677497957, 7696614948865, 562949953421312
+Values: -1, -1, -1
 Type: e
-Values: 0, 64256, 0
+Values: 0, 0, 0
+Type: e
+Values: 512, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: -1, -1, -1
+Type: e
+Values: -1, -1, -1
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 512, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: -1, -1, -1
+Type: e
+Values: 

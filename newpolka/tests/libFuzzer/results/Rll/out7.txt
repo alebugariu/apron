@@ -1,23 +1,39 @@
-Dim: 5
-Number of constraints: 5
+Dim: 2
+Started with bottom!
+Number of constraints: 13
 Type: e
-Values: 0, 0, 0, 0, 0, 0
+Values: -1, -1, -1
 Type: e
-Values: 0, 562949953421312, 144115188075855872, 1407374883553536, 0, 8589934592
-Type: s
-Values: 0, 0, 0, 131072, 33554432, 327680
+Values: 0, 0, 0
 Type: e
-Values: 0, 0, 0, 288230376151711745, 0, 0
-Type: s
-Values: 0, 1407374883553280, 0, 0, 4503599627436034, 137438953472
-Number of constraints: 5
+Values: 2, 0, 0
 Type: e
-Values: 268435456, 8192, 1099511627776, 3298536849920, 0, 0
+Values: 0, 0, 0
 Type: e
-Values: 0, 33554432, 8589934592, 83886080, 0, 512
+Values: -1, -1, -1
 Type: e
-Values: 0, 8319118281009004544, 7881145869077671007, 58519738137954, 0, 0
+Values: -1, -1, -1
 Type: e
-Values: 0, 0, 0, 0, 0, 0
+Values: 0, 0, 0
 Type: e
-Values: -256, 251, 0, 0, 0, 0
+Values: 2, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: -1, -1, -1
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 0, 0, 0
+Number of operators: 0
+Successfully created!
+Started with bottom!
+Number of constraints: 2
+Type: e
+Values: -1, -1, -1
+Type: e
+Values: -1, -1, -1
+Number of operators: 0
+Successfully created!
