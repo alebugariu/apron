@@ -54,6 +54,7 @@ bool create_a_constraint(ap_linexpr0_t** constraint, ap_constyp_t *type,
 		return false;
 	}
 	fprintf(fp, "Values: ");
+	fflush(fp);
 	for (i = 0; i < dim; i++) {
 		if (!assume_fuzzable(
 				!(randomVariable <= VAR_THRESHOLD)
@@ -62,6 +63,7 @@ bool create_a_constraint(ap_linexpr0_t** constraint, ap_constyp_t *type,
 			return false;
 		}
 		fprintf(fp, "%ld, ", fuzzableValues[i]);
+		fflush(fp);
 	}
 	if (!assume_fuzzable(
 			!(randomVariable <= VAR_THRESHOLD)
@@ -398,8 +400,10 @@ bool create_variable(int *variable, bool assign, int dim, const long *data,
 	}
 	if (assign) {
 		fprintf(fp, "Assigned to variable: %d\n", *variable);
+		fflush(fp);
 	} else {
 		fprintf(fp, "Projected variable: %d\n", *variable);
+		fflush(fp);
 	}
 	fflush(fp);
 	return true;
