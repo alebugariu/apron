@@ -18,7 +18,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		pk_t* polyhedron1;
 		if (create_polyhedron(&polyhedron1, man, top, bottom, dim, data,
 				dataSize, &dataIndex, fp)) {
-			if (pk_is_eq(man, polyhedron1, bottom) == false) {
+			if (pk_is_bottom(man, polyhedron1) == false) {
 
 				// assignment cannot return bottom if the current set of constraints is not bottom
 
@@ -35,7 +35,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 								DESTRUCTIVE, polyhedron1, tdim, assignmentArray,
 								1, NULL);
 
-						if (pk_is_eq(man, assign_result1, bottom) == true) {
+						if (pk_is_bottom(man, assign_result1) == true) {
 							pk_free(man, top);
 							pk_free(man, bottom);
 							pk_free(man, polyhedron1);

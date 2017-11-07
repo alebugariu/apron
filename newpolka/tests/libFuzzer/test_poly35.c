@@ -30,7 +30,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 				pk_t* assign_result1 = pk_assign_linexpr_array(man,
 				DESTRUCTIVE, bottom, tdim, assignmentArray, 1, NULL);
 
-				if (pk_is_eq(man, assign_result1, bottom) == false) {
+				if (pk_is_bottom(man, assign_result1) == false) {
 					pk_free(man, top);
 					pk_free(man, bottom);
 					pk_free(man, assign_result1);
