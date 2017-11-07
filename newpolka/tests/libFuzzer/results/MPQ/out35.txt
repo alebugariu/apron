@@ -1,0 +1,3 @@
+Dim: 18
+Assigned to variable: 0
+Assignment expression: -256, -1, -1, -1, 511, -256, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 
