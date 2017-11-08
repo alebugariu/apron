@@ -87,6 +87,7 @@ bool create_constraints(ap_lincons0_array_t *lincons0, long nbcons, int dim,
 	for (i = 0; i < nbcons; i++) {
 		if (!create_a_constraint(&constraint, &type, dim, randomVariable, data,
 				dataSize, dataIndex, fp)) {
+			ap_lincons0_array_clear(lincons0);
 			return false;
 		}
 		lincons0->p[i].constyp = type;
@@ -167,6 +168,7 @@ bool create_polyhedron_from_bottom(pk_t** polyhedron, ap_manager_t* man,
 		DESTRUCTIVE, top, &a_constraint);
 
 		*polyhedron = pk_join(man, DESTRUCTIVE, *polyhedron, meet_result);
+		pk_free(man, meet_result);
 	}
 	ap_lincons0_array_clear(&constraints);
 	return true;
@@ -223,9 +225,11 @@ bool create_polyhedron_with_assignment(pk_t** polyhedron, ap_manager_t* man,
 	for (i = 0; i < nbops; i++) {
 		int operator;
 		if (!make_fuzzable(&operator, sizeof(int), data, dataSize, dataIndex)) {
+			pk_free(man, *polyhedron);
 			return false;
 		}
 		if (!assume_fuzzable(operator == ASSIGN || operator == PROJECT)) {
+			pk_free(man, *polyhedron);
 			return false;
 		}
 
@@ -236,6 +240,7 @@ bool create_polyhedron_with_assignment(pk_t** polyhedron, ap_manager_t* man,
 			int assignedToVariable;
 			if (!create_variable(&assignedToVariable, true, dim, data, dataSize,
 					dataIndex, fp)) {
+				pk_free(man, *polyhedron);
 				return false;
 			}
 			ap_linexpr0_t** assignmentArray;
@@ -243,6 +248,7 @@ bool create_polyhedron_with_assignment(pk_t** polyhedron, ap_manager_t* man,
 
 			if (!create_assignment(&assignmentArray, assignedToVariable, &tdim,
 					dim, data, dataSize, dataIndex, fp)) {
+				pk_free(man, *polyhedron);
 				return false;
 			}
 			pk_t* assign_result = pk_assign_linexpr_array(man,
@@ -258,6 +264,7 @@ bool create_polyhedron_with_assignment(pk_t** polyhedron, ap_manager_t* man,
 			int projectedVariable;
 			if (!create_variable(&projectedVariable, false, dim, data, dataSize,
 					dataIndex, fp)) {
+				pk_free(man, *polyhedron);
 				return false;
 			}
 			ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
@@ -310,6 +317,7 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 			int assignedToVariable;
 			if (!create_variable(&assignedToVariable, true, dim, data, dataSize,
 					dataIndex, fp)) {
+				pk_free(man, *polyhedron);
 				return false;
 			}
 			ap_linexpr0_t** assignmentArray;
@@ -317,6 +325,7 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 
 			if (!create_assignment(&assignmentArray, assignedToVariable, &tdim,
 					dim, data, dataSize, dataIndex, fp)) {
+				pk_free(man, *polyhedron);
 				return false;
 			}
 			pk_t* assign_result = pk_assign_linexpr_array(man,
@@ -334,6 +343,7 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 			int projectedVariable;
 			if (!create_variable(&projectedVariable, false, dim, data, dataSize,
 					dataIndex, fp)) {
+				pk_free(man, *polyhedron);
 				return false;
 			}
 			ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
@@ -350,9 +360,11 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 			pk_t *other;
 			if (!create_polyhedron_from_top(&other, man, top, dim, data,
 					dataSize, dataIndex, fp)) {
+				pk_free(man, *polyhedron);
 				return false;
 			}
 			*polyhedron = pk_meet(man, DESTRUCTIVE, *polyhedron, other);
+			pk_free(man, other);
 			break;
 		}
 		case JOIN: {
@@ -361,9 +373,11 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 			pk_t *other;
 			if (!create_polyhedron_from_top(&other, man, top, dim, data,
 					dataSize, dataIndex, fp)) {
+				pk_free(man, *polyhedron);
 				return false;
 			}
 			*polyhedron = pk_join(man, DESTRUCTIVE, *polyhedron, other);
+			pk_free(man, other);
 			break;
 		}
 		}
