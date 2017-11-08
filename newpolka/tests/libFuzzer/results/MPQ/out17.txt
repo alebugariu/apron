@@ -1,6 +1,6 @@
 Dim: 2
 Started with bottom!
-Number of constraints: 13
+Number of constraints: 38
 Type: e
 Values: -1, -1, -1
 Type: e
@@ -12,6 +12,8 @@ Values: 0, 0, 0
 Type: e
 Values: -1, -1, -1
 Type: e
-Values: -1, -1, -1
+Values: 0, 0, 0
+Type: e
+Values: 512, 0, 0
 Type: e
 Values: 0, 0, 0

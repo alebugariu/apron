@@ -1,5 +1,13 @@
-Dim: 3
+Dim: 2
 Started with bottom!
-Number of constraints: 3
+Number of constraints: 13
 Type: e
-Values: -1, -1, -1, -1
+Values: -1, -1, -1
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: 2, 0, 0
+Type: e
+Values: 0, 0, 0
+Type: e
+Values: -1, -1, -1
