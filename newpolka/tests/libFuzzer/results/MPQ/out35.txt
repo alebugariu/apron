@@ -1,3 +1,1 @@
-Dim: 12
-Assigned to variable: 0
-Assignment expression: 
+Dim: 2
