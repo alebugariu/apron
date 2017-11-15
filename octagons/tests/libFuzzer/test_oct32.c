@@ -20,13 +20,13 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		//meet == glb, join == lub
 		//widening reaches a fixed point
 		oct_t* octagon1;
-		if (create_octagon(&octagon1, man, top, dim, data, dataSize, &dataIndex,
+		if (create_octagon(&octagon1, man, top, bottom, dim, data, dataSize, &dataIndex,
 				fp)) {
 			oct_t* wideningResult;
 			int i = 0;
 			while (true) {
 				oct_t* octagon2;
-				if (create_octagon(&octagon2, man, top, dim, data, dataSize,
+				if (create_octagon(&octagon2, man, top, bottom, dim, data, dataSize,
 						&dataIndex, fp)) {
 					wideningResult = oct_widening(man, octagon1, octagon2);
 					if (oct_is_leq(man, wideningResult, octagon1)) {

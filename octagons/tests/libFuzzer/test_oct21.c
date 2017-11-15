@@ -17,7 +17,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		oct_t * bottom = oct_bottom(man, dim, 0);
 
 		oct_t* octagon1;
-		if (create_octagon(&octagon1, man, top, dim, data, dataSize, &dataIndex,
+		if (create_octagon(&octagon1, man, top, bottom, dim, data, dataSize, &dataIndex,
 				fp)) {
 
 			//meet == glb, join == lub

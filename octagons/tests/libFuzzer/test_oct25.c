@@ -18,15 +18,15 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		oct_t * bottom = oct_bottom(man, dim, 0);
 
 		oct_t* octagon1;
-		if (create_octagon(&octagon1, man, top, dim, data, dataSize, &dataIndex,
+		if (create_octagon(&octagon1, man, top, bottom, dim, data, dataSize, &dataIndex,
 				fp)) {
 			oct_t* octagon2;
-			if (create_octagon(&octagon2, man, top, dim, data, dataSize,
+			if (create_octagon(&octagon2, man, top, bottom, dim, data, dataSize,
 					&dataIndex, fp)) {
 				oct_t* lub = oct_join(man, DESTRUCTIVE, octagon1, octagon2);
 
 				oct_t* bound;
-				if (create_octagon(&bound, man, top, dim, data, dataSize,
+				if (create_octagon(&bound, man, top, bottom, dim, data, dataSize,
 						&dataIndex, fp)) {
 					//meet == glb, join == lub
 					//join is the least upper bound
