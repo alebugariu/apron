@@ -390,7 +390,7 @@ bool create_octagon_as_random_program(oct_t** octagon, ap_manager_t* man,
 			return false;
 		}
 		if (!assume_fuzzable(
-				operator == ASSIGN || operator == PROJECT || operator == MEET
+				operator == ASSIGN || operator == MEET
 						|| operator == JOIN || operator == WIDENING)) {
 			if (!oct_is_top(man, *octagon)) {
 				oct_free(man, *octagon);
@@ -423,24 +423,6 @@ bool create_octagon_as_random_program(oct_t** octagon, ap_manager_t* man,
 			*octagon = oct_assign_linexpr_array(man,
 			DESTRUCTIVE, *octagon, tdim, assignmentArray, 1, NULL);
 			free(assignmentArray);
-			free(tdim);
-			break;
-		}
-		case PROJECT: {
-			fprintf(fp, "PROJECT\n");
-			fflush(fp);
-			int projectedVariable;
-			if (!create_variable(&projectedVariable, false, dim, data, dataSize,
-					dataIndex, fp)) {
-				if (!oct_is_top(man, *octagon)) {
-					oct_free(man, *octagon);
-				}
-				return false;
-			}
-			ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
-			tdim[0] = projectedVariable;
-			*octagon = oct_forget_array(man,
-			DESTRUCTIVE, *octagon, tdim, 1, false);
 			free(tdim);
 			break;
 		}
