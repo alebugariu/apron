@@ -282,11 +282,9 @@ bool create_polyhedron_with_assignment(pk_t** polyhedron, ap_manager_t* man,
 	return true;
 }
 
-bool create_polyhedron_as_random_program(pk_t** polyhedron,
-		ap_manager_t* man, pk_t * top, int dim, const long *data,
-		size_t dataSize, unsigned int *dataIndex, FILE *fp) {
-
-	*polyhedron = top;
+bool create_polyhedron_as_random_program(pk_t** polyhedron, ap_manager_t* man,
+		pk_t * top, int dim, const long *data, size_t dataSize,
+		unsigned int *dataIndex, FILE *fp) {
 
 	int nbops;
 	if (!make_fuzzable(&nbops, sizeof(int), data, dataSize, dataIndex)) {
@@ -296,17 +294,25 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 		return false;
 	}
 
+	*polyhedron = top;
+
 	fprintf(fp, "Number of operators: %d\n", nbops);
 	fflush(fp);
 	size_t i;
 	for (i = 0; i < nbops; i++) {
 		int operator;
 		if (!make_fuzzable(&operator, sizeof(int), data, dataSize, dataIndex)) {
+			if (!pk_is_top(man, *polyhedron)) {
+				pk_free(man, *polyhedron);
+			}
 			return false;
 		}
 		if (!assume_fuzzable(
 				operator == ASSIGN || operator == PROJECT || operator == MEET
 						|| operator == JOIN)) {
+			if (!pk_is_top(man, *polyhedron)) {
+				pk_free(man, *polyhedron);
+			}
 			return false;
 		}
 
@@ -317,7 +323,9 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 			int assignedToVariable;
 			if (!create_variable(&assignedToVariable, true, dim, data, dataSize,
 					dataIndex, fp)) {
-				pk_free(man, *polyhedron);
+				if (!pk_is_top(man, *polyhedron)) {
+					pk_free(man, *polyhedron);
+				}
 				return false;
 			}
 			ap_linexpr0_t** assignmentArray;
@@ -325,12 +333,13 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 
 			if (!create_assignment(&assignmentArray, assignedToVariable, &tdim,
 					dim, data, dataSize, dataIndex, fp)) {
-				pk_free(man, *polyhedron);
+				if (!pk_is_top(man, *polyhedron)) {
+					pk_free(man, *polyhedron);
+				}
 				return false;
 			}
 			pk_t* assign_result = pk_assign_linexpr_array(man,
-			DESTRUCTIVE, *polyhedron, tdim, assignmentArray, 1,
-			NULL);
+			DESTRUCTIVE, *polyhedron, tdim, assignmentArray, 1, NULL);
 
 			*polyhedron = assign_result;
 			free(assignmentArray);
@@ -343,7 +352,9 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 			int projectedVariable;
 			if (!create_variable(&projectedVariable, false, dim, data, dataSize,
 					dataIndex, fp)) {
-				pk_free(man, *polyhedron);
+				if (!pk_is_top(man, *polyhedron)) {
+					pk_free(man, *polyhedron);
+				}
 				return false;
 			}
 			ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
@@ -360,7 +371,9 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 			pk_t *other;
 			if (!create_polyhedron_from_top(&other, man, top, dim, data,
 					dataSize, dataIndex, fp)) {
-				pk_free(man, *polyhedron);
+				if (!pk_is_top(man, *polyhedron)) {
+					pk_free(man, *polyhedron);
+				}
 				return false;
 			}
 			*polyhedron = pk_meet(man, DESTRUCTIVE, *polyhedron, other);
@@ -373,7 +386,9 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 			pk_t *other;
 			if (!create_polyhedron_from_top(&other, man, top, dim, data,
 					dataSize, dataIndex, fp)) {
-				pk_free(man, *polyhedron);
+				if (!pk_is_top(man, *polyhedron)) {
+					pk_free(man, *polyhedron);
+				}
 				return false;
 			}
 			*polyhedron = pk_join(man, DESTRUCTIVE, *polyhedron, other);
@@ -387,9 +402,9 @@ bool create_polyhedron_as_random_program(pk_t** polyhedron,
 	return true;
 }
 
-bool create_polyhedron(pk_t** polyhedron, ap_manager_t* man,
-		pk_t * top, pk_t * bottom, int dim,
-		const long *data, size_t dataSize, unsigned int *dataIndex, FILE *fp) {
+bool create_polyhedron(pk_t** polyhedron, ap_manager_t* man, pk_t * top,
+		pk_t * bottom, int dim, const long *data, size_t dataSize,
+		unsigned int *dataIndex, FILE *fp) {
 	switch (CONSTRUCTION_METHOD) {
 	case FROM_TOP:
 		return create_polyhedron_from_top(polyhedron, man, top, dim, data,
@@ -423,9 +438,9 @@ bool create_variable(int *variable, bool assign, int dim, const long *data,
 	return true;
 }
 
-bool create_assignment(ap_linexpr0_t*** assignmentArray,
-		int assignedToVariable, ap_dim_t ** tdim, int dim, const long *data,
-		size_t dataSize, unsigned int *dataIndex, FILE *fp) {
+bool create_assignment(ap_linexpr0_t*** assignmentArray, int assignedToVariable,
+		ap_dim_t ** tdim, int dim, const long *data, size_t dataSize,
+		unsigned int *dataIndex, FILE *fp) {
 	unsigned char randomVariable;
 	if (!create_random_variable(&randomVariable, dim, data, dataSize, dataIndex,
 			fp)) {
