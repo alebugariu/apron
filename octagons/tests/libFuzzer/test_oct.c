@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <math.h>
 
+
 ap_linexpr0_t * create_linexpr0(int dim, long v1, long v2, long coeff1,
 		long coeff2, long scalar_value) {
 	ap_coeff_t *cst, *coeff;
@@ -23,6 +24,23 @@ ap_linexpr0_t * create_linexpr0(int dim, long v1, long v2, long coeff1,
 	linterm->dim = v2;
 	coeff = &linterm->coeff;
 	ap_scalar_set_double(coeff->val.scalar, coeff2);
+	return linexpr0;
+}
+
+ap_linexpr0_t * create_polyhedral_linexpr0(int dim, long *values) {
+	ap_coeff_t *cst, *coeff;
+	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE, dim);
+	cst = &linexpr0->cst;
+
+	ap_scalar_set_double(cst->val.scalar, values[dim]);
+
+	size_t i;
+	for (i = 0; i < dim; i++) {
+		ap_linterm_t * linterm = &linexpr0->p.linterm[i];
+		linterm->dim = i;
+		coeff = &linterm->coeff;
+		ap_scalar_set_double(cst->val.scalar, values[i]);
+	}
 	return linexpr0;
 }
 
@@ -122,52 +140,44 @@ bool create_random_variable(unsigned char *randomVariable, int dim,
 	return true;
 }
 
-bool create_assignment(ap_linexpr0_t*** assignmentArray, int assignedToVariable,
-		ap_dim_t ** tdim, int dim, const long *data, size_t dataSize,
-		unsigned int *dataIndex, FILE *fp) {
+bool create_assignment(ap_linexpr0_t*** assignmentArray,
+		int assignedToVariable, ap_dim_t ** tdim, int dim, const long *data,
+		size_t dataSize, unsigned int *dataIndex, FILE *fp) {
 	unsigned char randomVariable;
 	if (!create_random_variable(&randomVariable, dim, data, dataSize, dataIndex,
 			fp)) {
 		return false;
 	}
 
-	fprintf(fp, "Assignment expression: ");
-	fflush(fp);
-	long assignmentValues[5];
-	if (!make_fuzzable(assignmentValues, 5 * sizeof(long), data, dataSize,
+	long fuzzableValues[MAX_DIM + 1];
+	if (!make_fuzzable(fuzzableValues, (dim + 1) * sizeof(long), data, dataSize,
 			dataIndex)) {
 		return false;
 	}
-	if (!assume_fuzzable(
-			assignmentValues[0] < dim && assignmentValues[1] < dim
-					&& assignmentValues[0] != assignmentValues[1]
-					&& assignmentValues[0] >= 0 && assignmentValues[1] >= 0)) {
-		return false;
-	}
-	if (!assume_fuzzable(
-			assignmentValues[2] == 1 || assignmentValues[2] == -1
-					|| assignmentValues[2] == 0)) {
-		return false;
-	}
-	if (!assume_fuzzable(
-			assignmentValues[3] == 1 || assignmentValues[3] == -1
-					|| assignmentValues[3] == 0)) {
-		return false;
+	int j;
+	fprintf(fp, "Assignment expression: ");
+	fflush(fp);
+	for (j = 0; j < dim; j++) {
+		if (!assume_fuzzable(
+				!(randomVariable <= VAR_THRESHOLD)
+						&& (fuzzableValues[j] >= MIN_VALUE
+								&& fuzzableValues[j] <= MAX_VALUE))) {
+			return false;
+		}
+		fprintf(fp, "%ld, ", fuzzableValues[j]);
+		fflush(fp);
 	}
 	if (!assume_fuzzable(
 			!(randomVariable <= VAR_THRESHOLD)
-					&& (assignmentValues[4] >= MIN_VALUE
-							&& assignmentValues[4] <= MAX_VALUE))) {
+					&& (fuzzableValues[j] >= MIN_VALUE
+							&& fuzzableValues[j] <= MAX_VALUE))) {
 		return false;
 	}
-	fprintf(fp, "Values: %ld, %ld, %ld, %ld, %ld\n", assignmentValues[0],
-			assignmentValues[1], assignmentValues[2], assignmentValues[3],
-			assignmentValues[4]);
+	fprintf(fp, "%ld\n", fuzzableValues[j]);
 	fflush(fp);
 
-	ap_linexpr0_t* expression = create_linexpr0(dim, assignmentValues[0],
-			assignmentValues[1], assignmentValues[2], assignmentValues[3],
-			assignmentValues[4]);
+	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim,
+			fuzzableValues);
 	*assignmentArray = (ap_linexpr0_t**) malloc(sizeof(ap_linexpr0_t*));
 	*assignmentArray[0] = expression;
 
@@ -193,9 +203,9 @@ bool create_variable(int *variable, bool assign, int dim, const long *data,
 	return true;
 }
 
-bool create_octagon_from_top(oct_t** octagon, ap_manager_t* man, oct_t * top,
-		int dim, const long *data, size_t dataSize, unsigned int *dataIndex,
-		FILE *fp) {
+bool create_octagon_from_top(oct_t** octagon, ap_manager_t* man,
+		oct_t * top, int dim, const long *data, size_t dataSize,
+		unsigned int *dataIndex, FILE *fp) {
 	long nbcons;
 	if (!create_number_of_constraints(&nbcons, dim, data, dataSize, dataIndex,
 			fp)) {
@@ -219,9 +229,9 @@ bool create_octagon_from_top(oct_t** octagon, ap_manager_t* man, oct_t * top,
 	return true;
 }
 
-bool create_octagon_from_bottom(oct_t** octagon, ap_manager_t* man, oct_t * top,
-		oct_t * bottom, int dim, const long *data, size_t dataSize,
-		unsigned int *dataIndex, FILE *fp) {
+bool create_octagon_from_bottom(oct_t** octagon, ap_manager_t* man,
+		oct_t * top, oct_t * bottom, int dim, const long *data,
+		size_t dataSize, unsigned int *dataIndex, FILE *fp) {
 	*octagon = bottom;
 
 	long nbcons;
@@ -259,8 +269,8 @@ bool create_octagon_from_bottom(oct_t** octagon, ap_manager_t* man, oct_t * top,
 }
 
 bool create_octagon_with_assignment(oct_t** octagon, ap_manager_t* man,
-		oct_t * top, oct_t * bottom, int dim, const long *data, size_t dataSize,
-		unsigned int *dataIndex, FILE *fp) {
+		oct_t * top, oct_t * bottom, int dim, const long *data,
+		size_t dataSize, unsigned int *dataIndex, FILE *fp) {
 
 	int top_or_bottom;
 	if (!make_fuzzable(&top_or_bottom, sizeof(int), data, dataSize,
@@ -390,8 +400,8 @@ bool create_octagon_as_random_program(oct_t** octagon, ap_manager_t* man,
 			return false;
 		}
 		if (!assume_fuzzable(
-				operator == ASSIGN || operator == MEET
-						|| operator == JOIN || operator == WIDENING)) {
+				operator == ASSIGN || operator == MEET || operator == JOIN
+						|| operator == WIDENING)) {
 			if (!oct_is_top(man, *octagon)) {
 				oct_free(man, *octagon);
 			}
@@ -514,7 +524,7 @@ bool make_fuzzable(void *array, size_t size, const long *data, size_t dataSize,
 }
 
 bool assume_fuzzable(bool condition) {
-	return condition;
+	return (condition == true);
 }
 
 bool make_fuzzable_dimension(int *dim, const long *data, size_t dataSize,
