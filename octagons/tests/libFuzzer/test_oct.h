@@ -40,6 +40,16 @@ bool create_octagon(oct_t** octagon, ap_manager_t* man, oct_t * top,
 		oct_t * bottom, int dim, const long *data, size_t dataSize,
 		unsigned int *dataIndex, FILE *fp);
 
+bool create_variable(int *variable, bool assign, int dim, const long *data,
+		size_t dataSize, unsigned int *dataIndex, FILE *fp);
+
+bool create_assignment(ap_linexpr0_t*** assignmentArray,
+		int assignedToVariable, ap_dim_t ** tdim, int dim, const long *data,
+		size_t dataSize, unsigned int *dataIndex, FILE *fp);
+
+bool create_conditional(ap_lincons0_array_t *conditionalExpression, int dim, const long *data,
+		size_t dataSize, unsigned int *dataIndex, FILE *fp);
+
 bool make_fuzzable(void *array, size_t size, const long *data, size_t dataSize,
 		unsigned int *dataIndex);
 bool assume_fuzzable(bool condition);
