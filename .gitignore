@@ -10,6 +10,7 @@ octagons/tests/libFuzzer/test*
 octagons/tests/libFuzzer/crash-*
 octagons/tests/libFuzzer/slow-*
 octagons/tests/libFuzzer/oom-*
+octagons/tests/libFuzzer/MY_CORPUS/*
 octagons/tests/libFuzzer/out*.txt
 octagons/tests/libFuzzer/failing_tests/test*
 newpolka/tests/libFuzzer/test*

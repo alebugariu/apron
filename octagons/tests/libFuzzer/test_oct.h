@@ -4,57 +4,62 @@
 #include "oct.h"
 #include "oct_internal.h"
 
-#define MIN_DIM 1
-#define MAX_DIM 20
+#define MIN_DIM 8
+#define MAX_DIM 8
 #define MIN_NBCONS 1
 #define MAX_NBCONS 50
-#define MIN_NBOPS 0
-#define MAX_NBOPS 5
+
+#define MAX_POOL_SIZE 32
+
+#define NBOPS 32
+#define NBASSIGNMENTS 4
 #define MIN_VALUE -9999
 #define MAX_VALUE 9999
 #define MIN_RANDOM_VARIABLE 0
 #define MAX_RANDOM_VARIABLE 15
 #define VAR_THRESHOLD 12
 
+#define OVERFLOW 3
+
+#define FROM_POOL true
 #define DESTRUCTIVE false
+#define RANDOM_ASSIGNMENT false
+#define RANDOM_CONDITIONAL false
 
-#define FROM_TOP 1
-#define WITH_ASSIGNMENT 2
-#define RANDOM_PROGRAM 3
-#define CONSTRUCTION_METHOD RANDOM_PROGRAM
-
-#define TOP 1
-#define BOTTOM 2
-
-#define ASSIGN 1
-#define PROJECT 2
-#define MEET 3
-#define JOIN 4
-#define WIDENING 5
+#define ASSIGN 0
+#define PROJECT 1
+#define MEET 2
+#define JOIN 3
+#define WIDENING 4
 
 //for widening
 #define K 100
 #define R(i) i < K
 
-bool create_octagon(oct_t** octagon, ap_manager_t* man, oct_t * top,
-		oct_t * bottom, int dim, const long *data, size_t dataSize,
+bool create_pool(ap_manager_t* man, oct_t * top, oct_t * bottom,
+		int dim, const long *data, size_t dataSize, unsigned int *dataIndex,
+		FILE *fp);
+
+void free_pool(ap_manager_t* man);
+
+bool get_octagon(oct_t** octagon, ap_manager_t* man, oct_t * top,
+		unsigned char *number, const long *data, size_t dataSize,
 		unsigned int *dataIndex, FILE *fp);
 
-bool create_variable(int *variable, bool assign, int dim, const long *data,
-		size_t dataSize, unsigned int *dataIndex, FILE *fp);
+int create_dimension(FILE *fp);
 
 bool create_assignment(ap_linexpr0_t*** assignmentArray,
 		int assignedToVariable, ap_dim_t ** tdim, int dim, const long *data,
 		size_t dataSize, unsigned int *dataIndex, FILE *fp);
 
-bool create_conditional(ap_lincons0_array_t *conditionalExpression, int dim, const long *data,
-		size_t dataSize, unsigned int *dataIndex, FILE *fp);
+bool create_conditional(ap_lincons0_array_t *conditionalArray,
+		const long *data, size_t dataSize, unsigned int *dataIndex, FILE *fp);
 
-bool make_fuzzable(void *array, size_t size, const long *data, size_t dataSize,
-		unsigned int *dataIndex);
+bool create_variable(unsigned char *variable, bool assign, int dim,
+		const long *data, size_t dataSize, unsigned int *dataIndex, FILE *fp);
+
 bool assume_fuzzable(bool condition);
 
-bool make_fuzzable_dimension(int * dim, const long *data, size_t dataSize,
-		unsigned int *dataIndex, FILE *fp);
+void print_octagon(ap_manager_t* man, oct_t* octagon, unsigned char number, FILE *fp);
 
 #endif /* TEST_OCT_H_ */
