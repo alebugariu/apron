@@ -5,39 +5,45 @@
 
 extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 	unsigned int dataIndex = 0;
-	int dim;
 	FILE *fp;
 	fp = fopen("out29.txt", "w+");
 
-	if (make_fuzzable_dimension(&dim, data, dataSize, &dataIndex, fp)) {
+	int dim = create_dimension(fp);
 
-		ap_manager_t * man = pk_manager_alloc(false);
-		pk_t * top = pk_top(man, dim, 0);
-		pk_t * bottom = pk_bottom(man, dim, 0);
+	ap_manager_t * man = pk_manager_alloc(false);
+	pk_t * top = pk_top(man, dim, 0);
+	pk_t * bottom = pk_bottom(man, dim, 0);
+
+	if (create_pool(man, top, bottom, dim, data, dataSize, &dataIndex, fp)) {
 
 		pk_t* polyhedron1;
-		if (create_polyhedron(&polyhedron1, man, top, bottom, dim, data, dataSize,
+		unsigned char number1;
+		if (get_polyhedron(&polyhedron1, man, top, &number1, data, dataSize,
 				&dataIndex, fp)) {
+
 			if (assume_fuzzable(pk_is_leq(man, polyhedron1, bottom))) {
 				//meet == glb, join == lub
 				//x widening bottom == x
-				if (!pk_is_eq(man, pk_widening(man, polyhedron1, bottom),
-						polyhedron1)) {
-					pk_free(man, top);
-					pk_free(man, bottom);
-					pk_free(man, polyhedron1);
+				if (pk_is_eq(man, pk_widening(man, polyhedron1, bottom),
+						polyhedron1) == false) {
+					fprintf(fp, "found polyhedron %d!\n", number1);
+					print_polyhedron(man, polyhedron1, number1, fp);
+					fflush(fp);
+					free_pool(man);
+					free_polyhedron(man, &top);
+					free_polyhedron(man, &bottom);
+					free_polyhedron(man, &polyhedron1);
 					ap_manager_free(man);
 					fclose(fp);
 					return 1;
 				}
 			}
-			pk_free(man, polyhedron1);
+			free_polyhedron(man, &polyhedron1);
 		}
-
-		pk_free(man, top);
-		pk_free(man, bottom);
-		ap_manager_free(man);
+		free_polyhedron(man, &top);
+		free_polyhedron(man, &bottom);
 	}
+	ap_manager_free(man);
 	fclose(fp);
 	return 0;
 }

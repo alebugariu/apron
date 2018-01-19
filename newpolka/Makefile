@@ -34,7 +34,7 @@ pk_meetjoin.h pk_assign.h pk_resize.h
 
 CCSRC = $(CCINC) $(CCMODULES:%=%.c)
 
-CCINC_TO_INSTALL = pk.h pkeq.h
+CCINC_TO_INSTALL = pk.h pkeq.h pk_internal.h pk_config.h pk_bit.h
 CCBIN_TO_INSTALL =
 CCLIB_TO_INSTALL = \
 libpolkaMPQ.a libpolkaMPQ_debug.a \

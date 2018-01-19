@@ -157,8 +157,8 @@ void vector_gcd(pk_internal_t* pk,
     numint_abs(v[i],q[i]);
 
   do {
-	  //printf("get me out of here\n");
-	  //fflush(stdout);
+	  printf("infinite loop\n");
+	  fflush(stdout);
     int index=0;
     vector_min_notzero(pk,size,&index,gcd);
     if (numint_sgn(gcd)==0) break;
