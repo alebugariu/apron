@@ -43,6 +43,8 @@ bool create_pool(ap_manager_t* man, oct_t * top, oct_t * bottom,
 
 void free_pool(ap_manager_t* man);
 
+void free_octagon(ap_manager_t* man, oct_t** octagon);
+
 bool get_octagon(oct_t** octagon, ap_manager_t* man, oct_t * top,
 		unsigned char *number, const long *data, size_t dataSize,
 		unsigned int *dataIndex, FILE *fp);

@@ -23,13 +23,15 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 		//widening reaches a fixed point
 		oct_t* octagon1;
 		unsigned char number1;
-		if (get_octagon(&octagon1, man, top, &number1, data, dataSize, &dataIndex, fp)) {
+		if (get_octagon(&octagon1, man, top, &number1, data, dataSize,
+				&dataIndex, fp)) {
 			oct_t* wideningResult;
 			int i = 0;
 			while (true) {
 				oct_t* octagon2;
 				unsigned char number2;
-				if (get_octagon(&octagon2, man, top, &number2, data, dataSize, &dataIndex, fp)) {
+				if (get_octagon(&octagon2, man, top, &number2, data, dataSize,
+						&dataIndex, fp)) {
 					wideningResult = oct_widening(man, octagon1, octagon2);
 					if (oct_is_leq(man, wideningResult, octagon1)) {
 						break; // we reached a fixed point
@@ -37,14 +39,16 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					octagon1 = wideningResult;
 					i++;
 					if (!(R(i))) {
-						ap_lincons0_array_t a1 = oct_to_lincons_array(
-								man, octagon1);
 						fprintf(fp, "found octagon %d!\n", number1);
 						print_octagon(man, octagon1, number1, fp);
 						fprintf(fp, "found octagon %d!\n", number2);
 						print_octagon(man, octagon2, number2, fp);
 						fflush(fp);
 						free_pool(man);
+						free_octagon(man, &top);
+						free_octagon(man, &bottom);
+						free_octagon(man, &octagon1);
+						free_octagon(man, &octagon2);
 						ap_manager_free(man);
 						fclose(fp);
 						return 1;
@@ -53,7 +57,10 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					break;
 				}
 			}
+			free_octagon(man, &octagon1);
 		}
+		free_octagon(man, &top);
+		free_octagon(man, &bottom);
 	}
 	ap_manager_free(man);
 	fclose(fp);

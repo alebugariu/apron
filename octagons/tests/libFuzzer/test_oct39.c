@@ -22,7 +22,8 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 
 		oct_t* octagon1;
 		unsigned char number1;
-		if (get_octagon(&octagon1, man, top, &number1, data, dataSize, &dataIndex, fp)) {
+		if (get_octagon(&octagon1, man, top, &number1, data, dataSize,
+				&dataIndex, fp)) {
 
 			// conditional(x) less equal x
 
@@ -39,13 +40,20 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					print_octagon(man, octagon1, number1, fp);
 					fflush(fp);
 					free_pool(man);
+					free_octagon(man, &top);
+					free_octagon(man, &bottom);
+					free_octagon(man, &octagon1);
 					oct_free(man, cond_result1);
 					ap_manager_free(man);
 					fclose(fp);
 					return 1;
 				}
+				oct_free(man, cond_result1);
 			}
+			free_octagon(man, &octagon1);
 		}
+		free_octagon(man, &top);
+		free_octagon(man, &bottom);
 	}
 	ap_manager_free(man);
 	fclose(fp);

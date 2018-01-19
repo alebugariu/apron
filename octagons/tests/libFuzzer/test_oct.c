@@ -10,7 +10,11 @@
 int pool_size = 0;
 int initial_pool_size = 0;
 oct_t** pool = NULL;
+#if NBOPS
 unsigned char history[NBOPS][5] = { 0 };
+#else
+unsigned char history[NBOPS][5];
+#endif
 
 int dim;
 
@@ -940,7 +944,6 @@ void print_octagon(ap_manager_t* man, oct_t* octagon,
 		NULL);
 		fflush(fp);
 		ap_lincons0_array_clear(&a);
-		oct_free(man, octagon);
 	}
 }
 
@@ -1099,5 +1102,11 @@ void free_pool(ap_manager_t* man) {
 		free(pool);
 
 		clear_history();
+	}
+}
+
+void free_octagon(ap_manager_t* man, oct_t** octagon) {
+	if (!FROM_POOL) {
+		oct_free(man, *octagon);
 	}
 }

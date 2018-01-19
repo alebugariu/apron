@@ -18,11 +18,13 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 
 		oct_t* octagon1;
 		unsigned char number1;
-		if (get_octagon(&octagon1, man, top, &number1, data, dataSize, &dataIndex, fp)) {
+		if (get_octagon(&octagon1, man, top, &number1, data, dataSize,
+				&dataIndex, fp)) {
 
 			oct_t* octagon2;
 			unsigned char number2;
-			if (get_octagon(&octagon2, man, top, &number2, data, dataSize, &dataIndex, fp)) {
+			if (get_octagon(&octagon2, man, top, &number2, data, dataSize,
+					&dataIndex, fp)) {
 
 				// conditional is monotone
 				if (assume_fuzzable(oct_is_leq(man, octagon1, octagon2))) {
@@ -55,10 +57,16 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 							fclose(fp);
 							return 1;
 						}
+						oct_free(man, cond_result1);
+						oct_free(man, cond_result2);
 					}
 				}
+				free_octagon(man, &octagon2);
 			}
+			free_octagon(man, &octagon1);
 		}
+		free_octagon(man, &top);
+		free_octagon(man, &bottom);
 	}
 	ap_manager_free(man);
 	fclose(fp);
