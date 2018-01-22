@@ -80,22 +80,14 @@ void choose(ap_manager_t* man, pk_t * top, long coefficients[3],
 						initialValues[i] = coefficients[got[i]];
 					}
 				}
-				printf("%ld ", initialValues[i]);
-				fflush(stdout);
 			}
-			printf("type=%d\n", type);
-			fflush(stdout);
 			//here we have all the values of the new polyhedron
 			ap_lincons0_array_t a_constraint = ap_lincons0_array_make(1);
 			a_constraint.p[0].constyp = type;
 			a_constraint.p[0].linexpr0 = create_polyhedral_linexpr0(dim,
 					initialValues);
-			printf("Before meet_lincons!\n");
-			fflush(stdout);
 			pk_t* polyhedron = pk_meet_lincons_array(man,
 			DESTRUCTIVE, top, &a_constraint);
-			printf("After meet_lincons!\n");
-			fflush(stdout);
 			if (!pk_is_bottom(man, polyhedron) && !pk_is_top(man, polyhedron)
 					&& !exists(man, polyhedron)) {
 				(*expectedNumber)--;

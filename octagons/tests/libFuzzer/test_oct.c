@@ -40,8 +40,7 @@ ap_linexpr0_t * create_octogonal_linexpr0(int dim, long v1, long v2,
 
 ap_linexpr0_t * create_polyhedral_linexpr0(int dim, long *values) {
 	ap_coeff_t *cst, *coeff;
-	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE,
-			dim);
+	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE, dim);
 	cst = &linexpr0->cst;
 	ap_scalar_set_double(cst->val.scalar, values[dim]);
 
@@ -79,8 +78,8 @@ long random_with_max(long max) {
 	return x / bin_size;
 }
 
-void initialize_pool(ap_manager_t* man, oct_t * top, oct_t * bottom,
-		int dim, FILE *fp) {
+void initialize_pool(ap_manager_t* man, oct_t * top, oct_t * bottom, int dim,
+		FILE *fp) {
 
 	long coefficients[3] = { 0, -1, 1 };
 	long constants[3] = { 0, LONG_MIN, LONG_MAX };
@@ -119,19 +118,16 @@ void initialize_pool(ap_manager_t* man, oct_t * top, oct_t * bottom,
 										create_octogonal_linexpr0(dim, v1, v2,
 												coefficients[coeff1],
 												coefficients[coeff2], constant);
-								oct_t* octagon = oct_meet_lincons_array(
-										man,
-										DESTRUCTIVE, top, &a_constraint);
+								oct_t* octagon = oct_meet_lincons_array(man,
+								DESTRUCTIVE, top, &a_constraint);
 								if (!oct_is_bottom(man, octagon)
 										&& !oct_is_top(man, octagon)
 										&& !exists(man, octagon)) {
 									expectedNumber--;
 									ap_lincons0_array_t a =
-											oct_to_lincons_array(man,
-													octagon);
+											oct_to_lincons_array(man, octagon);
 									printf("octagon %d: ", pool_size);
-									ap_lincons0_array_fprint(stdout, &a,
-									NULL);
+									ap_lincons0_array_fprint(stdout, &a, NULL);
 									fflush(stdout);
 									ap_lincons0_array_clear(&a);
 									pool[pool_size++] = octagon;
@@ -168,82 +164,6 @@ void initialize_pool(ap_manager_t* man, oct_t * top, oct_t * bottom,
 	fflush(stdout);
 }
 
-/*void initialize_pool(ap_manager_t* man, oct_t * top, oct_t * bottom,
- int dim, FILE *fp) {
-
- long coefficients[3] = { 0, -1, 1 };
- long constants[3] = { 0, LONG_MIN, LONG_MAX };
- int type[2] = { AP_CONS_SUPEQ, AP_CONS_EQ };
-
- pool = (oct_t **) malloc((MAX_POOL_SIZE + NBOPS) * sizeof(oct_t *));
-
- unsigned v1, v2;
- unsigned coeff1, coeff2;
- int i, j;
- for (i = 0; i < 4; i++) {
- for (j = 0; j < 2; j++) {
- for (coeff1 = 0; coeff1 < 3; coeff1++) {
- for (coeff2 = coeff1; coeff2 < 3; coeff2++) {
- long constant;
- if (i == 3) {
- constant = rand()
- % (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
- } else {
- constant = constants[i];
- }
- v1 = rand() % dim;
- v2 = rand() % dim;
- while (v2 == v1) {
- v2 = rand() % dim;
- }
- ap_lincons0_array_t a_constraint =
- ap_lincons0_array_make(1);
- a_constraint.p[0].constyp = type[j];
- a_constraint.p[0].linexpr0 = create_octogonal_linexpr0(dim,
- v1, v2, coefficients[coeff1], coefficients[coeff2],
- constant);
- oct_t* octagon = oct_meet_lincons_array(man,
- DESTRUCTIVE, top, &a_constraint);
- if (!oct_is_bottom(man, octagon)
- && !oct_is_top(man, octagon)
- && !exists(man, octagon)) {
- ap_lincons0_array_t a = oct_to_lincons_array(man,
- octagon);
- printf("octagon %d: ", pool_size);
- ap_lincons0_array_fprint(stdout, &a,
- NULL);
- fflush(stdout);
- ap_lincons0_array_clear(&a);
- pool[pool_size++] = octagon;
- } else {
- oct_free(man, octagon);
- }
- ap_lincons0_array_clear(&a_constraint);
- }
- }
- }
- }
- ap_lincons0_array_t a = oct_to_lincons_array(man, top);
- printf("octagon %d: ", pool_size);
- ap_lincons0_array_fprint(stdout, &a, NULL);
- fflush(stdout);
- ap_lincons0_array_clear(&a);
- pool[pool_size++] = top;
-
- a = oct_to_lincons_array(man, bottom);
- printf("octagon %d: ", pool_size);
- ap_lincons0_array_fprint(stdout, &a, NULL);
- fflush(stdout);
- ap_lincons0_array_clear(&a);
- pool[pool_size++] = bottom;
-
- initial_pool_size = pool_size;
- fprintf(fp, "Successfully initialized the pool!\n");
- fflush(fp);
- printf("Initial pool size: %d\n", initial_pool_size);
- fflush(stdout);
- }*/
-
 bool make_fuzzable(void *array, size_t size, const long *data, size_t dataSize,
 		unsigned int *dataIndex) {
 	int numberOfElements = dataSize / sizeof(long);
@@ -269,15 +189,13 @@ bool create_number(unsigned char *number, int dimension, const long *data,
 	return true;
 }
 
-bool create_random_conditional(ap_lincons0_array_t *conditionalArray,
-		FILE *fp) {
+bool create_random_conditional(ap_lincons0_array_t *conditionalArray, FILE *fp) {
 	unsigned char randomVariable =
 			rand()
 					% (MAX_RANDOM_VARIABLE + 1 - MIN_RANDOM_VARIABLE)+ MIN_RANDOM_VARIABLE;
 
 	ap_constyp_t type =
-			randomVariable % 2 == AP_CONS_SUPEQ ?
-					AP_CONS_SUPEQ : AP_CONS_EQ;
+			randomVariable % 2 == AP_CONS_SUPEQ ? AP_CONS_SUPEQ : AP_CONS_EQ;
 
 	fprintf(fp, "Conditional expression: ");
 	fflush(fp);
@@ -308,16 +226,14 @@ bool create_random_conditional(ap_lincons0_array_t *conditionalArray,
 	fflush(fp);
 
 	*conditionalArray = ap_lincons0_array_make(1);
-	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim,
-			fuzzableValues);
+	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim, fuzzableValues);
 	conditionalArray->p[0].constyp = type;
 	conditionalArray->p[0].linexpr0 = expression;
 	return true;
 }
 
-bool create_fuzzable_conditioanl(ap_lincons0_array_t *conditionalArray,
-		int dim, const long *data, size_t dataSize, unsigned int *dataIndex,
-		FILE *fp) {
+bool create_fuzzable_conditioanl(ap_lincons0_array_t *conditionalArray, int dim,
+		const long *data, size_t dataSize, unsigned int *dataIndex, FILE *fp) {
 	unsigned char overflowFlag;
 	if (!create_number(&overflowFlag, OVERFLOW + 1, data, dataSize,
 			dataIndex)) {
@@ -325,8 +241,7 @@ bool create_fuzzable_conditioanl(ap_lincons0_array_t *conditionalArray,
 	}
 
 	ap_constyp_t type =
-			overflowFlag % 2 == AP_CONS_SUPEQ ?
-					AP_CONS_SUPEQ : AP_CONS_EQ;
+			overflowFlag % 2 == AP_CONS_SUPEQ ? AP_CONS_SUPEQ : AP_CONS_EQ;
 
 	fprintf(fp, "Conditional expression: ");
 	fflush(fp);
@@ -358,15 +273,14 @@ bool create_fuzzable_conditioanl(ap_lincons0_array_t *conditionalArray,
 	fflush(fp);
 
 	*conditionalArray = ap_lincons0_array_make(1);
-	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim,
-			fuzzableValues);
+	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim, fuzzableValues);
 	conditionalArray->p[0].constyp = type;
 	conditionalArray->p[0].linexpr0 = expression;
 	return true;
 }
 
-bool create_conditional(ap_lincons0_array_t *conditionalArray,
-		const long *data, size_t dataSize, unsigned int *dataIndex, FILE *fp) {
+bool create_conditional(ap_lincons0_array_t *conditionalArray, const long *data,
+		size_t dataSize, unsigned int *dataIndex, FILE *fp) {
 	if (RANDOM_CONDITIONAL) {
 		return create_random_conditional(conditionalArray, fp);
 	}
@@ -399,14 +313,12 @@ ap_linexpr0_t* create_random_polyhedral_assignment(int dim, FILE* fp) {
 	}
 	fprintf(fp, "%ld\n", fuzzableValues[j]);
 	fflush(fp);
-	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim,
-			fuzzableValues);
+	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim, fuzzableValues);
 	return expression;
 }
 
-bool create_fuzzable_polyhedral_assignment(ap_linexpr0_t** expression,
-		int dim, const long *data, size_t dataSize, unsigned int *dataIndex,
-		FILE *fp) {
+bool create_fuzzable_polyhedral_assignment(ap_linexpr0_t** expression, int dim,
+		const long *data, size_t dataSize, unsigned int *dataIndex, FILE *fp) {
 	unsigned char overflowFlag;
 	if (!create_number(&overflowFlag, OVERFLOW + 1, data, dataSize,
 			dataIndex)) {
@@ -440,9 +352,9 @@ bool create_fuzzable_polyhedral_assignment(ap_linexpr0_t** expression,
 	return true;
 }
 
-bool create_assignment(ap_linexpr0_t*** assignmentArray,
-		int assignedToVariable, ap_dim_t ** tdim, int dim, const long *data,
-		size_t dataSize, unsigned int *dataIndex, FILE *fp) {
+bool create_assignment(ap_linexpr0_t*** assignmentArray, int assignedToVariable,
+		ap_dim_t ** tdim, int dim, const long *data, size_t dataSize,
+		unsigned int *dataIndex, FILE *fp) {
 	ap_linexpr0_t* expression;
 	if (RANDOM_ASSIGNMENT) {
 		expression = create_random_polyhedral_assignment(dim, fp);
@@ -474,9 +386,9 @@ bool create_variable(unsigned char *variable, bool assign, int dim,
 	return true;
 }
 
-bool create_fuzzable_assignments(ap_linexpr0_t** assignments,
-		ap_manager_t* man, int dim, const long *data, size_t dataSize,
-		unsigned int *dataIndex, FILE *fp) {
+bool create_fuzzable_assignments(ap_linexpr0_t** assignments, ap_manager_t* man,
+		int dim, const long *data, size_t dataSize, unsigned int *dataIndex,
+		FILE *fp) {
 
 	unsigned char overflowFlag;
 	if (!create_number(&overflowFlag, OVERFLOW + 1, data, dataSize,
@@ -580,8 +492,7 @@ bool increase_pool(ap_manager_t* man, int dim, const long *data,
 			ap_lincons0_array_clear(&a);
 
 			oct_t *result = oct_assign_linexpr_array(man,
-			DESTRUCTIVE, octagon, tdim, assignmentArray, 1,
-			NULL);
+			DESTRUCTIVE, octagon, tdim, assignmentArray, 1, NULL);
 
 			if (!oct_is_bottom(man, result) && !oct_is_top(man, result)
 					&& !oct_is_eq(man, result, octagon)
@@ -666,10 +577,6 @@ bool increase_pool(ap_manager_t* man, int dim, const long *data,
 			fprintf(fp, "octagon %d: ", number1);
 			ap_lincons0_array_fprint(fp, &a1, NULL);
 			fflush(fp);
-			/*printf("\noctagon %d: ", number1);
-			 ap_lincons0_array_fprint(stdout, &a1, NULL);
-			 fflush(stdout);
-			 */
 			ap_lincons0_array_clear(&a1);
 
 			oct_t *octagon2 = pool[number2];
@@ -677,27 +584,12 @@ bool increase_pool(ap_manager_t* man, int dim, const long *data,
 			fprintf(fp, "octagon %d: ", number2);
 			ap_lincons0_array_fprint(fp, &a2, NULL);
 			fflush(fp);
-			/*printf("\noctagon %d: ", number2);
-			 ap_lincons0_array_fprint(stdout, &a2, NULL);
-			 fflush(stdout);
-			 */
 			ap_lincons0_array_clear(&a2);
 
-//bool top1 = oct_is_top(man, octagon1);
-//bool top2 = oct_is_top(man, octagon2);
+			bool top1 = oct_is_top(man, octagon1);
+			bool top2 = oct_is_top(man, octagon2);
 
-			oct_t *result = oct_meet(man, DESTRUCTIVE, octagon1,
-					octagon2);
-			/*if (oct_is_top(man, octagon2) && !top2) {
-			 printf("***********************ERRROOOR at MEET octagon %d\n",
-			 number2);
-			 fflush(stdout);
-			 }
-			 if (oct_is_top(man, octagon1) && !top1) {
-			 printf("***********************ERRROOOR at MEET octagon %d\n",
-			 number1);
-			 fflush(stdout);
-			 }*/
+			oct_t *result = oct_meet(man, DESTRUCTIVE, octagon1, octagon2);
 
 			if (!oct_is_bottom(man, result) && !oct_is_top(man, result)
 					&& !oct_is_eq(man, result, octagon1)
@@ -740,8 +632,7 @@ bool increase_pool(ap_manager_t* man, int dim, const long *data,
 			fflush(fp);
 			ap_lincons0_array_clear(&a2);
 
-			oct_t *result = oct_join(man, DESTRUCTIVE, octagon1,
-					octagon2);
+			oct_t *result = oct_join(man, DESTRUCTIVE, octagon1, octagon2);
 			if (!oct_is_bottom(man, result) && !oct_is_top(man, result)
 					&& !oct_is_eq(man, result, octagon1)
 					&& !oct_is_eq(man, result, octagon2)
@@ -774,15 +665,13 @@ bool increase_pool(ap_manager_t* man, int dim, const long *data,
 
 			oct_t *result;
 			if (oct_is_leq(man, octagon1, octagon2)) {
-				ap_lincons0_array_t a1 = oct_to_lincons_array(man,
-						octagon1);
+				ap_lincons0_array_t a1 = oct_to_lincons_array(man, octagon1);
 				fprintf(fp, "octagon %d: ", number1);
 				ap_lincons0_array_fprint(fp, &a1, NULL);
 				fflush(fp);
 				ap_lincons0_array_clear(&a1);
 
-				ap_lincons0_array_t a2 = oct_to_lincons_array(man,
-						octagon2);
+				ap_lincons0_array_t a2 = oct_to_lincons_array(man, octagon2);
 				fprintf(fp, "octagon %d: ", number2);
 				ap_lincons0_array_fprint(fp, &a2, NULL);
 				fflush(fp);
@@ -790,15 +679,13 @@ bool increase_pool(ap_manager_t* man, int dim, const long *data,
 
 				result = oct_widening(man, octagon1, octagon2);
 			} else {
-				ap_lincons0_array_t a1 = oct_to_lincons_array(man,
-						octagon2);
+				ap_lincons0_array_t a1 = oct_to_lincons_array(man, octagon2);
 				fprintf(fp, "octagon %d: ", number2);
 				ap_lincons0_array_fprint(fp, &a1, NULL);
 				fflush(fp);
 				ap_lincons0_array_clear(&a1);
 
-				ap_lincons0_array_t a2 = oct_to_lincons_array(man,
-						octagon1);
+				ap_lincons0_array_t a2 = oct_to_lincons_array(man, octagon1);
 				fprintf(fp, "octagon %d: ", number1);
 				ap_lincons0_array_fprint(fp, &a2, NULL);
 				fflush(fp);
@@ -816,8 +703,7 @@ bool increase_pool(ap_manager_t* man, int dim, const long *data,
 				history[resultOctagonIndex][2] = number1;
 				history[resultOctagonIndex++][3] = number2;
 				pool[pool_size++] = result;
-				ap_lincons0_array_t a = oct_to_lincons_array(man,
-						result);
+				ap_lincons0_array_t a = oct_to_lincons_array(man, result);
 				fprintf(fp, "octagon %d: ", pool_size);
 				ap_lincons0_array_fprint(fp, &a, NULL);
 				fflush(fp);
@@ -861,9 +747,8 @@ bool pool_is_empty() {
 	return pool_size == 0;
 }
 
-bool create_pool(ap_manager_t* man, oct_t * top, oct_t * bottom,
-		int dim, const long *data, size_t dataSize, unsigned int *dataIndex,
-		FILE *fp) {
+bool create_pool(ap_manager_t* man, oct_t * top, oct_t * bottom, int dim,
+		const long *data, size_t dataSize, unsigned int *dataIndex, FILE *fp) {
 	if (!FROM_POOL) {
 		return true;
 	}
@@ -880,8 +765,7 @@ void print_history(ap_manager_t* man, unsigned char number, FILE *fp) {
 		fprintf(fp, "Octagon %d is from the initial pool:\n", number);
 		oct_t* octagon = pool[number];
 		ap_lincons0_array_t a = oct_to_lincons_array(man, octagon);
-		ap_lincons0_array_fprint(fp, &a,
-		NULL);
+		ap_lincons0_array_fprint(fp, &a, NULL);
 		fprintf(fp, "\n");
 		fflush(fp);
 		ap_lincons0_array_clear(&a);
@@ -934,16 +818,14 @@ void print_history(ap_manager_t* man, unsigned char number, FILE *fp) {
 	}
 }
 
-void print_octagon(ap_manager_t* man, oct_t* octagon,
-		unsigned char number, FILE *fp) {
+void print_octagon(ap_manager_t* man, oct_t* octagon, unsigned char number,
+		FILE *fp) {
+	ap_lincons0_array_t a = oct_to_lincons_array(man, octagon);
+	ap_lincons0_array_fprint(fp, &a, NULL);
+	fflush(fp);
+	ap_lincons0_array_clear(&a);
 	if (FROM_POOL) {
 		print_history(man, number, fp);
-	} else {
-		ap_lincons0_array_t a = oct_to_lincons_array(man, octagon);
-		ap_lincons0_array_fprint(fp, &a,
-		NULL);
-		fflush(fp);
-		ap_lincons0_array_clear(&a);
 	}
 }
 
@@ -969,8 +851,7 @@ bool create_octogonal_constraint(int index, ap_linexpr0_t** constraint,
 		return false;
 	}
 
-	*type = overflowFlag % 2 == AP_CONS_SUPEQ ?
-			AP_CONS_SUPEQ : AP_CONS_EQ;
+	*type = overflowFlag % 2 == AP_CONS_SUPEQ ? AP_CONS_SUPEQ : AP_CONS_EQ;
 
 	long fuzzableValues[5];
 	if (!make_fuzzable(fuzzableValues, (5) * sizeof(long), data, dataSize,
@@ -1036,9 +917,9 @@ bool create_constraints(ap_lincons0_array_t *lincons0, long nbcons, int dim,
 	return true;
 }
 
-bool create_octagon_from_top(oct_t** octagon, ap_manager_t* man,
-		oct_t * top, int dim, const long *data, size_t dataSize,
-		unsigned int *dataIndex, FILE *fp) {
+bool create_octagon_from_top(oct_t** octagon, ap_manager_t* man, oct_t * top,
+		int dim, const long *data, size_t dataSize, unsigned int *dataIndex,
+		FILE *fp) {
 	unsigned long nbcons;
 	if (!create_number_of_constraints(&nbcons, dim, data, dataSize, dataIndex,
 			fp)) {
