@@ -29,14 +29,14 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 				pk_t* meet12 = pk_meet(man, DESTRUCTIVE,
 						polyhedron1, polyhedron2);
 				pk_internal_t * meet12_internal = pk_init_from_manager(
-						man, ELINA_FUNID_MEET);
+						man, AP_FUNID_MEET);
 				pk_t* meet21 = pk_meet(man, DESTRUCTIVE,
 						polyhedron2, polyhedron1);
 				pk_internal_t * meet21_internal = pk_init_from_manager(
-						man, ELINA_FUNID_MEET);
+						man, AP_FUNID_MEET);
 
-				if (meet12_internal->exn != ELINA_EXC_OVERFLOW
-						&& meet21_internal->exn != ELINA_EXC_OVERFLOW) {
+				if (meet12_internal->exn != AP_EXC_OVERFLOW
+						&& meet21_internal->exn != AP_EXC_OVERFLOW) {
 
 					//meet == glb, join == lub
 					//meet is commutative

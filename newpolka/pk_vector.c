@@ -2,8 +2,11 @@
 /* pk_vector.c: operations on vectors */
 /* ********************************************************************** */
 
-/* This file is part of the APRON Library, released under LGPL license.  Please
-   read the COPYING file packaged in the distribution */
+/* This file is part of the APRON Library, released under LGPL license
+   with an exception allowing the redistribution of statically linked
+   executables.
+
+   Please read the COPYING file packaged in the distribution */
 
 #include "pk_config.h"
 #include "pk_vector.h"
@@ -120,18 +123,17 @@ vector_min_notzero(pk_internal_t* pk,
      and stores the index and the coeff in *index and *min */
   i = 0;
   while (i<size){
-    if (numint_sgn(v[i])>0){
+    if (numint_sgn(v[i])){
       *index = i;
       numint_set(min,v[i]);
       break;
     }
     i++;
   }
-
   i++;
   /* search now the minimum */
   while (i<size) {
-    if (numint_sgn(v[i])>0){
+    if (numint_sgn(v[i])){
       if (numint_cmp(min,v[i]) > 0){
 	*index = i;
 	numint_set(min,v[i]);
@@ -155,8 +157,8 @@ void vector_gcd(pk_internal_t* pk,
     numint_abs(v[i],q[i]);
 
   do {
-    printf("Infinite loop!!!\n");
-    fflush(stdout);
+	  //printf("infinte loop\n");
+	  //fflush(stdout);
     int index=0;
     vector_min_notzero(pk,size,&index,gcd);
     if (numint_sgn(gcd)==0) break;
@@ -185,9 +187,9 @@ bool vector_normalize(pk_internal_t* pk,
   size_t i;
 
   assert(size<=pk->maxcols);
-      /*  computation of the pgcd */
-  vector_gcd(pk,&q[1],size-1, pk->vector_tmp[1]);
 
+  /*  computation of the pgcd */
+  vector_gcd(pk,&q[1],size-1, pk->vector_tmp[1]);
   /* possible division */
   if (numint_cmp_int(pk->vector_tmp[1],1)>0){
     for (i=1; i<size; i++)
@@ -370,138 +372,32 @@ int vector_compare(pk_internal_t* pk,
    considered for computations, except when k==0.
 
    This function uses pk->vector_tmp[0..4] and pk->vector_numintp. */
-bool int64_add(numint_t x, numint_t y, numint_t  result){
-    numint_init(result);
-    numint_t tmp1, tmp2;
-    numint_set_int(tmp1,INT64_MAX);
-    numint_sub(tmp1,tmp1,x);
-    numint_set_int(tmp2,INT64_MIN);
-    numint_sub(tmp2,tmp2,x);
-    if(numint_sgn(x) > 0 && numint_cmp(y,tmp1)>0) return true;
-    else if(numint_sgn(x) < 0 && numint_cmp(y,tmp2)<0){
-        return true;
-    }
-    numint_add(result,x,y);
-    return false;
-}
-
-
-//multiplication with overflow detection
-int int64_mult(numint_t x, numint_t y, numint_t x1, numint_t x2, numint_t  result)
-{
-    numint_init(result);
-    numint_t tmp1, tmp2, tmp3,tmp4;
-        numint_neg(tmp3,x);
-    numint_neg(tmp4,x1);
-    if (numint_sgn(x) > 0 && numint_sgn(y) > 0 && numint_cmp(x, x1)>0) return 1;
-    if (numint_sgn(x) < 0 && numint_sgn(y) > 0 && numint_cmp(x , x2)<0) return 1;
-    if (numint_sgn(x) > 0){
-        numint_set_int(tmp1,INT64_MIN);
-        numint_divexact(tmp2,tmp1,x);
-        if(numint_sgn(y) < 0 && numint_cmp(y,tmp2)<0){
-            return 1;
-        }
-    }
-    if (numint_sgn(x) < 0 && numint_sgn(y) < 0 && (numint_cmp(x,tmp1) <=0 || numint_cmp(y,tmp1)<=0 || numint_cmp(tmp3,tmp4)>0))
-        return 1;
-    numint_mul(result,x,y);
-    return 0;
-}
-
 
 void vector_combine(pk_internal_t* pk,
 		    numint_t* q1, numint_t* q2,
 		    numint_t* q3, size_t k, size_t size)
 {
-
   size_t j;
-  numint_t tmp1,tmp2,tmp3,tmp4, x1, x2, x3, x4, s1;
-  numint_mul(s1,q1[k],q2[k]);
-  bool add = numint_sgn(s1) < 0 ? true: false;
-
   numint_gcd(pk->vector_tmp[0],q1[k],q2[k]);
-
-   /* if(!numint_cmp_int(q1[k],INT64_MIN) && !numint_cmp_int(pk->vector_tmp[0],-1)){
-        printf("exception division\n");
-        fflush(stdout);
-        pk->exn = AP_EXC_OVERFLOW;
-        return ;
-    }
-    if(!numint_cmp_int(q2[k],INT64_MIN) && !numint_cmp_int(pk->vector_tmp[0],-1)){
-        printf("exception division\n");
-        fflush(stdout);
-        pk->exn = AP_EXC_OVERFLOW;
-        return ;
-    }*/
-  int flag = 0;
-  //numint_divexact(pk->vector_tmp[1],q1[k],pk->vector_tmp[0]);
-  //numint_divexact(pk->vector_tmp[2],q2[k],pk->vector_tmp[0]);
-
-
-  numint_divexact(tmp3,q1[k],pk->vector_tmp[0]);
-  numint_divexact(tmp4,q2[k],pk->vector_tmp[0]);
-  numint_abs(pk->vector_tmp[1],tmp3);
-  numint_abs(pk->vector_tmp[2],tmp4);
-
-  numint_set_int(tmp1,INT64_MAX);
-
-  numint_set_int(tmp2,INT64_MIN);
-  numint_divexact(x1,tmp1,pk->vector_tmp[2]);
-  numint_divexact(x2,tmp2,pk->vector_tmp[2]);
-
-  numint_divexact(x3,tmp1,pk->vector_tmp[1]);
-  numint_divexact(x4,tmp2,pk->vector_tmp[1]);
-
+  numint_divexact(pk->vector_tmp[1],q1[k],pk->vector_tmp[0]);
+  numint_divexact(pk->vector_tmp[2],q2[k],pk->vector_tmp[0]);
   for (j=1;j<size;j++){
     if (j!=k){
-
-      flag = flag || int64_mult(q1[j],pk->vector_tmp[2],x1,x2,pk->vector_tmp[3]);
-      flag = flag || int64_mult(q2[j],pk->vector_tmp[1],x3,x4,pk->vector_tmp[4]);
-
-      if(add){
-	 numint_set(tmp3,pk->vector_tmp[4]);
-      }
-      else{
-	 numint_neg(tmp3,pk->vector_tmp[4]);
-      }
-      flag = flag || int64_add(pk->vector_tmp[3],tmp3,q3[j]);
-      //numint_mul(pk->vector_tmp[3],pk->vector_tmp[2],q1[j]);
-      //numint_mul(pk->vector_tmp[4],pk->vector_tmp[1],q2[j]);
-      //numint_sub(q3[j],pk->vector_tmp[3],pk->vector_tmp[4]);
+      numint_mul(pk->vector_tmp[3],pk->vector_tmp[2],q1[j]);
+      numint_mul(pk->vector_tmp[4],pk->vector_tmp[1],q2[j]);
+      numint_sub(q3[j],pk->vector_tmp[3],pk->vector_tmp[4]);
     }
   }
-  //numint_t max;
-  //numint_init_set_int(max,NUMINT_MAX/2);
-  //if (pk->max_coeff_size){
-    //for (j=0; j<size; j++){
-      //if (numint_size(q3[j]) > pk->max_coeff_size){
-	//numint_t abs;
-	//numint_init(abs);
-	//numint_abs(abs,q3[j]);
-	//if(numint_cmp(abs,max)>0){
-	//	printf("exception\n");
-	//	fflush(stdout);
-	//	pk->exn = AP_EXC_OVERFLOW;
-	////	return;
-	//}
-      //}
-    //}
- // }
   numint_set_int(q3[k],0);
-  if(flag){
-             //printf("exception \n");
-             //fflush(stdout);
-             pk->exn = AP_EXC_OVERFLOW;
-             return ;
-    }
-      vector_normalize(pk,q3,size);
-     /*if (pk->max_coeff_size){
+  vector_normalize(pk,q3,size);
+
+  if (pk->max_coeff_size){
     for (j=0; j<size; j++){
       if (numint_size(q3[j]) > pk->max_coeff_size){
 	pk->exn = AP_EXC_OVERFLOW;
       }
     }
-  }*/
+  }
 }
 
 //* ********************************************************************** */

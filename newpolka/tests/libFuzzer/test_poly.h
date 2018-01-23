@@ -11,7 +11,7 @@
 
 #define MAX_POOL_SIZE 32
 
-#define NBOPS 32
+#define NBOPS 1
 #define NBASSIGNMENTS 4
 #define MIN_VALUE -9999
 #define MAX_VALUE 9999

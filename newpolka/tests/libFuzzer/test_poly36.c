@@ -39,12 +39,12 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 							NULL);
 					pk_internal_t * assign1_internal =
 							pk_init_from_manager(man,
-									ELINA_FUNID_ASSIGN_LINEXPR_ARRAY);
+									AP_FUNID_ASSIGN_LINEXPR_ARRAY);
 
 					pk_t* project_result1 = pk_forget_array(man,
 					DESTRUCTIVE, polyhedron1, tdim, 1, false);
 
-					if (assign1_internal->exn != ELINA_EXC_OVERFLOW) {
+					if (assign1_internal->exn != AP_EXC_OVERFLOW) {
 
 						if (pk_is_leq(man, assign_result1, project_result1)
 								== false) {

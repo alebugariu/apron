@@ -30,9 +30,9 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 						polyhedron2);
 				unsigned char number3;
 				pk_internal_t * lub_internal = pk_init_from_manager(man,
-						ELINA_FUNID_JOIN);
+						AP_FUNID_JOIN);
 
-				if (lub_internal->exn != ELINA_EXC_OVERFLOW) {
+				if (lub_internal->exn != AP_EXC_OVERFLOW) {
 
 					pk_t* bound;
 					if (get_polyhedron(&bound, man, top, &number3, data,

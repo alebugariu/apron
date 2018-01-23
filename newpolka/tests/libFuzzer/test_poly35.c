@@ -33,9 +33,9 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 						DESTRUCTIVE, bottom, tdim, assignmentArray, 1,
 						NULL);
 				pk_internal_t * assign1_internal = pk_init_from_manager(
-						man, ELINA_FUNID_ASSIGN_LINEXPR_ARRAY);
+						man, AP_FUNID_ASSIGN_LINEXPR_ARRAY);
 
-				if (assign1_internal->exn != ELINA_EXC_OVERFLOW) {
+				if (assign1_internal->exn != AP_EXC_OVERFLOW) {
 
 					if (pk_is_bottom(man, assign_result1) == false) {
 						ap_lincons0_array_t a1 = pk_to_lincons_array(

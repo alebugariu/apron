@@ -23,9 +23,9 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 			pk_t* join11 = pk_join(man, DESTRUCTIVE, polyhedron1,
 					polyhedron1);
 			pk_internal_t * join11_internal = pk_init_from_manager(man,
-					ELINA_FUNID_JOIN);
+					AP_FUNID_JOIN);
 
-			if (join11_internal->exn != ELINA_EXC_OVERFLOW) {
+			if (join11_internal->exn != AP_EXC_OVERFLOW) {
 				//meet == glb, join == lub
 				//join is idempotent
 				if (pk_is_eq(man, join11, polyhedron1) == false) {

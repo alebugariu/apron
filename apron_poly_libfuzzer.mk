@@ -17,7 +17,7 @@ test:
 		clang -lstdc++ -fsanitize-coverage=trace-pc-guard -I /usr/local/include $(LIB_PATHS) test_poly.c test_poly$${number}.c \
 			  /home/libFuzzer.a -o test$${number} -lmpfr -lgmp -lapron -litv $(lib) $(format); \
         startTime=`date +%s%N` ; \
-		./test$${number} -max_len=10000 -detect_leaks=0 -rss_limit_mb=0 -max_total_time=10 -timeout=3600 -print_final_stats=1 MY_CORPUS/ SEED_CORPUS/; \
+		./test$${number} -max_len=10000 -detect_leaks=0 -rss_limit_mb=0 -max_total_time=10800 -timeout=3600 -seed=1046527 -print_final_stats=1 MY_CORPUS/ SEED_CORPUS/; \
         endTime=`date +%s%N` ; \
         runtime=$$((($$endTime - $$startTime)/1000000)) ; \
         echo "Execution time: $$runtime millisec for test_poly$$number\n" ; \

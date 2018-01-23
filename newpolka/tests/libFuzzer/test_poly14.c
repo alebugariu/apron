@@ -5,9 +5,10 @@
 
 extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 	unsigned int dataIndex = 0;
-	int dim;
 	FILE *fp;
 	fp = fopen("out14.txt", "w+");
+
+	int dim = create_dimension(fp);
 
 	ap_manager_t * man = pk_manager_alloc(false);
 	pk_t * top = pk_top(man, dim, 0);
@@ -28,15 +29,15 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 				pk_t* meet12 = pk_meet(man, DESTRUCTIVE,
 						polyhedron1, polyhedron2);
 				pk_internal_t * meet12_internal = pk_init_from_manager(
-						man, ELINA_FUNID_MEET);
+						man, AP_FUNID_MEET);
 
 				pk_t* join12 = pk_join(man, DESTRUCTIVE,
 						polyhedron1, meet12);
 				pk_internal_t * join12_internal = pk_init_from_manager(
-						man, ELINA_FUNID_JOIN);
+						man, AP_FUNID_JOIN);
 
-				if (meet12_internal->exn != ELINA_EXC_OVERFLOW
-						&& join12_internal->exn != ELINA_EXC_OVERFLOW) {
+				if (meet12_internal->exn != AP_EXC_OVERFLOW
+						&& join12_internal->exn != AP_EXC_OVERFLOW) {
 
 					//meet == glb, join == lub
 					//join absorbtion

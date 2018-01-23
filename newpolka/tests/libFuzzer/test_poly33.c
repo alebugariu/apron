@@ -47,7 +47,7 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 											NULL);
 							pk_internal_t * assign1_internal =
 									pk_init_from_manager(man,
-											ELINA_FUNID_ASSIGN_LINEXPR_ARRAY);
+											AP_FUNID_ASSIGN_LINEXPR_ARRAY);
 
 							pk_t* assign_result2 =
 									pk_assign_linexpr_array(man,
@@ -56,11 +56,11 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 											NULL);
 							pk_internal_t * assign2_internal =
 									pk_init_from_manager(man,
-											ELINA_FUNID_ASSIGN_LINEXPR_ARRAY);
+											AP_FUNID_ASSIGN_LINEXPR_ARRAY);
 
-							if (assign1_internal->exn != ELINA_EXC_OVERFLOW
+							if (assign1_internal->exn != AP_EXC_OVERFLOW
 									&& assign2_internal->exn
-											!= ELINA_EXC_OVERFLOW) {
+											!= AP_EXC_OVERFLOW) {
 
 								if (pk_is_leq(man, assign_result1,
 										assign_result2) == false) {

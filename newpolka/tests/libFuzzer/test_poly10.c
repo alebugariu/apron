@@ -34,27 +34,27 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					pk_t* join12 = pk_join(man, DESTRUCTIVE,
 							polyhedron1, polyhedron2);
 					pk_internal_t * join12_internal =
-							pk_init_from_manager(man, ELINA_FUNID_JOIN);
+							pk_init_from_manager(man, AP_FUNID_JOIN);
 
 					pk_t* join23 = pk_join(man, DESTRUCTIVE,
 							polyhedron2, polyhedron3);
 					pk_internal_t * join23_internal =
-							pk_init_from_manager(man, ELINA_FUNID_JOIN);
+							pk_init_from_manager(man, AP_FUNID_JOIN);
 
 					pk_t* join12_3 = pk_join(man, DESTRUCTIVE,
 							join12, polyhedron3);
 					pk_internal_t * join12_3_internal =
-							pk_init_from_manager(man, ELINA_FUNID_JOIN);
+							pk_init_from_manager(man, AP_FUNID_JOIN);
 
 					pk_t* join1_23 = pk_join(man, DESTRUCTIVE,
 							polyhedron1, join23);
 					pk_internal_t * join1_23_internal =
-							pk_init_from_manager(man, ELINA_FUNID_JOIN);
+							pk_init_from_manager(man, AP_FUNID_JOIN);
 
-					if (join12_internal->exn != ELINA_EXC_OVERFLOW
-							&& join23_internal->exn != ELINA_EXC_OVERFLOW
-							&& join12_3_internal->exn != ELINA_EXC_OVERFLOW
-							&& join1_23_internal->exn != ELINA_EXC_OVERFLOW) {
+					if (join12_internal->exn != AP_EXC_OVERFLOW
+							&& join23_internal->exn != AP_EXC_OVERFLOW
+							&& join12_3_internal->exn != AP_EXC_OVERFLOW
+							&& join1_23_internal->exn != AP_EXC_OVERFLOW) {
 
 						//meet == glb, join == lub
 						//join is associative

@@ -34,9 +34,9 @@ extern int LLVMFuzzerTestOneInput(const long *data, size_t dataSize) {
 					pk_t* meet12 = pk_meet(man, DESTRUCTIVE,
 							polyhedron1, polyhedron2);
 					pk_internal_t * meet12_internal =
-							pk_init_from_manager(man, ELINA_FUNID_MEET);
+							pk_init_from_manager(man, AP_FUNID_MEET);
 
-					if (meet12_internal->exn != ELINA_EXC_OVERFLOW) {
+					if (meet12_internal->exn != AP_EXC_OVERFLOW) {
 						if (pk_is_eq(man, meet12, polyhedron1) == false) {
 							fprintf(fp, "found polyhedron %d!\n", number1);
 							print_polyhedron(man, polyhedron1, number1, fp);
