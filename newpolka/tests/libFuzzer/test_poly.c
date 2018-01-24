@@ -303,8 +303,7 @@ bool create_a_constraint(int index, ap_linexpr0_t** constraint,
 		return false;
 	}
 
-	*type = overflowFlag % 2 == AP_CONS_SUPEQ ?
-			AP_CONS_SUPEQ : AP_CONS_EQ;
+	*type = overflowFlag % 2 == AP_CONS_SUPEQ ? AP_CONS_SUPEQ : AP_CONS_EQ;
 	fprintf(fp, "%d. Type: %c\n", index, *type == AP_CONS_EQ ? 'e' : 's');
 	fflush(fp);
 
@@ -863,13 +862,12 @@ void print_history(ap_manager_t* man, unsigned char number, FILE *fp) {
 
 void print_polyhedron(ap_manager_t* man, pk_t* polyhedron, unsigned char number,
 		FILE *fp) {
+	ap_lincons0_array_t a = pk_to_lincons_array(man, polyhedron);
+	ap_lincons0_array_fprint(fp, &a, NULL);
+	fflush(fp);
+	ap_lincons0_array_clear(&a);
 	if (FROM_POOL) {
 		print_history(man, number, fp);
-	} else {
-		ap_lincons0_array_t a = pk_to_lincons_array(man, polyhedron);
-		ap_lincons0_array_fprint(fp, &a, NULL);
-		fflush(fp);
-		ap_lincons0_array_clear(&a);
 	}
 }
 
