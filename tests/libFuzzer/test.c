@@ -6,7 +6,7 @@
 #if defined(AP_BOX)
 #include "box.h"
 #elif defined(AP_OCT)
-#include "abstract0.h"
+#include "oct.h"
 #elif defined(AP_PK)
 #include "pk.h"
 #else
@@ -23,6 +23,26 @@ unsigned char history[NBOPS][5];
 #endif
 
 int dim;
+
+ap_linexpr0_t * create_octogonal_linexpr0(int dim, long v1, long v2,
+		long coeff1, long coeff2, long scalar_value) {
+	ap_coeff_t *cst, *coeff;
+	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE, 2);
+	cst = &linexpr0->cst;
+
+	ap_scalar_set_double(cst->val.scalar, scalar_value);
+
+	ap_linterm_t * linterm = &linexpr0->p.linterm[0];
+	linterm->dim = v1;
+	coeff = &linterm->coeff;
+	ap_scalar_set_double(coeff->val.scalar, coeff1);
+
+	linterm = &linexpr0->p.linterm[1];
+	linterm->dim = v2;
+	coeff = &linterm->coeff;
+	ap_scalar_set_double(coeff->val.scalar, coeff2);
+	return linexpr0;
+}
 
 ap_linexpr0_t * create_polyhedral_linexpr0(int dim, long *values) {
 	ap_coeff_t *cst, *coeff;
@@ -157,6 +177,7 @@ unsigned long long number_of_combinations(unsigned long long n,
 
 unsigned long long compute_total_number(int dim) {
 #if defined(AP_BOX) || defined(ELINA_BOX)
+	return 2 * (NB_CONSTANTS)*(NB_CONSTANTS + 1)/2;
 #elif defined(AP_OCT) || defined(ELINA_OCT)
 	return 72 * (dim - 1) * dim / 2;
 #elif define(AP_PK) || defined(ELINA_PK)
@@ -168,7 +189,7 @@ unsigned long long compute_total_number(int dim) {
 
 void initialize_poly(ap_manager_t* man, ap_abstract0_t * top,
 		long coefficients[NB_COEFFICIENTS], long constants[NB_CONSTANTS],
-		int type, int totalNumber, unsigned expectedNumber) {
+		int type[NB_TYPES], int totalNumber, unsigned expectedNumber) {
 	int counter = 0;
 	int j;
 	for (j = 0; j < NB_TYPES; j++) {
@@ -208,18 +229,18 @@ void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
 										ap_lincons0_array_make(1);
 								a_constraint.p[0].constyp = type[j];
 								a_constraint.p[0].linexpr0 =
-										create_abstract0ogonal_linexpr0(dim, v1,
-												v2, coefficients[coeff1],
+										create_octogonal_linexpr0(dim, v1, v2,
+												coefficients[coeff1],
 												coefficients[coeff2], constant);
 								ap_abstract0_t* element =
-										abstract0_meet_lincons_array(man,
+										ap_abstract0_meet_lincons_array(man,
 										DESTRUCTIVE, top, &a_constraint);
-								if (!abstract0_is_bottom(man, element)
-										&& !abstract0_is_top(man, element)
+								if (!ap_abstract0_is_bottom(man, element)
+										&& !ap_abstract0_is_top(man, element)
 										&& !exists(man, element)) {
 									expectedNumber--;
 									ap_lincons0_array_t a =
-											abstract0_to_lincons_array(man,
+											ap_abstract0_to_lincons_array(man,
 													element);
 									printf("element %d: ", pool_size);
 									ap_lincons0_array_fprint(stdout, &a, NULL);
@@ -227,7 +248,7 @@ void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
 									ap_lincons0_array_clear(&a);
 									pool[pool_size++] = element;
 								} else {
-									abstract0_free(man, element);
+									ap_abstract0_free(man, element);
 								}
 								ap_lincons0_array_clear(&a_constraint);
 							}
@@ -241,62 +262,52 @@ void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
 }
 
 void initialize_interval(ap_manager_t* man, ap_abstract0_t * top,
-		long constants[NB_CONSTANTS], int type, int totalNumber,
-		unsigned expectedNumber) {
+		long constants[NB_CONSTANTS], int type[NB_TYPES]) {
 	int v;
 	int index1, index2;
 	int i, j;
-	int counter = 0;
 	for (j = 0; j < NB_TYPES; j++) {
-		for (i = 0; i < dim; i++) {
-			for (index1 = 0; index1 <= NB_CONSTANTS; index1++) {
-				for (index2 = index1; index2 <= NB_CONSTANTS; index2++) {
+		for (index1 = 0; index1 <= NB_CONSTANTS; index1++) {
+			for (index2 = index1; index2 <= NB_CONSTANTS; index2++) {
 
-					unsigned randomValue = random_with_max(
-							totalNumber - counter);
-					if (randomValue < expectedNumber) {
+					ap_interval_t* interval = ap_interval_alloc();
 
-						ap_interval_t* interval = ap_interval_alloc();
-
-						long lowerBound, upperBound;
-						if (index1 == NB_CONSTANTS) {
-							lowerBound = rand()
-									% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
-						} else {
-							lowerBound = constants[index1];
-						}
-
-						if (index2 == NB_CONSTANTS) {
-							upperBound = rand()
-									% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
-						} else {
-							upperBound = constants[index2];
-						}
-						long aux;
-						if (lowerBound > upperBound) {
-							aux = lowerBound;
-							lowerBound = upperBound;
-							upperBound = aux;
-						}
-						ap_interval_set_int(interval, lowerBound, upperBound);
-						ap_abstract0_t* element = interval;
-						if (!abstract0_is_bottom(man, element)
-								&& !abstract0_is_top(man, element)
-								&& !exists(man, element)) {
-							expectedNumber--;
-							ap_lincons0_array_t a = abstract0_to_lincons_array(
-									man, element);
-							printf("element %d: ", pool_size);
-							ap_lincons0_array_fprint(stdout, &a, NULL);
-							fflush(stdout);
-							ap_lincons0_array_clear(&a);
-							pool[pool_size++] = element;
-						} else {
-							abstract0_free(man, element);
-						}
+					long lowerBound, upperBound;
+					if (index1 == NB_CONSTANTS) {
+						lowerBound = rand()
+								% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
+					} else {
+						lowerBound = constants[index1];
 					}
-					counter++;
-				}
+
+					if (index2 == NB_CONSTANTS) {
+						upperBound = rand()
+								% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
+					} else {
+						upperBound = constants[index2];
+					}
+					long aux;
+					if (lowerBound > upperBound) {
+						aux = lowerBound;
+						lowerBound = upperBound;
+						upperBound = aux;
+					}
+					ap_interval_set_int(interval, lowerBound, upperBound);
+					ap_abstract0_t* element = ap_abstract0_of_box(man, 1, 0,
+							&interval);
+					if (!ap_abstract0_is_bottom(man, element)
+							&& !ap_abstract0_is_top(man, element)
+							&& !exists(man, element)) {
+						ap_lincons0_array_t a = ap_abstract0_to_lincons_array(
+								man, element);
+						printf("element %d: ", pool_size);
+						ap_lincons0_array_fprint(stdout, &a, NULL);
+						fflush(stdout);
+						ap_lincons0_array_clear(&a);
+						pool[pool_size++] = element;
+					} else {
+						ap_abstract0_free(man, element);
+					}
 			}
 		}
 	}
@@ -316,7 +327,7 @@ void initialize_pool(ap_manager_t* man, ap_abstract0_t * top,
 	int type[2] = { AP_CONS_SUPEQ, AP_CONS_EQ };
 
 #if defined(AP_BOX) || defined(ELINA_BOX)
-	initialize_interval(man, top, constants, type, totalNumber, expectedNumber);
+	initialize_interval(man, top, constants, type);
 #elif defined(AP_OCT) || defined(ELINA_OCT)
 	initialize_octagon(man, top, coefficients, constants, type, totalNumber, expectedNumber);
 #elif define(AP_PK) || defined(ELINA_PK)
@@ -1176,13 +1187,13 @@ ap_manager_t * create_manager() {
 #if defined(AP_BOX)
 	return box_manager_alloc();
 #elif defined(AP_OCT)
-	return abstract0_manager_alloc();
+	return oct_manager_alloc();
 #elif defined(AP_PK)
 	return pk_manager_alloc(false);
 #elif defined(ELINA_BOX)
 	return elina_box_manager_alloc();
 #elif defined(ELINA_OCT)
-	return elina_abstract0_manager_alloc();
+	return elina_oct_manager_alloc();
 #elif defined(ELINA_PK)
 	return elina_pk_manager_alloc(false);
 #endif
@@ -1191,19 +1202,19 @@ ap_manager_t * create_manager() {
 
 char* create_fileName(char* suffix) {
 #if defined(AP_BOX)
-	char prefix[30] = "results/apron/ap_box_";
+	char prefix[40] = "results/apron/box/ap_box_";
 #elif defined(AP_OCT)
-	char prefix[30] = "results/apron/ap_abstract0_";
+	char prefix[40] = "results/apron/oct/ap_oct_";
 #elif defined(AP_PK)
-	char prefix[30] = "results/apron/ap_poly_";
+	char prefix[40] = "results/apron/poly/ap_poly_";
 #elif defined(ELINA_BOX)
-	char prefix[30] = "results/elina/elina_box_";
+	char prefix[40] = "results/elina/box/elina_box_";
 #elif defined(ELINA_OCT)
-	char prefix[30] = "results/elina/elina_abstract0_";
+	char prefix[40] = "results/elina/oct/elina_oct_";
 #elif defined(ELINA_PK)
-	char prefix[30] = "results/elina/elina_poly_";
+	char prefix[40] = "results/elina/poly/elina_poly_";
 #endif
-	char *fileName = (char *) malloc(50 * sizeof(char));
+	char *fileName = (char *) malloc(60 * sizeof(char));
 	strcpy(fileName, prefix);
 	strcat(fileName, suffix);
 	return fileName;
