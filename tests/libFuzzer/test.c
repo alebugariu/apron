@@ -13,6 +13,7 @@
 #error "NO DOMAIN CHOSEN"
 #endif
 
+const int NB_COMMON_CONSTANTS = NB_LIMIT_CONSTANTS * (1-PERCENTAGE_LIMIT_CONSTANTS)/PERCENTAGE_LIMIT_CONSTANTS;
 int pool_size = 0;
 int initial_pool_size = 0;
 ap_abstract0_t ** pool = NULL;
@@ -85,7 +86,7 @@ long random_with_max(long max) {
 }
 
 void choose(ap_manager_t* man, ap_abstract0_t * top,
-		long coefficients[NB_COEFFICIENTS], long constants[NB_CONSTANTS],
+		long coefficients[NB_COEFFICIENTS], long constants[NB_LIMIT_CONSTANTS],
 		int type, int totalNumber, unsigned * expectedNumber, int * got,
 		int n_chosen, int len, int at, int max_types, int * counter) {
 	int i;
@@ -99,7 +100,7 @@ void choose(ap_manager_t* man, ap_abstract0_t * top,
 		if (randomValue < *expectedNumber) {
 			long initialValues[MAX_DIM + 1];
 			for (i = 0; i < len; i++) {
-				if (got[i] == NB_CONSTANTS) {
+				if (got[i] >= NB_LIMIT_CONSTANTS) {
 					initialValues[i] = rand()
 							% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
 				} else {
@@ -118,21 +119,6 @@ void choose(ap_manager_t* man, ap_abstract0_t * top,
 					initialValues);
 			ap_abstract0_t* element = ap_abstract0_meet_lincons_array(man,
 			DESTRUCTIVE, top, &a_constraint);
-			/*if (ap_abstract0_is_top(man, element)) { //we intersected constraints using the meet from a less expressive domain
-			 ap_interval_t** interval = ap_interval_array_alloc(dim);
-			 for (i = 0; i < dim; i++) {
-			 int lowerBound, upperBound;
-			 if (initialValues[i] > 0) {
-			 upperBound = initialValues[i];
-			 lowerBound = -initialValues[i];
-			 } else {
-			 upperBound = -initialValues[i];
-			 lowerBound = initialValues[i];
-			 }
-			 ap_interval_set_int(interval[i], lowerBound, upperBound);
-			 }
-			 element = ap_abstract0_of_box(man, dim, 0, interval);
-			 }*/
 			if (!ap_abstract0_is_bottom(man, element)
 					&& !ap_abstract0_is_top(man, element)
 					&& !exists(man, element)) {
@@ -177,30 +163,30 @@ unsigned long long number_of_combinations(unsigned long long n,
 
 unsigned long long compute_total_number(int dim) {
 #if defined(AP_BOX) || defined(ELINA_BOX)
-	return 2 * (NB_CONSTANTS)*(NB_CONSTANTS + 1)/2;
+	return 2 * (NB_LIMIT_CONSTANTS)*(NB_LIMIT_CONSTANTS + 1)/2;
 #elif defined(AP_OCT) || defined(ELINA_OCT)
 	return 72 * (dim - 1) * dim / 2;
-#elif define(AP_PK) || defined(ELINA_PK)
+#elif defined(AP_PK) || defined(ELINA_PK)
 	return 2
-	* number_of_combinations(4 + dim, dim + 1);
+	* number_of_combinations(NB_LIMIT_CONSTANTS + NB_COMMON_CONSTANTS + dim, dim + 1);
 #endif
 	return 0;
 }
 
 void initialize_poly(ap_manager_t* man, ap_abstract0_t * top,
-		long coefficients[NB_COEFFICIENTS], long constants[NB_CONSTANTS],
+		long coefficients[NB_COEFFICIENTS], long constants[NB_LIMIT_CONSTANTS],
 		int type[NB_TYPES], int totalNumber, unsigned expectedNumber) {
 	int counter = 0;
 	int j;
 	for (j = 0; j < NB_TYPES; j++) {
 		int indexes[MAX_DIM + 1] = { 0 };
 		choose(man, top, coefficients, constants, type[j], totalNumber,
-				&expectedNumber, indexes, 0, dim + 1, 0, 4, &counter);
+				&expectedNumber, indexes, 0, dim + 1, 0, NB_LIMIT_CONSTANTS + NB_COMMON_CONSTANTS, &counter);
 	}
 }
 
 void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
-		long coefficients[NB_COEFFICIENTS], long constants[NB_CONSTANTS],
+		long coefficients[NB_COEFFICIENTS], long constants[NB_LIMIT_CONSTANTS],
 		int type[NB_TYPES], int totalNumber, unsigned expectedNumber) {
 
 	int v1, v2;
@@ -212,7 +198,7 @@ void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
 		for (v2 = v1 + 1; v2 < dim; v2++) {
 			for (coeff1 = 0; coeff1 < NB_COEFFICIENTS; coeff1++) {
 				for (coeff2 = 0; coeff2 < NB_COEFFICIENTS; coeff2++) {
-					for (i = 0; i < NB_CONSTANTS + 1; i++) {
+					for (i = 0; i < NB_LIMIT_CONSTANTS + 1; i++) {
 						for (j = 0; j < NB_TYPES; j++) {
 							unsigned randomValue = random_with_max(
 									totalNumber - counter);
@@ -262,25 +248,25 @@ void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
 }
 
 void initialize_interval(ap_manager_t* man, ap_abstract0_t * top,
-		long constants[NB_CONSTANTS], int type[NB_TYPES]) {
+		long constants[NB_LIMIT_CONSTANTS], int type[NB_TYPES]) {
 	int v;
 	int index1, index2;
 	int i, j;
 	for (j = 0; j < NB_TYPES; j++) {
-		for (index1 = 0; index1 <= NB_CONSTANTS; index1++) {
-			for (index2 = index1; index2 <= NB_CONSTANTS; index2++) {
+		for (index1 = 0; index1 <= NB_LIMIT_CONSTANTS; index1++) {
+			for (index2 = index1; index2 <= NB_LIMIT_CONSTANTS; index2++) {
 
 					ap_interval_t* interval = ap_interval_alloc();
 
 					long lowerBound, upperBound;
-					if (index1 == NB_CONSTANTS) {
+					if (index1 == NB_LIMIT_CONSTANTS) {
 						lowerBound = rand()
 								% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
 					} else {
 						lowerBound = constants[index1];
 					}
 
-					if (index2 == NB_CONSTANTS) {
+					if (index2 == NB_LIMIT_CONSTANTS) {
 						upperBound = rand()
 								% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
 					} else {
@@ -323,15 +309,15 @@ void initialize_pool(ap_manager_t* man, ap_abstract0_t * top,
 	unsigned long long totalNumber = compute_total_number(dim);
 
 	long coefficients[NB_COEFFICIENTS] = { 0, -1, 1 };
-	long constants[NB_CONSTANTS] = { LONG_MIN, 0, LONG_MAX };
+	long limitConstants[NB_LIMIT_CONSTANTS] = { LONG_MIN, 0, LONG_MAX };
 	int type[2] = { AP_CONS_SUPEQ, AP_CONS_EQ };
 
 #if defined(AP_BOX) || defined(ELINA_BOX)
-	initialize_interval(man, top, constants, type);
+	initialize_interval(man, top, limit_constants, type);
 #elif defined(AP_OCT) || defined(ELINA_OCT)
-	initialize_octagon(man, top, coefficients, constants, type, totalNumber, expectedNumber);
-#elif define(AP_PK) || defined(ELINA_PK)
-	initialize_poly(man, top, coefficients, constants, type, totalNumber, expectedNumber);
+	initialize_octagon(man, top, coefficients, limitConstants, type, totalNumber, expectedNumber);
+#elif defined(AP_PK) || defined(ELINA_PK)
+	initialize_poly(man, top, coefficients, limitConstants, type, totalNumber, expectedNumber);
 #endif
 
 	ap_lincons0_array_t a = ap_abstract0_to_lincons_array(man, top);
