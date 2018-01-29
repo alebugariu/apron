@@ -13,7 +13,6 @@
 #error "NO DOMAIN CHOSEN"
 #endif
 
-const int NB_COMMON_CONSTANTS = NB_LIMIT_CONSTANTS * (1-PERCENTAGE_LIMIT_CONSTANTS)/PERCENTAGE_LIMIT_CONSTANTS;
 int pool_size = 0;
 int initial_pool_size = 0;
 ap_abstract0_t ** pool = NULL;
@@ -86,9 +85,9 @@ long random_with_max(long max) {
 }
 
 void choose(ap_manager_t* man, ap_abstract0_t * top,
-		long coefficients[NB_COEFFICIENTS], long constants[NB_LIMIT_CONSTANTS],
-		int type, int totalNumber, unsigned * expectedNumber, int * got,
-		int n_chosen, int len, int at, int max_types, int * counter) {
+		long constants[NB_PREDEFINED_CONSTANTS], int type, int totalNumber,
+		unsigned * expectedNumber, int * got, int n_chosen, int len, int at,
+		int max_types, int * counter) {
 	int i;
 	long count = 0;
 	if (n_chosen == len) {
@@ -100,16 +99,11 @@ void choose(ap_manager_t* man, ap_abstract0_t * top,
 		if (randomValue < *expectedNumber) {
 			long initialValues[MAX_DIM + 1];
 			for (i = 0; i < len; i++) {
-				if (got[i] >= NB_LIMIT_CONSTANTS) {
+				if (got[i] == NB_PREDEFINED_CONSTANTS) {
 					initialValues[i] = rand()
 							% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
 				} else {
-					if (i == dim) //the constant
-							{
-						initialValues[i] = constants[got[i]];
-					} else {
-						initialValues[i] = coefficients[got[i]];
-					}
+					initialValues[i] = constants[got[i]];
 				}
 			}
 			//here we have all the values of the new element
@@ -141,10 +135,16 @@ void choose(ap_manager_t* man, ap_abstract0_t * top,
 
 	for (i = at; i < max_types; i++) {
 		if (got) {
-			got[n_chosen] = i;
+			unsigned percentage = random_with_max(101);
+			if (i < NB_PREDEFINED_CONSTANTS
+					&& percentage < PERCENTAGE_PREDEFINED_CONSTANTS) {
+				got[n_chosen] = i;
+			} else {
+				got[n_chosen] = max_types - 1; //random
+			}
 		}
-		choose(man, top, coefficients, constants, type, totalNumber,
-				expectedNumber, got, n_chosen + 1, len, i, max_types, counter);
+		choose(man, top, constants, type, totalNumber, expectedNumber, got,
+				n_chosen + 1, len, i, max_types, counter);
 	}
 }
 
@@ -163,31 +163,33 @@ unsigned long long number_of_combinations(unsigned long long n,
 
 unsigned long long compute_total_number(int dim) {
 #if defined(AP_BOX) || defined(ELINA_BOX)
-	return 2 * (NB_LIMIT_CONSTANTS)*(NB_LIMIT_CONSTANTS + 1)/2;
+	return NB_TYPES * (NB_PREDEFINED_CONSTANTS + 1)*(NB_PREDEFINED_CONSTANTS + 2)/2;
 #elif defined(AP_OCT) || defined(ELINA_OCT)
-	return 72 * (dim - 1) * dim / 2;
+	return NB_TYPES * NB_COEFFICIENTS * NB_COEFFICIENTS * (NB_PREDEFINED_CONSTANTS + 1) * (dim -1) * dim  / 2;
 #elif defined(AP_PK) || defined(ELINA_PK)
-	return 2
-	* number_of_combinations(NB_LIMIT_CONSTANTS + NB_COMMON_CONSTANTS + dim, dim + 1);
+	return NB_TYPES
+	* number_of_combinations(NB_PREDEFINED_CONSTANTS + 1 + dim, dim + 1);
 #endif
 	return 0;
 }
 
 void initialize_poly(ap_manager_t* man, ap_abstract0_t * top,
-		long coefficients[NB_COEFFICIENTS], long constants[NB_LIMIT_CONSTANTS],
-		int type[NB_TYPES], int totalNumber, unsigned expectedNumber) {
+		long constants[NB_PREDEFINED_CONSTANTS], int type[NB_TYPES],
+		int totalNumber, unsigned expectedNumber) {
+	printf("total number = %d\n", totalNumber);
 	int counter = 0;
 	int j;
 	for (j = 0; j < NB_TYPES; j++) {
 		int indexes[MAX_DIM + 1] = { 0 };
-		choose(man, top, coefficients, constants, type[j], totalNumber,
-				&expectedNumber, indexes, 0, dim + 1, 0, NB_LIMIT_CONSTANTS + NB_COMMON_CONSTANTS, &counter);
+		choose(man, top, constants, type[j], totalNumber, &expectedNumber,
+				indexes, 0, dim + 1, 0, NB_PREDEFINED_CONSTANTS + 1, &counter);
 	}
 }
 
 void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
-		long coefficients[NB_COEFFICIENTS], long constants[NB_LIMIT_CONSTANTS],
-		int type[NB_TYPES], int totalNumber, unsigned expectedNumber) {
+		long coefficients[NB_COEFFICIENTS],
+		long constants[NB_PREDEFINED_CONSTANTS], int type[NB_TYPES],
+		int totalNumber, unsigned expectedNumber) {
 
 	int v1, v2;
 	int coeff1, coeff2;
@@ -198,13 +200,17 @@ void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
 		for (v2 = v1 + 1; v2 < dim; v2++) {
 			for (coeff1 = 0; coeff1 < NB_COEFFICIENTS; coeff1++) {
 				for (coeff2 = 0; coeff2 < NB_COEFFICIENTS; coeff2++) {
-					for (i = 0; i < NB_LIMIT_CONSTANTS + 1; i++) {
+					for (i = 0; i < NB_PREDEFINED_CONSTANTS + 1; i++) {
 						for (j = 0; j < NB_TYPES; j++) {
 							unsigned randomValue = random_with_max(
 									totalNumber - counter);
 							if (randomValue < expectedNumber) {
+
+								unsigned percentage = random_with_max(101);
 								long constant;
-								if (i == 3) {
+								if (i == NB_PREDEFINED_CONSTANTS
+										|| percentage
+												>= PERCENTAGE_PREDEFINED_CONSTANTS) {
 									constant =
 											rand()
 													% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
@@ -248,25 +254,33 @@ void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
 }
 
 void initialize_interval(ap_manager_t* man, ap_abstract0_t * top,
-		long constants[NB_LIMIT_CONSTANTS], int type[NB_TYPES]) {
+		long constants[NB_PREDEFINED_CONSTANTS], int type[NB_TYPES],
+		int totalNumber, unsigned expectedNumber) {
+
 	int v;
 	int index1, index2;
 	int i, j;
+	int counter = 0;
+
 	for (j = 0; j < NB_TYPES; j++) {
-		for (index1 = 0; index1 <= NB_LIMIT_CONSTANTS; index1++) {
-			for (index2 = index1; index2 <= NB_LIMIT_CONSTANTS; index2++) {
+		for (index1 = 0; index1 <= NB_PREDEFINED_CONSTANTS; index1++) {
+			for (index2 = index1; index2 <= NB_PREDEFINED_CONSTANTS; index2++) {
+				unsigned randomValue = random_with_max(totalNumber - counter);
+				if (randomValue < expectedNumber) {
 
 					ap_interval_t* interval = ap_interval_alloc();
-
+					unsigned percentage = random_with_max(101);
 					long lowerBound, upperBound;
-					if (index1 == NB_LIMIT_CONSTANTS) {
+					if (index1 == NB_PREDEFINED_CONSTANTS
+							|| percentage >= PERCENTAGE_PREDEFINED_CONSTANTS) {
 						lowerBound = rand()
 								% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
 					} else {
 						lowerBound = constants[index1];
 					}
 
-					if (index2 == NB_LIMIT_CONSTANTS) {
+					if (index2 == NB_PREDEFINED_CONSTANTS
+							|| percentage >= PERCENTAGE_PREDEFINED_CONSTANTS) {
 						upperBound = rand()
 								% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
 					} else {
@@ -284,6 +298,7 @@ void initialize_interval(ap_manager_t* man, ap_abstract0_t * top,
 					if (!ap_abstract0_is_bottom(man, element)
 							&& !ap_abstract0_is_top(man, element)
 							&& !exists(man, element)) {
+						expectedNumber--;
 						ap_lincons0_array_t a = ap_abstract0_to_lincons_array(
 								man, element);
 						printf("element %d: ", pool_size);
@@ -294,6 +309,8 @@ void initialize_interval(ap_manager_t* man, ap_abstract0_t * top,
 					} else {
 						ap_abstract0_free(man, element);
 					}
+					counter++;
+				}
 			}
 		}
 	}
@@ -308,16 +325,19 @@ void initialize_pool(ap_manager_t* man, ap_abstract0_t * top,
 	unsigned expectedNumber = MAX_POOL_SIZE - 2; // top and bottom
 	unsigned long long totalNumber = compute_total_number(dim);
 
+	printf("total number = %lld", totalNumber);
+
 	long coefficients[NB_COEFFICIENTS] = { 0, -1, 1 };
-	long limitConstants[NB_LIMIT_CONSTANTS] = { LONG_MIN, 0, LONG_MAX };
+	long predefinedConstants[NB_PREDEFINED_CONSTANTS] = { LONG_MIN, -1, 0, 1,
+			LONG_MAX };
 	int type[2] = { AP_CONS_SUPEQ, AP_CONS_EQ };
 
 #if defined(AP_BOX) || defined(ELINA_BOX)
-	initialize_interval(man, top, limit_constants, type);
+	initialize_interval(man, top, predefinedConstants, type, totalNumber, expectedNumber);
 #elif defined(AP_OCT) || defined(ELINA_OCT)
-	initialize_octagon(man, top, coefficients, limitConstants, type, totalNumber, expectedNumber);
+	initialize_octagon(man, top, coefficients, predefinedConstants, type, totalNumber, expectedNumber);
 #elif defined(AP_PK) || defined(ELINA_PK)
-	initialize_poly(man, top, coefficients, limitConstants, type, totalNumber, expectedNumber);
+	initialize_poly(man, top, predefinedConstants, type, totalNumber, expectedNumber);
 #endif
 
 	ap_lincons0_array_t a = ap_abstract0_to_lincons_array(man, top);
