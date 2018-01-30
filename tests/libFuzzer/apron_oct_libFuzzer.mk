@@ -5,11 +5,12 @@ LIB_PATHS=-L $(ITV) -L $(APRON) -L $(OCTAGONS)
 
 all: compile test
 compile: 
-	make CC=clang CFLAGS="-fsanitize-coverage=trace-pc-guard -fPIC -O0" CXX=clang++ CXXFLAGS="-fsanitize-coverage=trace-pc-guard -fPIC -O0"
+	cd /home/apron/ ; \
+	make CC=clang CFLAGS="-fsanitize-coverage=trace-pc-guard -fPIC -O0" CXX=clang++ CXXFLAGS="-fsanitize-coverage=trace-pc-guard -fPIC -O0";\
 	sudo make install
 
-test:	tests/libFuzzer/*.c	
-	cd tests/libFuzzer; \
+test:
+	cd /home/tests/libFuzzer;\
     number=$(start) ; while [ $${number} -le $(number) ] ; do \
     	rm MY_CORPUS/* ; \
 	    clang -lstdc++ -fsanitize-coverage=trace-pc-guard -I /usr/local/include -I $(APRON) -I $(OCTAGONS) $(LIB_PATHS) test.c test$${number}.c \

@@ -900,7 +900,7 @@ bool increase_pool(ap_manager_t* man, int dim, const long *data,
 				ap_lincons0_array_clear(&a2);
 
 				result = ap_abstract0_widening(man, element1, element2);
-			} else {
+			} else if (ap_abstract0_is_leq(man, element2, element1)) {
 				ap_lincons0_array_t a1 = ap_abstract0_to_lincons_array(man,
 						element2);
 				fprintf(fp, "element %d: ", number2);
@@ -916,6 +916,8 @@ bool increase_pool(ap_manager_t* man, int dim, const long *data,
 				ap_lincons0_array_clear(&a2);
 
 				result = ap_abstract0_widening(man, element2, element1);
+			} else {
+				return false;
 			}
 
 			if (!ap_abstract0_is_bottom(man, result)

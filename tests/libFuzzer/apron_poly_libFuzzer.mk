@@ -3,16 +3,15 @@ POLY=/home/apron/newpolka/
 ITV=/home/apron/itv/
 LIB_PATHS=-L $(ITV) -L $(APRON) -L $(POLY)
 
-.PHONY: compile test
-
 all: compile test
-compile: 
-	make CC=clang CFLAGS="-fsanitize-coverage=trace-pc-guard -fPIC -O0" CXX=clang++ CXXFLAGS="-fsanitize-coverage=trace-pc-guard -fPIC -O0"
+compile:
+	cd /home/apron;\
+	make CC=clang CFLAGS="-fsanitize-coverage=trace-pc-guard -fPIC -O0" CXX=clang++ CXXFLAGS="-fsanitize-coverage=trace-pc-guard -fPIC -O0";\
 	sudo make install
 	
-test: tests/libFuzzer/*.c	
-	cd tests/libFuzzer; \
-    number=$(start) ; while [ $${number} -le $(number) ] ; do \
+test: 
+	cd /home/tests/libFuzzer;\
+	number=$(start) ; while [ $${number} -le $(number) ] ; do \
    	 	rm MY_CORPUS/* ; \
 		clang -lstdc++ -fsanitize-coverage=trace-pc-guard -I /usr/local/include $(LIB_PATHS) test.c test$${number}.c \
 			  /home/libFuzzer.a -o test$${number} -lmpfr -lgmp -lapron -litv $(lib) $(format) -DAP_PK; \
