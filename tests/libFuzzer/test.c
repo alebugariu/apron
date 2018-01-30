@@ -5,10 +5,16 @@
 
 #if defined(AP_BOX)
 #include "box.h"
+#elif defined(ELINA_BOX)
+#include "opt_box.h"
 #elif defined(AP_OCT)
 #include "oct.h"
+#elif defined(ELINA_OCT)
+#include "opt_oct.h"
 #elif defined(AP_PK)
 #include "pk.h"
+#elif defined(ELINA_PK)
+#include "opt_pk.h"
 #else
 #error "NO DOMAIN CHOSEN"
 #endif
@@ -148,170 +154,144 @@ void choose(ap_manager_t* man, ap_abstract0_t * top,
 	}
 }
 
-unsigned long long number_of_combinations(unsigned long long n,
-		unsigned long long k) {
-	if (k > n) {
-		return 0;
-	}
-	unsigned long long r = 1;
-	for (unsigned long long d = 1; d <= k; ++d) {
-		r *= n--;
-		r /= d;
-	}
-	return r;
-}
-
-unsigned long long compute_total_number(int dim) {
-#if defined(AP_BOX) || defined(ELINA_BOX)
-	return NB_TYPES * (NB_PREDEFINED_CONSTANTS + 1)*(NB_PREDEFINED_CONSTANTS + 2)/2;
-#elif defined(AP_OCT) || defined(ELINA_OCT)
-	return NB_TYPES * NB_COEFFICIENTS * NB_COEFFICIENTS * (NB_PREDEFINED_CONSTANTS + 1) * (dim -1) * dim  / 2;
-#elif defined(AP_PK) || defined(ELINA_PK)
-	return NB_TYPES
-	* number_of_combinations(NB_PREDEFINED_CONSTANTS + 1 + dim, dim + 1);
-#endif
-	return 0;
-}
-
 void initialize_poly(ap_manager_t* man, ap_abstract0_t * top,
 		long constants[NB_PREDEFINED_CONSTANTS], int type[NB_TYPES],
-		int totalNumber, unsigned expectedNumber) {
-	printf("total number = %d\n", totalNumber);
+		unsigned expectedNumber) {
+
+	int i, j;
+	int index;
 	int counter = 0;
-	int j;
-	for (j = 0; j < NB_TYPES; j++) {
-		int indexes[MAX_DIM + 1] = { 0 };
-		choose(man, top, constants, type[j], totalNumber, &expectedNumber,
-				indexes, 0, dim + 1, 0, NB_PREDEFINED_CONSTANTS + 1, &counter);
+
+	while (counter < expectedNumber) {
+		j = rand() % NB_TYPES;
+		long initialValues[MAX_DIM + 1];
+		for (i = 0; i <= dim; i++) {
+			unsigned percentage = random_with_max(100);
+			if (percentage >= PERCENTAGE_PREDEFINED_CONSTANTS) {
+				initialValues[i] = rand()
+						% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
+			} else {
+				index = rand() % NB_PREDEFINED_CONSTANTS;
+				initialValues[i] = constants[index];
+			}
+		}
+		ap_lincons0_array_t a_constraint = ap_lincons0_array_make(1);
+		a_constraint.p[0].constyp = type[j];
+		a_constraint.p[0].linexpr0 = create_polyhedral_linexpr0(dim,
+				initialValues);
+		ap_abstract0_t* element = ap_abstract0_meet_lincons_array(man,
+		DESTRUCTIVE, top, &a_constraint);
+		if (!ap_abstract0_is_bottom(man, element)
+				&& !ap_abstract0_is_top(man, element)
+				&& !exists(man, element)) {
+			counter++;
+			ap_lincons0_array_t a = ap_abstract0_to_lincons_array(man, element);
+			printf("element %d: ", pool_size);
+			ap_lincons0_array_fprint(stdout, &a, NULL);
+			fflush(stdout);
+			ap_lincons0_array_clear(&a);
+			pool[pool_size++] = element;
+		} else {
+			ap_abstract0_free(man, element);
+		}
+		ap_lincons0_array_clear(&a_constraint);
 	}
 }
 
 void initialize_octagon(ap_manager_t* man, ap_abstract0_t * top,
 		long coefficients[NB_COEFFICIENTS],
 		long constants[NB_PREDEFINED_CONSTANTS], int type[NB_TYPES],
-		int totalNumber, unsigned expectedNumber) {
+		unsigned expectedNumber) {
 
 	int v1, v2;
 	int coeff1, coeff2;
 	int i, j;
 	int counter = 0;
 
-	for (v1 = 0; v1 < dim - 1; v1++) {
-		for (v2 = v1 + 1; v2 < dim; v2++) {
-			for (coeff1 = 0; coeff1 < NB_COEFFICIENTS; coeff1++) {
-				for (coeff2 = 0; coeff2 < NB_COEFFICIENTS; coeff2++) {
-					for (i = 0; i < NB_PREDEFINED_CONSTANTS + 1; i++) {
-						for (j = 0; j < NB_TYPES; j++) {
-							unsigned randomValue = random_with_max(
-									totalNumber - counter);
-							if (randomValue < expectedNumber) {
+	while (counter < expectedNumber) {
+		v1 = rand() % (dim - 1);
+		v2 = rand() % (dim + 1 - v1) + v1;
+		coeff1 = rand() % NB_COEFFICIENTS;
+		coeff2 = rand() % NB_COEFFICIENTS;
+		j = rand() % NB_TYPES;
 
-								unsigned percentage = random_with_max(101);
-								long constant;
-								if (i == NB_PREDEFINED_CONSTANTS
-										|| percentage
-												>= PERCENTAGE_PREDEFINED_CONSTANTS) {
-									constant =
-											rand()
-													% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
-								} else {
-									constant = constants[i];
-								}
-								ap_lincons0_array_t a_constraint =
-										ap_lincons0_array_make(1);
-								a_constraint.p[0].constyp = type[j];
-								a_constraint.p[0].linexpr0 =
-										create_octogonal_linexpr0(dim, v1, v2,
-												coefficients[coeff1],
-												coefficients[coeff2], constant);
-								ap_abstract0_t* element =
-										ap_abstract0_meet_lincons_array(man,
-										DESTRUCTIVE, top, &a_constraint);
-								if (!ap_abstract0_is_bottom(man, element)
-										&& !ap_abstract0_is_top(man, element)
-										&& !exists(man, element)) {
-									expectedNumber--;
-									ap_lincons0_array_t a =
-											ap_abstract0_to_lincons_array(man,
-													element);
-									printf("element %d: ", pool_size);
-									ap_lincons0_array_fprint(stdout, &a, NULL);
-									fflush(stdout);
-									ap_lincons0_array_clear(&a);
-									pool[pool_size++] = element;
-								} else {
-									ap_abstract0_free(man, element);
-								}
-								ap_lincons0_array_clear(&a_constraint);
-							}
-							counter++;
-						}
-					}
-				}
-			}
+		unsigned percentage = random_with_max(100);
+		long constant;
+		if (percentage >= PERCENTAGE_PREDEFINED_CONSTANTS) {
+			constant = rand() % (MAX_VALUE + 1 - MIN_VALUE) + MIN_VALUE;
+		} else {
+			i = rand() % NB_PREDEFINED_CONSTANTS;
+			constant = constants[i];
 		}
+		ap_lincons0_array_t a_constraint = ap_lincons0_array_make(1);
+		a_constraint.p[0].constyp = type[j];
+		a_constraint.p[0].linexpr0 = create_octogonal_linexpr0(dim, v1, v2,
+				coefficients[coeff1], coefficients[coeff2], constant);
+		ap_abstract0_t* element = ap_abstract0_meet_lincons_array(man,
+		DESTRUCTIVE, top, &a_constraint);
+		if (!ap_abstract0_is_bottom(man, element)
+				&& !ap_abstract0_is_top(man, element)
+				&& !exists(man, element)) {
+			counter++;
+			ap_lincons0_array_t a = ap_abstract0_to_lincons_array(man, element);
+			printf("element %d: ", pool_size);
+			ap_lincons0_array_fprint(stdout, &a, NULL);
+			fflush(stdout);
+			ap_lincons0_array_clear(&a);
+			pool[pool_size++] = element;
+		} else {
+			ap_abstract0_free(man, element);
+		}
+		ap_lincons0_array_clear(&a_constraint);
 	}
 }
 
 void initialize_interval(ap_manager_t* man, ap_abstract0_t * top,
 		long constants[NB_PREDEFINED_CONSTANTS], int type[NB_TYPES],
-		int totalNumber, unsigned expectedNumber) {
+		unsigned expectedNumber) {
 
-	int v;
+	int j;
 	int index1, index2;
-	int i, j;
 	int counter = 0;
 
-	for (j = 0; j < NB_TYPES; j++) {
-		for (index1 = 0; index1 <= NB_PREDEFINED_CONSTANTS; index1++) {
-			for (index2 = index1; index2 <= NB_PREDEFINED_CONSTANTS; index2++) {
-				unsigned randomValue = random_with_max(totalNumber - counter);
-				if (randomValue < expectedNumber) {
+	while (counter < expectedNumber) {
+		j = rand() % NB_TYPES;
+		unsigned percentage = random_with_max(100);
+		int index1, index2;
+		long lowerBound, upperBound;
 
-					ap_interval_t* interval = ap_interval_alloc();
-					unsigned percentage = random_with_max(101);
-					long lowerBound, upperBound;
-					if (index1 == NB_PREDEFINED_CONSTANTS
-							|| percentage >= PERCENTAGE_PREDEFINED_CONSTANTS) {
-						lowerBound = rand()
-								% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
-					} else {
-						lowerBound = constants[index1];
-					}
+		if (percentage >= PERCENTAGE_PREDEFINED_CONSTANTS) {
+			lowerBound = rand() % (MAX_VALUE + 1 - MIN_VALUE) + MIN_VALUE;
+			upperBound = rand() % (MAX_VALUE + 1 - MIN_VALUE) + MIN_VALUE;
+		} else {
+			index1 = rand() % NB_PREDEFINED_CONSTANTS;
+			index2 = rand() % NB_PREDEFINED_CONSTANTS;
+			lowerBound = constants[index1];
+			upperBound = constants[index2];
+		}
 
-					if (index2 == NB_PREDEFINED_CONSTANTS
-							|| percentage >= PERCENTAGE_PREDEFINED_CONSTANTS) {
-						upperBound = rand()
-								% (MAX_VALUE + 1 - MIN_VALUE)+ MIN_VALUE;
-					} else {
-						upperBound = constants[index2];
-					}
-					long aux;
-					if (lowerBound > upperBound) {
-						aux = lowerBound;
-						lowerBound = upperBound;
-						upperBound = aux;
-					}
-					ap_interval_set_int(interval, lowerBound, upperBound);
-					ap_abstract0_t* element = ap_abstract0_of_box(man, 1, 0,
-							&interval);
-					if (!ap_abstract0_is_bottom(man, element)
-							&& !ap_abstract0_is_top(man, element)
-							&& !exists(man, element)) {
-						expectedNumber--;
-						ap_lincons0_array_t a = ap_abstract0_to_lincons_array(
-								man, element);
-						printf("element %d: ", pool_size);
-						ap_lincons0_array_fprint(stdout, &a, NULL);
-						fflush(stdout);
-						ap_lincons0_array_clear(&a);
-						pool[pool_size++] = element;
-					} else {
-						ap_abstract0_free(man, element);
-					}
-					counter++;
-				}
-			}
+		ap_interval_t* interval = ap_interval_alloc();
+
+		long aux;
+		if (lowerBound > upperBound) {
+			aux = lowerBound;
+			lowerBound = upperBound;
+			upperBound = aux;
+		}
+		ap_interval_set_int(interval, lowerBound, upperBound);
+		ap_abstract0_t* element = ap_abstract0_of_box(man, 1, 0, &interval);
+		if (!ap_abstract0_is_bottom(man, element)
+				&& !ap_abstract0_is_top(man, element)
+				&& !exists(man, element)) {
+			counter++;
+			ap_lincons0_array_t a = ap_abstract0_to_lincons_array(man, element);
+			printf("element %d: ", pool_size);
+			ap_lincons0_array_fprint(stdout, &a, NULL);
+			fflush(stdout);
+			ap_lincons0_array_clear(&a);
+			pool[pool_size++] = element;
+		} else {
+			ap_abstract0_free(man, element);
 		}
 	}
 }
@@ -323,9 +303,6 @@ void initialize_pool(ap_manager_t* man, ap_abstract0_t * top,
 			(MAX_POOL_SIZE + NBOPS) * sizeof(ap_abstract0_t *));
 
 	unsigned expectedNumber = MAX_POOL_SIZE - 2; // top and bottom
-	unsigned long long totalNumber = compute_total_number(dim);
-
-	printf("total number = %lld", totalNumber);
 
 	long coefficients[NB_COEFFICIENTS] = { 0, -1, 1 };
 	long predefinedConstants[NB_PREDEFINED_CONSTANTS] = { LONG_MIN, -1, 0, 1,
@@ -333,11 +310,11 @@ void initialize_pool(ap_manager_t* man, ap_abstract0_t * top,
 	int type[2] = { AP_CONS_SUPEQ, AP_CONS_EQ };
 
 #if defined(AP_BOX) || defined(ELINA_BOX)
-	initialize_interval(man, top, predefinedConstants, type, totalNumber, expectedNumber);
+	initialize_interval(man, top, predefinedConstants, type, expectedNumber);
 #elif defined(AP_OCT) || defined(ELINA_OCT)
-	initialize_octagon(man, top, coefficients, predefinedConstants, type, totalNumber, expectedNumber);
+	initialize_octagon(man, top, coefficients, predefinedConstants, type, expectedNumber);
 #elif defined(AP_PK) || defined(ELINA_PK)
-	initialize_poly(man, top, predefinedConstants, type, totalNumber, expectedNumber);
+	initialize_poly(man, top, predefinedConstants, type, expectedNumber);
 #endif
 
 	ap_lincons0_array_t a = ap_abstract0_to_lincons_array(man, top);
@@ -1199,9 +1176,9 @@ ap_manager_t * create_manager() {
 #elif defined(ELINA_BOX)
 	return elina_box_manager_alloc();
 #elif defined(ELINA_OCT)
-	return elina_oct_manager_alloc();
+	return opt_oct_manager_alloc();
 #elif defined(ELINA_PK)
-	return elina_pk_manager_alloc(false);
+	return opt_pk_manager_alloc(false);
 #endif
 	return NULL;
 }
