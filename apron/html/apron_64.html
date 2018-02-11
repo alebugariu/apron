@@ -1,0 +1,117 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Assigning values</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Assigning values">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Assigning values">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC100"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_63.html#SEC99"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_116.html#SEC152"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_56.html#SEC92"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_57.html#SEC93"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_66.html#SEC102"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H4> Assigning values  </H4>
+<!--docid::SEC151::-->
+<P>
+
+<A NAME="IDX392"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_coefft* <VAR>coeff</VAR>)</I>
+<DD><A NAME="IDX393"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst_scalar</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_scalar_t* <VAR>scalar</VAR>)</I>
+<DD><A NAME="IDX394"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst_scalar_int</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, int <VAR>num</VAR>)</I>
+<DD><A NAME="IDX395"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst_scalar_frac</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, int <VAR>num</VAR>, unsigned int <VAR>den</VAR>)</I>
+<DD><A NAME="IDX396"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst_scalar_double</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, double <VAR>num</VAR>)</I>
+<DD><A NAME="IDX397"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst_interval</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_interval_t* <VAR>itv</VAR>)</I>
+<DD><A NAME="IDX398"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst_interval_scalar</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_scalar_t* <VAR>inf</VAR>, ap_scalar_t* <VAR>sup</VAR>)</I>
+<DD><A NAME="IDX399"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst_interval_int</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, int <VAR>inf</VAR>, int <VAR>sup</VAR>)</I>
+<DD><A NAME="IDX400"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst_interval_frac</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, int <VAR>numinf</VAR>, unsigned int <VAR>deninf</VAR>, int <VAR>numsup</VAR>, unsigned int <VAR>densup</VAR>)</I>
+<DD><A NAME="IDX401"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_cst_interval_double</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, double <VAR>inf</VAR>, double <VAR>sup</VAR>)</I>
+<DD>Set the constant coefficient of expression <VAR>e</VAR>.
+</DL>
+</P><P>
+
+<A NAME="IDX402"></A>
+<DL>
+<DT><U>Function:</U> bool <B>ap_linexpr0_set_coeff</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, ap_coefft* <VAR>coeff</VAR>)</I>
+<DD><A NAME="IDX403"></A>
+<DT><U>Function:</U> bool <B>ap_linexpr0_set_coeff_scalar</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, ap_scalar_t* <VAR>scalar</VAR>)</I>
+<DD><A NAME="IDX404"></A>
+<DT><U>Function:</U> bool <B>ap_linexpr0_set_coeff_scalar_int</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, int <VAR>num</VAR>)</I>
+<DD><A NAME="IDX405"></A>
+<DT><U>Function:</U> bool <B>ap_linexpr0_set_coeff_scalar_frac</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, int <VAR>num</VAR>, unsigned int <VAR>den</VAR>)</I>
+<DD><A NAME="IDX406"></A>
+<DT><U>Function:</U> bool <B>ap_linexpr0_set_coeff_scalar_double</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, double <VAR>num</VAR>)</I>
+<DD><A NAME="IDX407"></A>
+<DT><U>Function:</U> bool <B>ap_linexpr0_set_coeff_interval</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, ap_interval_t* <VAR>itv</VAR>)</I>
+<DD><A NAME="IDX408"></A>
+<DT><U>Function:</U> bool <B>ap_linexpr0_set_coeff_interval_scalar</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, ap_scalar_t* <VAR>inf</VAR>, ap_scalar_t* <VAR>sup</VAR>)</I>
+<DD><A NAME="IDX409"></A>
+<DT><U>Function:</U> bool <B>ap_linexpr0_set_coeff_interval_int</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, int <VAR>inf</VAR>, int <VAR>sup</VAR>)</I>
+<DD><A NAME="IDX410"></A>
+<DT><U>Function:</U> bool <B>ap_linexpr0_set_coeff_interval_frac</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, int <VAR>numinf</VAR>, unsigned int <VAR>deninf</VAR>, int <VAR>numsup</VAR>, unsigned int <VAR>densup</VAR>)</I>
+<DD><A NAME="IDX411"></A>
+<DT><U>Function:</U> void <B>ap_linexpr0_set_coeff_interval_double</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>, double <VAR>inf</VAR>, double <VAR>sup</VAR>)</I>
+<DD>Set the coefficient of the dimension <VAR>dim</VAR> of expression <VAR>e</VAR>.
+</P><P>
+
+Return <CODE>true</CODE> in case <CODE>ap_linexpr0_coeffref(e,dim)</CODE> returns NULL.
+</DL>
+</P><P>
+
+<A NAME="Change of dimensions and permutations of linear expressions of level 0"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_63.html#SEC99"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_116.html#SEC152"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_56.html#SEC92"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_57.html#SEC93"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_66.html#SEC102"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

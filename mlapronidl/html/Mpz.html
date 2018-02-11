@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="PolkaGrid.html">
+<link rel="next" href="Mpq.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Scalar" rel="Chapter" href="Scalar.html">
+<link title="Interval" rel="Chapter" href="Interval.html">
+<link title="Coeff" rel="Chapter" href="Coeff.html">
+<link title="Dim" rel="Chapter" href="Dim.html">
+<link title="Linexpr0" rel="Chapter" href="Linexpr0.html">
+<link title="Lincons0" rel="Chapter" href="Lincons0.html">
+<link title="Generator0" rel="Chapter" href="Generator0.html">
+<link title="Texpr0" rel="Chapter" href="Texpr0.html">
+<link title="Tcons0" rel="Chapter" href="Tcons0.html">
+<link title="Manager" rel="Chapter" href="Manager.html">
+<link title="Abstract0" rel="Chapter" href="Abstract0.html">
+<link title="Var" rel="Chapter" href="Var.html">
+<link title="Environment" rel="Chapter" href="Environment.html">
+<link title="Linexpr1" rel="Chapter" href="Linexpr1.html">
+<link title="Lincons1" rel="Chapter" href="Lincons1.html">
+<link title="Generator1" rel="Chapter" href="Generator1.html">
+<link title="Texpr1" rel="Chapter" href="Texpr1.html">
+<link title="Tcons1" rel="Chapter" href="Tcons1.html">
+<link title="Abstract1" rel="Chapter" href="Abstract1.html">
+<link title="Parser" rel="Chapter" href="Parser.html">
+<link title="Box" rel="Chapter" href="Box.html">
+<link title="Oct" rel="Chapter" href="Oct.html">
+<link title="Polka" rel="Chapter" href="Polka.html">
+<link title="Ppl" rel="Chapter" href="Ppl.html">
+<link title="PolkaGrid" rel="Chapter" href="PolkaGrid.html">
+<link title="Mpz" rel="Chapter" href="Mpz.html">
+<link title="Mpq" rel="Chapter" href="Mpq.html">
+<link title="Gmp_random" rel="Chapter" href="Gmp_random.html">
+<link title="Mpf" rel="Chapter" href="Mpf.html">
+<link title="Mpfr" rel="Chapter" href="Mpfr.html">
+<link title="Mpzf" rel="Chapter" href="Mpzf.html">
+<link title="Mpqf" rel="Chapter" href="Mpqf.html">
+<link title="Mpfrf" rel="Chapter" href="Mpfrf.html"><link title="Pretty printing" rel="Section" href="#2_Prettyprinting">
+<link title="Initialization Functions" rel="Section" href="#2_InitializationFunctions">
+<link title="Assignement Functions" rel="Section" href="#2_AssignementFunctions">
+<link title="Combined Initialization and Assignment Functions" rel="Section" href="#2_CombinedInitializationandAssignmentFunctions">
+<link title="Conversion Functions" rel="Section" href="#2_ConversionFunctions">
+<link title="User Conversions" rel="Section" href="#2_UserConversions">
+<link title="Arithmetic Functions" rel="Section" href="#2_ArithmeticFunctions">
+<link title="Division Functions" rel="Section" href="#2_DivisionFunctions">
+<link title="Exponentiation Functions" rel="Section" href="#2_ExponentiationFunctions">
+<link title="Root Extraction Functions" rel="Section" href="#2_RootExtractionFunctions">
+<link title="Number Theoretic  Functions" rel="Section" href="#2_NumberTheoreticFunctions">
+<link title="Comparison Functions" rel="Section" href="#2_ComparisonFunctions">
+<link title="Logical and Bit Manipulation Functions" rel="Section" href="#2_LogicalandBitManipulationFunctions">
+<link title="Input and Output Functions: not interfaced" rel="Section" href="#2_InputandOutputFunctionsnotinterfaced">
+<link title="Random Number Functions: see Gmp_random module" rel="Section" href="#2_RandomNumberFunctionsseeGmprandommodule">
+<link title="Integer Import and Export Functions" rel="Section" href="#2_IntegerImportandExportFunctions">
+<link title="Miscellaneous Functions" rel="Section" href="#2_MiscellaneousFunctions">
+<link title="Ceiling division" rel="Subsection" href="#3_Ceilingdivision">
+<link title="Floor division" rel="Subsection" href="#3_Floordivision">
+<link title="Truncate division" rel="Subsection" href="#3_Truncatedivision">
+<link title="Other division-related functions" rel="Subsection" href="#3_Otherdivisionrelatedfunctions">
+<title>Mpz</title>
+</head>
+<body>
+<div class="navbar"><a href="PolkaGrid.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Mpq.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Mpz.html">Mpz</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Mpz: <code class="code"><span class="keyword">sig</span></code> <a href="Mpz.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>GMP multi-precision integers<br>
+<hr width="100%">
+<pre><span class="keyword">type</span> <a name="TYPEt"></a><code class="type"></code>t </pre>
+
+<br>
+GMP multi-precision integers<br>
+<br>
+The following operations are mapped as much as possible to their C counterpart. In case of imperative functions (like <code class="code">set</code>, <code class="code">add</code>, ...) the first parameter of type <code class="code">t</code> is an out-parameter and holds the result when the function returns. For instance, <code class="code">add x y z</code> adds the values of <code class="code">y</code> and <code class="code">z</code> and stores the result in <code class="code">x</code>.
+<p>
+
+ These functions are as efficient as their C counterpart: they do not imply additional memory allocation, unlike the corresponding functions in the module <a href="Mpzf.html"><code class="code"><span class="constructor">Mpzf</span></code></a>.<br>
+<br>
+<a name="2_Prettyprinting"></a>
+<h2>Pretty printing</h2><br>
+<pre><span class="keyword">val</span> <a name="VALprint"></a>print : <code class="type">Format.formatter -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><br>
+<a name="2_InitializationFunctions"></a>
+<h2>Initialization Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALinit"></a>init : <code class="type">unit -> <a href="Mpz.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit2"></a>init2 : <code class="type">int -> <a href="Mpz.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALrealloc2"></a>realloc2 : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><br>
+<a name="2_AssignementFunctions"></a>
+<h2>Assignement Functions</h2><br>
+<br>
+The first parameter holds the result.<br>
+<pre><span class="keyword">val</span> <a name="VALset"></a>set : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALset_si"></a>set_si : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALset_d"></a>set_d : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> float -> unit</code></pre><pre><span class="keyword">val</span> <a name="VAL_set_str"></a>_set_str : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> string -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALset_str"></a>set_str : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> string -> base:int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALswap"></a>swap : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><br>
+<a name="2_CombinedInitializationandAssignmentFunctions"></a>
+<h2>Combined Initialization and Assignment Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALinit_set"></a>init_set : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit_set_si"></a>init_set_si : <code class="type">int -> <a href="Mpz.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit_set_d"></a>init_set_d : <code class="type">float -> <a href="Mpz.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VAL_init_set_str"></a>_init_set_str : <code class="type">string -> int -> <a href="Mpz.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit_set_str"></a>init_set_str : <code class="type">string -> base:int -> <a href="Mpz.html#TYPEt">t</a></code></pre><br>
+<a name="2_ConversionFunctions"></a>
+<h2>Conversion Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALget_si"></a>get_si : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> nativeint</code></pre><pre><span class="keyword">val</span> <a name="VALget_int"></a>get_int : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALget_d"></a>get_d : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> float</code></pre><pre><span class="keyword">val</span> <a name="VALget_d_2exp"></a>get_d_2exp : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> float * int</code></pre><pre><span class="keyword">val</span> <a name="VAL_get_str"></a>_get_str : <code class="type">int -> <a href="Mpz.html#TYPEt">t</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALget_str"></a>get_str : <code class="type">base:int -> <a href="Mpz.html#TYPEt">t</a> -> string</code></pre><br>
+<a name="2_UserConversions"></a>
+<h2>User Conversions</h2><br>
+<br>
+These functions are additions to or renaming of functions offered by the C library.<br>
+<pre><span class="keyword">val</span> <a name="VALto_string"></a>to_string : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALto_float"></a>to_float : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> float</code></pre><pre><span class="keyword">val</span> <a name="VALof_string"></a>of_string : <code class="type">string -> <a href="Mpz.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_float"></a>of_float : <code class="type">float -> <a href="Mpz.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_int"></a>of_int : <code class="type">int -> <a href="Mpz.html#TYPEt">t</a></code></pre><br>
+<a name="2_ArithmeticFunctions"></a>
+<h2>Arithmetic Functions</h2><br>
+<br>
+The first parameter holds the result.<br>
+<pre><span class="keyword">val</span> <a name="VALadd"></a>add : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALadd_ui"></a>add_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALsub"></a>sub : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALsub_ui"></a>sub_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALui_sub"></a>ui_sub : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALmul"></a>mul : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALmul_si"></a>mul_si : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALaddmul"></a>addmul : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALaddmul_ui"></a>addmul_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALsubmul"></a>submul : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALsubmul_ui"></a>submul_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALmul_2exp"></a>mul_2exp : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALneg"></a>neg : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALabs"></a>abs : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><br>
+<a name="2_DivisionFunctions"></a>
+<h2>Division Functions</h2><br>
+<br>
+<code class="code">c</code> stands for ceiling, <code class="code">f</code> for floor, and <code class="code">t</code> for truncate (rounds toward 0).<br>
+<br>
+<a name="3_Ceilingdivision"></a>
+<h3>Ceiling division</h3><br>
+<pre><span class="keyword">val</span> <a name="VALcdiv_q"></a>cdiv_q : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><div class="info">
+The first parameter holds the quotient.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcdiv_r"></a>cdiv_r : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><div class="info">
+The first parameter holds the remainder.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcdiv_qr"></a>cdiv_qr : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><div class="info">
+The two first parameters hold resp. the quotient and the remainder).<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcdiv_q_ui"></a>cdiv_q_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><div class="info">
+The first parameter holds the quotient.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcdiv_r_ui"></a>cdiv_r_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><div class="info">
+The first parameter holds the remainder.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcdiv_qr_ui"></a>cdiv_qr_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><div class="info">
+The two first parameters hold resp. the quotient and the remainder).<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcdiv_ui"></a>cdiv_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALcdiv_q_2exp"></a>cdiv_q_2exp : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><div class="info">
+The first parameter holds the quotient.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcdiv_r_2exp"></a>cdiv_r_2exp : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><div class="info">
+The first parameter holds the remainder.<br>
+</div>
+<br>
+<a name="3_Floordivision"></a>
+<h3>Floor division</h3><br>
+<pre><span class="keyword">val</span> <a name="VALfdiv_q"></a>fdiv_q : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_r"></a>fdiv_r : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_qr"></a>fdiv_qr : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_q_ui"></a>fdiv_q_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_r_ui"></a>fdiv_r_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_qr_ui"></a>fdiv_qr_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_ui"></a>fdiv_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_q_2exp"></a>fdiv_q_2exp : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_r_2exp"></a>fdiv_r_2exp : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><br>
+<a name="3_Truncatedivision"></a>
+<h3>Truncate division</h3><br>
+<pre><span class="keyword">val</span> <a name="VALtdiv_q"></a>tdiv_q : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_r"></a>tdiv_r : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_qr"></a>tdiv_qr : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_q_ui"></a>tdiv_q_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_r_ui"></a>tdiv_r_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_qr_ui"></a>tdiv_qr_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_ui"></a>tdiv_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_q_2exp"></a>tdiv_q_2exp : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_r_2exp"></a>tdiv_r_2exp : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><br>
+<a name="3_Otherdivisionrelatedfunctions"></a>
+<h3>Other division-related functions</h3><br>
+<pre><span class="keyword">val</span> <a name="VALgmod"></a>gmod : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALgmod_ui"></a>gmod_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALdivexact"></a>divexact : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALdivexact_ui"></a>divexact_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALdivisible_p"></a>divisible_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALdivisible_ui_p"></a>divisible_ui_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALdivisible_2exp_p"></a>divisible_2exp_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALcongruent_p"></a>congruent_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALcongruent_ui_p"></a>congruent_ui_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALcongruent_2exp_p"></a>congruent_2exp_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> bool</code></pre><br>
+<a name="2_ExponentiationFunctions"></a>
+<h2>Exponentiation Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VAL_powm"></a>_powm : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VAL_powm_ui"></a>_powm_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALpowm"></a>powm : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> modulo:<a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALpowm_ui"></a>powm_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> modulo:<a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALpow_ui"></a>pow_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALui_pow_ui"></a>ui_pow_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int -> unit</code></pre><br>
+<a name="2_RootExtractionFunctions"></a>
+<h2>Root Extraction Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALroot"></a>root : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALsqrt"></a>sqrt : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VAL_sqrtrem"></a>_sqrtrem : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALsqrtrem"></a>sqrtrem : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> remainder:<a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALperfect_power_p"></a>perfect_power_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALperfect_square_p"></a>perfect_square_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><br>
+<a name="2_NumberTheoreticFunctions"></a>
+<h2>Number Theoretic  Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALprobab_prime_p"></a>probab_prime_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALnextprime"></a>nextprime : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALgcd"></a>gcd : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALgcd_ui"></a>gcd_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> option -> <a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VAL_gcdext"></a>_gcdext : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALgcdext"></a>gcdext : <code class="type">gcd:<a href="Mpz.html#TYPEt">t</a> -> alpha:<a href="Mpz.html#TYPEt">t</a> -> beta:<a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALlcm"></a>lcm : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALlcm_ui"></a>lcm_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALinvert"></a>invert : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALjacobi"></a>jacobi : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALlegendre"></a>legendre : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALkronecker"></a>kronecker : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALkronecker_si"></a>kronecker_si : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALsi_kronecker"></a>si_kronecker : <code class="type">int -> <a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALremove"></a>remove : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALfac_ui"></a>fac_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALbin_ui"></a>bin_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALbin_uiui"></a>bin_uiui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALfib_ui"></a>fib_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALfib2_ui"></a>fib2_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALlucnum_ui"></a>lucnum_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALlucnum2_ui"></a>lucnum2_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><br>
+<a name="2_ComparisonFunctions"></a>
+<h2>Comparison Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALcmp"></a>cmp : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALcmp_d"></a>cmp_d : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> float -> int</code></pre><pre><span class="keyword">val</span> <a name="VALcmp_si"></a>cmp_si : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALcmpabs"></a>cmpabs : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALcmpabs_d"></a>cmpabs_d : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> float -> int</code></pre><pre><span class="keyword">val</span> <a name="VALcmpabs_ui"></a>cmpabs_ui : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALsgn"></a>sgn : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int</code></pre><br>
+<a name="2_LogicalandBitManipulationFunctions"></a>
+<h2>Logical and Bit Manipulation Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALgand"></a>gand : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALior"></a>ior : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALxor"></a>xor : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALcom"></a>com : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALpopcount"></a>popcount : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALhamdist"></a>hamdist : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALscan0"></a>scan0 : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALscan1"></a>scan1 : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALsetbit"></a>setbit : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALclrbit"></a>clrbit : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALtstbit"></a>tstbit : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> bool</code></pre><br>
+<a name="2_InputandOutputFunctionsnotinterfaced"></a>
+<h2>Input and Output Functions: not interfaced</h2><br>
+<br>
+<a name="2_RandomNumberFunctionsseeGmprandommodule"></a>
+<h2>Random Number Functions: see <a href="Gmp_random.html"><code class="code"><span class="constructor">Gmp_random</span></code></a> module</h2><br>
+<br>
+<a name="2_IntegerImportandExportFunctions"></a>
+<h2>Integer Import and Export Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VAL_import"></a>_import : <code class="type"><a href="Mpz.html#TYPEt">t</a> -><br>       (int, Bigarray.int32_elt, Bigarray.c_layout) Bigarray.Array1.t -><br>       int -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VAL_export"></a>_export : <code class="type"><a href="Mpz.html#TYPEt">t</a> -><br>       int -> int -> (int, Bigarray.int32_elt, Bigarray.c_layout) Bigarray.Array1.t</code></pre><pre><span class="keyword">val</span> <a name="VALimport"></a>import : <code class="type">dest:<a href="Mpz.html#TYPEt">t</a> -><br>       (int, Bigarray.int32_elt, Bigarray.c_layout) Bigarray.Array1.t -><br>       order:int -> endian:int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALexport"></a>export : <code class="type"><a href="Mpz.html#TYPEt">t</a> -><br>       order:int -><br>       endian:int -> (int, Bigarray.int32_elt, Bigarray.c_layout) Bigarray.Array1.t</code></pre><br>
+<a name="2_MiscellaneousFunctions"></a>
+<h2>Miscellaneous Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALfits_int_p"></a>fits_int_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALodd_p"></a>odd_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALeven_p"></a>even_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALsize"></a>size : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALsizeinbase"></a>sizeinbase : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALfits_ulong_p"></a>fits_ulong_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALfits_slong_p"></a>fits_slong_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALfits_uint_p"></a>fits_uint_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALfits_sint_p"></a>fits_sint_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALfits_ushort_p"></a>fits_ushort_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALfits_sshort_p"></a>fits_sshort_p : <code class="type"><a href="Mpz.html#TYPEt">t</a> -> bool</code></pre></body></html>

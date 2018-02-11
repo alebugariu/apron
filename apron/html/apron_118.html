@@ -1,0 +1,121 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Linear constraints of level 0</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Linear constraints of level 0">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Linear constraints of level 0">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC154"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_117.html#SEC153"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_119.html#SEC155"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_108.html#SEC144"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_104.html#SEC140"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_123.html#SEC159"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H2> Linear constraints of level 0 (<TT>`ap_lincons0.h'</TT>) </H2>
+<!--docid::SEC154::-->
+<P>
+
+<A NAME="IDX419"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_constyp_t</B>
+<DD><TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef enum ap_constyp_t {
+  AP_CONS_EQ,    /* equality constraint */
+  AP_CONS_SUPEQ, /* &#62;= constraint */
+  AP_CONS_SUP,   /* &#62; constraint */
+  AP_CONS_EQMOD, /* congruence equality constraint */
+  AP_CONS_DISEQ  /* disequality constraint */
+} ap_constyp_t;
+</pre></td></tr></table>Datatype for type of constraints.
+</DL>
+</P><P>
+
+<A NAME="IDX420"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_lincons0_t</B>
+<DD><TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef struct ap_lincons0_t {
+  ap_linexpr0_t* linexpr0;   /* expression */
+  ap_constyp_t constyp;      /* type of constraint */
+  ap_scalar_t* scalar;       /* maybe NULL.
+
+				For EQMOD constraint, indicates the
+				modulo */
+} ap_lincons0_t;
+</pre></td></tr></table>Datatype for constraints.
+</P><P>
+
+Constraints are meant to be manipulated freely via their components. Creating the constraint <CODE>[1,2]x0 + 5/2x1 &#62;=0</CODE> and then freeing it can be done with
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>ap_lincons0_t cons = ap_lincons0_make(AP_CONS_SUPEQ,
+				      ap_linexpr0_alloc(AP_LINEXPR_SPARSE,2),
+                                      NULL);
+ap_linexpr0_set_list(cons.linexpr0,
+		     AP_COEFF_I_INT, 1,2, 0,
+		     AP_COEFF_S_FRAC, 5,2, 1,
+		     AP_END);
+ap_lincons0_clear(&#38;cons);
+</pre></td></tr></table></DL>
+</P><P>
+
+<A NAME="IDX421"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_lincons0_array_t</B>
+<DD><TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef struct ap_lincons0_array_t {
+  ap_lincons0_t* p;
+  size_t size;
+} ap_lincons0_array_t;
+</pre></td></tr></table>Datatype for arrays of constraints.
+</P><P>
+
+Arrays are accessed directly, for example by writing
+<CODE>array-&#62;p[i]</CODE> (of type <CODE>ap_lincons0_t</CODE>),
+<CODE>array-&#62;p[i].constyp</CODE> and <CODE>array-&#62;p[i].linexpr0</CODE>.
+</P><P>
+
+One can assign a constraint to the index <VAR>index</VAR> by writing:
+<CODE>array-&#62;p[index] = ap_lincons0_make(constyp,expr)</CODE>.
+</DL>
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_119.html#SEC155">Allocating linear constraints of level 0</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_120.html#SEC156">Tests on linear constraints of level 0</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_121.html#SEC157">Arrays of linear constraints of level 0</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_122.html#SEC158">Change of dimensions and permutations of linear constraints of level 0</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="Allocating linear constraints of level 0"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

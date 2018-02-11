@@ -1,0 +1,137 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Arrays of tree constraints of level 1</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Arrays of tree constraints of level 1">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Arrays of tree constraints of level 1">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC122"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_85.html#SEC121"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_87.html#SEC123"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_77.html#SEC113"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_82.html#SEC118"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_87.html#SEC123"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Arrays of tree constraints of level 1 </H3>
+<!--docid::SEC122::-->
+<P>
+
+<A NAME="IDX279"></A>
+<DL>
+<DT><U>Function:</U> ap_tcons1_array_t <B>ap_tcons1_array_make</B> <I>(ap_environment_t* <VAR>env</VAR>, size_t <VAR>size</VAR>)</I>
+<DD>Allocate an array of size constraints.  The constraints are
+initialized with NULL pointers, so that <CODE>ap_tcons1_array_free</CODE>
+may be safely called.
+</DL>
+<A NAME="IDX280"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_tcons1_array_clear</B> <I>(ap_tcons1_array_t* <VAR>array</VAR>)</I>
+<DD>Clear the constraints of the array, and then the array itself.
+</DL>
+<A NAME="IDX281"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_tcons1_array_fprint</B> <I>(FILE* stream, ap_tcons1_array_t* <VAR>array</VAR>)</I>
+<DD><A NAME="IDX282"></A>
+<DT><U>Function:</U> void <B>ap_tcons1_array_print</B> <I>(ap_tcons1_array_t* <VAR>array</VAR>)</I>
+<DD>Printing.
+</DL>
+</P><P>
+
+<A NAME="IDX283"></A>
+<DL>
+<DT><U>Function:</U> size_t <B>ap_tcons1_array_size</B> <I>(ap_tcons1_array_t* <VAR>array</VAR>)</I>
+<DD>Return the size of the array.
+</DL>
+</P><P>
+
+<A NAME="IDX284"></A>
+<DL>
+<DT><U>Function:</U> ap_environment_t* <B>ap_tcons1_array_envref</B> <I>(ap_tcons1_array_t* <VAR>array</VAR>)</I>
+<DD>Return a reference to the environment of the array. Do not free it.
+</DL>
+</P><P>
+
+<A NAME="IDX285"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_tcons1_array_clear_index</B> <I>(ap_tcons1_array_t* <VAR>array</VAR>, size_t <VAR>index</VAR>)</I>
+<DD>Clear the constraint at index index and set pointers to <CODE>NULL</CODE>.
+</DL>
+</P><P>
+
+<A NAME="IDX286"></A>
+<DL>
+<DT><U>Function:</U> ap_tcons1_t <B>ap_tcons1_array_get</B> <I>(ap_tcons1_array_t* <VAR>array</VAR>, size_t <VAR>index</VAR>)</I>
+<DD>Return the linear constraint of the given index Nothing is duplicated,
+and the result should never be cleared.  Modifying the argument or the
+result is equivalent, except for change of environments.
+</DL>
+</P><P>
+
+<A NAME="IDX287"></A>
+<DL>
+<DT><U>Function:</U> bool <B>ap_tcons1_array_set</B> <I>(ap_tcons1_array_t* <VAR>array</VAR>, size_t <VAR>index</VAR>, ap_tcons1_t* <VAR>cons</VAR>)</I>
+<DD>Fill the index of the array with the constraint.  Assumes
+<CODE>ap_environment_is_eq(array-&#62;env,cons-&#62;env)</CODE>. Nothing is
+duplicated.  The argument should never be cleared (its environment
+is dereferenced).  If a constraint was already stored, it is first
+cleared.  Return <CODE>true</CODE> iff problem (index or <CODE>array-&#62;env!=cons-&#62;env</CODE>)
+</DL>
+</P><P>
+
+<A NAME="IDX288"></A>
+<DL>
+<DT><U>Function:</U> bool <B>ap_tcons1_array_extend_environment_with</B> <I>(ap_tcons1_array_t* <VAR>array</VAR>, ap_environment_t* <VAR>nenv</VAR>)</I>
+<DD><A NAME="IDX289"></A>
+<DT><U>Function:</U> bool <B>ap_tcons1_array_extend_environment</B> <I>(ap_tcons1_array_t* narray, ap_tcons1_array_t* <VAR>array</VAR>, ap_environment_t* <VAR>nenv</VAR>)</I>
+<DD>Change current environment with a super-environment.  Return
+<CODE>true</CODE> if <VAR>nenv</VAR> is not a superenvironment of
+<CODE>array-&#62;env</CODE>.
+</DL>
+</P><P>
+
+<A NAME="Abstract values and operations of level 1"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_85.html#SEC121"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_87.html#SEC123"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_77.html#SEC113"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_82.html#SEC118"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_87.html#SEC123"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

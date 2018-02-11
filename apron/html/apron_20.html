@@ -1,0 +1,150 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Functions related to managers</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Functions related to managers">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Functions related to managers">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC51"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_19.html#SEC50"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_21.html#SEC54"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_17.html#SEC48"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_18.html#SEC49"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_21.html#SEC54"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Functions related to managers </H3>
+<!--docid::SEC51::-->
+<P>
+
+<A NAME="IDX8"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_manager_free</B> <I>(ap_manager_t* <VAR>man</VAR>)</I>
+<DD>Free a manager (dereference a counter, and possibly deallocate).
+</DL>
+</P><P>
+
+<A NAME="IDX9"></A>
+<DL>
+<DT><U>Function:</U> const <B>char*</B> <I>ap_manager_get_library (ap_manager_t* <VAR>man</VAR>)</I>
+<DD><A NAME="IDX10"></A>
+<DT><U>Function:</U> const <B>char*</B> <I>ap_manager_get_version (ap_manager_t* <VAR>man</VAR>)</I>
+<DD>Reading the name and the version of the attached underlying library.
+</DL>
+</P><P>
+
+<A NAME="IDX11"></A>
+<DL>
+<DT><U>Function:</U> bool <B>ap_manager_get_flag_exact</B> <I>(ap_manager_t* <VAR>man</VAR>)</I>
+<DD><A NAME="IDX12"></A>
+<DT><U>Function:</U> bool <B>ap_manager_get_flag_best</B> <I>(ap_manager_t* <VAR>man</VAR>)</I>
+<DD>Return <CODE>true</CODE> if the last called APRON function returned an
+exact (resp. a best approximation) result.
+</DL>
+</P><P>
+
+<A NAME="Manager options"></A>
+<A NAME="SEC52"></A>
+<H3> Options </H3>
+<!--docid::SEC52::-->
+See  <A HREF="apron_19.html#ap_funopt_t">ap_funopt_t</A>.
+<A NAME="IDX13"></A>
+<DL>
+<DT><U>Function:</U> ap_funopt_t <B>ap_manager_get_funopt</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_funid_t <VAR>funid</VAR>)</I>
+<DD>Getting the option attached to the specified function in the
+manager. <VAR>funid</VAR> should be less than <CODE>AP_FUNID_SIZE</CODE> (no
+option associated to other identifiers). Otherwise, abort with a
+message.
+</DL>
+<A NAME="IDX14"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_manager_set_funopt</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_funid_t <VAR>funid</VAR>, ap_funopt_t* <VAR>fopt</VAR>)</I>
+<DD>Setting the option attached to the specified function in the
+manager. <VAR>fopt</VAR> is copied (and not only referenced). <VAR>funid</VAR>
+should be less than <CODE>AP_FUNID_SIZE</CODE> (no option associated to
+other identifiers). Otherwise, do nothing.
+</DL>
+<A NAME="IDX15"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_funopt_init</B> <I>(ap_funopt_t* <VAR>fopt</VAR>)</I>
+<DD>Initialize <VAR>fopt</VAR> with default values.
+</DL>
+<P>
+
+<A NAME="SEC53"></A>
+<H3> Exceptions </H3>
+<!--docid::SEC53::-->
+<P>
+
+<A NAME="IDX16"></A>
+<DL>
+<DT><U>Function:</U> bool <B>ap_manager_get_abort_if_exception</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_exc_t <VAR>exn</VAR>)</I>
+<DD>Return true if the program abort when the exception <VAR>exn</VAR> is
+raised by some function. Otherwise, in such a case, a valid (but
+dummy) value should be returned by the function that raises the exception.
+</DL>
+<A NAME="IDX17"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_manager_set_abort_if_exception</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_exc_t <VAR>exn</VAR>, bool <VAR>flag</VAR>)</I>
+<DD>Position the above-described option.
+</DL>
+</P><P>
+
+<A NAME="IDX18"></A>
+<DL>
+<DT><U>Function:</U> ap_exc_t <B>ap_manager_get_exception</B> <I>(ap_manager_t* <VAR>man</VAR>)</I>
+<DD>Get the last exception raised.
+</DL>
+<A NAME="IDX19"></A>
+<DL>
+<DT><U>Function:</U> ap_exclog_t <B>ap_manager_get_exclog</B> <I>(ap_manager_t* <VAR>man</VAR>)</I>
+<DD>Get the full log of exceptions. The first one in the list is the last
+raised one.
+</DL>
+</P><P>
+
+<A NAME="Box"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_19.html#SEC50"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_21.html#SEC54"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_17.html#SEC48"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_18.html#SEC49"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_21.html#SEC54"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

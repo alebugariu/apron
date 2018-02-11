@@ -1,0 +1,134 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Introduction to APRON</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Introduction to APRON">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Introduction to APRON">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC5"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_1.html#SEC1"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_1.html#SEC1"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H1> Introduction to APRON </H1>
+<!--docid::SEC5::-->
+<P>
+
+The APRON library provides a common interface for <EM>abstract
+domains of invariants</EM> for numerical variables, in the sense of the
+Abstract Interpretation theory. It includes a few domains, and
+provides interfaces to libraries implemented by other teams.
+</P><P>
+
+Several libraries already exists, wich implement various abstract domains of
+invariants.  One can cite intervals, linear equalities, octagons,
+octahedra, convex polyhedra, polynomial equalities, polynomial
+inequalities. Although they offer a kernel of common functionalities,
+their API may differ greatly, and some functionalities may lack in some
+libraries. The aim of the APRON library is to offer a common interface to these
+libraries. Such a standardized interface offers several advantages: it allows
+<UL>
+<LI>to easily
+substitute a library/abstract domain by another in the same analysis
+tool; this is useful to compare the efficiency of 2 implementations of
+the same abstract domain, or the precision of 2 different abstract
+domains.
+<LI>
+to factorize services which are mostly independant of the abstract
+domain (variables management, linearization of non-linear expressions,
+etc...);
+<LI>
+to make easier the combination of abstract domains: the abstract
+domains to be combined are used through the same interface, as the
+resulting combination;
+</UL>
+<P>
+
+<A NAME="SEC6"></A>
+<H4> As a user, why should I use APRON ? </H4>
+<!--docid::SEC6::-->
+<OL>
+<LI>
+it makes very easy to switch the abstract domain (for numerical
+variables) in use in an analyzer;
+<LI>
+it already offers the most used abstract domains, ranging from
+intervals, octagons, convex polyhedra to linear congruences;
+<LI>
+its interface should satisfy most needs, as it already satisfies the
+members of the APRON project working in different contexts
+(verification of high-level specifications/programs with exact
+arithmetics for INRIA \&#38; Verimag, static analysis of runtime errors
+with floating-point arithmetics for ENS Paris, automatic
+parallelization of programs for ENSMP).
+<LI>
+the interface, at the level 1, already provides slightly higher-level
+functionalities than most existing and publicy available abstract
+domains libraries (with the manipulation of environments); this
+statement should be reinforced in the near future with the planned
+addition of a generic non-linear expressions layer and a
+floating-point arithmetic layer.
+</OL>
+<P>
+
+<A NAME="SEC7"></A>
+<H4> As a domain implementor, why should I interface my abstract domain/library to APRON ? </H4>
+<!--docid::SEC7::-->
+<OL>
+<LI>to incite existing users of the APRON interface to try your library;
+<LI>to make your users, including yourself, benefit from previous points 1 and 4;
+<LI>
+to not waste your time implementing environments, variables renaming,
+OCaml interfaces, and so on; the effort to connect your library to the
+interface should at minimum be counterbalanced by such gains;
+</OL>
+<P>
+
+<A NAME="APRON Rationale and Functionalities"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_1.html#SEC1"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_1.html#SEC1"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

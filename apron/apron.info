@@ -1,0 +1,189 @@
+Ceci est le fichier Info apron.info, produit par Makeinfo version 4.8
+Ã  partir apron.texi.
+
+START-INFO-DIR-ENTRY
+* apron: (apron).  APRON library for Abstract Interpretation of
+numerical variables.
+END-INFO-DIR-ENTRY
+
+
+Indirect:
+apron.info-1: 219
+apron.info-2: 254090
+
+Tag Table:
+(Indirect)
+Node: Top219
+Node: Copying605
+Node: Introduction to APRON28984
+Node: APRON Rationale and Functionalities32154
+Node: General choices32486
+Node: Interface levels32884
+Node: Programming language34445
+Node: Compatibility with threads35069
+Node: Interruptions35790
+Node: Memory management37330
+Node: Programming style37693
+Node: Number representation38088
+Node: Functionalities of the interface at level 038797
+Node: Representation of an abstract value39447
+Node: Semantics of an abstract value40377
+Node: Dimensions40749
+Node: Other datatypes41344
+Node: Control of internal representation43424
+Node: Printing43847
+Node: Serializaton/Deserialization44338
+Node: Constructors45000
+Node: Tests45413
+Node: Property extraction45840
+Node: Lattice operations46653
+Node: Assignement and Substitutions47142
+Node: Operations on dimensions47690
+Node: Other operations48374
+Node: Functionalities of the interface at level 148743
+Node: Variables and Environments49286
+Node: Semantics and Representation of an abstract value49922
+Node: Operations on environments50655
+Node: Dynamic typing w.r.t. environments50998
+Node: Operations on variables in abstract values51589
+Node: APRON Guidelines52217
+Node: Installing APRON52566
+Node: C Programming Guidelines52820
+Node: C Headers and Libraries53178
+Node: C Naming conventions55723
+Node: Allocating managers and setting options57357
+Node: Sequel of the small example59044
+Node: Typing issue in C61355
+Node: OCaml Programming Guidelines63568
+Node: MakingLibrary64569
+Node: Managers and Abstract Domains67368
+Node: Managers68139
+Node: APRON Global Datatypes68394
+Ref: ap_funopt_t72276
+Node: Functions related to managers73370
+Ref: Manager options74134
+Node: Box75675
+Node: Use of Box75991
+Node: Allocating Box managers77429
+Node: Oct77678
+Node: NewPolka77858
+Node: Use of NewPolka78616
+Node: Allocating NewPolka managers and setting specific options80477
+Node: NewPolka standard options82984
+Node: PPL92183
+Node: Use of APRON PPL92734
+Node: Allocating APRON PPL managers94106
+Node: APRON PPL standard options94842
+Node: pkgrid96180
+Node: Use of pkgrid96873
+Node: Allocating pkgrid managers97690
+Node: Scalars & Intervals & Coefficients98259
+Node: Scalars99454
+Node: Initializing scalars100460
+Node: Assigning scalars101191
+Node: Converting scalars102286
+Node: Comparing scalars102856
+Node: Other operations on scalars103839
+Node: Intervals104533
+Node: Initializing intervals105040
+Node: Assigning intervals105607
+Node: Comparing intervals107019
+Node: Other operations on intervals108028
+Node: Array of intervals108686
+Node: Coefficients109119
+Node: Initializing coefficients109912
+Node: Assigning coefficients110981
+Node: Comparing coefficients112784
+Node: Other operations on coefficients113520
+Node: Level 1 of the interface114116
+Node: Variables and related operations117004
+Node: Environments119081
+Node: Linear expressions of level 1125890
+Node: Allocating linear expressions of level 1128362
+Node: Tests on linear expressions of level 1129627
+Node: Access to linear expressions of level 1130439
+Node: Change of dimensions and permutations of linear expressions of level 1136378
+Node: Linear constraints of level 1137229
+Node: Allocating linear constraints of level 1138949
+Node: Tests on linear constraints of level 1140077
+Node: Access to linear constraints of level 1140532
+Node: Change of dimensions and permutations of linear constraints of level 1142485
+Node: Arrays of linear constraints of level 1143263
+Node: Generators of level 1145728
+Node: Allocating generators of level 1147317
+Node: Access to generators of level 1148174
+Node: Change of dimensions and permutations of generators of level 1150132
+Node: Arrays of generators of level 1150869
+Node: Tree expressions of level 1153325
+Node: Datatypes for tree expressions of level 1154464
+Node: Constructors/Destructors for tree expressions of level 1156661
+Node: Tests on tree expressions of level 1159824
+Node: Operations on tree expressions of level 1161030
+Node: Tree constraints of level 1162101
+Node: Datatypes for tree constraints of level 1162637
+Node: Constructors/Destructors for tree constraints of level 1163576
+Node: Operations on tree constraints of level 1165577
+Node: Arrays of tree constraints of level 1166244
+Node: Abstract values and operations of level 1168676
+Node: Allocating abstract values of level 1171311
+Node: Control of internal representation of abstract values of level 1172055
+Node: Printing abstract values of level 1173470
+Node: Serialization of abstract values of level 1174358
+Node: Constructors for abstract values of level 1175278
+Node: Accessors for abstract values of level 1176300
+Node: Tests on abstract values of level 1177107
+Node: Extraction of properties of abstract values of level 1178895
+Node: Meet and Join of abstract values of level 1180634
+Node: Assignements and Substitutions of abstract values of level 1182411
+Node: Existential quantification of abstract values of level 1184048
+Node: Change of environments of abstract values of level 1184745
+Node: Expansion and Folding of dimensions in abstract values of level 1186160
+Node: Widening of abstract values of level 1187799
+Node: Topological closure of abstract values of level 1188656
+Node: Additional functions on abstract values of level 1189181
+Node: Level 0 of the interface192242
+Node: Dimensions and related operations194199
+Node: Manipulating changes of dimensions196945
+Node: Manipulating permutations of dimensions198009
+Node: Linear expressions of level 0199392
+Node: Allocating linear expressions of level 0200312
+Node: Tests on linear expressions of level 0201880
+Node: Access to linear expressions of level 0202841
+Node: Change of dimensions and permutations of linear expressions of level 0210412
+Node: Other functions on linear expressions of level 0211687
+Node: Linear constraints of level 0212503
+Node: Allocating linear constraints of level 0214786
+Node: Tests on linear constraints of level 0216021
+Node: Arrays of linear constraints of level 0216432
+Node: Change of dimensions and permutations of linear constraints of level 0217256
+Node: Generators of level 0218851
+Node: Allocating generators of level 0220207
+Node: Arrays of generators of level 0221222
+Node: Change of dimensions and permutations of generators of level 0222290
+Node: Tree expressions of level 0223944
+Node: Tree constraints of level 0224194
+Node: Abstract values and operations of level 0224464
+Node: Allocating abstract values of level 0226444
+Node: Control of internal representation of abstract values of level 0227188
+Node: Printing abstract values of level 0228620
+Node: Serialization of abstract values of level 0229712
+Node: Constructors for abstract values of level 0230631
+Node: Accessors for abstract values of level 0231537
+Node: Tests on abstract values of level 0231984
+Node: Extraction of properties of abstract values of level 0233774
+Node: Meet and Join of abstract values of level 0235549
+Node: Assignements and Substitutions of abstract values of level 0237462
+Node: Existential quantification of abstract values of level 0239108
+Node: Change and permutation of dimensions of abstract values of level 0239821
+Node: Expansion and Folding of dimensions in abstract values of level 0241105
+Node: Widening of abstract values of level 0242729
+Node: Topological closure of abstract values of level 0243258
+Node: Additional functions on abstract values of level 0243783
+Node: Functions for implementors246228
+Node: Examples247152
+Node: Appendices247384
+Node: C Datatype Index247564
+Node: C Variable Index253617
+Node: C Function Index254090
+
+End Tag Table

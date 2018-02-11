@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Mpz.html">
+<link rel="next" href="Gmp_random.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Scalar" rel="Chapter" href="Scalar.html">
+<link title="Interval" rel="Chapter" href="Interval.html">
+<link title="Coeff" rel="Chapter" href="Coeff.html">
+<link title="Dim" rel="Chapter" href="Dim.html">
+<link title="Linexpr0" rel="Chapter" href="Linexpr0.html">
+<link title="Lincons0" rel="Chapter" href="Lincons0.html">
+<link title="Generator0" rel="Chapter" href="Generator0.html">
+<link title="Texpr0" rel="Chapter" href="Texpr0.html">
+<link title="Tcons0" rel="Chapter" href="Tcons0.html">
+<link title="Manager" rel="Chapter" href="Manager.html">
+<link title="Abstract0" rel="Chapter" href="Abstract0.html">
+<link title="Var" rel="Chapter" href="Var.html">
+<link title="Environment" rel="Chapter" href="Environment.html">
+<link title="Linexpr1" rel="Chapter" href="Linexpr1.html">
+<link title="Lincons1" rel="Chapter" href="Lincons1.html">
+<link title="Generator1" rel="Chapter" href="Generator1.html">
+<link title="Texpr1" rel="Chapter" href="Texpr1.html">
+<link title="Tcons1" rel="Chapter" href="Tcons1.html">
+<link title="Abstract1" rel="Chapter" href="Abstract1.html">
+<link title="Parser" rel="Chapter" href="Parser.html">
+<link title="Box" rel="Chapter" href="Box.html">
+<link title="Oct" rel="Chapter" href="Oct.html">
+<link title="Polka" rel="Chapter" href="Polka.html">
+<link title="Ppl" rel="Chapter" href="Ppl.html">
+<link title="PolkaGrid" rel="Chapter" href="PolkaGrid.html">
+<link title="Mpz" rel="Chapter" href="Mpz.html">
+<link title="Mpq" rel="Chapter" href="Mpq.html">
+<link title="Gmp_random" rel="Chapter" href="Gmp_random.html">
+<link title="Mpf" rel="Chapter" href="Mpf.html">
+<link title="Mpfr" rel="Chapter" href="Mpfr.html">
+<link title="Mpzf" rel="Chapter" href="Mpzf.html">
+<link title="Mpqf" rel="Chapter" href="Mpqf.html">
+<link title="Mpfrf" rel="Chapter" href="Mpfrf.html"><link title="Pretty printing" rel="Section" href="#2_Prettyprinting">
+<link title="Initialization and Assignment Functions" rel="Section" href="#2_InitializationandAssignmentFunctions">
+<link title="Additional Initialization and Assignements functions" rel="Section" href="#2_AdditionalInitializationandAssignementsfunctions">
+<link title="Conversion Functions" rel="Section" href="#2_ConversionFunctions">
+<link title="Arithmetic Functions" rel="Section" href="#2_ArithmeticFunctions">
+<link title="Comparison Functions" rel="Section" href="#2_ComparisonFunctions">
+<link title="Applying Integer Functions to Rationals" rel="Section" href="#2_ApplyingIntegerFunctionstoRationals">
+<link title="Input and Output Functions: not interfaced" rel="Section" href="#2_InputandOutputFunctionsnotinterfaced">
+<title>Mpq</title>
+</head>
+<body>
+<div class="navbar"><a href="Mpz.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Gmp_random.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Mpq.html">Mpq</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Mpq: <code class="code"><span class="keyword">sig</span></code> <a href="Mpq.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>GMP multiprecision rationals<br>
+<hr width="100%">
+<pre><span class="keyword">type</span> <a name="TYPEt"></a><code class="type"></code>t </pre>
+
+<br>
+GMP multiprecision rationals<br>
+<br>
+The following operations are mapped as much as possible to their C counterpart. In case of imperative functions (like <code class="code">set</code>, <code class="code">add</code>, ...) the first parameter of type <code class="code">t</code> is an out-parameter and holds the result when the function returns. For instance, <code class="code">add x y z</code> adds the values of <code class="code">y</code> and <code class="code">z</code> and stores the result in <code class="code">x</code>.
+<p>
+
+ These functions are as efficient as their C counterpart: they do not imply additional memory allocation, unlike the corresponding functions in the module <a href="Mpqf.html"><code class="code"><span class="constructor">Mpqf</span></code></a>.<br>
+<pre><span class="keyword">val</span> <a name="VALcanonicalize"></a>canonicalize : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><br>
+<a name="2_Prettyprinting"></a>
+<h2>Pretty printing</h2><br>
+<pre><span class="keyword">val</span> <a name="VALprint"></a>print : <code class="type">Format.formatter -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><br>
+<a name="2_InitializationandAssignmentFunctions"></a>
+<h2>Initialization and Assignment Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALinit"></a>init : <code class="type">unit -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALset"></a>set : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALset_z"></a>set_z : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">Mpz.t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALset_si"></a>set_si : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> int -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VAL_set_str"></a>_set_str : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> string -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALset_str"></a>set_str : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> string -> base:int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALswap"></a>swap : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><br>
+<a name="2_AdditionalInitializationandAssignementsfunctions"></a>
+<h2>Additional Initialization and Assignements functions</h2><br>
+<br>
+These functions are additions to or renaming of functions offered by the C library.<br>
+<pre><span class="keyword">val</span> <a name="VALinit_set"></a>init_set : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit_set_z"></a>init_set_z : <code class="type"><a href="Mpz.html#TYPEt">Mpz.t</a> -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit_set_si"></a>init_set_si : <code class="type">int -> int -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit_set_str"></a>init_set_str : <code class="type">string -> base:int -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit_set_d"></a>init_set_d : <code class="type">float -> <a href="Mpq.html#TYPEt">t</a></code></pre><br>
+<a name="2_ConversionFunctions"></a>
+<h2>Conversion Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALget_d"></a>get_d : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> float</code></pre><pre><span class="keyword">val</span> <a name="VALset_d"></a>set_d : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> float -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALget_z"></a>get_z : <code class="type"><a href="Mpz.html#TYPEt">Mpz.t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VAL_get_str"></a>_get_str : <code class="type">int -> <a href="Mpq.html#TYPEt">t</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALget_str"></a>get_str : <code class="type">base:int -> <a href="Mpq.html#TYPEt">t</a> -> string</code></pre><div class="info">
+<a name="2_UserConversions"></a>
+<h2>User Conversions</h2><br>
+</div>
+<br>
+These functionss are additions to or renaming of functions offeered by the C library.<br>
+<pre><span class="keyword">val</span> <a name="VALto_string"></a>to_string : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALto_float"></a>to_float : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> float</code></pre><pre><span class="keyword">val</span> <a name="VALof_string"></a>of_string : <code class="type">string -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_float"></a>of_float : <code class="type">float -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_int"></a>of_int : <code class="type">int -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_frac"></a>of_frac : <code class="type">int -> int -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_mpz"></a>of_mpz : <code class="type"><a href="Mpz.html#TYPEt">Mpz.t</a> -> <a href="Mpq.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_mpz2"></a>of_mpz2 : <code class="type"><a href="Mpz.html#TYPEt">Mpz.t</a> -> <a href="Mpz.html#TYPEt">Mpz.t</a> -> <a href="Mpq.html#TYPEt">t</a></code></pre><br>
+<a name="2_ArithmeticFunctions"></a>
+<h2>Arithmetic Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALadd"></a>add : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALsub"></a>sub : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALmul"></a>mul : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALmul_2exp"></a>mul_2exp : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALdiv"></a>div : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALdiv_2exp"></a>div_2exp : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> int -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALneg"></a>neg : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALabs"></a>abs : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALinv"></a>inv : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><br>
+<a name="2_ComparisonFunctions"></a>
+<h2>Comparison Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALcmp"></a>cmp : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALcmp_si"></a>cmp_si : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> int -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALsgn"></a>sgn : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALequal"></a>equal : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpq.html#TYPEt">t</a> -> bool</code></pre><br>
+<a name="2_ApplyingIntegerFunctionstoRationals"></a>
+<h2>Applying Integer Functions to Rationals</h2><br>
+<pre><span class="keyword">val</span> <a name="VALget_num"></a>get_num : <code class="type"><a href="Mpz.html#TYPEt">Mpz.t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALget_den"></a>get_den : <code class="type"><a href="Mpz.html#TYPEt">Mpz.t</a> -> <a href="Mpq.html#TYPEt">t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALset_num"></a>set_num : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">Mpz.t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALset_den"></a>set_den : <code class="type"><a href="Mpq.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">Mpz.t</a> -> unit</code></pre><br>
+<a name="2_InputandOutputFunctionsnotinterfaced"></a>
+<h2>Input and Output Functions: not interfaced</h2><br>
+</body></html>

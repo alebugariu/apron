@@ -1,0 +1,132 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Linear expressions of level 1</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Linear expressions of level 1">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Linear expressions of level 1">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC93"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_56.html#SEC92"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_58.html#SEC94"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_54.html#SEC90"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_54.html#SEC90"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_66.html#SEC102"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H2> Linear expressions of level 1 (<TT>`ap_linexpr1.h'</TT>) </H2>
+<!--docid::SEC93::-->
+<P>
+
+We manipulate here expressions of the form
+<BLOCKQUOTE>
+<EM>a_0.x_0 + ... + a_n.x_n + b</EM>
+</BLOCKQUOTE>
+where the coefficients <EM>a_0, ..., a_n, b</EM> are of
+<CODE>ap_coeff_t</CODE> type (either scalars or intervals) and the variables
+<EM>x_0, ... , x_n</EM> are of type <CODE>ap_var_t</CODE>.
+<P>
+
+The semantics of linear expressions is exact, in the sense that the
+arithmetic operations are interpreted in the real (or rational)
+numbers. However, abstract domains are free to overapproximate this
+exact semantics (this may occur when converting rational scalars to
+<CODE>double</CODE> type for instance).
+</P><P>
+
+A special remark concerns integer variables. Abstract domains are
+assumed to perform the operations involving linear expressions using a
+real/rational semantics, and then possibly to reduce the result using
+the knowledge that integer variables may only take integer
+values.
+<BLOCKQUOTE>
+This semantics <EM>coincides</EM> with the natural integer semantics of
+expressions involving only integer variables <EM>only if</EM> the
+involved coefficients are all integers.
+</BLOCKQUOTE>
+<BLOCKQUOTE>
+A typical counter-example to this is an assignement <EM>y := 1/3 x</EM> where
+<EM>x</EM> and <EM>y</EM> are integer variables. If this assignement is
+applied to the BOX abstract domain value <EM>x in [1;1]</EM>, it
+may lead to the bottom value, because one will first obtain <EM>y in
+[1/3;1/3]</EM> by real/rational computations, and this may be reduced to
+the empty interval because <EM>y</EM> is integer and the interval
+contains no integer values.
+</BLOCKQUOTE>
+<P>
+
+If you need expressions with a less simple semantics (mixing integer,
+real/rational and floating-point semantics with casts), you should use
+tree expressions (see section <A HREF="apron_77.html#SEC113">Tree expressions of level 1 (<TT>`ap_texpr1.h'</TT>)</A>).
+</P><P>
+
+<A NAME="IDX128"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_linexpr1_t</B>
+<DD>(Internal) type of interval linear expressions.
+</P><P>
+
+Linear expressions of level 1 are created as objects of type
+<CODE>ap_linexpr1_t</CODE>, not as pointers of type <CODE>ap_linexpr1_t*</CODE>.
+</P><P>
+
+For information:
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef struct ap_linexpr1_t {
+  ap_linexpr0_t* linexpr0;
+  ap_environment_t* env;
+} ap_linexpr1_t;
+</pre></td></tr></table></DL>
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_58.html#SEC94">Allocating linear expressions of level 1</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_59.html#SEC95">Tests on linear expressions of level 1</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_60.html#SEC96">Access to linear expressions of level 1</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_65.html#SEC101">Change of dimensions and permutations of linear expressions of level 1</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="Allocating linear expressions of level 1"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_56.html#SEC92"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_58.html#SEC94"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_54.html#SEC90"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_54.html#SEC90"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_66.html#SEC102"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

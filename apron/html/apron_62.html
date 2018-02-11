@@ -1,0 +1,83 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Getting values</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Getting values">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Getting values">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC98"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_61.html#SEC97"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_63.html#SEC99"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_63.html#SEC99"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_57.html#SEC93"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_66.html#SEC102"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H4> Getting values  </H4>
+<!--docid::SEC149::-->
+<P>
+
+<A NAME="IDX387"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_linexpr0_get_cst</B> <I>(ap_coefft* <VAR>coeff</VAR>, ap_linexpr0_t* <VAR>e</VAR>)</I>
+<DD>Assign to <VAR>coeff</VAR> the constant coefficient of <VAR>e</VAR>.
+</DL>
+</P><P>
+
+<A NAME="IDX388"></A>
+<DL>
+<DT><U>Function:</U> bool <B>ap_linexpr0_get_coeff</B> <I>(ap_coefft* coeff, ap_linexpr0_t* <VAR>e</VAR>, ap_dim_t <VAR>dim</VAR>)</I>
+<DD>Assign to <VAR>coeff</VAR> the coefficient of dimension <VAR>dim</VAR> in the expression <VAR>e</VAR>.
+</P><P>
+
+Return true in case <CODE>ap_linexpr0_coeffref(e,dim)</CODE> returns NULL.
+</DL>
+</P><P>
+
+<A NAME="IDX389"></A>
+<DL>
+<DT><U>Macro:</U> <B>ap_linexpr0_ForeachLinterm</B> <I>(ap_linexpr0_t* <VAR>e</VAR>, size_t <VAR>i</VAR>, ap_dim_t <VAR>dim</VAR>, ap_coeff_t* <VAR>coeff</VAR>)</I>
+<DD>Iterator on the coefficients associated to dimensions.
+</P><P>
+
+<CODE>ap_linexpr0_ForeachLinterm(E,I,DIM,COEFF){ body }</CODE>
+executes the body for each pair (<VAR>coeff</VAR>,<VAR>dim</VAR>) in the
+expression <VAR>e</VAR>. <VAR>coeff</VAR> is a reference to the coefficient
+associated to dimension <VAR>dim</VAR> in <VAR>e</VAR>. <VAR>i</VAR> is an
+auxiliary variable used internally by the macro.
+</DL>
+</P><P>
+
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

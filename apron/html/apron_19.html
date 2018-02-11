@@ -1,0 +1,222 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: APRON Global Datatypes</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: APRON Global Datatypes">
+<META NAME="keywords" CONTENT="APRON 0.9.8: APRON Global Datatypes">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC50"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_18.html#SEC49"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_20.html#SEC51"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_17.html#SEC48"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_18.html#SEC49"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_21.html#SEC54"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Datatypes </H3>
+<!--docid::SEC50::-->
+<P>
+
+<A NAME="IDX1"></A>
+<DL>
+<DT><U>datatype:</U> <B>tbool_t</B>
+<DD><TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef enum tbool_t {
+  tbool_false=0,
+  tbool_true=1,
+  tbool_top=2,   /* don't know */
+} tbool_t;
+static inline tbool_t tbool_of_bool(bool a);
+static inline tbool_t tbool_or(tbool_t a, tbool_t b);
+static inline tbool_t tbool_and(tbool_t a, tbool_t b);
+</pre></td></tr></table>Booleans with a third unknown value.
+</DL>
+</P><P>
+
+<A NAME="IDX2"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_membuf_t</B>
+<DD><TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef struct ap_membuf_t {
+  void* ptr;
+  size_t size;
+} ap_membuf_t;
+</pre></td></tr></table>For serialization.
+</DL>
+</P><P>
+
+<A NAME="IDX3"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_manager_t</B>
+<DD>APRON managers (opaque type).
+</DL>
+</P><P>
+
+<A NAME="IDX4"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_funid_t</B>
+<DD>For identifying functions in excpetions, and when reading/setting
+options attached to them.
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef enum ap_funid_t {
+  AP_FUNID_UNKNOWN,
+  AP_FUNID_COPY,
+  AP_FUNID_FREE,
+  AP_FUNID_ASIZE, /* For avoiding name conflict with AP_FUNID_SIZE */
+  AP_FUNID_MINIMIZE,
+  AP_FUNID_CANONICALIZE,
+  AP_FUNID_HASH,
+  AP_FUNID_APPROXIMATE,
+  AP_FUNID_FPRINT,
+  AP_FUNID_FPRINTDIFF,
+  AP_FUNID_FDUMP,
+  AP_FUNID_SERIALIZE_RAW,
+  AP_FUNID_DESERIALIZE_RAW,
+  AP_FUNID_BOTTOM,
+  AP_FUNID_TOP,
+  AP_FUNID_OF_BOX,
+  AP_FUNID_DIMENSION,
+  AP_FUNID_IS_BOTTOM,
+  AP_FUNID_IS_TOP,
+  AP_FUNID_IS_LEQ,
+  AP_FUNID_IS_EQ,
+  AP_FUNID_IS_DIMENSION_UNCONSTRAINED,
+  AP_FUNID_SAT_INTERVAL,
+  AP_FUNID_SAT_LINCONS,
+  AP_FUNID_SAT_TCONS,
+  AP_FUNID_BOUND_DIMENSION,
+  AP_FUNID_BOUND_LINEXPR,
+  AP_FUNID_BOUND_TEXPR,
+  AP_FUNID_TO_BOX,
+  AP_FUNID_TO_LINCONS_ARRAY,
+  AP_FUNID_TO_TCONS_ARRAY,
+  AP_FUNID_TO_GENERATOR_ARRAY,
+  AP_FUNID_MEET,
+  AP_FUNID_MEET_ARRAY,
+  AP_FUNID_MEET_LINCONS_ARRAY,
+  AP_FUNID_MEET_TCONS_ARRAY,
+  AP_FUNID_JOIN,
+  AP_FUNID_JOIN_ARRAY,
+  AP_FUNID_ADD_RAY_ARRAY,
+  AP_FUNID_ASSIGN_LINEXPR_ARRAY,
+  AP_FUNID_SUBSTITUTE_LINEXPR_ARRAY,
+  AP_FUNID_ASSIGN_TEXPR_ARRAY,
+  AP_FUNID_SUBSTITUTE_TEXPR_ARRAY,
+  AP_FUNID_ADD_DIMENSIONS,
+  AP_FUNID_REMOVE_DIMENSIONS,
+  AP_FUNID_PERMUTE_DIMENSIONS,
+  AP_FUNID_FORGET_ARRAY,
+  AP_FUNID_EXPAND,
+  AP_FUNID_FOLD,
+  AP_FUNID_WIDENING,
+  AP_FUNID_CLOSURE,
+  AP_FUNID_SIZE,
+  AP_FUNID_CHANGE_ENVIRONMENT,
+  AP_FUNID_RENAME_ARRAY,
+  AP_FUNID_SIZE2
+} ap_funid_t;
+
+extern const char* ap_name_of_funid[AP_FUNID_SIZE2];
+/* give the name of a function identifier */
+</pre></td></tr></table></DL>
+</P><P>
+
+<A NAME="IDX5"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_exc_t</B>
+<DD><A NAME="IDX6"></A>
+<DT><U>datatype:</U> <B>ap_exc_log_t</B>
+<DD>Exceptions and exception logs (chained in a list, the first one being
+the last one).
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef enum ap_exc_t {
+  AP_EXC_NONE,           /* no exception detected */
+  AP_EXC_TIMEOUT,        /* timeout detected */
+  AP_EXC_OUT_OF_SPACE,   /* out of space detected */
+  AP_EXC_OVERFLOW,        /* magnitude overflow detected */
+  AP_EXC_INVALID_ARGUMENT, /* invalid arguments */
+  AP_EXC_NOT_IMPLEMENTED, /* not implemented */
+  AP_EXC_SIZE
+} ap_exc_t;
+extern const char* ap_name_of_exception[AP_EXC_SIZE];
+typedef struct ap_exclog_t {
+  ap_exc_t exn;
+  ap_funid_t funid;
+  char* msg;                   /* dynamically allocated */
+  struct ap_exclog_t* tail;
+} ap_exclog_t;
+</pre></td></tr></table></DL>
+</P><P>
+
+<A NAME="ap_funopt_t"></A>
+<A NAME="IDX7"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_funopt_t</B>
+<DD>Options attached to functions.
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef struct ap_funopt_t {
+  int algorithm;
+  /* Algorithm selection:
+     - 0 is default algorithm;
+     - MAX_INT is most accurate available;
+     - MIN_INT is most efficient available;
+     - otherwise, no accuracy or speed meaning
+  */
+  size_t timeout; /* unit !? */
+  /* Above the given computation time, the function may abort with the
+     exception flag flag_time_out on.
+  */
+  size_t max_object_size; /* in abstract object size unit. */
+  /* If during the computation, the size of some object reach this limit, the
+     function may abort with the exception flag flag_out_of_space on.
+  */
+  bool flag_exact_wanted;
+  /* return information about exactitude if possible
+  */
+  bool flag_best_wanted;
+  /* return information about best correct approximation if possible
+  */
+} ap_funopt_t;
+</pre></td></tr></table></DL>
+</P><P>
+
+<A NAME="Functions related to managers"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_18.html#SEC49"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_20.html#SEC51"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_17.html#SEC48"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_18.html#SEC49"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_21.html#SEC54"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

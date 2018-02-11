@@ -1,0 +1,85 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Allocating generators of level 1</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Allocating generators of level 1">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Allocating generators of level 1">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC109"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_72.html#SEC108"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_74.html#SEC110"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_66.html#SEC102"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_72.html#SEC108"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_77.html#SEC113"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Allocating generators of level 1 </H3>
+<!--docid::SEC109::-->
+<P>
+
+<A NAME="IDX201"></A>
+<DL>
+<DT><U>Function:</U> ap_generator1_t <B>ap_generator1_make</B> <I>(ap_gentyp_t <VAR>gentyp</VAR>, ap_linexpr1_t* <VAR>linexpr</VAR>)</I>
+<DD>Create a generator of type <VAR>gentyp</VAR> with the expression <VAR>linexpr</VAR>.
+</P><P>
+
+The expression is not duplicated, just pointed to, so it becomes
+managed via the generator.
+</DL>
+</P><P>
+
+<A NAME="IDX202"></A>
+<DL>
+<DT><U>Function:</U> ap_generator1_t <B>ap_generator1_copy</B> <I>(ap_generator1_t* <VAR>gen</VAR>)</I>
+<DD>Duplication
+</DL>
+</P><P>
+
+<A NAME="IDX203"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_generator1_clear</B> <I>(ap_generator1_t* <VAR>gen</VAR>)</I>
+<DD>Clear the generator and set pointers to NULL.
+</DL>
+</P><P>
+
+<A NAME="IDX204"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_generator1_fprint</B> <I>(FILE* <VAR>stream</VAR>, ap_generator1_t* <VAR>gen</VAR>);</I>
+<DD>Print the linear generator on stream <VAR>stream</VAR>.
+</DL>
+</P><P>
+
+<A NAME="Access to generators of level 1"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

@@ -1,0 +1,479 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: NewPolka standard options</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: NewPolka standard options">
+<META NAME="keywords" CONTENT="APRON 0.9.8: NewPolka standard options">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC63"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_27.html#SEC60"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_29.html#SEC65"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_24.html#SEC57"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_25.html#SEC58"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_29.html#SEC65"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> NewPolka standard options </H3>
+<!--docid::SEC63::-->
+<P>
+
+This section describes the NewPolka options which are selected using
+the standard mechanism offered by APRON (see  <A HREF="apron_20.html#Manager options">Manager options</A>).
+</P><P>
+
+<A NAME="SEC64"></A>
+<H4> Modes </H4>
+<!--docid::SEC64::-->
+Most functions of NewPolka has two modes. In the lazy mode the
+canonicalization (computation of the dual representation and
+minimisation of both representations) of the argument polyhedra is
+performed only when the needed representation is not available. The
+resulting polyhedra is in general not in the canonical
+representation. In the strict mode, argument polyhedra are
+canonicalized (if they are not yet in canonical form) and the result
+is (in general) in canonical form.
+<P>
+
+The strict mode exploits the incremental propery of the Chernikova
+algorithm and maintain in parallel the constraints and the generators
+representations. The lazy mode delays computations as much as
+possible.
+</P><P>
+
+Be cautious, in the following table, canonical means minimized
+constraints and generators representation, but nothing more. In
+particular, the function <CODE>canonicalize</CODE> performs further
+normalization by normalizing strict constraints (when they exist) and
+ordering constraints and generators.
+</P><P>
+
+<TABLE>
+
+<TR><TD>Function              </TD><TD> algo      </TD><TD> Comments</TD>
+
+</TR>
+<TR><TD>copy                      </TD><TD></TD>
+</TD><TD> Identical representation
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>free</TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>size                      </TD><TD></TD>
+</TD><TD> Return the number of coefficients. <BR>
+Their size (when using multi-precision integers) is not taken into
+account.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>minimize                  </TD><TD></TD>
+</TD><TD> Require canonicalization.
+
+Keep only the smallest representation among the constraints and the
+generators representation.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>canonicalize              </TD><TD></TD>
+</TD><TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>approximate               </TD><TD></TD>
+</TD><TD> Require constraints. <BR>
+algo here refers to the explicit parameter of the
+function. A negative number indicates a possibly smaller result, a
+positive one a possibly greater one. The effects of the function may
+be different for 2 identical polyhedra defined by different systems of
+(non minimal) constraints.<BR>
+Equalities are never modified.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD></TD><TD> -1</TD>
+</TD><TD> Normalize integer minimal constraints. This results in a smaller
+polyhedra.
+
+</TR>
+<TR><TD></TD><TD> 1</TD>
+</TD><TD> Remove constraints with coefficients of size (in bits) greater than
+the approximate_max_coeff_size parameter.
+
+</TR>
+<TR><TD></TD><TD> 2</TD>
+</TD><TD> Idem, but preserve interval constraints.
+
+</TR>
+<TR><TD></TD><TD> 3</TD>
+</TD><TD> Idem, but preserve octagonal constraints (+/- xi +/- xj &#62;= cst).
+
+</TR>
+<TR><TD></TD><TD> 10</TD>
+</TD><TD> Simplify constraints such that the coefficients size (in bits) are
+less or equal than the approximate_max_coeff_size parameter. The
+constant coefficients are recomputed by linear programming and are not
+involved in the reduction process.
+
+</TR>
+<TR><TD></TD><TD> --</TD>
+</TD><TD> Do nothing
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>fprint                    </TD><TD></TD>
+</TD><TD> Require canonicalization.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>fprintdiff                </TD><TD></TD>
+</TD><TD> not implemented
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>fdump                     </TD><TD></TD>
+</TD><TD> Print raw representations of any of the constraints, generators and
+saturation matrices that are available.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>serialize_raw, deserialize_raw </TD><TD></TD>
+</TD><TD> not implemented
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>bottom,top                </TD><TD>      </TD><TD> Return canonical form.</TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>of_box                    </TD><TD>      </TD><TD> Return constraints.</TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>of_lincons_array          </TD><TD>      </TD><TD> Return constraints.</TD>
+</TR>
+<TR><TD></TD><TD> &#62;=0  </TD><TD> Take into account interval-linear constraints, after having minimized the quasi-linear constraints</TD>
+</TR>
+<TR><TD></TD><TD> &#60;0  </TD><TD> Ignore interval-linear constraints</TD>
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>dimension                 </TD><TD>      </TD><TD></TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>is_bottom                 </TD><TD> &#60;0   </TD><TD> If generators not available, return <CODE>tbool_top</CODE></TD>
+</TR>
+<TR><TD></TD><TD> &#62;=0  </TD><TD> If generators not available, canonicalize and return <CODE>tbool_false</CODE> or <CODE>tbool_true</CODE>.</TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>is_top                    </TD><TD> &#60;0   </TD><TD> If not in canonical form, return <CODE>tbool_top</CODE></TD>
+</TR>
+<TR><TD></TD><TD> &#62;=0  </TD><TD> Require canonical form.</TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>is_leq                    </TD><TD> &#60;=0  </TD><TD> Require generators of first argument and constraints of second argument.</TD>
+</TR>
+<TR><TD></TD><TD> &#62;0   </TD><TD> Require canonical form for both arguments.</TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>is_eq                     </TD><TD>      </TD><TD> Require canonical form for both arguments.</TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>is_dimension_unconstrained </TD><TD>     </TD><TD> Require canonical form</TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>sat_interval, sat_lincons, bound_dimension, bound_linexpr</TD>
+</TD><TD> &#60;=0  </TD><TD> Require generators.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;0   </TD><TD> Require canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>to_box                    </TD><TD> &#60;0   </TD><TD> Require generators.</TD>
+</TR>
+<TR><TD></TD><TD> &#62;=0  </TD><TD> Require canonical form.</TD>
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>to_lincons_array,</TD>
+to_generator_array              </TD><TD>      </TD><TD> Require canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>meet, meet_array, meet_lincons_array</TD>
+</TD><TD> &#60;0
+</TD><TD> Require constraints. <BR>
+Return non-minimized constraints.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;=0
+</TD><TD> Require canonical form. <BR>
+Return canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>join, join_array, add_ray_array</TD>
+</TD><TD> &#60;0
+</TD><TD> Require generators. <BR>
+Return non-minimized generators.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;=0
+</TD><TD> Require canonical form. <BR>
+Return canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>assign_linexpr</TD>
+</TD><TD> </TD><TD> 1. If the optional argument is NULL,
+</TR>
+<TR><TD></TD>
+</TD><TD> &#60;=0
+</TD><TD> If the expr. is deterministic and invertible, require any representation and return the transformed one. If in canonical form, return canonical form. <BR>
+If the expr. is deterministic and non-invertible, require generators and return generators <BR>
+If the expr. is non-deterministic, require constraints and return generators.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;0
+</TD><TD> Require canonical form, return canonical form. <BR>
+If the expr. is deterministic,(and even more, invertible), the
+operation is more efficient.
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD></TD><TD> </TD><TD> 2. If the optional argument is not NULL,</TD>
+first the assignement is performed, and then the
+meet function is applied with its corresponding option.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>substitute_linexpr</TD>
+</TD><TD> </TD><TD> 1. If the optional argument is NULL,
+</TR>
+<TR><TD></TD>
+</TD><TD> &#60;=0
+</TD><TD> If the expr. is deterministic and invertible, require any representation and return the transformed one. If in canonical form, return canonical form. <BR>
+If the expr. is deterministic and non-invertible, require constraints and return constraints <BR>
+If the expr. is non-deterministic, require constraints and return generators.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;0
+</TD><TD> Require canonical form, return canonical form. <BR>
+If the expr. is deterministic (and even more, invertible), the
+operation is more efficient.
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD></TD><TD> </TD><TD> 2. If the optional argument is not NULL,</TD>
+first the substitution is performed, and then the
+meet function is applied with its corresponding option.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>assign_linexpr_array</TD>
+</TD><TD> </TD><TD> 1. If the optional argument is NULL,
+</TR>
+<TR><TD></TD>
+</TD><TD> &#60;=0
+
+</TD><TD> If the expr. are deterministic, require generators and return generators <BR>
+Otherwise, require canonical form and return generators.
+
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;0
+</TD><TD> Require canonical form, return canonical form.
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD></TD><TD> </TD><TD> 2. If the optional argument is not NULL,</TD>
+first the assignement is performed, and then the
+meet function is applied with its corresponding option.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>substitute_linexpr_array</TD>
+</TD><TD> </TD><TD> 1. If the optional argument is NULL,
+</TR>
+<TR><TD></TD>
+</TD><TD> &#60;=0
+
+</TD><TD> If the expr. are deterministic, require constraints and return constraints <BR>
+Otherwise, require canonical form and return generators.
+
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;0
+</TD><TD> Require canonical form, return canonical form.
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD></TD><TD> </TD><TD> 2. If the optional argument is not NULL,</TD>
+first the substitution is performed, and then the
+meet function is applied with its corresponding option.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>forget_array</TD>
+</TD><TD> &#60;=0 
+</TD><TD> Require generators and return generators.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;0 
+</TD><TD> Require canonical form and return canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>add_dimensions, permute_dimensions</TD>
+</TD><TD> &#60;=0 
+</TD><TD> Require any representation and return the updated one. <BR>
+If in canonical form, return canonical form.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;0 
+</TD><TD> Require canonical form, return canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>remove_dimensions</TD>
+</TD><TD> &#60;=0 
+</TD><TD> Require generators, return generators.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;0 
+</TD><TD> Require canonical form, return canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>expand</TD>
+</TD><TD> &#60;0 
+</TD><TD> Require constraints, return constraints.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;=0 
+</TD><TD> Require canonical form, return canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>fold</TD>
+</TD><TD> &#60;0 
+</TD><TD> Require generators, return generators.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;=0 
+</TD><TD> Require canonical form, return canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>widening</TD>
+</TD><TD> 
+</TD><TD> Require canonical form.
+
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>closure</TD>
+</TD><TD> </TD><TD> 1. If pk_manager_alloc() has been given a false Boolean (no strict constraints), same as copy.
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD></TD>
+</TD><TD> </TD><TD> 2. Otherwise,
+</TR>
+<TR><TD></TD>
+</TD><TD> &#60;0
+</TD><TD> Require constraints, return constraints.
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;=0 
+</TD><TD> Require canonical form, return constraints.
+
+</TR></TABLE>
+<P>
+
+<A NAME="PPL"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_27.html#SEC60"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_29.html#SEC65"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_24.html#SEC57"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_25.html#SEC58"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_29.html#SEC65"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

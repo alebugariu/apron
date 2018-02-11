@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Mpz.html">
+<link rel="next" href="Mpq.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Mpz" rel="Chapter" href="Mpz.html">
+<link title="Mpzf" rel="Chapter" href="Mpzf.html">
+<link title="Mpq" rel="Chapter" href="Mpq.html">
+<link title="Mpqf" rel="Chapter" href="Mpqf.html">
+<link title="Mpf" rel="Chapter" href="Mpf.html">
+<link title="Mpfr" rel="Chapter" href="Mpfr.html">
+<link title="Mpfrf" rel="Chapter" href="Mpfrf.html">
+<link title="Gmp_random" rel="Chapter" href="Gmp_random.html"><link title="Constructors" rel="Section" href="#2_Constructors">
+<link title="Conversions and Printing" rel="Section" href="#2_ConversionsandPrinting">
+<link title="Arithmetic Functions" rel="Section" href="#2_ArithmeticFunctions">
+<link title="Comparison Functions" rel="Section" href="#2_ComparisonFunctions">
+<title>Mpzf</title>
+</head>
+<body>
+<div class="navbar"><a href="Mpz.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Mpq.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Mpzf.html">Mpzf</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Mpzf: <code class="code"><span class="keyword">sig</span></code> <a href="Mpzf.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>GMP multi-precision integers, functional version<br>
+<hr width="100%">
+<br>
+Functions in this module has a functional semantics, unlike the
+corresponding functions in <a href="Mpz.html"><code class="code"><span class="constructor">Mpz</span></code></a>.  These functions are less efficients, due to
+the additional memory allocation neded for the result.
+<p>
+
+This module could be extended to offer more functions with a functional
+semantics.<br>
+<pre><span class="keyword">type</span> <a name="TYPEt"></a><code class="type"></code>t </pre>
+<div class="info">
+multi-precision integer<br>
+</div>
+
+<pre><span class="keyword">val</span> <a name="VALto_mpz"></a>to_mpz : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">Mpz.t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_mpz"></a>of_mpz : <code class="type"><a href="Mpz.html#TYPEt">Mpz.t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><div class="info">
+Safe conversion from and to Mpz.t.
+<p>
+
+  There is no sharing between the argument and the result.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALmpz"></a>mpz : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpz.html#TYPEt">Mpz.t</a></code></pre><pre><span class="keyword">val</span> <a name="VALmpzf"></a>mpzf : <code class="type"><a href="Mpz.html#TYPEt">Mpz.t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><div class="info">
+Unsafe conversion from and to Mpz.t.
+<p>
+
+  The argument and the result actually share the same number: be cautious !<br>
+</div>
+<br>
+<a name="2_Constructors"></a>
+<h2>Constructors</h2><br>
+<pre><span class="keyword">val</span> <a name="VALof_string"></a>of_string : <code class="type">string -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_float"></a>of_float : <code class="type">float -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_int"></a>of_int : <code class="type">int -> <a href="Mpzf.html#TYPEt">t</a></code></pre><br>
+<a name="2_ConversionsandPrinting"></a>
+<h2>Conversions and Printing</h2><br>
+<pre><span class="keyword">val</span> <a name="VALto_string"></a>to_string : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALto_float"></a>to_float : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> float</code></pre><pre><span class="keyword">val</span> <a name="VALprint"></a>print : <code class="type">Format.formatter -> <a href="Mpzf.html#TYPEt">t</a> -> unit</code></pre><br>
+<a name="2_ArithmeticFunctions"></a>
+<h2>Arithmetic Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALadd"></a>add : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALadd_int"></a>add_int : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> int -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALsub"></a>sub : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALsub_int"></a>sub_int : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> int -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALmul"></a>mul : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALmul_int"></a>mul_int : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> int -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALcdiv_q"></a>cdiv_q : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALcdiv_r"></a>cdiv_r : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALcdiv_qr"></a>cdiv_qr : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> * <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_q"></a>fdiv_q : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_r"></a>fdiv_r : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALfdiv_qr"></a>fdiv_qr : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> * <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_q"></a>tdiv_q : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_r"></a>tdiv_r : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALtdiv_qr"></a>tdiv_qr : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> * <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALdivexact"></a>divexact : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALgmod"></a>gmod : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALgcd"></a>gcd : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALlcm"></a>lcm : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALneg"></a>neg : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALabs"></a>abs : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a></code></pre><br>
+<a name="2_ComparisonFunctions"></a>
+<h2>Comparison Functions</h2><br>
+<pre><span class="keyword">val</span> <a name="VALcmp"></a>cmp : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> <a href="Mpzf.html#TYPEt">t</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALcmp_int"></a>cmp_int : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> int -> int</code></pre><pre><span class="keyword">val</span> <a name="VALsgn"></a>sgn : <code class="type"><a href="Mpzf.html#TYPEt">t</a> -> int</code></pre></body></html>

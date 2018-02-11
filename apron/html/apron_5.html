@@ -1,0 +1,380 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Functionalities of the interface at level 0</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Functionalities of the interface at level 0">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Functionalities of the interface at level 0">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC17"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_4.html#SEC9"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_6.html#SEC32"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H2> Functionalities of the interface at level 0 </H2>
+<!--docid::SEC17::-->
+<P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC18">Representation of an abstract value</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC19">Semantics of an abstract value</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC20">Dimensions</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC21">Other datatypes</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC22">Control of internal representation</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC23">Printing</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC24">Serializaton/Deserialization</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC25">Constructors</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC26">Tests</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC27">Property extraction</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC28">Lattice operations</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC29">Assignement and Substitutions</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC30">Operations on dimensions</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_5.html#SEC31">Other operations</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="Representation of an abstract value"></A>
+<A NAME="SEC18"></A>
+<H4> Representation of an abstract value </H4>
+<!--docid::SEC18::-->
+<P>
+
+At the level 0 of the interface, an abstract value is a structure
+@verbatim
+struct ap_abstract0_t {
+  ap_manager_t *manager; /* Explicit context */
+  void         *value;   /* Abstract value representation
+			    (only known by the underlying library) */
+}
+The context is allocated by the underlying library, and contains an
+array of function pointers pointing to the function of the underlying
+library. Hence, it indicates the effective type of an abstract value.
+</P><P>
+
+The validity of the arguments of the functions called through the
+interface is checked before the call to effective functions. In case
+of problem, an <CODE>invalid_argument</CODE> exception is raised.
+</P><P>
+
+<A NAME="Semantics of an abstract value"></A>
+<A NAME="SEC19"></A>
+<H4> Semantics of an abstract value </H4>
+<!--docid::SEC19::-->
+<P>
+
+The semantics of an abstract value is a subset
+<BLOCKQUOTE>
+X of N^p x R^q
+</BLOCKQUOTE>
+<P>
+
+Abstract values are typed according to their dimensionality
+(p,q).
+</P><P>
+
+<A NAME="Dimensions"></A>
+<A NAME="SEC20"></A>
+<H4> Dimensions </H4>
+<!--docid::SEC20::-->
+Dimensions are numbered from 0 to p+q-1 and are typed either as
+integer or real, depending on their rank w.r.t. the dimensionality of
+the abstract value.
+<P>
+
+<BLOCKQUOTE>
+Taking into account or not the fact that some dimensions are integers
+is left to underlying libraries. Treating them as real is still a
+correct approximation. The behaviour of the libraries in this regard
+may also depend on some options.
+</BLOCKQUOTE>
+<P>
+
+<A NAME="Other datatypes"></A>
+<A NAME="SEC21"></A>
+<H4> Other datatypes </H4>
+<!--docid::SEC21::-->
+<P>
+
+In addition to abstract values, the interface also manipulates the
+following main datatypes:
+<DL COMPACT>
+<DT><EM>scalar (number)</EM>
+<DD>Either GMP multiprecision rationals or C <CODE>double</CODE>.
+<DT><EM>interval</EM>
+<DD>composed of 2 scalar numbers. With rationals, plus (resp minus) infinity is represented by 1/0 (resp -1/0). With <CODE>double</CODE>, the IEEE754 is assumed and the corresponding standard representation is used.
+<DT><EM>coefficient</EM>
+<DD>which is either a scalar or an interval.
+<DT><EM>(interval) linear expression</EM>
+<DD>The term linear is used even if the proper term should rather be
+affine.  A linear expression is a linear expression in the common
+sense, using only scalar numbers. A quasi-linear expression is a
+linear expression where the constant coefficient is an interval. An
+interval linear expression is a linear expression where any
+coefficient may be an interval. In order to have a unique datatype for
+these variations, we introduced the notion of coefficient described
+above.
+<DT><EM>"linear" constraints</EM>
+<DD>"Linear" constraints includes proper linear constraints, linear
+constraints in which the expression can be possibly an interval linear
+expression, linear equalities modulo a number, and linear disequalities.
+<DT><EM>generators</EM>
+<DD>A generator system for a subset of <EM>X\subseteq R^n</EM> is a finite
+set of vectors, among which one distinguishes <EM>points</EM>
+<EM>p_0,\ldots,p_m</EM> and <EM>rays</EM> <EM>r_0,\ldots,r_n</EM>, that
+generates <EM>X</EM>:
+<BLOCKQUOTE>
+X = { lambda0 p0 +...+ lambdaM pM + mu0 r0 +...+ muN rN | lambda0 +...+ lambdaN = 1 and forall J : muJ &#62;= 0 }
+</BLOCKQUOTE>
+The APRON datatype for generators distinguishes points (sum of
+coefficients equal to one), rays (positive coefficients), lines (or
+bidirectional rays, with unconstrainted coefficients), integer rays
+(integer positive coefficients) and integer lines (integer
+coefficients).
+</DL>
+<P>
+
+<A NAME="Control of internal representation"></A>
+<A NAME="SEC22"></A>
+<H4> Control of internal representation </H4>
+<!--docid::SEC22::-->
+<P>
+
+We identified several notions:
+</P><P>
+
+<UL>
+<LI>
+Canonical form
+<LI>
+Minimal form (in term of space)
+<LI>
+Approximation notion left to the underlying library (taking into
+account integers or not, ...).
+</UL>
+<P>
+
+<A NAME="Printing"></A>
+<A NAME="SEC23"></A>
+<H4> Printing </H4>
+<!--docid::SEC23::-->
+<P>
+
+There are two printing operations:
+</P><P>
+
+<UL>
+<LI>
+Printing of an abstract value;
+<LI>
+Printing the difference between two abstract values.
+</UL>
+<P>
+
+The printing format is library dependent. However, the conversion of
+abstract values to constraints (see below) allows a form of
+standardized printing for abstract values.
+</P><P>
+
+<A NAME="Serializaton/Deserialization"></A>
+<A NAME="SEC24"></A>
+<H4> Serializaton/Deserialization </H4>
+<!--docid::SEC24::-->
+<P>
+
+Serialization and deserialization of abstract values to a memory
+buffer is offered. It is entirely managed by the underlying
+library. In particular, it is up to it to check that a value read from
+the memory buffer has the right format and has not been written by a
+different library.
+</P><P>
+
+Serialization is done to a memory buffer instead of to a file
+descriptor because this mechanism is more general and is needed for
+interfacing with languages like OCAML.
+</P><P>
+
+<A NAME="Constructors"></A>
+<A NAME="SEC25"></A>
+<H4> Constructors </H4>
+<!--docid::SEC25::-->
+<P>
+
+Four basic constructors are offered:
+</P><P>
+
+<UL>
+<LI>
+bottom (empty) and top (universe) values (with a specified dimensionality);
+<LI>
+abstraction of a bounding box;
+<LI>
+abstraction of conjunction of linear constraints (in the broad sense).
+</UL>
+<P>
+
+<A NAME="Tests"></A>
+<A NAME="SEC26"></A>
+<H4> Tests </H4>
+<!--docid::SEC26::-->
+<P>
+
+Predicates are offered for testing
+<UL>
+<LI>
+emptiness and universality of an abstract value:
+<LI>
+inclusion and equality of two abstract values;
+<LI>
+inclusion of a dimension into an interval given an abstract value;
+<LI>
+satisfaction of a linear constraint by the abstract value.
+</UL>
+<P>
+
+<A NAME="Property extraction"></A>
+<A NAME="SEC27"></A>
+<H4> Property extraction </H4>
+<!--docid::SEC27::-->
+<P>
+
+Some properties may be inferred given an abstract values:
+</P><P>
+
+<UL>
+<LI>Interval of variation of a dimension in an abstract value;
+<P>
+
+<LI>Interval of variation of a linear expression in an abstract value;
+<LI>Conversion to a bounding box
+<LI>Conversion to a set of linear constraints (in the broad sense).
+</UL>
+<P>
+
+Notice that the second operation implements linear programming if it
+is exact. The third operation is not minimal, as it can be implemented
+using the first one, but it was convenient to include it. But the
+fourth operation is minimal and cannot be implemented using the second
+one, as the number of linear expression is infinite.
+</P><P>
+
+<A NAME="Lattice operations"></A>
+<A NAME="SEC28"></A>
+<H4> Lattice operations </H4>
+<!--docid::SEC28::-->
+<P>
+
+<UL>
+<LI>
+Least upper bound and greatest lower bound of two abstract values, and of arrays of abstract values;
+<LI>
+Intersection with one or several linear constraints;
+<LI>
+Addition of rays (for instance for implement generalized time elapse
+operator in linear hybrid systems).
+</UL>
+<P>
+
+<A NAME="Assignement and Substitutions"></A>
+<A NAME="SEC29"></A>
+<H4> Assignement and Substitutions </H4>
+<!--docid::SEC29::-->
+<P>
+
+<UL>
+<LI>
+of a dimension by a (interval) linear expression
+<LI>
+in parallel of several dimensions by several (interval) linear expressions
+</UL>
+<P>
+
+Parallel assignement and substitution ar enot minimal operations, but
+for some abstract domains implementing them directly results in more
+efficient or more precise operations.
+</P><P>
+
+<A NAME="Operations on dimensions"></A>
+<A NAME="SEC30"></A>
+<H4> Operations on dimensions </H4>
+<!--docid::SEC30::-->
+<P>
+
+<UL>
+<LI>
+Projection/Elimination of one or several dimensions with constant
+dimensionality;
+<LI>
+Addition/Removal/Permutation of dimensions with corresponding change
+of dimensionality (with the exception of permutation). These
+operations allows to resize abstract values, and reorganize
+dimensions.
+<LI>
+Expansion and folding of dimensions. This is useful for the
+abstraction of arrays, where a dimension may represent several
+variables.
+<P>
+
+</UL>
+<P>
+
+<A NAME="Other operations"></A>
+<A NAME="SEC31"></A>
+<H4> Other operations </H4>
+<!--docid::SEC31::-->
+<P>
+
+Widening, either simple or with threshold, is offered. A generic
+widening with threshold function is offered in the interface.
+</P><P>
+
+Topological closure (i.e., relaxation of strict inequalities) is
+offered.
+</P><P>
+
+<A NAME="Functionalities of the interface at level 1"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_4.html#SEC9"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_6.html#SEC32"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

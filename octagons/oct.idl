@@ -1,0 +1,116 @@
+/* -*- mode: c -*- */
+
+/*
+ * oct.idl
+ *
+ * OCaml interface specification for camlidl
+ *
+ * APRON Library / Octagonal Domain
+ *
+ * Copyright (C) Antoine Mine' 2006
+ *
+ */
+
+/* This file is part of the APRON Library, released under LGPL license.
+   Please read the COPYING file packaged in the distribution.
+*/
+
+quote(C,"/*\n This file is part of the APRON Library, released under LGPL license.\n Please read the COPYING file packaged in the distribution.\n*/")
+quote(MLMLI,"(*\n This file is part of the APRON Library, released under LGPL license.\n Please read the COPYING file packaged in the distribution.\n*)")
+
+quote(MLI,"\n \n(** Octagon abstract domain. *)\n \n")
+
+quote(C,"#include \"oct.h\"")
+quote(C,"#include \"apron_caml.h\"")
+
+quote(C,"#define I0_CHECK_EXC(man) if (man->result.exn!=AP_EXC_NONE){ value v = camlidl_c2ml_manager_struct_ap_exclog_t(man->result.exclog,_ctx); caml_raise_with_arg(*caml_named_value(\"apron exception\"),v); } ")
+
+
+quote(C,"typedef struct oct_internal_t* internal_ptr;")
+
+import "generator0.idl";
+import "abstract0.idl";
+import "scalar.idl";
+import "manager.idl";
+
+typedef [abstract] struct oct_internal_t* internal_ptr;
+
+quote(MLMLI,"\n \n\
+type t\n\
+  (** Type of octagons.\n\n\
+      Octagons are defined by conjunctions of inequalities of the form\n\
+      [+/-x_i +/- x_j >= 0].\n\n\
+    Abstract values which are octagons have the type [t Apron.AbstractX.t].\n\n\
+    Managers allocated for octagons have the type [t Apron.manager.t].\n\
+  *)\n\n \
+")
+
+quote(MLI,"(** Allocate a new manager to manipulate octagons. *)")
+ap_manager_ptr oct_manager_alloc(void);
+
+quote(MLI,"(** No internal parameters for now... *)")
+internal_ptr manager_get_internal(ap_manager_ptr man)
+  quote(call,"_res = (internal_ptr)man->internal;");
+
+quote(MLI,"(** Approximate a set of generators to an abstract value, with best precision. *)")
+ap_abstract0_ptr ap_abstract0_oct_of_generator_array(ap_manager_ptr man, int v1, int v2, [ref]struct ap_generator0_array_t* v3)
+     quote(dealloc,"I0_CHECK_EXC(man)");
+
+quote(MLI,"(** Widening with scalar thresholds. *)")
+ap_abstract0_ptr ap_abstract0_oct_widening_thresholds(ap_manager_ptr man,ap_abstract0_ptr a1,ap_abstract0_ptr a2,struct ap_scalar_array_t array)
+     quote(call,"_res = ap_abstract0_oct_widening_thresholds(man,a1,a2,(const ap_scalar_t**)array.p,array.size);")
+     quote(dealloc,"I0_CHECK_EXC(man)");
+
+quote(MLI,"(** Standard narrowing. *)")
+ap_abstract0_ptr ap_abstract0_oct_narrowing(ap_manager_ptr man, ap_abstract0_ptr a1,ap_abstract0_ptr a2)
+     quote(dealloc,"I0_CHECK_EXC(man)");
+
+quote(MLI,"(** Perturbation. *)")
+ap_abstract0_ptr ap_abstract0_oct_add_epsilon(ap_manager_ptr man,ap_abstract0_ptr a,ap_scalar_ptr epsilon)
+     quote(dealloc,"I0_CHECK_EXC(man)");
+
+quote(MLI,"(** Perturbation. *)")
+ap_abstract0_ptr ap_abstract0_oct_add_epsilon_bin(ap_manager_ptr man,ap_abstract0_ptr a1,ap_abstract0_ptr a2,ap_scalar_ptr epsilon)
+     quote(dealloc,"I0_CHECK_EXC(man)");
+
+quote(MLI,"(** Algorithms. *)")
+const int pre_widening = 99;
+
+quote(MLI,"\n\n(**
+{2 Compilation information}
+
+{3 Bytecode compilation}
+To compile to bytecode, you should first generate a custom interpreter with a
+command which should look like:
+
+[ocamlc -I $APRON_PREFIX/lib -make-runtime -o myrun bigarray.cma gmp.cma apron.cma oct.cma]
+
+and then you compile and link your example [X.ml] with
+
+[ocamlc -I $APRON_PREFIX/lib -c X.ml] and
+
+[ocamlc -I $APRON_PREFIX/lib -use-runtime myrun -o X bigarray.cma gmp.cma apron.cma oct.cma X.cmo]
+
+{b Comments:} The C libraries related to [gmp.cma] and [apron.cma] are
+automatically looked for (thanks to the auto-linking feature provided by
+[ocamlc]).  For [oct.cma], the library [liboct.a], identic to [liboctMPQ.a], is
+selected by default. The [-noautolink] option should be used to select a
+differetn version. See the C documentation of [Oct] library for details.
+
+With the [-noautolink] option, the generation of the custom runtime executable
+should be done with
+
+[ocamlc -I $APRON_PREFIX/lib -noautolink -make-runtime -o myrun bigarray.cma gmp.cma apron.cma oct.cma -ccopt \"-L$GMP_PREFIX/lib ...\" -cclib \"-loct_caml -loctMPQ -lapron_caml -lapron -lgmp_caml -lmpfr -lgmp -lbigarray -lcamlidl\"]
+
+{3 Native-code compilation}
+You compile and link with
+
+[ocamlopt -I $APRON_PREFIX/lib -c X.ml] and
+
+[ocamlopt -I $APRON_PREFIX/lib -o X bigarray.cmxa gmp.cmxa apron.cmxa oct.cmxa X.cmx]
+
+{b Comments:} Same as for bytecode compilation. With the
+[-noautolink] option, the linking command becomes
+
+[ocamlopt -I $APRON_PREFIX/lib -o X bigarray.cmxa gmp.cmxa apron.cmxa oct.cmxa -ccopt \"-L$GMP_PREFIX/lib ...\" -cclib \"-loct_caml -loctMPQ -lapron_caml -lapron -lgmp_caml -lmpfr -lgmp -lbigarray -lcamlidl\" X.cmx]
+*)")

@@ -1,0 +1,90 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Comparing scalars</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Comparing scalars">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Comparing scalars">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC77"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_40.html#SEC76"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_42.html#SEC78"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_36.html#SEC72"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_37.html#SEC73"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_43.html#SEC79"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Comparing scalars </H3>
+<!--docid::SEC77::-->
+<DL>
+<DT><U>Function:</U> int <B>ap_scalar_infty</B> <I>(ap_scalar_t* <VAR>op</VAR>)</I>
+<DD>Return <CODE>-1</CODE> if <VAR>op</VAR> is set to +infty, <CODE>-1</CODE> if set to
+-infty, and <CODE>0</CODE> otherwise.
+</DL>
+<P>
+
+<A NAME="IDX47"></A>
+<DL>
+<DT><U>Function:</U> int <B>ap_scalar_sgn</B> <I>(ap_scalar_t* <VAR>op</VAR>)</I>
+<DD>Return the sign of <VAR>op</VAR> (<CODE>+1</CODE>, <CODE>0</CODE> or <CODE>-1</CODE>).
+</DL>
+</P><P>
+
+<A NAME="IDX48"></A>
+<DL>
+<DT><U>Function:</U> int <B>ap_scalar_cmp</B> <I>(ap_scalar_t* <VAR>op1</VAR>, ap_scalar_t* <VAR>op2</VAR>)</I>
+<DD><A NAME="IDX49"></A>
+<DT><U>Function:</U> int <B>ap_scalar_cmp_int</B> <I>(ap_scalar_t* <VAR>op1</VAR>, int <VAR>op2</VAR>)</I>
+<DD>Exact comparison between two scalars (resp. a scalar and an integer).
+</P><P>
+
+Return <CODE>-1</CODE> if <VAR>op1</VAR> is less than <VAR>op2</VAR>, <CODE>0</CODE> if they
+are equal, and <CODE>+1</CODE> if <CODE>op1</CODE> is greater than <VAR>op2</VAR>.
+</DL>
+</P><P>
+
+<A NAME="IDX50"></A>
+<DL>
+<DT><U>Function:</U> bool <B>ap_scalar_equal</B> <I>(ap_scalar_t* <VAR>op1</VAR>, ap_scalar_t* <VAR>op2</VAR>);</I>
+<DD><A NAME="IDX51"></A>
+<DT><U>Function:</U> bool <B>ap_scalar_equal_int</B> <I>(ap_scalar_t* <VAR>op1</VAR>, int <VAR>op2</VAR>);</I>
+<DD>Equality test between two scalars (resp. a scalar and an integer).
+</P><P>
+
+Return <CODE>true</CODE> if equality.
+</DL>
+</P><P>
+
+<A NAME="Other operations on scalars"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

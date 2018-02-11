@@ -1,0 +1,101 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Meet and Join of abstract values of level 1</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Meet and Join of abstract values of level 1">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Meet and Join of abstract values of level 1">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC132"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_95.html#SEC131"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_97.html#SEC133"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_82.html#SEC118"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_87.html#SEC123"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_104.html#SEC140"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Meet and Join of abstract values of level 1 </H3>
+<!--docid::SEC132::-->
+<P>
+
+<A NAME="IDX324"></A>
+<DL>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_meet</B> <I>(ap_manager_t* <VAR>man</VAR>, bool <VAR>destructive</VAR>, ap_abstract1_t* <VAR>a1</VAR>, ap_abstract1_t* <VAR>a2</VAR>)</I>
+<DD></P><P>
+
+<A NAME="IDX325"></A>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_join</B> <I>(ap_manager_t* <VAR>man</VAR>, bool <VAR>destructive</VAR>, ap_abstract1_t* <VAR>a1</VAR>, ap_abstract1_t* <VAR>a2</VAR>)</I>
+<DD>Meet and Join of 2 abstract values
+</DL>
+</P><P>
+
+<A NAME="IDX326"></A>
+<DL>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_meet_array</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_abstract1_t* <VAR>array</VAR>, size_t <VAR>size</VAR>)</I>
+<DD></P><P>
+
+<A NAME="IDX327"></A>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_join_array</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_abstract1_t* <VAR>array</VAR>, size_t <VAR>size</VAR>)</I>
+<DD>Meet and Join of the array <VAR>array</VAR> of abstract values of size
+<VAR>size</VAR>.
+</P><P>
+
+Raise an <CODE>AP_EXC_INVALID_ARGUMENT</CODE> exception if
+<CODE>size==1</CODE> (no way to define the environment of the result
+in such a case).
+</DL>
+</P><P>
+
+<A NAME="IDX328"></A>
+<DL>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_meet_lincons_array</B> <I>(ap_manager_t* <VAR>man</VAR>, bool <VAR>destructive</VAR>, ap_abstract1_t* <VAR>a</VAR>, ap_lincons1_array_t* <VAR>array</VAR>)</I>
+<DD><A NAME="IDX329"></A>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_meet_tcons_array</B> <I>(ap_manager_t* <VAR>man</VAR>, bool <VAR>destructive</VAR>, ap_abstract1_t* <VAR>a</VAR>, ap_tcons1_array_t* <VAR>array</VAR>)</I>
+<DD>Meet of the abstract value <VAR>a</VAR> with the set of constraints
+<VAR>array</VAR>.
+</DL>
+</P><P>
+
+<A NAME="IDX330"></A>
+<DL>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_add_ray_array</B> <I>(ap_manager_t* <VAR>man</VAR>, bool <VAR>destructive</VAR>, ap_abstract1_t* <VAR>a</VAR>, ap_generator1_array_t* <VAR>array</VAR>)</I>
+<DD>Generalized time elapse operator.
+</P><P>
+
+<VAR>array</VAR> is supposed to contain only rays or lines, no vertices.
+</DL>
+</P><P>
+
+<A NAME="Assignements and Substitutions of abstract values of level 1"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

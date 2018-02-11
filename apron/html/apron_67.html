@@ -1,0 +1,94 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Allocating linear constraints of level 1</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Allocating linear constraints of level 1">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Allocating linear constraints of level 1">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC103"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_66.html#SEC102"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_68.html#SEC104"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_57.html#SEC93"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_66.html#SEC102"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_72.html#SEC108"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Allocating linear constraints of level 1 </H3>
+<!--docid::SEC103::-->
+<P>
+
+<A NAME="IDX170"></A>
+<DL>
+<DT><U>Function:</U> ap_lincons1_t <B>ap_lincons1_make</B> <I>(ap_constyp_t <VAR>constyp</VAR>, ap_linexpr1_t* <VAR>linexpr</VAR>, ap_scalar_t* mod)</I>
+<DD>Create a constraint of type <VAR>constyp</VAR> with the expression
+<VAR>linexpr</VAR>, and the modulo <VAR>mod</VAR> in case of a congruence
+constraint (<CODE>constyp==AP_CONS_EQMOD</CODE>).
+</P><P>
+
+The expression is not duplicated, just pointed to, so it becomes
+managed via the constraint.
+</DL>
+</P><P>
+
+<A NAME="IDX171"></A>
+<DL>
+<DT><U>Function:</U> ap_lincons1_t <B>ap_lincons1_make_unsat</B> <I>(ap_environment_t* <VAR>env</VAR>)</I>
+<DD>Create the constraint <CODE>-1&#62;=0</CODE>.
+</DL>
+</P><P>
+
+<A NAME="IDX172"></A>
+<DL>
+<DT><U>Function:</U> ap_lincons1_t <B>ap_lincons1_copy</B> <I>(ap_lincons1_t* <VAR>cons</VAR>)</I>
+<DD>Duplication
+</DL>
+</P><P>
+
+<A NAME="IDX173"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_lincons1_clear</B> <I>(ap_lincons1_t* <VAR>cons</VAR>)</I>
+<DD>Clear the constraint and set pointers to NULL.
+</DL>
+</P><P>
+
+<A NAME="IDX174"></A>
+<DL>
+<DT><U>Function:</U> void <B>ap_lincons1_fprint</B> <I>(FILE* <VAR>stream</VAR>, ap_lincons1_t* <VAR>cons</VAR>);</I>
+<DD>Print the linear constraint on stream <VAR>stream</VAR>.
+</DL>
+</P><P>
+
+<A NAME="Tests on linear constraints of level 1"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

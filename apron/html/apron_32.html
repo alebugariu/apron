@@ -1,0 +1,99 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: APRON PPL standard options</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: APRON PPL standard options">
+<META NAME="keywords" CONTENT="APRON 0.9.8: APRON PPL standard options">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC68"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_31.html#SEC67"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_33.html#SEC69"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_25.html#SEC58"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_29.html#SEC65"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_33.html#SEC69"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> APRON PPL standard options </H3>
+<!--docid::SEC68::-->
+<P>
+
+Currently, the only options available are related to the widening
+operators. 
+</P><P>
+
+<TABLE>
+
+<TR><TD>Function              </TD><TD> algo      </TD><TD> Comments</TD>
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>widening</TD>
+</TD><TD> &#60;=0 
+</TD><TD> CH78 standard widening (Cousot &#38; Halbwachs, POPL'1978).
+</TR>
+<TR><TD></TD>
+</TD><TD> &#62;0
+</TD><TD> BHRZ03 widening (Bagnara, Hill, Ricci &#38; Zafanella, SAS'2003)
+</TR>
+<TR><TD></TD>
+</TR>
+<TR><TD>widening_threshold</TD>
+</TD><TD> &#60;=0
+</TD><TD> standard widening with threshold
+</TR>
+<TR><TD></TD>
+</TD><TD> =1
+</TD><TD> standard widening with threshold, intersected by the bounding box of the convex hull pof the two arguments
+</TR>
+<TR><TD></TD>
+</TD><TD> &#60;=0
+</TD><TD> standard widening with threshold
+</TR>
+<TR><TD></TD>
+</TD><TD> =1
+</TD><TD> standard widening with threshold, intersected by the bounding box of the convex hull of the second argument. This is actually an extrapolation rather than a widening (termination is not guaranteed)
+</TR>
+<TR><TD></TD>
+</TD><TD> =2
+</TD><TD> BHRZ03 widening with threshold
+</TR>
+<TR><TD></TD>
+</TD><TD> =3
+</TD><TD> BHRZ03 widening with threshold, intersected by the bounding box of the convex hull of the second argument. This is actually an extrapolation rather than a widening (termination is not guaranteed)
+</TR></TABLE>
+<P>
+
+<A NAME="pkgrid"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

@@ -1,0 +1,175 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Functionalities of the interface at level 1</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Functionalities of the interface at level 1">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Functionalities of the interface at level 1">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC32"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_5.html#SEC17"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H2> Functionalities of the interface at level 1 </H2>
+<!--docid::SEC32::-->
+<P>
+
+We focus on the changes brought by the level 1 w.r.t. the level 0.
+</P><P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_6.html#SEC33">Variables and Environments</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_6.html#SEC34">Semantics and Representation of an abstract value</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_6.html#SEC35">Operations on environments</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_6.html#SEC36">Dynamic typing w.r.t. environments</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_6.html#SEC37">Operations on variables in abstract values</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="Variables and Environments"></A>
+<A NAME="SEC33"></A>
+<H4> Variables </H4>
+<!--docid::SEC33::-->
+<P>
+
+Dimensions are replaced by <EM>variables</EM>.
+</P><P>
+
+In the C interface, variables are defined by a generic type
+(<CODE>char*</CODE>, structured type, ...), equipped with the operations
+<CODE>compare</CODE>, <CODE>copy</CODE>, <CODE>free</CODE>, <CODE>to_string</CODE>. In the
+OCAML, for technical reasons, the type is just the <CODE>string</CODE>
+type.
+</P><P>
+
+<EM>Environments</EM> manages the correspondance between the numerical
+dimensions of level 0 and the variables of level 1.
+</P><P>
+
+<A NAME="Semantics and Representation of an abstract value"></A>
+<A NAME="SEC34"></A>
+<H4> Semantics and Representation of an abstract value </H4>
+<!--docid::SEC34::-->
+<P>
+
+The semantics of an abstract value is a subset
+<BLOCKQUOTE>
+X -&#62; (N+R).
+</BLOCKQUOTE>
+where <EM>X</EM> is a set of variables.
+Abstract values are typed according to their environment.
+<P>
+
+It is represented by a structure
+@verbatim
+struct ap_abstract1_t {
+  ap_abstract0_t    *abstract0;
+  ap_environment_t  *env;
+};
+Other datatypes of level 0 are extend in the same way. For instance,
+@verbatim
+struct ap_linexpr1_t {
+  ap_linexpr0_t    *linexpr0;
+  ap_environment_t *env;
+};
+</P><P>
+
+<A NAME="Operations on environments"></A>
+<A NAME="SEC35"></A>
+<H4> Operations on environments </H4>
+<!--docid::SEC35::-->
+<P>
+
+<UL>
+<LI>creation, merging, destruction
+<LI>addition/removal/renaming of variables
+</UL>
+<P>
+
+<A NAME="Dynamic typing w.r.t. environments"></A>
+<A NAME="SEC36"></A>
+<H4> Dynamic typing w.r.t. environments </H4>
+<!--docid::SEC36::-->
+<P>
+
+For binary operations on abstract values, the environments should be
+the same.
+</P><P>
+
+For operations involving an abstract value and an other datatype
+(expression, constraint, ...), one checks that the environment of
+the expression is a subenvironment of the environment of the abstract
+value, and one resize if necessary.
+</P><P>
+
+<A NAME="Operations on variables in abstract values"></A>
+<A NAME="SEC37"></A>
+<H4> Operations on variables in abstract values </H4>
+<!--docid::SEC37::-->
+<P>
+
+Operations on dimensions are lifted to operations on variables:
+</P><P>
+
+<UL>
+<LI>
+Projection/Elimination of one or several variables with constant
+environment;
+<LI>
+Addition/Removal/Renaming of variables with corresponding change
+of environment;
+<LI>
+Change of environment (possibly combining removal and addition of variables);
+<LI>
+Expansion and folding of variables. 
+</UL>
+<P>
+
+<A NAME="APRON Guidelines"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_5.html#SEC17"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

@@ -1,0 +1,102 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Typing issue in C</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Typing issue in C">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Typing issue in C">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC45"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_13.html#SEC44"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_15.html#SEC46"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_8.html#SEC39"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_9.html#SEC40"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_15.html#SEC46"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Typing issue in C </H3>
+<!--docid::SEC45::-->
+<P>
+
+The use of several libraries at the same time via the common
+interface and the managers associated to each library raises the
+problem of typing. Look at the following code:
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>ap_manager_t* manpk = pk_manager_alloc(true); /* manager for Polka */
+ap_manager_t* manoct = oct_manager_alloc();    /* manager for octagon */
+
+ap_abstract0_t* abs1 = ap_abstract_top(manpk,3,3);
+ap_abstract0_t* abs2 = ap_abstract_top(manoct,3,3);
+bool b = ap_abstract0_is_eq(manoct,abs1,abs2);
+  /* Problem: the effective function called (octagon_is_eq) expects
+     abs1 to be an octagon, and not a polyhedron ! */
+
+ap_abstract0_t* abs3 = ap_abstract_top(manoct,3,3);
+abstract0_meet_with(manpk,abs2,abs3);
+  /* Problem: the effective function called (pk_meet_with) expects
+     abs2 and abs3 to be polyhedra, but they are octagons */
+</pre></td></tr></table></P><P>
+
+There is actually no static typing, as <CODE>abstract0_t*</CODE>
+and <CODE>manager_t</CODE> are abstract types shared by the different
+libraries. Types are thus dynamically checked by the interface.
+Notice that the use of <EM>C++</EM> and inheritance would not solve
+directly the problem, if functions of the interface are methods of
+the manager; one would have:
+</P><P>
+
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>ap_manager_t* manpk = pk_manager_alloc(true);
+  /* manager for Polka, effective type pk_manager_t* */
+ap_manager_t* manoct = oct_manager_alloc();
+  /* manager for octagon, effective type oct_manager_t* */
+
+ap_abstract0_t* abs1 = manpk-&#62;abstract_top(3,3);
+  /* effective type: poly_t */
+ap_abstract0_t* abs2 = manoct-&#62;abstract_top(3,3);
+  /* effective type: oct_t */
+bool b = manoct-&#62;abstract0_is_eq(abs1,abs2);
+  /* No static typing possible:
+     manpk-&#62;abstract0_is_eq and manoct-&#62;abstract0_is_eq should have the same
+     signature (otherwise one cannot interchange manpk and manoct in the code),
+     which means that abs1 and abs2 are supposed to be of type abstract0_t* */
+*/
+</pre></td></tr></table></P><P>
+
+Currently, only the OCaml polymorphic type system allows to solve
+elegantly this problem.
+</P><P>
+
+<A NAME="OCaml Programming Guidelines"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

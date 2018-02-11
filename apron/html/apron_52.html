@@ -1,0 +1,80 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Comparing coefficients</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Comparing coefficients">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Comparing coefficients">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC88"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_51.html#SEC87"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_53.html#SEC89"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_43.html#SEC79"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_49.html#SEC85"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_54.html#SEC90"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Comparing coefficients </H3>
+<!--docid::SEC88::-->
+<P>
+
+<A NAME="IDX99"></A>
+<DL>
+<DT><U>Function:</U> int <B>ap_coeff_cmp</B> <I>(ap_coeff_t* <VAR>op1</VAR>, ap_coeff_t* <VAR>op2</VAR>)</I>
+<DD>Non-total comparison.
+<UL>
+<LI>If <VAR>op1</VAR> and <VAR>op2</VAR> are scalars, corresponds to <CODE>ap_scalar_cmp</CODE>.
+<LI>If <VAR>op1</VAR> and <VAR>op2</VAR> are intervals, corresponds to <CODE>ap_interval_cmp</CODE>.
+<LI>otherwise, -3 if the first is a scalar, 3 otherwise
+</UL>
+</DL>
+<P>
+
+<A NAME="IDX100"></A>
+<DL>
+<DT><U>Function:</U> bool <B>ap_coeff_equal</B> <I>(ap_coeff_t* <VAR>op1</VAR>, ap_coeff_t* <VAR>op2</VAR>)</I>
+<DD>Equality test.
+</DL>
+</P><P>
+
+<A NAME="IDX101"></A>
+<DL>
+<DT><U>Function:</U> bool <B>ap_coeff_zero</B> <I>(ap_coeff_t* <VAR>op</VAR>)</I>
+<DD>Return true iff coeff is a zero scalar or an interval with zero
+bounds.
+</DL>
+</P><P>
+
+<A NAME="Other operations on coefficients"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

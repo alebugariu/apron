@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="next" href="Interval.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Scalar" rel="Chapter" href="Scalar.html">
+<link title="Interval" rel="Chapter" href="Interval.html">
+<link title="Coeff" rel="Chapter" href="Coeff.html">
+<link title="Dim" rel="Chapter" href="Dim.html">
+<link title="Linexpr0" rel="Chapter" href="Linexpr0.html">
+<link title="Lincons0" rel="Chapter" href="Lincons0.html">
+<link title="Generator0" rel="Chapter" href="Generator0.html">
+<link title="Texpr0" rel="Chapter" href="Texpr0.html">
+<link title="Tcons0" rel="Chapter" href="Tcons0.html">
+<link title="Manager" rel="Chapter" href="Manager.html">
+<link title="Abstract0" rel="Chapter" href="Abstract0.html">
+<link title="Var" rel="Chapter" href="Var.html">
+<link title="Environment" rel="Chapter" href="Environment.html">
+<link title="Linexpr1" rel="Chapter" href="Linexpr1.html">
+<link title="Lincons1" rel="Chapter" href="Lincons1.html">
+<link title="Generator1" rel="Chapter" href="Generator1.html">
+<link title="Texpr1" rel="Chapter" href="Texpr1.html">
+<link title="Tcons1" rel="Chapter" href="Tcons1.html">
+<link title="Abstract1" rel="Chapter" href="Abstract1.html">
+<link title="Parser" rel="Chapter" href="Parser.html">
+<link title="Box" rel="Chapter" href="Box.html">
+<link title="Oct" rel="Chapter" href="Oct.html">
+<link title="Polka" rel="Chapter" href="Polka.html">
+<link title="Ppl" rel="Chapter" href="Ppl.html">
+<link title="PolkaGrid" rel="Chapter" href="PolkaGrid.html">
+<link title="Mpz" rel="Chapter" href="Mpz.html">
+<link title="Mpq" rel="Chapter" href="Mpq.html">
+<link title="Gmp_random" rel="Chapter" href="Gmp_random.html">
+<link title="Mpf" rel="Chapter" href="Mpf.html">
+<link title="Mpfr" rel="Chapter" href="Mpfr.html">
+<link title="Mpzf" rel="Chapter" href="Mpzf.html">
+<link title="Mpqf" rel="Chapter" href="Mpqf.html">
+<link title="Mpfrf" rel="Chapter" href="Mpfrf.html"><title>Scalar</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Interval.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Scalar.html">Scalar</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Scalar: <code class="code"><span class="keyword">sig</span></code> <a href="Scalar.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>APRON Scalar numbers. See <a href="Mpqf.html"><code class="code"><span class="constructor">Mpqf</span></code></a> for operations on GMP multiprecision rational numbers and <a href="Mpfr.html"><code class="code"><span class="constructor">Mpfr</span></code></a> for operations on MPFR multi-precision floating-point numbers.<br>
+<hr width="100%">
+<br><code><span class="keyword">type</span> <a name="TYPEt"></a><code class="type"></code>t = </code><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Float</span> <span class="keyword">of</span> <code class="type">float</code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Mpqf</span> <span class="keyword">of</span> <code class="type"><a href="Mpqf.html#TYPEt">Mpqf.t</a></code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Mpfrf</span> <span class="keyword">of</span> <code class="type"><a href="Mpfrf.html#TYPEt">Mpfrf.t</a></code></code></td>
+
+</tr></table>
+
+
+<br>
+APRON Scalar numbers. See <a href="Mpqf.html"><code class="code"><span class="constructor">Mpqf</span></code></a> for operations on GMP multiprecision rational numbers and <a href="Mpfr.html"><code class="code"><span class="constructor">Mpfr</span></code></a> for operations on MPFR multi-precision floating-point numbers.<br>
+<pre><span class="keyword">val</span> <a name="VALof_mpq"></a>of_mpq : <code class="type"><a href="Mpq.html#TYPEt">Mpq.t</a> -> <a href="Scalar.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_mpqf"></a>of_mpqf : <code class="type"><a href="Mpqf.html#TYPEt">Mpqf.t</a> -> <a href="Scalar.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_int"></a>of_int : <code class="type">int -> <a href="Scalar.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_frac"></a>of_frac : <code class="type">int -> int -> <a href="Scalar.html#TYPEt">t</a></code></pre><div class="info">
+Create a scalar of type <code class="code"><span class="constructor">Mpqf</span></code> from resp.<ul>
+<li>A multi-precision rational <code class="code"><span class="constructor">Mpq</span>.t</code> </li>
+<li>A multi-precision rational <code class="code"><span class="constructor">Mpqf</span>.t</code> </li>
+<li>an integer </li>
+<li>a fraction <code class="code">x/y</code></li>
+</ul>
+<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALof_mpfr"></a>of_mpfr : <code class="type"><a href="Mpfr.html#TYPEt">Mpfr.t</a> -> <a href="Scalar.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALof_mpfrf"></a>of_mpfrf : <code class="type"><a href="Mpfrf.html#TYPEt">Mpfrf.t</a> -> <a href="Scalar.html#TYPEt">t</a></code></pre><div class="info">
+Create a scalar of type <code class="code"><span class="constructor">Mpfrf</span></code> with the given value<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALof_float"></a>of_float : <code class="type">float -> <a href="Scalar.html#TYPEt">t</a></code></pre><div class="info">
+Create a scalar of type <code class="code"><span class="constructor">Float</span></code> with the given value<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALof_infty"></a>of_infty : <code class="type">int -> <a href="Scalar.html#TYPEt">t</a></code></pre><div class="info">
+Create a scalar of type <code class="code"><span class="constructor">Float</span></code> with the value multiplied by
+infinity (resulting in minus infinity, zero, or infinity<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALis_infty"></a>is_infty : <code class="type"><a href="Scalar.html#TYPEt">t</a> -> int</code></pre><div class="info">
+Infinity test.
+<code class="code">is_infty x</code> returns <code class="code">-1</code> if x is <code class="code">-oo</code>, <code class="code">1</code> if x is <code class="code">+oo</code>, and <code class="code">0</code> if <code class="code">x</code> is
+finite.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALsgn"></a>sgn : <code class="type"><a href="Scalar.html#TYPEt">t</a> -> int</code></pre><div class="info">
+Return the sign of the coefficient, which may be a negative value, zero
+or a positive value.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcmp"></a>cmp : <code class="type"><a href="Scalar.html#TYPEt">t</a> -> <a href="Scalar.html#TYPEt">t</a> -> int</code></pre><div class="info">
+Compare two coefficients, possibly converting to <code class="code"><span class="constructor">Mpqf</span>.t</code>.
+<code class="code">compare x y</code> returns a negative number if <code class="code">x</code> is less than <code class="code">y</code>, 
+<code class="code">0</code> if they ar equal, and a positive number if <code class="code">x</code> is greater than <code class="code">y</code>.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcmp_int"></a>cmp_int : <code class="type"><a href="Scalar.html#TYPEt">t</a> -> int -> int</code></pre><div class="info">
+Compare a coefficient with an integer<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALequal"></a>equal : <code class="type"><a href="Scalar.html#TYPEt">t</a> -> <a href="Scalar.html#TYPEt">t</a> -> bool</code></pre><div class="info">
+Equality test, possibly using a conversion to <code class="code"><span class="constructor">Mpqf</span>.t</code>.
+Return <code class="code"><span class="keyword">true</span></code> if the 2 values are equal. Two infinite values of the same
+signs are considered as equal.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALequal_int"></a>equal_int : <code class="type"><a href="Scalar.html#TYPEt">t</a> -> int -> bool</code></pre><div class="info">
+Equality test with an integer<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALneg"></a>neg : <code class="type"><a href="Scalar.html#TYPEt">t</a> -> <a href="Scalar.html#TYPEt">t</a></code></pre><div class="info">
+Negation<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALto_string"></a>to_string : <code class="type"><a href="Scalar.html#TYPEt">t</a> -> string</code></pre><div class="info">
+Conversion to string, using <code class="code">string_of_double</code>, <code class="code"><span class="constructor">Mpqf</span>.to_string</code> or <code class="code"><span class="constructor">Mpfr</span>.to_string</code><br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALprint"></a>print : <code class="type">Format.formatter -> <a href="Scalar.html#TYPEt">t</a> -> unit</code></pre><div class="info">
+Print a coefficient<br>
+</div>
+</body></html>

@@ -1,0 +1,255 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Table of Contents</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Table of Contents">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Table of Contents">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC_Contents"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H1>Table of Contents</H1>
+<UL>
+<LI><A NAME="TOC1" HREF="apron_1.html#SEC1">APRON Copying Conditions (LGPL)</A>
+</LI><LI><A NAME="TOC5" HREF="apron_2.html#SEC5">Introduction to APRON</A>
+</LI><LI><A NAME="TOC8" HREF="apron_3.html#SEC8">APRON Rationale and Functionalities</A>
+</LI><UL>
+<LI><A NAME="TOC9" HREF="apron_4.html#SEC9">General choices</A>
+</LI><LI><A NAME="TOC17" HREF="apron_5.html#SEC17">Functionalities of the interface at level 0</A>
+</LI><LI><A NAME="TOC32" HREF="apron_6.html#SEC32">Functionalities of the interface at level 1</A>
+</LI></UL>
+<LI><A NAME="TOC38" HREF="apron_7.html#SEC38">APRON Guidelines</A>
+</LI><UL>
+<LI><A NAME="TOC39" HREF="apron_8.html#SEC39">Installing APRON</A>
+</LI><LI><A NAME="TOC40" HREF="apron_9.html#SEC40">C Programming Guidelines</A>
+</LI><UL>
+<LI><A NAME="TOC41" HREF="apron_10.html#SEC41">C Headers and Libraries</A>
+</LI><LI><A NAME="TOC42" HREF="apron_11.html#SEC42">Naming conventions and Allocation/Deallocation schemes</A>
+</LI><LI><A NAME="TOC43" HREF="apron_12.html#SEC43">Allocating managers and setting options</A>
+</LI><LI><A NAME="TOC44" HREF="apron_13.html#SEC44">Sequel of the small example</A>
+</LI><LI><A NAME="TOC45" HREF="apron_14.html#SEC45">Typing issue in C</A>
+</LI></UL>
+<LI><A NAME="TOC46" HREF="apron_15.html#SEC46">OCaml Programming Guidelines</A>
+</LI><LI><A NAME="TOC47" HREF="apron_16.html#SEC47">How to make an existing library conformant to APRON ?</A>
+</LI></UL>
+<LI><A NAME="TOC48" HREF="apron_17.html#SEC48">Managers and Abstract Domains</A>
+</LI><UL>
+<LI><A NAME="TOC49" HREF="apron_18.html#SEC49">Managers (<TT>`ap_manager.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC50" HREF="apron_19.html#SEC50">Datatypes</A>
+</LI><LI><A NAME="TOC51" HREF="apron_20.html#SEC51">Functions related to managers</A>
+</LI></UL>
+<LI><A NAME="TOC54" HREF="apron_21.html#SEC54">Box (<TT>`box.h'</TT>): intervals abstract domain</A>
+</LI><UL>
+<LI><A NAME="TOC55" HREF="apron_22.html#SEC55">Use of Box</A>
+</LI><LI><A NAME="TOC56" HREF="apron_23.html#SEC56">Allocating Box managers</A>
+</LI></UL>
+<LI><A NAME="TOC57" HREF="apron_24.html#SEC57">Oct: octagon abstract domain</A>
+</LI><LI><A NAME="TOC58" HREF="apron_25.html#SEC58">NewPolka (<TT>`pk.h'</TT>): convex polyhedra and linear equalities abstract domains</A>
+</LI><UL>
+<LI><A NAME="TOC59" HREF="apron_26.html#SEC59">Use of NewPolka</A>
+</LI><LI><A NAME="TOC60" HREF="apron_27.html#SEC60">Allocating NewPolka managers and setting specific options</A>
+</LI><LI><A NAME="TOC63" HREF="apron_28.html#SEC63">NewPolka standard options</A>
+</LI></UL>
+<LI><A NAME="TOC65" HREF="apron_29.html#SEC65">PPL (<TT>`ap_ppl.h'</TT>): convex polyhedra and linear congruences abstract domains</A>
+</LI><UL>
+<LI><A NAME="TOC66" HREF="apron_30.html#SEC66">Use of APRON PPL</A>
+</LI><LI><A NAME="TOC67" HREF="apron_31.html#SEC67">Allocating APRON PPL managers</A>
+</LI><LI><A NAME="TOC68" HREF="apron_32.html#SEC68">APRON PPL standard options</A>
+</LI></UL>
+<LI><A NAME="TOC69" HREF="apron_33.html#SEC69">pkgrid (<TT>`ap_pkgrid.h'</TT>): reduced product of NewPolka convex polyhedra and PPL linear congruences abstract domains</A>
+</LI><UL>
+<LI><A NAME="TOC70" HREF="apron_34.html#SEC70">Use of pkgrid</A>
+</LI><LI><A NAME="TOC71" HREF="apron_35.html#SEC71">Allocating pkgrid managers</A>
+</LI></UL>
+</UL>
+<LI><A NAME="TOC72" HREF="apron_36.html#SEC72">Scalars &#38; Intervals &#38; coefficients</A>
+</LI><UL>
+<LI><A NAME="TOC73" HREF="apron_37.html#SEC73">Scalars (<TT>`ap_scalar.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC74" HREF="apron_38.html#SEC74">Initializing scalars</A>
+</LI><LI><A NAME="TOC75" HREF="apron_39.html#SEC75">Assigning scalars</A>
+</LI><LI><A NAME="TOC76" HREF="apron_40.html#SEC76">Converting scalars</A>
+</LI><LI><A NAME="TOC77" HREF="apron_41.html#SEC77">Comparing scalars</A>
+</LI><LI><A NAME="TOC78" HREF="apron_42.html#SEC78">Other operations on scalars</A>
+</LI></UL>
+<LI><A NAME="TOC79" HREF="apron_43.html#SEC79">Intervals (<TT>`ap_interval.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC80" HREF="apron_44.html#SEC80">Initializing intervals</A>
+</LI><LI><A NAME="TOC81" HREF="apron_45.html#SEC81">Assigning intervals</A>
+</LI><LI><A NAME="TOC82" HREF="apron_46.html#SEC82">Comparing intervals</A>
+</LI><LI><A NAME="TOC83" HREF="apron_47.html#SEC83">Other operations on intervals</A>
+</LI><LI><A NAME="TOC84" HREF="apron_48.html#SEC84">Array of intervals</A>
+</LI></UL>
+<LI><A NAME="TOC85" HREF="apron_49.html#SEC85">Coefficients (<TT>`ap_coeff.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC86" HREF="apron_50.html#SEC86">Initializing coefficients</A>
+</LI><LI><A NAME="TOC87" HREF="apron_51.html#SEC87">Assigning coefficients</A>
+</LI><LI><A NAME="TOC88" HREF="apron_52.html#SEC88">Comparing coefficients</A>
+</LI><LI><A NAME="TOC89" HREF="apron_53.html#SEC89">Other operations on coefficients</A>
+</LI></UL>
+</UL>
+<LI><A NAME="TOC90" HREF="apron_54.html#SEC90">Level 1 of the interface</A>
+</LI><UL>
+<LI><A NAME="TOC91" HREF="apron_55.html#SEC91">Variables and related operations (<TT>`ap_var.h'</TT>)</A>
+</LI><LI><A NAME="TOC92" HREF="apron_56.html#SEC92">Environments (<TT>`ap_environment.h'</TT>)</A>
+</LI><LI><A NAME="TOC93" HREF="apron_57.html#SEC93">Linear expressions of level 1 (<TT>`ap_linexpr1.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC94" HREF="apron_58.html#SEC94">Allocating linear expressions of level 1</A>
+</LI><LI><A NAME="TOC95" HREF="apron_59.html#SEC95">Tests on linear expressions of level 1</A>
+</LI><LI><A NAME="TOC96" HREF="apron_60.html#SEC96">Access to linear expressions of level 1</A>
+</LI><UL>
+<LI><A NAME="TOC97" HREF="apron_61.html#SEC97">Getting references</A>
+</LI><LI><A NAME="TOC98" HREF="apron_62.html#SEC98">Getting values</A>
+</LI><LI><A NAME="TOC99" HREF="apron_63.html#SEC99">Assigning values with a list of arguments</A>
+</LI><LI><A NAME="TOC100" HREF="apron_64.html#SEC100">Assigning values</A>
+</LI></UL>
+<LI><A NAME="TOC101" HREF="apron_65.html#SEC101">Change of dimensions and permutations of linear expressions of level 1</A>
+</LI></UL>
+<LI><A NAME="TOC102" HREF="apron_66.html#SEC102">Linear constraints of level 1 (<TT>`ap_lincons1.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC103" HREF="apron_67.html#SEC103">Allocating linear constraints of level 1</A>
+</LI><LI><A NAME="TOC104" HREF="apron_68.html#SEC104">Tests on linear constraints of level 1</A>
+</LI><LI><A NAME="TOC105" HREF="apron_69.html#SEC105">Access to linear constraints of level 1</A>
+</LI><LI><A NAME="TOC106" HREF="apron_70.html#SEC106">Change of dimensions and permutations of linear constraints of level 1</A>
+</LI><LI><A NAME="TOC107" HREF="apron_71.html#SEC107">Arrays of linear constraints of level 1</A>
+</LI></UL>
+<LI><A NAME="TOC108" HREF="apron_72.html#SEC108">generators of level 1 (<TT>`ap_generator1.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC109" HREF="apron_73.html#SEC109">Allocating generators of level 1</A>
+</LI><LI><A NAME="TOC110" HREF="apron_74.html#SEC110">Access to generators of level 1</A>
+</LI><LI><A NAME="TOC111" HREF="apron_75.html#SEC111">Change of dimensions and permutations of generators of level 1</A>
+</LI><LI><A NAME="TOC112" HREF="apron_76.html#SEC112">Arrays of generators of level 1</A>
+</LI></UL>
+<LI><A NAME="TOC113" HREF="apron_77.html#SEC113">Tree expressions of level 1 (<TT>`ap_texpr1.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC114" HREF="apron_78.html#SEC114">Datatypes for tree expressions of level 1</A>
+</LI><LI><A NAME="TOC115" HREF="apron_79.html#SEC115">Constructors/Destructors for tree expressions of level 1</A>
+</LI><LI><A NAME="TOC116" HREF="apron_80.html#SEC116">Tests on tree expressions of level 1</A>
+</LI><LI><A NAME="TOC117" HREF="apron_81.html#SEC117">Operations on tree expressions of level 1</A>
+</LI></UL>
+<LI><A NAME="TOC118" HREF="apron_82.html#SEC118">Tree constraints of level 1 (<TT>`ap_tcons1.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC119" HREF="apron_83.html#SEC119">Datatypes for tree constraints of level 1</A>
+</LI><LI><A NAME="TOC120" HREF="apron_84.html#SEC120">Constructors/Destructors for tree constraints of level 1</A>
+</LI><LI><A NAME="TOC121" HREF="apron_85.html#SEC121">Operations on tree constraints of level 1</A>
+</LI><LI><A NAME="TOC122" HREF="apron_86.html#SEC122">Arrays of tree constraints of level 1</A>
+</LI></UL>
+<LI><A NAME="TOC123" HREF="apron_87.html#SEC123">Abstract values and operations of level 1 (<TT>`ap_abstract1.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC124" HREF="apron_88.html#SEC124">Allocating abstract values of level 1</A>
+</LI><LI><A NAME="TOC125" HREF="apron_89.html#SEC125">Control of internal representation of abstract values of level 1</A>
+</LI><LI><A NAME="TOC126" HREF="apron_90.html#SEC126">Printing abstract values of level 1</A>
+</LI><LI><A NAME="TOC127" HREF="apron_91.html#SEC127">Serialization of abstract values of level 1</A>
+</LI><LI><A NAME="TOC128" HREF="apron_92.html#SEC128">Constructors for abstract values of level 1</A>
+</LI><LI><A NAME="TOC129" HREF="apron_93.html#SEC129">Accessors for abstract values of level 1</A>
+</LI><LI><A NAME="TOC130" HREF="apron_94.html#SEC130">Tests on abstract values of level 1</A>
+</LI><LI><A NAME="TOC131" HREF="apron_95.html#SEC131">Extraction of properties of abstract values of level 1</A>
+</LI><LI><A NAME="TOC132" HREF="apron_96.html#SEC132">Meet and Join of abstract values of level 1</A>
+</LI><LI><A NAME="TOC133" HREF="apron_97.html#SEC133">Assignements and Substitutions of abstract values of level 1</A>
+</LI><LI><A NAME="TOC134" HREF="apron_98.html#SEC134">Existential quantification of abstract values of level 1</A>
+</LI><LI><A NAME="TOC135" HREF="apron_99.html#SEC135">Change of environments of abstract values of level 1</A>
+</LI><LI><A NAME="TOC136" HREF="apron_100.html#SEC136">Expansion and Folding of dimensions of abstract values of level 1</A>
+</LI><LI><A NAME="TOC137" HREF="apron_101.html#SEC137">Widening of abstract values of level 1</A>
+</LI><LI><A NAME="TOC138" HREF="apron_102.html#SEC138">Topological closure of abstract values of level 1</A>
+</LI><LI><A NAME="TOC139" HREF="apron_103.html#SEC139">Additional functions on abstract values of level 1</A>
+</LI></UL>
+</UL>
+<LI><A NAME="TOC140" HREF="apron_104.html#SEC140">Level 0 of the interface</A>
+</LI><UL>
+<LI><A NAME="TOC141" HREF="apron_105.html#SEC141">Dimensions and related operations (<TT>`ap_dimension.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC142" HREF="apron_106.html#SEC142">Manipulating changes of dimensions</A>
+</LI><LI><A NAME="TOC143" HREF="apron_107.html#SEC143">Manipulating permutations of dimensions</A>
+</LI></UL>
+<LI><A NAME="TOC144" HREF="apron_108.html#SEC144">Linear expressions of level 0 (<TT>`ap_linexpr0.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC145" HREF="apron_109.html#SEC145">Allocating linear expressions of level 0</A>
+</LI><LI><A NAME="TOC146" HREF="apron_110.html#SEC146">Tests on linear expressions of level 0</A>
+</LI><LI><A NAME="TOC147" HREF="apron_111.html#SEC147">Access to linear expressions of level 0</A>
+</LI><UL>
+<LI><A NAME="TOC148" HREF="apron_112.html#SEC148">Getting references </A>
+</LI><LI><A NAME="TOC149" HREF="apron_113.html#SEC149">Getting values </A>
+</LI><LI><A NAME="TOC150" HREF="apron_114.html#SEC150">Assigning values with a list of arguments </A>
+</LI><LI><A NAME="TOC151" HREF="apron_115.html#SEC151">Assigning values </A>
+</LI></UL>
+<LI><A NAME="TOC152" HREF="apron_116.html#SEC152">Change of dimensions and permutations of linear expressions of level 0</A>
+</LI><LI><A NAME="TOC153" HREF="apron_117.html#SEC153">Other functions on linear expressions of level 0</A>
+</LI></UL>
+<LI><A NAME="TOC154" HREF="apron_118.html#SEC154">Linear constraints of level 0 (<TT>`ap_lincons0.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC155" HREF="apron_119.html#SEC155">Allocating linear constraints of level 0</A>
+</LI><LI><A NAME="TOC156" HREF="apron_120.html#SEC156">Tests on linear constraints of level 0</A>
+</LI><LI><A NAME="TOC157" HREF="apron_121.html#SEC157">Arrays of linear constraints of level 0</A>
+</LI><LI><A NAME="TOC158" HREF="apron_122.html#SEC158">Change of dimensions and permutations of linear constraints of level 0</A>
+</LI></UL>
+<LI><A NAME="TOC159" HREF="apron_123.html#SEC159">Generators of level 0 (<TT>`ap_generator0.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC160" HREF="apron_124.html#SEC160">Allocating generators of level 0</A>
+</LI><LI><A NAME="TOC161" HREF="apron_125.html#SEC161">Arrays of generators of level 0</A>
+</LI><LI><A NAME="TOC162" HREF="apron_126.html#SEC162">Change of dimensions and permutations of generators of level 0</A>
+</LI></UL>
+<LI><A NAME="TOC163" HREF="apron_127.html#SEC163">Tree expressions of level 0 (<TT>`ap_texpr0.h'</TT>)</A>
+</LI><LI><A NAME="TOC164" HREF="apron_128.html#SEC164">Tree constraints of level 0 (<TT>`ap_tcons0.h'</TT>)</A>
+</LI><LI><A NAME="TOC165" HREF="apron_129.html#SEC165">Abstract values and operations of level 0 (<TT>`ap_abstract0.h'</TT>)</A>
+</LI><UL>
+<LI><A NAME="TOC166" HREF="apron_130.html#SEC166">Allocating abstract values of level 0</A>
+</LI><LI><A NAME="TOC167" HREF="apron_131.html#SEC167">Control of internal representation of level 0</A>
+</LI><LI><A NAME="TOC168" HREF="apron_132.html#SEC168">Printing abstract values of level 0</A>
+</LI><LI><A NAME="TOC169" HREF="apron_133.html#SEC169">Serialization of abstract values of level 0</A>
+</LI><LI><A NAME="TOC170" HREF="apron_134.html#SEC170">Constructors for abstract values of level 0</A>
+</LI><LI><A NAME="TOC171" HREF="apron_135.html#SEC171">Accessors for abstract values of level 0</A>
+</LI><LI><A NAME="TOC172" HREF="apron_136.html#SEC172">Tests on abstract values of level 0</A>
+</LI><LI><A NAME="TOC173" HREF="apron_137.html#SEC173">Extraction of properties of abstract values of level 0</A>
+</LI><LI><A NAME="TOC174" HREF="apron_138.html#SEC174">Meet and Join of abstract values of level 0</A>
+</LI><LI><A NAME="TOC175" HREF="apron_139.html#SEC175">Assignements and Substitutions of abstract values of level 0</A>
+</LI><LI><A NAME="TOC176" HREF="apron_140.html#SEC176">Existential quantification of abstract values of level 0</A>
+</LI><LI><A NAME="TOC177" HREF="apron_141.html#SEC177">Change and permutation of dimensions of abstract values of level 0</A>
+</LI><LI><A NAME="TOC178" HREF="apron_142.html#SEC178">Expansion and Folding of dimensions of abstract values of level 0</A>
+</LI><LI><A NAME="TOC179" HREF="apron_143.html#SEC179">Widening of abstract values of level 0</A>
+</LI><LI><A NAME="TOC180" HREF="apron_144.html#SEC180">Topological closure of abstract values of level 0</A>
+</LI><LI><A NAME="TOC181" HREF="apron_145.html#SEC181">Additional functions on abstract values of level 0</A>
+</LI></UL>
+</UL>
+<LI><A NAME="TOC182" HREF="apron_146.html#SEC182">Functions for implementors</A>
+</LI><LI><A NAME="TOC183" HREF="apron_147.html#SEC183">Examples</A>
+</LI><LI><A NAME="TOC184" HREF="apron_148.html#SEC184">Appendices</A>
+</LI><UL>
+<LI><A NAME="TOC185" HREF="apron_149.html#SEC185">C Datatype Index</A>
+</LI><LI><A NAME="TOC186" HREF="apron_150.html#SEC186">C Variable Index</A>
+</LI><LI><A NAME="TOC187" HREF="apron_151.html#SEC187">C Function Index</A>
+</LI></UL>
+</UL>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

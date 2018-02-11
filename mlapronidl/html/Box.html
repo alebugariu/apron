@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Parser.html">
+<link rel="next" href="Oct.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Scalar" rel="Chapter" href="Scalar.html">
+<link title="Interval" rel="Chapter" href="Interval.html">
+<link title="Coeff" rel="Chapter" href="Coeff.html">
+<link title="Dim" rel="Chapter" href="Dim.html">
+<link title="Linexpr0" rel="Chapter" href="Linexpr0.html">
+<link title="Lincons0" rel="Chapter" href="Lincons0.html">
+<link title="Generator0" rel="Chapter" href="Generator0.html">
+<link title="Texpr0" rel="Chapter" href="Texpr0.html">
+<link title="Tcons0" rel="Chapter" href="Tcons0.html">
+<link title="Manager" rel="Chapter" href="Manager.html">
+<link title="Abstract0" rel="Chapter" href="Abstract0.html">
+<link title="Var" rel="Chapter" href="Var.html">
+<link title="Environment" rel="Chapter" href="Environment.html">
+<link title="Linexpr1" rel="Chapter" href="Linexpr1.html">
+<link title="Lincons1" rel="Chapter" href="Lincons1.html">
+<link title="Generator1" rel="Chapter" href="Generator1.html">
+<link title="Texpr1" rel="Chapter" href="Texpr1.html">
+<link title="Tcons1" rel="Chapter" href="Tcons1.html">
+<link title="Abstract1" rel="Chapter" href="Abstract1.html">
+<link title="Parser" rel="Chapter" href="Parser.html">
+<link title="Box" rel="Chapter" href="Box.html">
+<link title="Oct" rel="Chapter" href="Oct.html">
+<link title="Polka" rel="Chapter" href="Polka.html">
+<link title="Ppl" rel="Chapter" href="Ppl.html">
+<link title="PolkaGrid" rel="Chapter" href="PolkaGrid.html">
+<link title="Mpz" rel="Chapter" href="Mpz.html">
+<link title="Mpq" rel="Chapter" href="Mpq.html">
+<link title="Gmp_random" rel="Chapter" href="Gmp_random.html">
+<link title="Mpf" rel="Chapter" href="Mpf.html">
+<link title="Mpfr" rel="Chapter" href="Mpfr.html">
+<link title="Mpzf" rel="Chapter" href="Mpzf.html">
+<link title="Mpqf" rel="Chapter" href="Mpqf.html">
+<link title="Mpfrf" rel="Chapter" href="Mpfrf.html"><link title="Compilation information" rel="Section" href="#2_Compilationinformation">
+<link title="Bytecode compilation" rel="Subsection" href="#3_Bytecodecompilation">
+<link title="Native-code compilation" rel="Subsection" href="#3_Nativecodecompilation">
+<title>Box</title>
+</head>
+<body>
+<div class="navbar"><a href="Parser.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Oct.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Box.html">Box</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Box: <code class="code"><span class="keyword">sig</span></code> <a href="Box.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>Intervals abstract domain<br>
+<hr width="100%">
+<pre><span class="keyword">type</span> <a name="TYPEt"></a><code class="type"></code>t </pre>
+<div class="info">
+Type of boxes.
+<p>
+
+Boxes constrains each dimension/variable <code class="code">x_i</code> to belong to an interval <code class="code"><span class="constructor">I_i</span></code>.
+<p>
+
+Abstract values which are boxes have the type <code class="code">t <span class="constructor">Apron</span>.<span class="constructor">AbstractX</span>.t</code>.
+<p>
+
+Managers allocated for boxes have the type <code class="code">t <span class="constructor">Apron</span>.manager.t</code>.<br>
+</div>
+
+<pre><span class="keyword">val</span> <a name="VALmanager_alloc"></a>manager_alloc : <code class="type">unit -> <a href="Box.html#TYPEt">t</a> Apron.Manager.t</code></pre><div class="info">
+Create a Box manager.<br>
+</div>
+<br>
+<a name="2_Compilationinformation"></a>
+<h2>Compilation information</h2>
+<p>
+
+<a name="3_Bytecodecompilation"></a>
+<h3>Bytecode compilation</h3>
+To compile to bytecode, you should first generate a custom
+interpreter with a command which should look like:
+<p>
+
+<code class="code">ocamlc -<span class="constructor">I</span> $<span class="constructor">APRON_PREFIX</span>/lib -make-runtime -o myrun bigarray.cma gmp.cma apron.cma box.cma</code>
+<p>
+
+and then you compile and link your example <code class="code"><span class="constructor">X</span>.ml</code> with
+<p>
+
+<code class="code">ocamlc -<span class="constructor">I</span> $<span class="constructor">APRON_PREFIX</span>/lib -c <span class="constructor">X</span>.ml</code> and
+<p>
+
+<code class="code">ocamlc -<span class="constructor">I</span> $<span class="constructor">APRON_PREFIX</span>/lib -use-runtime myrun -o <span class="constructor">X</span> bigarray.cma gmp.cma apron.cma box.cma <span class="constructor">X</span>.cmo</code>
+<p>
+
+<b>Comments:</b> The C libraries related to <code class="code">gmp.cma</code> and <code class="code">apron.cma</code> are
+automatically looked for (thanks to the auto-linking feature provided by
+<code class="code">ocamlc</code>). For <code class="code">box.cma</code>, the library <code class="code">libbox.a</code>, identic to <code class="code">libboxMPQ.a</code>, is
+selected by default. The <code class="code">-noautolink</code> option should be used to select a differetn version. See the C documentation of <code class="code"><span class="constructor">Box</span></code> library for details.
+<p>
+
+With the <code class="code">-noautolink</code> option, the generation of the custom
+runtime executable should be done with
+<p>
+
+<code class="code">ocamlc -<span class="constructor">I</span> $<span class="constructor">APRON_PREFIX</span>/lib -noautolink -make-runtime -o myrun bigarray.cma gmp.cma apron.cma box.cma -ccopt <span class="string">"-L$GMP_PREFIX/lib ..."</span> -cclib <span class="string">"-lbox_caml -lboxMPQ -lapron_caml -lapron -lgmp_caml -lmpfr -lgmp -lbigarray -lcamlidl"</span></code>
+<p>
+
+<a name="3_Nativecodecompilation"></a>
+<h3>Native-code compilation</h3>
+You compile and link with
+<p>
+
+<code class="code">ocamlopt -<span class="constructor">I</span> $<span class="constructor">APRON_PREFIX</span>/lib -c <span class="constructor">X</span>.ml</code> and
+<p>
+
+<code class="code">ocamlopt -<span class="constructor">I</span> $<span class="constructor">APRON_PREFIX</span>/lib -o <span class="constructor">X</span> bigarray.cmxa gmp.cmxa apron.cmxa box.cmxa <span class="constructor">X</span>.cmx</code>
+<p>
+
+<b>Comments:</b> Same as for bytecode compilation. With the
+<code class="code">-noautolink</code> option, the linking command becomes
+<p>
+
+<code class="code">ocamlopt -<span class="constructor">I</span> $<span class="constructor">APRON_PREFIX</span>/lib -o <span class="constructor">X</span> bigarray.cmxa gmp.cmxa apron.cmxa box.cmxa -ccopt <span class="string">"-L$GMP_PREFIX/lib ..."</span> -cclib <span class="string">"-lbox_caml -lboxMPQ -lapron_caml -lapron -lgmp_caml -lmpfr -lgmp -lbigarray -lcamlidl"</span> <span class="constructor">X</span>.cmx</code><br>
+</body></html>

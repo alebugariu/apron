@@ -1,0 +1,84 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Use of APRON PPL</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Use of APRON PPL">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Use of APRON PPL">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC66"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_29.html#SEC65"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_31.html#SEC67"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_25.html#SEC58"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_29.html#SEC65"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_33.html#SEC69"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Use of APRON PPL </H3>
+<!--docid::SEC66::-->
+<P>
+
+To use APRON PPL in C, you need of course to install PPL, <EM>after
+having patched it</EM> following the recommendations of the <TT>`README'</TT>
+file.  You need also to add
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>#include "apron_ppl.h"
+</pre></td></tr></table>in your source file(s) and add <SAMP>`-I$(APRON_PREFIX)/include'</SAMP> in the
+command line in your Makefile.
+</P><P>
+
+You should also link your object files with the APRON PPL library to
+produce an executable, <EM>using</EM> <SAMP>`g++'</SAMP> (instead of <SAMP>`gcc'</SAMP>,
+because <TT>`libppl.a'</TT> is a C++ library), and adding something like
+<SAMP>`-L$(APRON_PREFIX)/lib -lapron_ppl -L$(PPL_PREFIX)/lib -lppl
+-L$(GMP_PREFIX)/lib -lgmpxx'</SAMP> in the command line in your Makefile
+(followed by the standard <SAMP>`-lapron -litvmpq -litvdbl
+-L$(MPFR_PREFIX)/lib -lmpfr -L$(GMP_PREFIX)/lib -lgmp'</SAMP>). The
+<TT>`libgmpxx.a'</TT> library is the C++ wrapper on top of the GMP
+library. Ensure that your GMP installation contains it, as it is not
+always installed by default.
+</P><P>
+
+All scalars of type <CODE>double</CODE> are converted to scalars of type
+<CODE>mpq_t</CODE> inside APRON PPL, as APRON PPL works internally with exact
+rational arithmetics. So when possible it is better for the user (in
+term of efficiency) to convert already <CODE>double</CODE> scalars to
+<CODE>mpq_t</CODE> scalars.
+</P><P>
+
+The wrapper library is available in debug mode
+(<SAMP>`libapron_ppl_debug.a'</SAMP>).
+</P><P>
+
+<A NAME="Allocating APRON PPL managers"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

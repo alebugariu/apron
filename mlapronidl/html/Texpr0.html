@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Generator0.html">
+<link rel="next" href="Tcons0.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Scalar" rel="Chapter" href="Scalar.html">
+<link title="Interval" rel="Chapter" href="Interval.html">
+<link title="Coeff" rel="Chapter" href="Coeff.html">
+<link title="Dim" rel="Chapter" href="Dim.html">
+<link title="Linexpr0" rel="Chapter" href="Linexpr0.html">
+<link title="Lincons0" rel="Chapter" href="Lincons0.html">
+<link title="Generator0" rel="Chapter" href="Generator0.html">
+<link title="Texpr0" rel="Chapter" href="Texpr0.html">
+<link title="Tcons0" rel="Chapter" href="Tcons0.html">
+<link title="Manager" rel="Chapter" href="Manager.html">
+<link title="Abstract0" rel="Chapter" href="Abstract0.html">
+<link title="Var" rel="Chapter" href="Var.html">
+<link title="Environment" rel="Chapter" href="Environment.html">
+<link title="Linexpr1" rel="Chapter" href="Linexpr1.html">
+<link title="Lincons1" rel="Chapter" href="Lincons1.html">
+<link title="Generator1" rel="Chapter" href="Generator1.html">
+<link title="Texpr1" rel="Chapter" href="Texpr1.html">
+<link title="Tcons1" rel="Chapter" href="Tcons1.html">
+<link title="Abstract1" rel="Chapter" href="Abstract1.html">
+<link title="Parser" rel="Chapter" href="Parser.html">
+<link title="Box" rel="Chapter" href="Box.html">
+<link title="Oct" rel="Chapter" href="Oct.html">
+<link title="Polka" rel="Chapter" href="Polka.html">
+<link title="Ppl" rel="Chapter" href="Ppl.html">
+<link title="PolkaGrid" rel="Chapter" href="PolkaGrid.html">
+<link title="Mpz" rel="Chapter" href="Mpz.html">
+<link title="Mpq" rel="Chapter" href="Mpq.html">
+<link title="Gmp_random" rel="Chapter" href="Gmp_random.html">
+<link title="Mpf" rel="Chapter" href="Mpf.html">
+<link title="Mpfr" rel="Chapter" href="Mpfr.html">
+<link title="Mpzf" rel="Chapter" href="Mpzf.html">
+<link title="Mpqf" rel="Chapter" href="Mpqf.html">
+<link title="Mpfrf" rel="Chapter" href="Mpfrf.html"><link title="Constructors and Destructor" rel="Section" href="#2_ConstructorsandDestructor">
+<link title="Tests" rel="Section" href="#2_Tests">
+<link title="Printing" rel="Section" href="#2_Printing">
+<link title="Internal usage for level 1" rel="Section" href="#2_Internalusageforlevel1">
+<link title="Incremental constructors" rel="Subsection" href="#3_Incrementalconstructors">
+<title>Texpr0</title>
+</head>
+<body>
+<div class="navbar"><a href="Generator0.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Tcons0.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Texpr0.html">Texpr0</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Texpr0: <code class="code"><span class="keyword">sig</span></code> <a href="Texpr0.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><hr width="100%">
+<pre><span class="keyword">type</span> <a name="TYPEt"></a><code class="type"></code>t </pre>
+
+<br><code><span class="keyword">type</span> <a name="TYPEunop"></a><code class="type"></code>unop = </code><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Neg</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Cast</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Sqrt</span></code></td>
+
+</tr></table>
+
+<div class="info">
+Unary operators<br>
+</div>
+
+<br><code><span class="keyword">type</span> <a name="TYPEbinop"></a><code class="type"></code>binop = </code><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Add</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Sub</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Mul</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Div</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Mod</span></code></td>
+
+</tr></table>
+
+<div class="info">
+Binary operators<br>
+</div>
+
+<br><code><span class="keyword">type</span> <a name="TYPEtyp"></a><code class="type"></code>typ = </code><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Real</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Int</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Single</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Double</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Extended</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Quad</span></code></td>
+
+</tr></table>
+
+<div class="info">
+Destination type for rounding<br>
+</div>
+
+<br><code><span class="keyword">type</span> <a name="TYPEround"></a><code class="type"></code>round = </code><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Near</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Zero</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Up</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Down</span></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Rnd</span></code></td>
+
+</tr></table>
+
+<div class="info">
+Rounding direction<br>
+</div>
+
+<br>
+APRON tree expressions of level 0<br>
+<br><code><span class="keyword">type</span> <a name="TYPEexpr"></a><code class="type"></code>expr = </code><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Cst</span> <span class="keyword">of</span> <code class="type"><a href="Coeff.html#TYPEt">Coeff.t</a></code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Dim</span> <span class="keyword">of</span> <code class="type"><a href="Dim.html#TYPEt">Dim.t</a></code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Unop</span> <span class="keyword">of</span> <code class="type"><a href="Texpr0.html#TYPEunop">unop</a> * <a href="Texpr0.html#TYPEexpr">expr</a> * <a href="Texpr0.html#TYPEtyp">typ</a> * <a href="Texpr0.html#TYPEround">round</a></code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span class="constructor">Binop</span> <span class="keyword">of</span> <code class="type"><a href="Texpr0.html#TYPEbinop">binop</a> * <a href="Texpr0.html#TYPEexpr">expr</a> * <a href="Texpr0.html#TYPEexpr">expr</a> * <a href="Texpr0.html#TYPEtyp">typ</a> * <a href="Texpr0.html#TYPEround">round</a></code></code></td>
+
+</tr></table>
+
+<div class="info">
+User type for tree expressions<br>
+</div>
+
+<br>
+<a name="2_ConstructorsandDestructor"></a>
+<h2>Constructors and Destructor</h2><br>
+<pre><span class="keyword">val</span> <a name="VALof_expr"></a>of_expr : <code class="type"><a href="Texpr0.html#TYPEexpr">expr</a> -> <a href="Texpr0.html#TYPEt">t</a></code></pre><div class="info">
+General constructor (actually the most efficient<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcopy"></a>copy : <code class="type"><a href="Texpr0.html#TYPEt">t</a> -> <a href="Texpr0.html#TYPEt">t</a></code></pre><div class="info">
+Copy<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALof_linexpr"></a>of_linexpr : <code class="type"><a href="Linexpr0.html#TYPEt">Linexpr0.t</a> -> <a href="Texpr0.html#TYPEt">t</a></code></pre><div class="info">
+Conversion<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALto_expr"></a>to_expr : <code class="type"><a href="Texpr0.html#TYPEt">t</a> -> <a href="Texpr0.html#TYPEexpr">expr</a></code></pre><div class="info">
+General destructor<br>
+</div>
+<br>
+<a name="3_Incrementalconstructors"></a>
+<h3>Incremental constructors</h3><br>
+<pre><span class="keyword">val</span> <a name="VALcst"></a>cst : <code class="type"><a href="Coeff.html#TYPEt">Coeff.t</a> -> <a href="Texpr0.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALdim"></a>dim : <code class="type"><a href="Dim.html#TYPEt">Dim.t</a> -> <a href="Texpr0.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALunop"></a>unop : <code class="type"><a href="Texpr0.html#TYPEunop">unop</a> -> <a href="Texpr0.html#TYPEt">t</a> -> <a href="Texpr0.html#TYPEtyp">typ</a> -> <a href="Texpr0.html#TYPEround">round</a> -> <a href="Texpr0.html#TYPEt">t</a></code></pre><pre><span class="keyword">val</span> <a name="VALbinop"></a>binop : <code class="type"><a href="Texpr0.html#TYPEbinop">binop</a> -><br>       <a href="Texpr0.html#TYPEtyp">typ</a> -> <a href="Texpr0.html#TYPEround">round</a> -> <a href="Texpr0.html#TYPEt">t</a> -> <a href="Texpr0.html#TYPEt">t</a> -> <a href="Texpr0.html#TYPEt">t</a></code></pre><br>
+<a name="2_Tests"></a>
+<h2>Tests</h2><br>
+<pre><span class="keyword">val</span> <a name="VALis_interval_cst"></a>is_interval_cst : <code class="type"><a href="Texpr0.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALis_interval_linear"></a>is_interval_linear : <code class="type"><a href="Texpr0.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALis_interval_polynomial"></a>is_interval_polynomial : <code class="type"><a href="Texpr0.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALis_interval_polyfrac"></a>is_interval_polyfrac : <code class="type"><a href="Texpr0.html#TYPEt">t</a> -> bool</code></pre><pre><span class="keyword">val</span> <a name="VALis_scalar"></a>is_scalar : <code class="type"><a href="Texpr0.html#TYPEt">t</a> -> bool</code></pre><br>
+<a name="2_Printing"></a>
+<h2>Printing</h2><br>
+<pre><span class="keyword">val</span> <a name="VALstring_of_unop"></a>string_of_unop : <code class="type"><a href="Texpr0.html#TYPEunop">unop</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALstring_of_binop"></a>string_of_binop : <code class="type"><a href="Texpr0.html#TYPEbinop">binop</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALstring_of_typ"></a>string_of_typ : <code class="type"><a href="Texpr0.html#TYPEtyp">typ</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALstring_of_round"></a>string_of_round : <code class="type"><a href="Texpr0.html#TYPEround">round</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALprint_unop"></a>print_unop : <code class="type">Format.formatter -> <a href="Texpr0.html#TYPEunop">unop</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALprint_binop"></a>print_binop : <code class="type">Format.formatter -> <a href="Texpr0.html#TYPEbinop">binop</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALprint_typ"></a>print_typ : <code class="type">Format.formatter -> <a href="Texpr0.html#TYPEtyp">typ</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALprint_round"></a>print_round : <code class="type">Format.formatter -> <a href="Texpr0.html#TYPEround">round</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALprint_expr"></a>print_expr : <code class="type">(<a href="Dim.html#TYPEt">Dim.t</a> -> string) -> Format.formatter -> <a href="Texpr0.html#TYPEexpr">expr</a> -> unit</code></pre><div class="info">
+Print a tree expression, using a function converting from dimensions to names<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALprint"></a>print : <code class="type">(<a href="Dim.html#TYPEt">Dim.t</a> -> string) -> Format.formatter -> <a href="Texpr0.html#TYPEt">t</a> -> unit</code></pre><div class="info">
+Print an abstract tree expression, using a function converting from dimensions to names<br>
+</div>
+<br>
+<a name="2_Internalusageforlevel1"></a>
+<h2>Internal usage for level 1</h2><br>
+<pre><span class="keyword">val</span> <a name="VALprint_sprint_unop"></a>print_sprint_unop : <code class="type"><a href="Texpr0.html#TYPEunop">unop</a> -> <a href="Texpr0.html#TYPEtyp">typ</a> -> <a href="Texpr0.html#TYPEround">round</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALprint_sprint_binop"></a>print_sprint_binop : <code class="type"><a href="Texpr0.html#TYPEbinop">binop</a> -> <a href="Texpr0.html#TYPEtyp">typ</a> -> <a href="Texpr0.html#TYPEround">round</a> -> string</code></pre><pre><span class="keyword">val</span> <a name="VALprint_precedence_of_unop"></a>print_precedence_of_unop : <code class="type"><a href="Texpr0.html#TYPEunop">unop</a> -> int</code></pre><pre><span class="keyword">val</span> <a name="VALprint_precedence_of_binop"></a>print_precedence_of_binop : <code class="type"><a href="Texpr0.html#TYPEbinop">binop</a> -> int</code></pre></body></html>

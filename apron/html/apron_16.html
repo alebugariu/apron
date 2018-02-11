@@ -1,0 +1,128 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: MakingLibrary</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: MakingLibrary">
+<META NAME="keywords" CONTENT="APRON 0.9.8: MakingLibrary">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC47"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_15.html#SEC46"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_17.html#SEC48"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_17.html#SEC48"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H2> How to make an existing library conformant to APRON ? </H2>
+<!--docid::SEC47::-->
+<P>
+
+We briefly describe here how to connect an existing library to the
+common interface.
+</P><P>
+
+First, the library has to expose an interface which conforms to the
+level 0 of the interface (module <CODE>abstract0</CODE>).  All the functions
+described in this module should be defined. If a function is not
+really implemented, at least it shoulld contain the code raising the
+exception <CODE>EXC_NOT_IMPLEMENTED</CODE>.  The implementor may use any
+functions of the files <TT>`ap_coeff.h'</TT>, <TT>`ap_linexpr0.h'</TT>,
+<TT>`ap_lincons0.h'</TT>, <TT>`ap_generator0.h'</TT> and <TT>`ap_manager.h'</TT>
+to help the job of converting datatypes of the interface to internal
+datatypes used inside the library.
+</P><P>
+
+Second and last, the library should expose an initialization
+function that allocates and initializes properly an object of type
+<CODE>manager_t</CODE>. For this purpose, the module <CODE>manager</CODE> offers the
+utility functions <CODE>manager_alloc</CODE>. As an example, we give the
+definition of the function allocating a manager as implemented in
+the <EM>NewPolka</EM>.
+</P><P>
+
+<OL>
+<LI>Header of the function:
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>manager_t* pk_manager_alloc(
+  bool strict /* specific parameter: do we allow strict constaints ? */
+)
+</pre></td></tr></table><LI>Allocation and initialisation of global data specific to <EM>NewPolka</EM>:
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>{
+  pk_internal_t* pk = pk_internal_alloc(strict); /* allocation */
+  pk_set_approximate_max_coeff_size(pk, 1);
+    /* initialization of specific functions
+       (not offered in the common interface) */
+}
+</pre></td></tr></table><LI>Allocation of the manager itself:
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>  manager_t* man = ap_manager_alloc("polka","2.0",
+				    pk, (void (*)(void*))pk_internal_free);
+</pre></td></tr></table>We provide resp. name, version, internal specific manager, and the
+function to free it.
+<P>
+
+The function <CODE>manager_alloc</CODE> sets the options of the
+common interface to their default value (see documentation).
+<LI>Initialization of the "virtual" table: we need to connect
+  the generic functions of the interface (eg, <CODE>abstract_meet</CODE>,
+  \ldots) to the actual functions of the library.
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>  funptr = man-&#62;funptr;
+
+  funptr[fun_minimize] = &#38;poly_minimize;
+  funptr[fun_canonicalize] = &#38;poly_canonicalize;
+  funptr[fun_hash] = &#38;poly_hash;
+  funptr[fun_approximate] = &#38;poly_approximate;
+  funptr[fun_fprint] = &#38;poly_fprint;
+  funptr[fun_fprintdiff] = &#38;poly_fprintdiff;
+  funptr[fun_fdump] = &#38;poly_fdump;
+  ...
+</pre></td></tr></table><LI>Last, we return the allocated manager:
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>  return man;
+}
+</pre></td></tr></table></OL>
+That's all for the implementor side.
+<P>
+
+<A NAME="Managers and Abstract Domains"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_15.html#SEC46"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_17.html#SEC48"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_17.html#SEC48"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

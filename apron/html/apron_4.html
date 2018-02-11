@@ -1,0 +1,263 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: General choices</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: General choices">
+<META NAME="keywords" CONTENT="APRON 0.9.8: General choices">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC9"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_5.html#SEC17"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H2> General choices </H2>
+<!--docid::SEC9::-->
+<P>
+
+<BLOCKQUOTE><TABLE BORDER=0 CELLSPACING=0> 
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_4.html#SEC10">Interface levels</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_4.html#SEC11">Programming language</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_4.html#SEC12">Compatibility with threads</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_4.html#SEC13">Interruptions</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_4.html#SEC14">Memory management</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_4.html#SEC15">Programming style</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+<TR><TD ALIGN="left" VALIGN="TOP"><A HREF="apron_4.html#SEC16">Number representation</A></TD><TD>&nbsp;&nbsp;</TD><TD ALIGN="left" VALIGN="TOP"></TD></TR>
+</TABLE></BLOCKQUOTE>
+<P>
+
+<A NAME="Interface levels"></A>
+<A NAME="SEC10"></A>
+<H4> Interface levels </H4>
+<!--docid::SEC10::-->
+<P>
+
+There are two main goals for the APRON interface: efficiency of the
+implementations, and ease of use for the user. In addition, code
+duplication between libraries should be avoided. As a consequence, two
+levels were identified:
+<DL COMPACT>
+<DT><EM>Level 0</EM>
+<DD>Choices are guided by the efficiency and the precision of the operations;
+<DT><EM>Level 1</EM>
+<DD>Choices are guided by ease of use, and code factorization.
+</DL>
+<P>
+
+The level 0 is directly connected to the underlying (existing)
+library. It includes all the operations that are specific to an
+abstract domain and whose code cannot be shared. The interface should
+be minimal, <EM>unless</EM> there is a strong algorithmical advantage to
+include a combination of more basic operations.
+</P><P>
+
+The higher levels offers additional functionalities that are shared by
+all the library connected to the level 0. For instance:
+</P><P>
+
+<UL>
+<LI>
+managing correspondance between numerical dimensions and names
+(characters strings or more generally references);
+<LI>
+abstraction of non linear expressions in interval linear expressions;
+<LI>
+automatic call to redimensioning and permutation operations for
+computing
+P(x,y)/\Q(y,z).
+</UL>
+<P>
+
+Combination of abstract domain is possible at the level 0. One can
+implement for instance the cartesian or reduced product of two
+different abstract domains, the decomposition of abstract values into
+a product of values of smaller dimensionality, ...
+</P><P>
+
+<A NAME="Programming language"></A>
+<A NAME="SEC11"></A>
+<H4> Programming language </H4>
+<!--docid::SEC11::-->
+<P>
+
+The reference version of the interface is the C version of the interface:
+</P><P>
+
+<UL>
+<LI>
+C can be easily interfaced with most programming languages;
+<LI>
+Most of the existing libraries implementing abstract domains for
+numerical variables are programmed in C or C++.
+</UL>
+<P>
+
+An OCAML version is already available. The interface between
+OCaml and C is even generic and any libraries can benefit from it by
+providing the glue for just one function (see XX).
+</P><P>
+
+<A NAME="Compatibility with threads"></A>
+<A NAME="SEC12"></A>
+<H4> Compatibility with threads </H4>
+<!--docid::SEC12::-->
+<P>
+
+In order to ensure compatibility with multithreading programming, a
+context is explicitly passed to functions in order to ensure the
+following points:
+</P><P>
+
+<UL>
+<LI>
+the transmission of data specific to each library (non-standard
+options, workspace, ...);
+<LI>
+the transmission of standard options (selection of algorithms and their
+precision inside a library);
+<LI>
+the management of exceptions (implemented as error codes in the C
+interface) (<CODE>not_implemented</CODE>, <CODE>invalid_argument</CODE>,
+<CODE>overflow</CODE>, <CODE>timeout</CODE>, <CODE>out_of_space</CODE>).
+</UL>
+<P>
+
+<A NAME="Interruptions"></A>
+<A NAME="SEC13"></A>
+<H4> Interruptions </H4>
+<!--docid::SEC13::-->
+<P>
+
+Interruptions mechanism is have possible for different cases:
+<DL COMPACT>
+<DT><CODE>timeout</CODE>
+<DD>if the execution time for an operation exceeds some bound;
+<DT><CODE>out_of_space</CODE>
+<DD>if the space consumption for an operation exceeds some bound;
+<DT><CODE>overflow</CODE>
+<DD>if the magnitude or the space usage of manipulated numbers exceeds some bound;
+<DT><CODE>not_implemented</CODE>
+<DD>if the operation is actually not implemented by the underlying library;
+<DT><CODE>invalid_argument</CODE>
+<DD>if the arguments do not follow the requirements of an operation.
+</DL>
+<P>
+
+<BLOCKQUOTE>
+For instance, in a convex polyhedra library, the <CODE>out_of_space</CODE>
+exception allows to abort an operation is the result appears to have
+too many constraints and/or generators. If this happens, one can redo
+the operation with another (less precise) algorithm. The
+<CODE>overflow</CODE> may be useful when effective overflows are encountered
+with machine integers or when multiprecision rational numbers have too
+large numerators and denominators. The <CODE>not_implemented</CODE>
+exception allows for a library to be linked to the interface even if
+it does not provide some operation of the interface.
+</BLOCKQUOTE>
+<P>
+
+When an interruption occurs, the function should still return a
+correct result, in the abstract interpretation sense: it should be a
+correct approximation, usable for next operations in the program. The
+top value is always a correct approximation.
+</P><P>
+
+<A NAME="Memory management"></A>
+<A NAME="SEC14"></A>
+<H4> Memory management </H4>
+<!--docid::SEC14::-->
+<P>
+
+Memory is managed differently depending on the programming language. Currently:
+</P><P>
+
+<UL>
+<LI>
+No automatic garbage collection in the C interface
+<LI>
+Use of the OCAML runtime garbage collector in the OCAML interface
+</UL>
+<P>
+
+<A NAME="Programming style"></A>
+<A NAME="SEC15"></A>
+<H4> Programming style </H4>
+<!--docid::SEC15::-->
+<P>
+
+Both functional and imperative (i.e., side-effect) signatures are
+supported for operations. This allows to optimize the memory
+allocation and to use whichever version is more convenient for an user
+and the used programming language.
+</P><P>
+
+<A NAME="Number representation"></A>
+<A NAME="SEC16"></A>
+<H4> Number representation </H4>
+<!--docid::SEC16::-->
+<P>
+
+Inside a specific library, any number representation may be used
+(floating-point numbers, machine integers, multiprecision
+integers/rationals, ...). Existing libraries often offers the
+possibility to select different representations.
+</P><P>
+
+However, in the interface, this representation should be normalized
+and independent of underlying libraries, without being restrictive
+either. As a consequence, the interface offers the choiced between
+</P><P>
+
+<UL>
+<LI>GMP multiprecision rationals (which implements exact arithmetic);
+<LI>and machine floating-point numbers (<CODE>double</CODE>).
+</UL>
+<P>
+
+<A NAME="Functionalities of the interface at level 0"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_5.html#SEC17"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_3.html#SEC8"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_7.html#SEC38"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

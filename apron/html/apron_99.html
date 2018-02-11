@@ -1,0 +1,80 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Change of environments of abstract values of level 1</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Change of environments of abstract values of level 1">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Change of environments of abstract values of level 1">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC135"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_98.html#SEC134"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_100.html#SEC136"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_82.html#SEC118"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_87.html#SEC123"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_104.html#SEC140"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Change of environments of abstract values of level 1 </H3>
+<!--docid::SEC135::-->
+<P>
+
+<A NAME="IDX336"></A>
+<DL>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_change_environment</B> <I>(ap_manager_t* <VAR>man</VAR>, bool <VAR>destructive</VAR>, ap_abstract1_t* <VAR>a</VAR>, ap_environment_t* <VAR>nenv</VAR>, bool <VAR>project</VAR>)</I>
+<DD>Change the environment of the abstract values.  Variables that are
+removed are first existentially quantified, and variables that are
+introduced are either unconstrained (<CODE>project==false</CODE>) or
+initialized to 0 (<CODE>project==false</CODE>).
+</DL>
+</P><P>
+
+<A NAME="IDX337"></A>
+<DL>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_minimize_environment</B> <I>(ap_manager_t* <VAR>man</VAR>, bool <VAR>destructive</VAR>, ap_abstract1_t* <VAR>a</VAR>)</I>
+<DD>Remove from the environment of the abstract value and from the
+abstract value itself variables that are unconstrained in it.
+</DL>
+</P><P>
+
+<A NAME="IDX338"></A>
+<DL>
+<DT><U>Function:</U> ap_abstract1_t <B>ap_abstract1_rename_array</B> <I>(ap_manager_t* <VAR>man</VAR>, bool <VAR>destructive</VAR>, ap_abstract1_t* <VAR>a</VAR>, ap_var_t* <VAR>tvar</VAR>, ap_var_t* <VAR>ntvar</VAR>, size_t <VAR>size</VAR>)</I>
+<DD>Parallel renaming of the environment of the abstract value. The new
+variables should not interfere with the variables that are not
+renamed.
+</DL>
+</P><P>
+
+<A NAME="Expansion and Folding of dimensions in abstract values of level 1"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

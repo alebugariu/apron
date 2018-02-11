@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Mpq.html">
+<link rel="next" href="Mpf.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Scalar" rel="Chapter" href="Scalar.html">
+<link title="Interval" rel="Chapter" href="Interval.html">
+<link title="Coeff" rel="Chapter" href="Coeff.html">
+<link title="Dim" rel="Chapter" href="Dim.html">
+<link title="Linexpr0" rel="Chapter" href="Linexpr0.html">
+<link title="Lincons0" rel="Chapter" href="Lincons0.html">
+<link title="Generator0" rel="Chapter" href="Generator0.html">
+<link title="Texpr0" rel="Chapter" href="Texpr0.html">
+<link title="Tcons0" rel="Chapter" href="Tcons0.html">
+<link title="Manager" rel="Chapter" href="Manager.html">
+<link title="Abstract0" rel="Chapter" href="Abstract0.html">
+<link title="Var" rel="Chapter" href="Var.html">
+<link title="Environment" rel="Chapter" href="Environment.html">
+<link title="Linexpr1" rel="Chapter" href="Linexpr1.html">
+<link title="Lincons1" rel="Chapter" href="Lincons1.html">
+<link title="Generator1" rel="Chapter" href="Generator1.html">
+<link title="Texpr1" rel="Chapter" href="Texpr1.html">
+<link title="Tcons1" rel="Chapter" href="Tcons1.html">
+<link title="Abstract1" rel="Chapter" href="Abstract1.html">
+<link title="Parser" rel="Chapter" href="Parser.html">
+<link title="Box" rel="Chapter" href="Box.html">
+<link title="Oct" rel="Chapter" href="Oct.html">
+<link title="Polka" rel="Chapter" href="Polka.html">
+<link title="Ppl" rel="Chapter" href="Ppl.html">
+<link title="PolkaGrid" rel="Chapter" href="PolkaGrid.html">
+<link title="Mpz" rel="Chapter" href="Mpz.html">
+<link title="Mpq" rel="Chapter" href="Mpq.html">
+<link title="Gmp_random" rel="Chapter" href="Gmp_random.html">
+<link title="Mpf" rel="Chapter" href="Mpf.html">
+<link title="Mpfr" rel="Chapter" href="Mpfr.html">
+<link title="Mpzf" rel="Chapter" href="Mpzf.html">
+<link title="Mpqf" rel="Chapter" href="Mpqf.html">
+<link title="Mpfrf" rel="Chapter" href="Mpfrf.html"><link title="Random State Initialization" rel="Section" href="#2_RandomStateInitialization">
+<link title="Random State Seeding" rel="Section" href="#2_RandomStateSeeding">
+<link title="Random Number Functions" rel="Section" href="#2_RandomNumberFunctions">
+<title>Gmp_random</title>
+</head>
+<body>
+<div class="navbar"><a href="Mpq.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Mpf.html">Next</a>
+</div>
+<center><h1>Module <a href="type_Gmp_random.html">Gmp_random</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Gmp_random: <code class="code"><span class="keyword">sig</span></code> <a href="Gmp_random.html">..</a> <code class="code"><span class="keyword">end</span></code></pre>GMP random generation functions<br>
+<hr width="100%">
+<pre><span class="keyword">type</span> <a name="TYPEstate"></a><code class="type"></code>state </pre>
+
+<br>
+GMP random generation functions<br>
+<br>
+<a name="2_RandomStateInitialization"></a>
+<h2>Random State Initialization</h2><br>
+<pre><span class="keyword">val</span> <a name="VALinit_default"></a>init_default : <code class="type">unit -> <a href="Gmp_random.html#TYPEstate">state</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit_lc_2exp"></a>init_lc_2exp : <code class="type"><a href="Mpz.html#TYPEt">Mpz.t</a> -> int -> int -> <a href="Gmp_random.html#TYPEstate">state</a></code></pre><pre><span class="keyword">val</span> <a name="VALinit_lc_2exp_size"></a>init_lc_2exp_size : <code class="type">int -> <a href="Gmp_random.html#TYPEstate">state</a></code></pre><br>
+<a name="2_RandomStateSeeding"></a>
+<h2>Random State Seeding</h2><br>
+<pre><span class="keyword">val</span> <a name="VALseed"></a>seed : <code class="type"><a href="Gmp_random.html#TYPEstate">state</a> -> <a href="Mpz.html#TYPEt">Mpz.t</a> -> unit</code></pre><pre><span class="keyword">val</span> <a name="VALseed_ui"></a>seed_ui : <code class="type"><a href="Gmp_random.html#TYPEstate">state</a> -> int -> unit</code></pre><br>
+<a name="2_RandomNumberFunctions"></a>
+<h2>Random Number Functions</h2><br>
+<pre><span class="keyword">module</span> <a href="Gmp_random.Mpz.html">Mpz</a>: <code class="code"><span class="keyword">sig</span></code> <a href="Gmp_random.Mpz.html">..</a> <code class="code"><span class="keyword">end</span></code></pre><pre><span class="keyword">module</span> <a href="Gmp_random.Mpf.html">Mpf</a>: <code class="code"><span class="keyword">sig</span></code> <a href="Gmp_random.Mpf.html">..</a> <code class="code"><span class="keyword">end</span></code></pre></body></html>

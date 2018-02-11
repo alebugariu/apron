@@ -1,0 +1,83 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Datatypes for tree constraints of level 1</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Datatypes for tree constraints of level 1">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Datatypes for tree constraints of level 1">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC119"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_82.html#SEC118"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_84.html#SEC120"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_77.html#SEC113"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_82.html#SEC118"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_87.html#SEC123"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Datatypes for tree constraints of level 1 </H3>
+<!--docid::SEC119::-->
+<P>
+
+<A NAME="IDX264"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_tcons1_t</B>
+<DD>Datatype for constraints.
+</P><P>
+
+For information:
+<TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef struct ap_tcons1_t {
+  ap_tcons0_t tcons0;
+  ap_environment_t* env;
+} ap_tcons1_t;
+</pre></td></tr></table></DL>
+</P><P>
+
+<A NAME="IDX265"></A>
+<DL>
+<DT><U>datatype:</U> <B>ap_tcons1_array_t</B>
+<DD><TABLE><tr><td>&nbsp;</td><td class=example><pre>typedef struct ap_tcons1_array_t {
+  ap_tcons0_array_t tcons0_array;
+  ap_environment_t* env;
+} ap_tcons1_array_t;
+</pre></td></tr></table>Datatype for arrays of constraints.
+</P><P>
+
+Arrays at level 1 cannot be accessed directly, for example by writing
+<CODE>array-&#62;p[i]</CODE>, but should instead be accessed with functions
+<CODE>ap_tcons1_array_get</CODE> and <CODE>ap_tcons1_array_set</CODE>.
+</DL>
+</P><P>
+
+<A NAME="Constructors/Destructors for tree constraints of level 1"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

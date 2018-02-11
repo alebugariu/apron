@@ -1,0 +1,153 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Allocating NewPolka managers and setting specific options</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Allocating NewPolka managers and setting specific options">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Allocating NewPolka managers and setting specific options">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC60"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_26.html#SEC59"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_28.html#SEC63"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_24.html#SEC57"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_25.html#SEC58"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_29.html#SEC65"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Allocating NewPolka managers and setting specific options </H3>
+<!--docid::SEC60::-->
+<P>
+
+<A NAME="IDX21"></A>
+<DL>
+<DT><U>datatype:</U> <B>pk_internal_t</B>
+<DD>NewPolka type for internal managers (specific to NewPolka, and
+specific to each execution thread in multithreaded programs).
+</DL>
+</P><P>
+
+<A NAME="SEC61"></A>
+<H3> Allocating managers </H3>
+<!--docid::SEC61::-->
+<P>
+
+<A NAME="IDX22"></A>
+<DL>
+<DT><U>Function:</U> ap_manager_t* <B>pk_manager_alloc</B> <I>(bool <VAR>strict</VAR>)</I>
+<DD>Allocate an APRON manager for convex polyhedra, linked to the NewPolka
+library.
+</P><P>
+
+The <VAR>strict</VAR> option, when true, enables strict constraints in polyhedra
+(like <CODE>x&#62;0</CODE>). Managers in strict mode or in loose mode
+(strict constraints disabled) are not compatible, and so are
+corresponding abstract values.
+</DL>
+</P><P>
+
+<A NAME="IDX23"></A>
+<DL>
+<DT><U>Function:</U> ap_manager_t* <B>pkeq_manager_alloc</B> <I>()</I>
+<DD>Allocate an APRON manager for linear equalities, linked to the NewPolka
+library.
+</P><P>
+
+Most options which makes sense for convex polyhedra are meaningless
+for linear equalities. It is better to set the standard options
+associated to functions so that abstract values are in canonical form
+(see section <A HREF="apron_28.html#SEC63">NewPolka standard options</A>). This is the default anyway.
+</DL>
+</P><P>
+
+<A NAME="SEC62"></A>
+<H3> Setting options </H3>
+<!--docid::SEC62::-->
+<P>
+
+Options specific to NEWPOLKA are set directly on the internal
+manager. It can be extracted with the <CODE>pk_manager_get_internal</CODE>
+function.
+</P><P>
+
+<A NAME="IDX24"></A>
+<DL>
+<DT><U>Function:</U> pk_internal_t* <B>pk_manager_get_internal</B> <I>(ap_manager_t* <VAR>man</VAR>)</I>
+<DD>Return the internal submanager. If <VAR>man</VAR> has not been created by
+<CODE>pk_manager_alloc</CODE> or <CODE>pkeq_manager_alloc</CODE>, return <CODE>NULL</CODE>.
+</DL>
+</P><P>
+
+<A NAME="IDX25"></A>
+<DL>
+<DT><U>Function:</U> void <B>pk_set_max_coeff_size</B> <I>(pk_internal_t* <VAR>pk</VAR>, size_t <VAR>size</VAR>)</I>
+<DD>If <VAR>size</VAR> is not 0, try to raise an <CODE>AP_EXC_OVERFLOW</CODE>
+exception as soon as the size of an integer exceed <VAR>size</VAR>.
+</P><P>
+
+Very incomplete implementation. Currently, used only in
+<TT>`libpolkag'</TT> variant, where the size is the number of limbs as
+returned by the function <CODE>mpz_size</CODE> of the GMP library. This
+allows to detect huge numbers.
+</DL>
+</P><P>
+
+<A NAME="IDX26"></A>
+<DL>
+<DT><U>Function:</U> void <B>pk_set_approximate_max_coeff_size</B> <I>(pk_internal_t* <VAR>pk</VAR>, size_t <VAR>size</VAR>)</I>
+<DD>This is the parameter to the <CODE>poly_approximate</CODE>/<CODE>ap_abstractX_approximate</CODE> functions.
+</DL>
+</P><P>
+
+<A NAME="IDX27"></A>
+<DL>
+<DT><U>Function:</U> size_t <B>pk_get_max_coeff_size</B> <I>(pk_internal_t* <VAR>pk</VAR>)</I>
+<DD><A NAME="IDX28"></A>
+<DT><U>Function:</U> size_t <B>pk_get_approximate_max_coeff_size</B> <I>(pk_internal_t* <VAR>pk</VAR>)</I>
+<DD>Reading the previous parameters.
+</DL>
+</P><P>
+
+<A NAME="NewPolka standard options"></A>
+<HR SIZE=1>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_26.html#SEC59"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_28.html#SEC63"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_24.html#SEC57"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_25.html#SEC58"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_29.html#SEC65"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

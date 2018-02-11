@@ -1,0 +1,103 @@
+<HTML>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- Created on June, 9  2008 by texi2html 1.64 -->
+<!-- 
+Written by: Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Olaf Bachmann <obachman@mathematik.uni-kl.de>
+Send bugs and suggestions to <texi2html@mathematik.uni-kl.de>
+ 
+-->
+<HEAD>
+<TITLE>APRON 0.9.8: Extraction of properties of abstract values of level 1</TITLE>
+
+<META NAME="description" CONTENT="APRON 0.9.8: Extraction of properties of abstract values of level 1">
+<META NAME="keywords" CONTENT="APRON 0.9.8: Extraction of properties of abstract values of level 1">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+<META NAME="Generator" CONTENT="texi2html 1.64">
+
+</HEAD>
+
+<BODY LANG="" BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080" ALINK="#FF0000">
+
+<A NAME="SEC131"></A>
+<TABLE CELLPADDING=1 CELLSPACING=1 BORDER=0>
+<TR><TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_94.html#SEC130"> &lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_96.html#SEC132"> &gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_82.html#SEC118"> &lt;&lt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_87.html#SEC123"> Up </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_104.html#SEC140"> &gt;&gt; </A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT"> &nbsp; <TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron.html#SEC_Top">Top</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_toc.html#SEC_Contents">Contents</A>]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[Index]</TD>
+<TD VALIGN="MIDDLE" ALIGN="LEFT">[<A HREF="apron_abt.html#SEC_About"> ? </A>]</TD>
+</TR></TABLE>
+<HR SIZE=1>
+<H3> Extraction of properties of abstract values of level 1 </H3>
+<!--docid::SEC131::-->
+<P>
+
+<A NAME="IDX317"></A>
+<DL>
+<DT><U>Function:</U> ap_interval_t* <B>ap_abstract1_bound_variable</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_abstract1_t* <VAR>a</VAR>, ap_var_t <VAR>var</VAR>)</I>
+<DD>Return the interval taken by the variable <VAR>var</VAR> over the abstract
+value <VAR>a</VAR>.
+</DL>
+</P><P>
+
+<A NAME="IDX318"></A>
+<DL>
+<DT><U>Function:</U> ap_interval_t* <B>ap_abstract1_bound_linexpr</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_abstract1_t* <VAR>a</VAR>, ap_linexpr1_t* <VAR>expr</VAR>)</I>
+<DD><A NAME="IDX319"></A>
+<DT><U>Function:</U> ap_interval_t* <B>ap_abstract1_bound_texpr</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_abstract1_t* <VAR>a</VAR>, ap_texpr1_t* <VAR>expr</VAR>)</I>
+<DD>Return the interval taken by the expression <VAR>expr</VAR> over
+the abstract value <VAR>a</VAR>.
+</P><P>
+
+In the case of truly linear expression, this function allows to solve
+a Linear Programming (LP) problem, but depending on the underlying
+domain the solution may be not optimal.
+</DL>
+</P><P>
+
+<A NAME="IDX320"></A>
+<DL>
+<DT><U>Function:</U> ap_box1_t <B>ap_abstract1_to_box</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_abstract1_t* <VAR>a</VAR>)</I>
+<DD>Convert <VAR>a</VAR> to an interval/hypercube.
+</DL>
+</P><P>
+
+<A NAME="IDX321"></A>
+<DL>
+<DT><U>Function:</U> ap_lincons1_array_t <B>ap_abstract1_to_lincons_array</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_abstract1_t* <VAR>a</VAR>)</I>
+<DD><A NAME="IDX322"></A>
+<DT><U>Function:</U> ap_tcons1_array_t <B>ap_abstract1_to_tcons_array</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_abstract1_t* <VAR>a</VAR>)</I>
+<DD>Convert <VAR>a</VAR> to a conjunction of linear (resp. tree)
+constraints.
+</P><P>
+
+The constraints are normally guaranteed to be without intervals.
+</DL>
+</P><P>
+
+<A NAME="IDX323"></A>
+<DL>
+<DT><U>Function:</U> ap_generator1_array_t <B>ap_abstract1_to_generator_array</B> <I>(ap_manager_t* <VAR>man</VAR>, ap_abstract1_t* <VAR>a</VAR>)</I>
+<DD>Convert <VAR>a</VAR> to an array of generators.
+</DL>
+</P><P>
+
+<A NAME="Meet and Join of abstract values of level 1"></A>
+<HR SIZE=1>
+<BR>  
+<FONT SIZE="-1">
+This document was generated
+on <I>June, 9  2008</I>
+using <A HREF="http://www.mathematik.uni-kl.de/~obachman/Texi2html
+"><I>texi2html</I></A>
+
+</BODY>
+</HTML>

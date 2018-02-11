@@ -1,0 +1,269 @@
+<html><head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Scalar" rel="Chapter" href="Scalar.html">
+<link title="Interval" rel="Chapter" href="Interval.html">
+<link title="Coeff" rel="Chapter" href="Coeff.html">
+<link title="Dim" rel="Chapter" href="Dim.html">
+<link title="Linexpr0" rel="Chapter" href="Linexpr0.html">
+<link title="Lincons0" rel="Chapter" href="Lincons0.html">
+<link title="Generator0" rel="Chapter" href="Generator0.html">
+<link title="Texpr0" rel="Chapter" href="Texpr0.html">
+<link title="Tcons0" rel="Chapter" href="Tcons0.html">
+<link title="Manager" rel="Chapter" href="Manager.html">
+<link title="Abstract0" rel="Chapter" href="Abstract0.html">
+<link title="Var" rel="Chapter" href="Var.html">
+<link title="Environment" rel="Chapter" href="Environment.html">
+<link title="Linexpr1" rel="Chapter" href="Linexpr1.html">
+<link title="Lincons1" rel="Chapter" href="Lincons1.html">
+<link title="Generator1" rel="Chapter" href="Generator1.html">
+<link title="Texpr1" rel="Chapter" href="Texpr1.html">
+<link title="Tcons1" rel="Chapter" href="Tcons1.html">
+<link title="Abstract1" rel="Chapter" href="Abstract1.html">
+<link title="Parser" rel="Chapter" href="Parser.html">
+<link title="Box" rel="Chapter" href="Box.html">
+<link title="Oct" rel="Chapter" href="Oct.html">
+<link title="Polka" rel="Chapter" href="Polka.html">
+<link title="Ppl" rel="Chapter" href="Ppl.html">
+<link title="PolkaGrid" rel="Chapter" href="PolkaGrid.html">
+<link title="Mpz" rel="Chapter" href="Mpz.html">
+<link title="Mpq" rel="Chapter" href="Mpq.html">
+<link title="Gmp_random" rel="Chapter" href="Gmp_random.html">
+<link title="Mpf" rel="Chapter" href="Mpf.html">
+<link title="Mpfr" rel="Chapter" href="Mpfr.html">
+<link title="Mpzf" rel="Chapter" href="Mpzf.html">
+<link title="Mpqf" rel="Chapter" href="Mpqf.html">
+<link title="Mpfrf" rel="Chapter" href="Mpfrf.html"><title>Abstract0</title>
+</head>
+<body>
+<code class="code"><span class="keyword">sig</span><br>
+&nbsp;&nbsp;<span class="keyword">type</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;t<br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;set_gc&nbsp;:&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_set_gc"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;copy&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_copy"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;size&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_size"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;minimize&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_minimize"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;canonicalize&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_canonicalize"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;approximate&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_approximate"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;fdump&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_fdump"</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;print&nbsp;:&nbsp;(int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;string)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Format</span>.formatter&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;bottom&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_bottom"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;top&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_top"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;of_box&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Interval</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_of_box"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;dimension&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.dimension<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_dimension"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;manager&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_manager"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;is_bottom&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_is_bottom"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;is_top&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_is_top"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;is_leq&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_is_leq"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;is_eq&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_is_eq"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;sat_lincons&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Lincons0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_sat_lincons"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;sat_tcons&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Tcons0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_sat_tcons"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;sat_interval&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Interval</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_sat_interval"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;is_dimension_unconstrained&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_is_dimension_unconstrained"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;bound_dimension&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Interval</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_bound_dimension"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;bound_linexpr&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Linexpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Interval</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_bound_linexpr"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;bound_texpr&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Texpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Interval</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_bound_texpr"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;to_box&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Interval</span>.t&nbsp;array<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_to_box"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;to_lincons_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Lincons0</span>.t&nbsp;array<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_to_lincons_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;to_tcons_array&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Tcons0</span>.t&nbsp;array<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_to_tcons_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;to_generator_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Generator0</span>.t&nbsp;array<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_to_generator_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;meet&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_meet"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;meet_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_meet_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;meet_lincons_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Lincons0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_meet_lincons_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;meet_tcons_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Tcons0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_meet_tcons_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;join&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_join"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;join_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_join_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;add_ray_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Generator0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_add_ray_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;meet_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_meet_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;meet_lincons_array_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Lincons0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_meet_lincons_array_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;meet_tcons_array_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Tcons0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_meet_tcons_array_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;join_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_join_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;add_ray_array_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Generator0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_add_ray_array_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;assign_linexpr_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Linexpr0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_assign_linexpr_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;substitute_linexpr_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Linexpr0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_substitute_linexpr_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;assign_texpr_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Texpr0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_assign_texpr_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;substitute_texpr_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Texpr0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_substitute_texpr_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;assign_linexpr_array_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Linexpr0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_assign_linexpr_array_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;substitute_linexpr_array_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Linexpr0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_substitute_linexpr_array_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;assign_texpr_array_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Texpr0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_assign_texpr_array_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;substitute_texpr_array_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Texpr0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_substitute_texpr_array_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;forget_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_forget_array"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;forget_array_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_forget_array_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;add_dimensions&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.change&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_add_dimensions"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;remove_dimensions&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.change&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_remove_dimensions"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;permute_dimensions&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.perm&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_permute_dimensions"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;add_dimensions_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.change&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;bool&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_add_dimensions_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;remove_dimensions_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.change&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_remove_dimensions_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;permute_dimensions_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.perm&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_permute_dimensions_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;expand&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_expand"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;fold&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_fold"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;expand_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_expand_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;fold_with&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_fold_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;widening&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_widening"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;widening_threshold&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Lincons0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_widening_threshold"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;closure&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_closure"</span><br>
+&nbsp;&nbsp;<span class="keyword">external</span>&nbsp;closure_with&nbsp;:&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<span class="string">"camlidl_abstract0_ap_abstract0_closure_with"</span><br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;of_lincons_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Lincons0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;of_tcons_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;int&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Tcons0</span>.t&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;assign_linexpr&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Linexpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;substitute_linexpr&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Linexpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;assign_texpr&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Texpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;substitute_texpr&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Texpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;assign_linexpr_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Linexpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;substitute_linexpr_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Linexpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;assign_texpr_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Texpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;substitute_texpr_with&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Manager</span>.t&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Dim</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Texpr0</span>.t&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="constructor">Abstract0</span>.t&nbsp;option&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;print_array&nbsp;:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;?first:(unit,&nbsp;<span class="constructor">Format</span>.formatter,&nbsp;unit)&nbsp;<span class="constructor">Pervasives</span>.format&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?sep:(unit,&nbsp;<span class="constructor">Format</span>.formatter,&nbsp;unit)&nbsp;<span class="constructor">Pervasives</span>.format&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;?last:(unit,&nbsp;<span class="constructor">Format</span>.formatter,&nbsp;unit)&nbsp;<span class="constructor">Pervasives</span>.format&nbsp;<span class="keywordsign">-&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="constructor">Format</span>.formatter&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit)&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="constructor">Format</span>.formatter&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;<span class="keywordsign">'</span>a&nbsp;array&nbsp;<span class="keywordsign">-&gt;</span>&nbsp;unit<br>
+<span class="keyword">end</span></code></body></html>
