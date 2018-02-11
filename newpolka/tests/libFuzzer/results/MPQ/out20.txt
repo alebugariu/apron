@@ -1,3 +1,0 @@
-Dim: 3
-Started with bottom!
-Number of constraints: 3
