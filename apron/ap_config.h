@@ -25,7 +25,7 @@ static const bool true  = 1;
 
 #if !(defined __USE_SVID || defined __USE_BSD || defined __USE_XOPEN_EXTENDED || defined __APPLE__ || defined __CYGWIN__)
 
-static inline char* strdup(const char* s){
+static inline char* strdup2(const char* s){
   char* s2;
 
   s2 = malloc(strlen(s)+1);

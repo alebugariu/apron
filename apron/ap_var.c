@@ -22,13 +22,13 @@ static int var_hash_default(void* v){
   return res;
 }
 static void* var_copy_default(void* v){
-  return strdup((char*)v);
+  return strdup2((char*)v);
 }
 static void var_free_default(void* v){
   free(v);
 }
 static char* var_to_string_default(void* v){
-  return strdup((char*)v);
+  return strdup2((char*)v);
 }
 
 struct ap_var_operations_t ap_var_operations_default = {

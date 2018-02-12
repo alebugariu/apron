@@ -116,7 +116,7 @@ ap_exclog_t* ap_exc_cons(ap_exc_t exn,
   ap_exclog_t* head = (ap_exclog_t*)malloc(sizeof(ap_exclog_t));
   head->exn = exn;
   head->funid = funid;
-  head->msg = strdup(msg ? msg : "");
+  head->msg = strdup2(msg ? msg : "");
   head->tail = tail;
   return head;
 }

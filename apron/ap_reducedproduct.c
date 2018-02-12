@@ -1202,7 +1202,7 @@ ap_manager_t* ap_reducedproduct_manager_alloc
   internal->reduce = reduce;
   internal->approximate = approximate;
   internal->library = library;
-  internal->version = strdup(version);
+  internal->version = strdup2(version);
   free(version);
 
   /* allocating managers */
