@@ -67,6 +67,101 @@ bool create_polyhedron(pk_t** polyhedron, ap_manager_t* man, pk_t * top,
 	return true;
 }
 
+box_t* box_assign(box_t* box, ap_manager_t* man, int dim,
+		double *assignment_values, int assignedToVariable) {
+	ap_linexpr0_t** expr_array = (ap_linexpr0_t**) malloc(
+			sizeof(ap_linexpr0_t*));
+	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim,
+			assignment_values);
+	expr_array[0] = expression;
+	ap_dim_t* tdim = (ap_dim_t*) malloc(sizeof(ap_dim_t));
+	tdim[0] = assignedToVariable;
+	box_t* assign_result = box_assign_linexpr_array(man, false, box, tdim,
+			expr_array, 1, NULL);
+	fprintf(stdout, "Assign result: ");
+	ap_lincons0_array_t a = box_to_lincons_array(man, assign_result);
+	ap_lincons0_array_print(&a, NULL);
+	fflush(stdout);
+	return assign_result;
+}
+
+oct_t* oct_assign(oct_t* octagon, ap_manager_t* man, int dim,
+		double *assignment_values, int assignedToVariable) {
+	ap_linexpr0_t** expr_array = (ap_linexpr0_t**) malloc(
+			sizeof(ap_linexpr0_t*));
+	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim,
+			assignment_values);
+	expr_array[0] = expression;
+	ap_dim_t* tdim = (ap_dim_t*) malloc(sizeof(ap_dim_t));
+	tdim[0] = assignedToVariable;
+	oct_t* assign_result = oct_assign_linexpr_array(man, false, octagon, tdim,
+			expr_array, 1, NULL);
+	fprintf(stdout, "Assign result: ");
+	ap_lincons0_array_t a = oct_to_lincons_array(man, assign_result);
+	ap_lincons0_array_print(&a, NULL);
+	fflush(stdout);
+	return assign_result;
+}
+
+pk_t* poly_assign(pk_t* polyhedron, ap_manager_t* man, int dim,
+		double *assignment_values, int assignedToVariable) {
+	ap_linexpr0_t** expr_array = (ap_linexpr0_t**) malloc(
+			sizeof(ap_linexpr0_t*));
+	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim,
+			assignment_values);
+	expr_array[0] = expression;
+	ap_dim_t* tdim = (ap_dim_t*) malloc(sizeof(ap_dim_t));
+	tdim[0] = assignedToVariable;
+	pk_t* assign_result = pk_assign_linexpr_array(man, false, polyhedron, tdim,
+			expr_array, 1, NULL);
+	fprintf(stdout, "Assign result: ");
+	ap_lincons0_array_t a = pk_to_lincons_array(man, assign_result);
+	ap_lincons0_array_print(&a, NULL);
+	fflush(stdout);
+	return assign_result;
+}
+
+box_t* box_project(box_t* box, ap_manager_t* man, int dim,
+		int projectedVariable) {
+
+	ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
+	tdim[0] = projectedVariable;
+	box_t* project_result = box_forget_array(man, false, box, tdim, 1, false);
+	fprintf(stdout, "Project result: ");
+	ap_lincons0_array_t a = box_to_lincons_array(man, project_result);
+	ap_lincons0_array_print(&a, NULL);
+	fflush(stdout);
+	return project_result;
+}
+
+oct_t* oct_project(oct_t* octagon, ap_manager_t* man, int dim,
+		int projectedVariable) {
+
+	ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
+	tdim[0] = projectedVariable;
+	oct_t* project_result = oct_forget_array(man, false, octagon, tdim, 1,
+			false);
+	fprintf(stdout, "Project result: ");
+	ap_lincons0_array_t a = oct_to_lincons_array(man, project_result);
+	ap_lincons0_array_print(&a, NULL);
+	fflush(stdout);
+	return project_result;
+}
+
+pk_t* poly_project(pk_t* polyhedron, ap_manager_t* man, int dim,
+		int projectedVariable) {
+
+	ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
+	tdim[0] = projectedVariable;
+	pk_t* project_result = pk_forget_array(man, false, polyhedron, tdim, 1,
+			false);
+	fprintf(stdout, "Project result: ");
+	ap_lincons0_array_t a = pk_to_lincons_array(man, project_result);
+	ap_lincons0_array_print(&a, NULL);
+	fflush(stdout);
+	return project_result;
+}
+
 int main(int argc, char **argv) {
 	int dim = 8;
 
@@ -103,16 +198,14 @@ int main(int argc, char **argv) {
 	box_t* box_join_result = box_join(box_man, false, box1, box2);
 
 	//assign
-	ap_linexpr0_t** box_assignmentArray = (ap_linexpr0_t**) malloc(
-			sizeof(ap_linexpr0_t*));
 	double box_values[9] = { -3, 7, 3, 12, -410, 0, 0, -1, 12 };
-	ap_linexpr0_t* box_assignment_expression = create_polyhedral_linexpr0(dim,
-			box_values); // we always use polyhedral expressions for assignments
-	box_assignmentArray[0] = box_assignment_expression;
-	ap_dim_t * box_tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
-	box_tdim[0] = 4; //the variable we want to assigned to
-	box_t * box_assign_result = box_assign_linexpr_array(box_man, false, box1,
-			box_tdim, box_assignmentArray, 1, NULL);
+	box_t * box_assign_result = box_assign(box1, box_man, dim, box_values, 6);
+
+	//project
+	box_t * box_project_result = box_project(box1, box_man, dim, 6);
+
+	//widening
+	box_t * box_widening_result = box_widening(box_man, box1, box2);
 
 	printf("\n");
 
@@ -162,16 +255,18 @@ int main(int argc, char **argv) {
 	oct_t* oct_join_result = oct_join(oct_man, false, octagon1, octagon2);
 
 	//assign
-	ap_linexpr0_t** oct_assignmentArray = (ap_linexpr0_t**) malloc(
-			sizeof(ap_linexpr0_t*));
 	double oct_values[9] = { 14, 0, 0, -12, 10, 1, -1, 1, 89 };
-	ap_linexpr0_t* oct_assignment_expression = create_polyhedral_linexpr0(dim,
-			oct_values); // we always use polyhedral expressions for assignments
-	oct_assignmentArray[0] = oct_assignment_expression;
-	ap_dim_t * oct_tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
-	oct_tdim[0] = 0; //the variable we want to assigned to
-	oct_t * oct_assign_result = oct_assign_linexpr_array(oct_man, false,
-			octagon1, oct_tdim, oct_assignmentArray, 1, NULL);
+	oct_t * oct_assign_result = oct_assign(octagon1, oct_man, dim, oct_values,
+			1);
+
+	//project
+	oct_t * oct_project_result = oct_project(octagon1, oct_man, dim, 0);
+
+	//widening
+	oct_t * oct_widening_result = oct_widening(oct_man, octagon1, octagon2);
+
+	//narrowing
+	oct_t * oct_narrowing_result = oct_narrowing(box_man, octagon1, octagon2);
 
 	printf("\n");
 
@@ -221,16 +316,18 @@ int main(int argc, char **argv) {
 	pk_t* poly_join_result = pk_join(poly_man, false, polyhedron1, polyhedron2);
 
 	//assign
-	ap_linexpr0_t** assignmentArray = (ap_linexpr0_t**) malloc(
-			sizeof(ap_linexpr0_t*));
 	double values3[9] = { 4, 0, 43, 2, 0, 0, 1, 1, 24 };
-	ap_linexpr0_t* assignment_expression = create_polyhedral_linexpr0(dim,
-			values3);
-	assignmentArray[0] = assignment_expression;
-	ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
-	tdim[0] = 2; //the variable we want to assigned to
-	pk_t * poly_assign_result = pk_assign_linexpr_array(poly_man, false,
-			polyhedron1, tdim, assignmentArray, 1, NULL);
+	pk_t * poly_assign_result = poly_assign(polyhedron1, poly_man, dim, values3,
+			0);
+
+	//project
+	pk_t * poly_project_result = poly_project(polyhedron1, poly_man, dim, 0);
+
+	//widening
+	//requires: polyhedron1 <= polyhedron2
+	if(pk_is_leq(poly_man, polyhedron1, polyhedron2)) {
+		pk_t * pk_widening_result = pk_widening(poly_man, polyhedron1, polyhedron2);
+	}
 	return 0;
 }
 
