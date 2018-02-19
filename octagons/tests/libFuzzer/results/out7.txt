@@ -1,5 +1,0 @@
-Dim: 11
-Number of constraints: 17
-Type: e
-Values: 0, 9, -1, -1, 2199023255551
-Type: e

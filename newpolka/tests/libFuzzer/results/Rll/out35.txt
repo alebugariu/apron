@@ -1,3 +1,0 @@
-Dim: 10
-Assigned to variable: 0
-Assignment expression: 
