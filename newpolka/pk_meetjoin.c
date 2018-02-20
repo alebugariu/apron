@@ -153,7 +153,7 @@ bool poly_meet_particularcases(bool meet, bool lazy,
 	poly_chernikova_dual(man,pb,"of the second argument",false);
 	pk->exn = AP_EXC_NONE;
       }
-      poly_set(po,pb);
+      poly_set(po,pa);
       return true;
     }
     if (!pb->C && !pb->F){
@@ -501,6 +501,19 @@ pk_t* pk_meet(ap_manager_t* man,
   poly_meet(true, pk->funopt->algorithm < 0,
 	    man,po,pa,pb);
   assert(poly_check(pk,po));
+    if(po->F){
+        size_t i, nbrows = po->F->nbrows;
+        for(i=0; i < nbrows; i++){
+            if(vector_is_positivity_constraint(pk,po->F->p[i],po->F->nbcolumns)){
+                numint_t * tmp = po->F->p[i];
+                po->F->p[i] = po->F->p[nbrows];
+                po->F->p[nbrows] = tmp;
+                nbrows--;
+            }
+        }
+        po->F->nbrows = nbrows;
+    }
+
   return po;
 }
 
@@ -617,6 +630,20 @@ pk_t* pk_join(ap_manager_t* man, bool destructive, pk_t* pa, pk_t* pb)
   poly_dual(pa);
   if (pb!=pa) poly_dual(pb); /* We take care of possible alias */
   if (po!=pa) poly_dual(po);
+    if(po->F && (po->F->nbrows < po->F->_maxrows)){
+        bool flag = true;
+        size_t i, nbrows = po->F->nbrows;
+        for(i=0; i < nbrows; i++){
+            if(vector_is_positivity_constraint(pk,po->F->p[i],po->F->nbcolumns)){
+                flag = false;
+            }
+        }
+        if(flag){
+            numint_set_int(po->F->p[nbrows][0],1);
+            numint_set_int(po->F->p[nbrows][0],1);
+            po->F->nbrows++;
+        }
+    }
   return po;
 }
 

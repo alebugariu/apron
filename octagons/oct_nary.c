@@ -28,6 +28,15 @@ oct_t* oct_meet(ap_manager_t* man, bool destructive, oct_t* a1, oct_t* a2)
   oct_internal_t* pr = oct_init_from_manager(man,AP_FUNID_MEET,0);
   bound_t* m;
   arg_assert(a1->dim==a2->dim && a1->intdim==a2->intdim,return NULL;);
+    if(oct_is_leq(man,a1,a2)){
+        bound_t* m1 = a1->closed ? a1->closed : a1->m;
+        m = destructive ? m1 : hmat_alloc(pr,a1->dim);
+        bound_t* m2 = a2->closed ? a2->closed : a2->m;
+        size_t i;
+        for (i=0;i<matsize(a1->dim);i++)
+            bound_set(m[i],m2[i]);
+        return oct_set_mat(pr,a1,m,NULL,destructive);
+    }
   if ((!a1->closed && !a1->m) || (!a2->closed && !a2->m))
     /* one argument is empty */
     return oct_set_mat(pr,a1,NULL,NULL,destructive);

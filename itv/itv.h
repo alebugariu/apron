@@ -464,9 +464,10 @@ static inline void bound_widening(bound_t a, bound_t b, bound_t c)
 {
   if (bound_infty(c) ||
       bound_cmp(b,c)<0){
-    bound_set_infty(a,+1);
+      bound_set(a,b);
   } else {
-    bound_set(a,b);
+      bound_set_infty(a,+1);
+    
   }
 }
 static inline void itv_widening(itv_t a, itv_t b, itv_t c)
