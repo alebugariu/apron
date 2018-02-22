@@ -452,7 +452,7 @@ static inline int itv_hash(itv_t a)
 static inline bool itv_meet(itv_internal_t* intern, itv_t a, itv_t b, itv_t c)
 {
   bound_min(a->sup,b->sup,c->sup);
-  bound_min(a->inf,b->inf,c->inf);
+  bound_max(a->inf,b->inf,c->inf);
   return itv_canonicalize(intern,a,false);
 }
 static inline void itv_join(itv_t a, itv_t b, itv_t c)
@@ -472,7 +472,7 @@ static inline void bound_widening(bound_t a, bound_t b, bound_t c)
 static inline void itv_widening(itv_t a, itv_t b, itv_t c)
 {
   bound_widening(a->sup,b->sup,c->sup);
-  bound_widening(a->inf,b->inf,c->inf);
+  bound_widening(a->inf,b->inf,b->inf);
 }
 static inline void itv_add(itv_t a, itv_t b, itv_t c)
 {
