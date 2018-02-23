@@ -71,39 +71,8 @@ bool hmat_s_step(bound_t* m, size_t dim)
 
 bool hmat_close(bound_t* m, size_t dim)
 {
-  size_t i,j,k;
-  bound_t *c,ik,ik2,ij;
-
-  bound_init(ik); bound_init(ik2); bound_init(ij);
-
-  /* Floyd-Warshall */
-  for (k=0;k<2*dim;k++) {
-    size_t k2 = k^1;
-    c = m;
-    for (i=0;i<2*dim;i++) {
-      size_t i2 = i|1;
-      size_t br = k<i2 ? k : i2;
-      bound_set(ik,m[matpos2(i,k)]);
-      bound_set(ik2,m[matpos2(i,k2)]);
-      for (j=0;j<=br;j++,c++) {
-	bound_add(ij,ik,m[matpos(k,j)]);    /* ik+kj */
-	bound_bmin(*c,ij);
-	bound_add(ij,ik2,m[matpos(k2,j)]);  /* ik2+k2j */
-	bound_bmin(*c,ij);
-      }
-      for (;j<=i2;j++,c++) {
-	bound_add(ij,ik,m[matpos(j^1,k2)]); /* ik+kj */
-	bound_bmin(*c,ij);
-	bound_add(ij,ik2,m[matpos(j^1,k)]); /* ik2+k2j */
-	bound_bmin(*c,ij);
-      }
-    }
- 
-  }
-  
-  bound_clear(ik); bound_clear(ik2); bound_clear(ij);
-
-  return hmat_s_step(m,dim);
+  printf("hmat_close\n");
+  return false;
 }
 
 
