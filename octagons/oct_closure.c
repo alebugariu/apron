@@ -71,7 +71,6 @@ bool hmat_s_step(bound_t* m, size_t dim)
 
 bool hmat_close(bound_t* m, size_t dim)
 {
-  printf("hmat_close\n");
   return false;
 }
 

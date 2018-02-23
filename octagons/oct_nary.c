@@ -57,8 +57,7 @@ oct_t* oct_join(ap_manager_t* man, bool destructive, oct_t* a1, oct_t* a2)
      return oct_set_mat(pr,a1,NULL,NULL,destructive);
    else
      /* a1 empty, a2 not empty */
-     return oct_set_mat(pr,a1,hmat_copy(pr,a2->m,a2->dim),
-			hmat_copy(pr,a2->closed,a2->dim),destructive);
+     return oct_set_mat(pr,a1,NULL,NULL,destructive);
  }
  else if (!a2->closed && !a2->m)
    /* a1 not empty, a2 empty */
