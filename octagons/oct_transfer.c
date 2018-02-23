@@ -605,8 +605,6 @@ static void hmat_assign(oct_internal_t* pr, uexpr u, bound_t* m, size_t dim,
     i = 2*u.i + (u.coef_i==1 ? 0 : 1);
     bound_set(m[matpos2(2*d,i)],pr->tmp[0]);
     bound_set(m[matpos2(i,2*d)],pr->tmp[1]);
-    if (*respect_closure)
-      hmat_close_incremental(m,dim,d);
   }
 
   else if (u.type==UNARY && u.coef_i==-1) {

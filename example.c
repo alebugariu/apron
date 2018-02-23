@@ -172,7 +172,7 @@ int main(int argc, char **argv) {
 
 	box_t* box1;
 
-	if (create_box(&box1, box_man, dim, 10, 20, 6)) {
+	if (create_box(&box1, box_man, dim, 0, 10, 6)) {
 		printf("created box 1\n");
 		ap_lincons0_array_t i1 = box_to_lincons_array(box_man, box1);
 		ap_lincons0_array_fprint(stdout, &i1, NULL);
@@ -181,7 +181,7 @@ int main(int argc, char **argv) {
 
 	box_t* box2;
 
-	if (create_box(&box2, box_man, dim, 0, 1000, 6)) {
+	if (create_box(&box2, box_man, dim, 0, 11, 6)) {
 		printf("created box 2\n");
 		ap_lincons0_array_t i2 = box_to_lincons_array(box_man, box2);
 		ap_lincons0_array_fprint(stdout, &i2, NULL);

@@ -611,12 +611,12 @@ pk_t* pk_join(ap_manager_t* man, bool destructive, pk_t* pa, pk_t* pb)
   pk_t* po = destructive ? pa : poly_alloc(pa->intdim,pa->realdim);
 
   poly_dual(pa);
-  if (pb!=pa) poly_dual(pb); /* We take care of possible alias */
+  poly_dual(pb); /* We take care of possible alias */
   poly_meet(false,pk->funopt->algorithm<0,
 	    man,po,pa,pb);
   poly_dual(pa);
-  if (pb!=pa) poly_dual(pb); /* We take care of possible alias */
-  if (po!=pa) poly_dual(po);
+  poly_dual(pb); /* We don't take care of possible alias */
+  poly_dual(po);
   return po;
 }
 

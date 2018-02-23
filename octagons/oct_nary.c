@@ -71,7 +71,7 @@ oct_t* oct_join(ap_manager_t* man, bool destructive, oct_t* a1, oct_t* a2)
    size_t i;
    man->result.flag_exact = false;
    for (i=0;i<matsize(a1->dim);i++)
-     bound_max(m[i],m1[i],m2[i]);
+     bound_max(m[i],m1[i],m1[i]);
    if (a1->closed && a2->closed) {
      /* result is closed and optimal on Q */
      if (num_incomplete || a1->intdim) flag_incomplete;
