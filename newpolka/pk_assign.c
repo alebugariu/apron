@@ -855,7 +855,7 @@ pk_t* pk_assign_linexpr_array(ap_manager_t* man,
 			      pk->funopt->algorithm<=0,
 			      man,destructive,pa,tdim,texpr,size,pb);
   assert(poly_check(pk,po));
-  return po;
+  return pk_forget_array(man, false, po, tdim, 1, false);
 }
 
 pk_t* pk_substitute_linexpr_array(ap_manager_t* man,
