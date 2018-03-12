@@ -128,8 +128,7 @@ bool box_is_leq(ap_manager_t* man, box_t* a, box_t* b)
   for (i=0;i<nbdims;i++){
     if (! itv_is_leq(a->p[i],b->p[i])){
       res = false;
-    } else {
-      res = true;
+      break;
     }
   }
   return res;
