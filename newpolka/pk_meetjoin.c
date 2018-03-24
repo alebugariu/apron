@@ -153,7 +153,7 @@ bool poly_meet_particularcases(bool meet, bool lazy,
 	poly_chernikova_dual(man,pb,"of the second argument",false);
 	pk->exn = AP_EXC_NONE;
       }
-      poly_set(po,pa);
+      poly_set(po,pb);
       return true;
     }
     if (!pb->C && !pb->F){
