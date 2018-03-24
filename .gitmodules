@@ -1,0 +1,3 @@
+[submodule "generic_tests"]
+	path = generic_tests
+	url = https://github.com/alebugariu/generic_tests

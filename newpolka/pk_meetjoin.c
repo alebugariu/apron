@@ -630,20 +630,6 @@ pk_t* pk_join(ap_manager_t* man, bool destructive, pk_t* pa, pk_t* pb)
   poly_dual(pa);
   if (pb!=pa) poly_dual(pb); /* We take care of possible alias */
   if (po!=pa) poly_dual(po);
-    if(po->F && (po->F->nbrows < po->F->_maxrows)){
-        bool flag = true;
-        size_t i, nbrows = po->F->nbrows;
-        for(i=0; i < nbrows; i++){
-            if(vector_is_positivity_constraint(pk,po->F->p[i],po->F->nbcolumns)){
-                flag = false;
-            }
-        }
-        if(flag){
-            numint_set_int(po->F->p[nbrows][0],1);
-            numint_set_int(po->F->p[nbrows][0],1);
-            po->F->nbrows++;
-        }
-    }
   return po;
 }
 

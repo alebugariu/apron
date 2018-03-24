@@ -845,15 +845,6 @@ pk_t* pk_assign_linexpr_array(ap_manager_t* man,
 {
   pk_internal_t* pk = pk_init_from_manager(man,AP_FUNID_ASSIGN_LINEXPR_ARRAY);
   pk_t* po;
-    if(pk_is_bottom(man,pa)){
-        if(destructive){
-            poly_set_top(pk,pa);
-            return pa;
-        }
-        else{
-            return pk_top(man,pa->intdim,pa->realdim);
-        }
-    }
   po =
     size==1 ?
     poly_asssub_linexpr(true,
