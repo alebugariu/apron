@@ -24,7 +24,7 @@ ap_linexpr0_t * create_linexpr0(int dim, long v1, long v2, long coeff1,
 	return linexpr0;
 }
 
-bool create_octagon(oct_t** octagon, ap_manager_t* man, oct_t * top, int dim,
+bool create_zonotope(oct_t** octagon, ap_manager_t* man, oct_t * top, int dim,
 		ap_lincons0_array_t constraints) {
 	*octagon = oct_meet_lincons_array(man, false, top, &constraints);
 	return true;
@@ -125,7 +125,7 @@ int main(int argc, char **argv) {
 			72066390131015681);
 	lincons0.p[16].linexpr0 = linexpr16;
 
-	if (create_octagon(&octagon1, man, top, dim, lincons0)) {
+	if (create_zonotope(&octagon1, man, top, dim, lincons0)) {
 		oct_t * meet_result = oct_meet(man, false, top, octagon1);
 		printf("top meet octagon == octagon: ");
 		printf("%d\n", (oct_is_eq(man, meet_result, octagon1)));

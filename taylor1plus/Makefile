@@ -122,7 +122,7 @@ clean:
 	/bin/rm -f *.[ao] *.so *.cm[ioax] *.cmx[as] *.byte *.opt *.annot
 	/bin/rm -f *.?.tex *.log *.aux *.bbl *.blg *.toc *.dvi *.ps *.pstex*
 	/bin/rm -fr t1ppolkarung t1ppolkatopg tmp
-	/bin/rm -fr test*
+	#/bin/rm -fr test*
 	/bin/rm -f t1p.ml t1p.mli t1p_caml.c
 	/bin/rm -f Makefile.depend
 
