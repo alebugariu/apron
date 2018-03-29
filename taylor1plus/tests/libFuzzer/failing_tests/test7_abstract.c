@@ -21,13 +21,13 @@ int main(int argc, char **argv) {
 
 	double values0[8][2] = { { 0, 1 }, { 0, 0 }, { 0, LONG_MAX },
 				{ LONG_MIN, 1 }, { 0, 0 }, { -1, LONG_MAX }, { 1, 0 }, { 0, 0 } };
-	ap_abstract0_t* zonotope0 = create_zonotope(man, dim, values0);
+	ap_abstract0_t* zonotope0 = create_octagon(man, dim, values0);
 	printf("successfully created zonotope0:\n");
 	ap_abstract0_fprint(stdout, man, zonotope0, NULL);
 
 	double values1[8][2] = { { 0, 0 }, { NAN, 0 }, { LONG_MIN, 1 }, { 0, 1 }, { 1,
 				NAN }, { 0, LONG_MAX }, { NAN, 0 }, { NAN, LONG_MAX } };
-	ap_abstract0_t* zonotope1 = create_zonotope(man, dim, values1);
+	ap_abstract0_t* zonotope1 = create_octagon(man, dim, values1);
 	printf("successfully created zonotope1:\n");
 	ap_abstract0_fprint(stdout, man, zonotope1, NULL);
 

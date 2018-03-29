@@ -40,7 +40,7 @@ ap_linexpr0_t * create_polyhedral_linexpr0(int dim, long *values) {
 	return linexpr0;
 }
 
-bool create_zonotope(oct_t** octagon, ap_manager_t* man, oct_t * top, int dim,
+bool create_octagon(oct_t** octagon, ap_manager_t* man, oct_t * top, int dim,
 		ap_lincons0_array_t constraints) {
 	*octagon = oct_meet_lincons_array(man, false, top, &constraints);
 	return true;
@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
 	ap_linexpr0_t * linexpr0 = create_octogonal_linexpr0(dim, 1, 4, -1, 1, 4813);
 	lincons0.p[0].linexpr0 = linexpr0;
 
-	if (create_zonotope(&octagon10, man, top, dim, lincons0)) {
+	if (create_octagon(&octagon10, man, top, dim, lincons0)) {
 		printf("succesfully created octagon 10\n");
 		ap_lincons0_array_t a = oct_to_lincons_array(man, octagon10);
 		ap_lincons0_array_fprint(stdout, &a, NULL);
@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
 		ap_linexpr0_t * linexpr1 = create_octogonal_linexpr0(dim, 2, 4, 1, -1, LONG_MAX);
 		lincons1.p[0].linexpr0 = linexpr1;
 
-		if (create_zonotope(&octagon17, man, top, dim, lincons1)) {
+		if (create_octagon(&octagon17, man, top, dim, lincons1)) {
 			printf("succesfully created octagon 17\n");
 			a = oct_to_lincons_array(man, octagon17);
 			ap_lincons0_array_fprint(stdout, &a, NULL);
@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
 					LONG_MAX);
 			lincons2.p[0].linexpr0 = linexpr1;
 
-			if (create_zonotope(&octagon11, man, top, dim, lincons1)) {
+			if (create_octagon(&octagon11, man, top, dim, lincons1)) {
 				printf("succesfully created octagon 11\n");
 				a = oct_to_lincons_array(man, octagon11);
 				ap_lincons0_array_fprint(stdout, &a, NULL);
