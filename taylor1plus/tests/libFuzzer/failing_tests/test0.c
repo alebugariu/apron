@@ -3,13 +3,14 @@
 #include <string.h>
 #include <stdio.h>
 
-t1p_t * create_zonotope(ap_manager_t* man, int dim, double values[dim][2]) {
+ap_abstract0_t * create_zonotope(ap_manager_t* man, int dim,
+		double values[dim][2]) {
 	ap_interval_t** intervals = ap_interval_array_alloc(dim);
 	int i;
 	for (i = 0; i < dim; i++) {
 		ap_interval_set_double(intervals[i], values[i][0], values[i][1]);
 	}
-	t1p_t * zonotope = t1p_of_box(man, dim, 0, intervals);
+	ap_abstract0_t * zonotope = ap_abstract0_of_box(man, dim, 0, intervals);
 	return zonotope;
 }
 
@@ -29,7 +30,8 @@ ap_linexpr0_t * create_polyhedral_linexpr0(int dim, double *values) {
 	return linexpr0;
 }
 
-t1p_t* assign(ap_manager_t* man, t1p_t* zonotope, int assignedToVariable, int dim, double *values) {
+void assign(ap_manager_t* man, ap_abstract0_t* zonotope, int assignedToVariable,
+		int dim, double *values) {
 	ap_linexpr0_t* expression = create_polyhedral_linexpr0(dim, values);
 	ap_linexpr0_t** assignmentArray = (ap_linexpr0_t**) malloc(
 			sizeof(ap_linexpr0_t*));
@@ -37,9 +39,13 @@ t1p_t* assign(ap_manager_t* man, t1p_t* zonotope, int assignedToVariable, int di
 
 	ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
 	tdim[0] = assignedToVariable;
-	return t1p_assign_linexpr_array(man, false, zonotope, tdim, assignmentArray,
-			1, NULL);
-
+	printf("Before assignment!");
+	fflush(stdout);
+	ap_abstract0_t* result = ap_abstract0_assign_linexpr_array(man, false,
+			zonotope, tdim, assignmentArray, 1, NULL);
+	ap_abstract0_fprint(stdout, man, result, NULL);
+	free(assignmentArray);
+	free(tdim);
 }
 
 int main(int argc, char **argv) {
@@ -47,18 +53,20 @@ int main(int argc, char **argv) {
 
 	ap_manager_t* man = t1p_manager_alloc();
 
-	double values0[8][2] = { { -8924,-5373 }, { 4487,8456 }, { 4148,5161 },
-			{ 5503,7300 }, { -7022,-5259 }, { -9773,2748 }, { 1906,6349 }, {
-					-3587,6037 } };
-	t1p_t* zonotope20 = create_zonotope(man, dim, values0);
-	printf("successfully created zonotope20:\n");
-	t1p_fprint(stdout, man, zonotope20, NULL);
+	double values0[8][2] = { { 448, 4819 }, { -6469, -1121 }, { 4831, 9743 }, {
+			LONG_MIN, 0 }, { -2034, 8206 }, { 7806, 8741 }, { 0, LONG_MAX }, {
+			4244, 5112 } };
+	ap_abstract0_t* zonotope0 = create_zonotope(man, dim, values0);
+	ap_abstract0_fprint(stdout, man, zonotope0, NULL);
 
-	double values[9] = { LONG_MIN, LONG_MIN, LONG_MIN, LONG_MIN, LONG_MIN, LONG_MIN,
-			LONG_MIN, LONG_MIN, LONG_MIN };
+	ap_manager_free(man);
+	man = t1p_manager_alloc();
 
-	t1p_t* assignment_result = assign(man, zonotope20, 7, dim, values);
-	t1p_fprint(stdout, man, assignment_result, NULL);
+	double assignmentValues0[9] = { 686832606, 1812014285, 845477147, 589228643,
+			240314275, LONG_MIN, 489148821, LONG_MIN, 340713449 };
+	assign(man, zonotope0, 0, dim, assignmentValues0);
+
+	printf("Finished!\n");
 	return 0;
 }
 
