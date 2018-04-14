@@ -226,7 +226,7 @@ void t1p_fprint(FILE* stream,
 	    }
 	    fprintf(stream, " := ");
 	    t1p_aff_fprint(pr, stream, a->paf[i]);
-	    itv_fprint(stdout, a->box[i]);
+	    //itv_fprint(stdout, a->box[i]);
 	    fprintf(stream,"\n");
 	} else {
 	    fprintf(stream, "[[NULL]]\n");

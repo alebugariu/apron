@@ -416,7 +416,7 @@ int optpr_cramer(t1p_internal_t* pr, itv_t lambda, itv_t u0, itv_t * l1, itv_t *
 	    /* l1 = l2 */
 	    return 0;
 	} else {
-	    /* l1 // l2 avec exactement même vecteur directeur */
+	    /* l1 // l2 avec exactement mï¿½me vecteur directeur */
 	    return -1;
 	}
     } else {
@@ -577,10 +577,10 @@ void optpr_solve(t1p_internal_t* pr, itv_t alpha0x, itv_t alpha0, itv_t midgx, i
 	pcooruSave[i] = &cooruSave[i];
     }
 
-    /* complexité (opt->sizeJ)^3 */
+    /* complexitï¿½ (opt->sizeJ)^3 */
     for (i=0; i<opt->sizeJ; i++) {
 	for (j=i+1; j<opt->sizeJ; j++) {
-	    /* TODO: pour le moment on ne fait rien si deux lignes sont identiques: à optimiser */
+	    /* TODO: pour le moment on ne fait rien si deux lignes sont identiques: ï¿½ optimiser */
 	    if (optpr_cramer(pr, lambda, u0, opt->litab[i].abc, opt->litab[j].abc) > 0) {
 		/* secant lines */
 		if (optpr_isfeasible(pr, lambda, u0)) {
@@ -699,11 +699,11 @@ void optpr_solve(t1p_internal_t* pr, itv_t alpha0x, itv_t alpha0, itv_t midgx, i
 			memcpy(pcooruSave, pcooru, (opt->size)*sizeof(itv_t*));
 			memcpy(pcooru, swap, (opt->size)*sizeof(itv_t*));
 		    } else if (itv_cmp(f,opt->optval)) {
-			/* définitivement pas bon - je le mets surtout pour le else */
+			/* dï¿½finitivement pas bon - je le mets surtout pour le else */
 		    } else if (itv_is_leq(f,opt->optval)) {
 			/* do nothing, le optval contient deja f */
 		    } else {
-			/* entrelacements des intervalles: prendre celui qui a la borne sup la plus grande et garder le point quand même */
+			/* entrelacements des intervalles: prendre celui qui a la borne sup la plus grande et garder le point quand mï¿½me */
 			printf("f: ");itv_print(f);printf("optval: ");itv_print(opt->optval);printf("\n");
 			fatal("A implementer .... \n");
 		    }
@@ -715,7 +715,7 @@ void optpr_solve(t1p_internal_t* pr, itv_t alpha0x, itv_t alpha0, itv_t midgx, i
     itv_set(lambda,opt->optsol.lambda);
     itv_set(u0, opt->optsol.u0);
     itv_sub(ulambda, un, lambda);
-    /* on a la dernière solution dans opt->optsol et sa valeur dans opt->optval */
+    /* on a la derniï¿½re solution dans opt->optsol et sa valeur dans opt->optval */
     itv_div(pr->itv, tmp1, u0, lambda);
     itv_div(pr->itv, tmp2, u0, ulambda);
     /* creer deux linexp pour la dimension 0 */
