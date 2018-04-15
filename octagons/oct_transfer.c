@@ -156,6 +156,7 @@ bool hmat_add_lincons(oct_internal_t* pr, bound_t* b, size_t intdim, size_t dim,
       bound_sub_uint(pr->tmp[1], pr->tmp[1], 1);
     }
 
+
     switch (u.type) {
 
     case EMPTY:
@@ -237,6 +238,7 @@ bool hmat_add_lincons(oct_internal_t* pr, bound_t* b, size_t intdim, size_t dim,
 	  if (bound_infty(tmpb)) { Cinf++; Cj2 = Cj1; Cj1 = j; }
 	  else bound_badd(Cb,tmpb);
 	}
+
 	/* upper bound */
 	if (bound_infty(Cb)) ;
 
@@ -402,9 +404,11 @@ bool hmat_add_lincons(oct_internal_t* pr, bound_t* b, size_t intdim, size_t dim,
     default: assert(0);
     }
   }
+
   /* apply pending incremental closure now */
   if (*respect_closure && closure_pending)
-    if (hmat_close_incremental(b,dim,var_pending)) {return true;}
+    if (hmat_close_incremental(b,dim,var_pending)) return true;
+
   return false;
 }
 
@@ -485,6 +489,7 @@ oct_t* oct_meet_lincons_array(ap_manager_t* man,
     respect_closure = (m==a->closed) && (pr->funopt->algorithm>=0);
 
     if (!destructive) m = hmat_copy(pr,m,a->dim);
+
     /* go */
     if (hmat_add_lincons(pr,m,a->intdim,a->dim,array,&exact,&respect_closure)) {
       /* empty */

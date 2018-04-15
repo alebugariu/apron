@@ -4,8 +4,8 @@
 #include <string.h>
 #include <stdio.h>
 
-ap_linexpr0_t * create_octogonal_linexpr0(int dim, long v1, long v2,
-		long coeff1, long coeff2, long scalar_value) {
+ap_linexpr0_t * create_linexpr0(int dim, long v1, long v2, double coeff1,
+		double coeff2, double scalar_value) {
 	ap_coeff_t *cst, *coeff;
 	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE, 2);
 	cst = &linexpr0->cst;
@@ -24,7 +24,7 @@ ap_linexpr0_t * create_octogonal_linexpr0(int dim, long v1, long v2,
 	return linexpr0;
 }
 
-ap_linexpr0_t * create_polyhedral_linexpr0(int dim, long *values) {
+ap_linexpr0_t * create_polyhedral_linexpr0(int dim, double *values) {
 	ap_coeff_t *cst, *coeff;
 	ap_linexpr0_t * linexpr0 = ap_linexpr0_alloc(AP_LINEXPR_SPARSE, dim);
 	cst = &linexpr0->cst;
@@ -47,59 +47,88 @@ bool create_octagon(oct_t** octagon, ap_manager_t* man, oct_t * top, int dim,
 }
 
 int main(int argc, char **argv) {
+
 	int dim = 8;
+	int nbcons = 7;
 
 	ap_manager_t * man = oct_manager_alloc();
 	oct_t * top = oct_top(man, dim, 0);
 	oct_t * bottom = oct_bottom(man, dim, 0);
 
-	oct_t* octagon19;
-	ap_lincons0_array_t lincons0 = ap_lincons0_array_make(1);
+	oct_t* octagon22;
+	ap_lincons0_array_t lincons22 = ap_lincons0_array_make(1);
 
-	lincons0.p[0].constyp = AP_CONS_EQ;
-	ap_linexpr0_t * linexpr0 = create_octogonal_linexpr0(dim, 2, 6, -1, 1,
-			-3711);
-	lincons0.p[0].linexpr0 = linexpr0;
+	lincons22.p[0].constyp = AP_CONS_EQ;
+	ap_linexpr0_t * linexpr22 = create_linexpr0(dim, 1, 5, 1, -1, LONG_MIN);
+	lincons22.p[0].linexpr0 = linexpr22;
 
-	if (create_octagon(&octagon19, man, top, dim, lincons0)) {
-		printf("succesfully created octagon 19:\n");
-		ap_lincons0_array_t a = oct_to_lincons_array(man, octagon19);
+	if (create_octagon(&octagon22, man, top, dim, lincons22)) {
+		printf("successfully created octagon 22:\n");
+		ap_lincons0_array_t a = oct_to_lincons_array(man, octagon22);
 		ap_lincons0_array_fprint(stdout, &a, NULL);
-
-		oct_t* octagon15;
-		ap_lincons0_array_t lincons1 = ap_lincons0_array_make(1);
-
-		lincons1.p[0].constyp = AP_CONS_EQ;
-		ap_linexpr0_t * linexpr1 = create_octogonal_linexpr0(dim, 1, 6, 1, 1,
-				LONG_MAX);
-		lincons1.p[0].linexpr0 = linexpr1;
-
-		if (create_octagon(&octagon15, man, top, dim, lincons1)) {
-			printf("succesfully created octagon 15:\n");
-			a = oct_to_lincons_array(man, octagon15);
-			ap_lincons0_array_fprint(stdout, &a, NULL);
-
-			oct_t* octagon1 = oct_meet(man, false, octagon19, octagon15);
-			printf("\noctagon 1:\n");
-			a = oct_to_lincons_array(man, octagon1);
-			ap_lincons0_array_fprint(stdout, &a, NULL);
-
-			oct_t* octagon2 = octagon1;
-			printf("\noctagon 2:\n");
-			a = oct_to_lincons_array(man, octagon2);
-			ap_lincons0_array_fprint(stdout, &a, NULL);
-
-			if (oct_is_leq(man, octagon1, octagon2)) {
-				oct_t * meet_result = oct_meet(man, false, octagon1, octagon2);
-				printf("\noctagon1 meet octagon2 == octagon1: ");
-				printf("%d\n", (oct_is_eq(man, meet_result, octagon1)));
-				printf("octagon1 meet octagon2 <= octagon1: ");
-				printf("%d\n", (oct_is_leq(man, meet_result, octagon1)));
-				printf("octagon1 <= octagon1 meet octagon2: ");
-				printf("%d\n", (oct_is_leq(man, octagon1, meet_result)));
-			}
-		}
+		printf("\n");
 	}
+
+	oct_t* octagon29;
+
+	ap_lincons0_array_t lincons29 = ap_lincons0_array_make(1);
+
+	lincons29.p[0].constyp = AP_CONS_EQ;
+	ap_linexpr0_t * linexpr9 = create_linexpr0(dim, 4, 5, 1, 0, -1266);
+	lincons29.p[0].linexpr0 = linexpr9;
+
+	if (create_octagon(&octagon29, man, top, dim, lincons29)) {
+		printf("successfully created octagon 29:\n");
+		ap_lincons0_array_t a = oct_to_lincons_array(man, octagon29);
+		ap_lincons0_array_fprint(stdout, &a, NULL);
+		printf("\n");
+	}
+
+	ap_linexpr0_t** assignmentArray = (ap_linexpr0_t**) malloc(
+			sizeof(ap_linexpr0_t*));
+	double values[9] = { 0, 0, 0, 0, 0, 0, 0, 0, 4819 };
+	ap_linexpr0_t* assignment_expression = create_polyhedral_linexpr0(dim,
+			values);
+	assignmentArray[0] = assignment_expression;
+	ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
+	tdim[0] = 5;
+
+	oct_t* octagon32 = oct_assign_linexpr_array(man, false, octagon29, tdim,
+			assignmentArray, 1, NULL);
+
+	printf("successfully created octagon 32:\n");
+	ap_lincons0_array_t a = oct_to_lincons_array(man, octagon32);
+	ap_lincons0_array_fprint(stdout, &a, NULL);
+	printf("\n");
+
+	oct_t* octagon3;
+	ap_lincons0_array_t lincons3 = ap_lincons0_array_make(1);
+
+	lincons3.p[0].constyp = AP_CONS_SUPEQ;
+	ap_linexpr0_t * linexpr3 = create_linexpr0(dim, 4, 7, -1, 1, -LONG_MAX);
+	lincons3.p[0].linexpr0 = linexpr3;
+
+	if (create_octagon(&octagon3, man, top, dim, lincons3)) {
+		printf("successfully created octagon 3:\n");
+		ap_lincons0_array_t a = oct_to_lincons_array(man, octagon3);
+		ap_lincons0_array_fprint(stdout, &a, NULL);
+		printf("\n");
+	}
+
+	oct_t* octagon36 = oct_meet(man, false, octagon3, octagon32);
+	printf("successfully created octagon 36:\n");
+	a = oct_to_lincons_array(man, octagon36);
+	ap_lincons0_array_fprint(stdout, &a, NULL);
+	oct_t * meet_result = oct_meet(man, false, top, octagon36);
+	printf("\nmeet result:\n");
+	a = oct_to_lincons_array(man, meet_result);
+	ap_lincons0_array_fprint(stdout, &a, NULL);
+	printf("\ntop meet octagon == octagon: ");
+	printf("%d\n", (oct_is_eq(man, meet_result, octagon36)));
+	printf("top meet octagon <= octagon: ");
+	printf("%d\n", (oct_is_leq(man, meet_result, octagon36)));
+	printf("octagon <= top meet octagon: ");
+	printf("%d\n", (oct_is_leq(man, octagon36, meet_result)));
 	return 0;
 }
 

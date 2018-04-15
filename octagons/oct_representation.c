@@ -335,9 +335,9 @@ ap_manager_t* oct_manager_alloc(void)
   ap_manager_t* man;
   oct_internal_t* pr;
 
- // if (!ap_fpu_init()) {
-  //  fprintf(stderr,"oct_manager_alloc cannot change the FPU rounding mode\n");
-  //}
+  if (!ap_fpu_init()) {
+    fprintf(stderr,"oct_manager_alloc cannot change the FPU rounding mode\n");
+  }
 
   pr = (oct_internal_t*)malloc(sizeof(oct_internal_t));
   assert(pr);
