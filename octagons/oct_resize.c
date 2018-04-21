@@ -51,14 +51,14 @@ oct_t* oct_forget_array(ap_manager_t* man,
 	bound_set_infty(m[matpos(k,d2+1)],1);
       }
       /* unary constraints on tdim[i] */
-      if (project) {
+      //if (project) {
 	bound_set_int(m[matpos(d2,d2+1)],0);
 	bound_set_int(m[matpos(d2+1,d2)],0);
-      }
-      else {
-	bound_set_infty(m[matpos(d2,d2+1)],1);
-	bound_set_infty(m[matpos(d2+1,d2)],1);
-      }
+      //}
+      //else {
+	//bound_set_infty(m[matpos(d2,d2+1)],1);
+	//bound_set_infty(m[matpos(d2+1,d2)],1);
+      //}
     }
     if (a->closed) {
       /* result is exact on Q, and closed if forget, not project */
