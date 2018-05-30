@@ -153,6 +153,7 @@ t1p_t* t1p_meet(ap_manager_t* man, bool destructive, t1p_t* a1, t1p_t* a2)
 	    } else if (itv_is_point(pr->itv, res->box[i])) {
 		res->paf[i] = t1p_aff_alloc_init(pr);
 		itv_set(res->paf[i]->c, res->box[i]);
+		res->paf[i]->pby++;
 	    } else {
 		//fprintf(stdout, "destructive ? %d\n",destructive);
 		//t1p_fprint(stdout, man, a1, 0x0);
