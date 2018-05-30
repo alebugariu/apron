@@ -56,6 +56,7 @@ void initialize_zonotopes(ap_manager_t* man, int dim, ap_abstract0_t * top,
 				lowerBound = upperBound;
 				upperBound = aux;
 			}
+			printf("[%f, %f]\n", lowerBound, upperBound);
 			ap_interval_set_double(intervals[i], lowerBound, upperBound);
 		}
 		ap_abstract0_t* element = ap_abstract0_of_box(man, dim, 0, intervals);
@@ -69,6 +70,7 @@ void initialize_zonotopes(ap_manager_t* man, int dim, ap_abstract0_t * top,
 		} else {
 			ap_abstract0_free(man, element);
 		}
+		printf("\n");
 	}
 	printf("element %d: ", pool_size);
 	ap_abstract0_fprint(stdout, man, top, NULL);
