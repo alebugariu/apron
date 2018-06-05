@@ -43,7 +43,6 @@ int main(int argc, char **argv) {
 	ap_abstract0_fprint(stdout, man, zonotope4, NULL);
 
 	ap_abstract0_free(man, zonotope3);
-	ap_abstract0_free(man, zonotope4);
 	return 0;
 }
 
