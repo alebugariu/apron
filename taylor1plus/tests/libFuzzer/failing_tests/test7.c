@@ -3,37 +3,45 @@
 #include <string.h>
 #include <stdio.h>
 
-t1p_t * create_zonotope(ap_manager_t* man, int dim, double values[dim][2]) {
+ap_abstract0_t * create_zonotope(ap_manager_t* man, int dim, double values[dim][2]) {
 	ap_interval_t** intervals = ap_interval_array_alloc(dim);
 	int i;
 	for (i = 0; i < dim; i++) {
 		ap_interval_set_double(intervals[i], values[i][0], values[i][1]);
 	}
-	t1p_t * zonotope = t1p_of_box(man, dim, 0, intervals);
+	ap_abstract0_t * zonotope = ap_abstract0_of_box(man, dim, 0, intervals);
 	return zonotope;
 }
 
 int main(int argc, char **argv) {
-	int dim = 8;
+	int dim = 2;
 
 	ap_manager_t * man = t1p_manager_alloc();
+	ap_abstract0_t* bottom = ap_abstract0_bottom(man, dim, 0);
+	ap_abstract0_t* top = ap_abstract0_top(man, dim, 0);
 
-	double values0[8][2] = { { 0, 1 }, { 0, 0 }, { 0, LONG_MAX },
-			{ LONG_MIN, 1 }, { NAN, 0 }, { -1, LONG_MAX }, { 1, NAN }, { NAN, NAN } };
-	t1p_t* zonotope0 = create_zonotope(man, dim, values0);
-	printf("successfully created zonotope0:\n");
-	t1p_fprint(stdout, man, zonotope0, NULL);
+	ap_dim_t * tdim = (ap_dim_t *) malloc(sizeof(ap_dim_t));
+	tdim[0] = 0;
 
-	double values1[8][2] = { { 0, 0 }, { NAN, 0 }, { LONG_MIN, 1 }, { 0, 1 }, { 1,
-			NAN }, { 0, LONG_MAX }, { NAN, 0 }, { NAN, LONG_MAX } };
-	t1p_t* zonotope1 = create_zonotope(man, dim, values1);
-	printf("successfully created zonotope1:\n");
-	t1p_fprint(stdout, man, zonotope1, NULL);
+	ap_abstract0_t* zonotope1 = ap_abstract0_forget_array(man, false, bottom,
+			tdim, 1, false);
+	printf("zonotope1:\n");
+	ap_abstract0_fprint(stdout, man, zonotope1, NULL);
+	printf("zonotope1 is bottom: %d\n", ap_abstract0_is_bottom(man, zonotope1));
 
-	printf("zonotope0 <= zonotope0 join zonotope1: ");
+	double values2[2][2] = { { 0, 0 }, { -6469, -1121 } };
+
+	ap_abstract0_t* zonotope2 = create_zonotope(man, dim, values2);
+	printf("zonotope2:\n");
+	ap_abstract0_fprint(stdout, man, zonotope2, NULL);
+
+	ap_abstract0_t* zonotope3 = ap_abstract0_join(man, false, zonotope1, zonotope2);
+	printf("zonotope3:\n");
+	ap_abstract0_fprint(stdout, man, zonotope3, NULL);
+
+	printf("zonotope1 <= zonotope1 join zonotope2: ");
 	printf("%d\n",
-			(t1p_is_leq(man, zonotope0,
-					t1p_join(man, false, zonotope0, zonotope1))));
+			(ap_abstract0_is_leq(man, zonotope1, zonotope3)));
 	return 0;
 }
 
