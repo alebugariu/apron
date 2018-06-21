@@ -27,7 +27,6 @@ int main(int argc, char **argv) {
 			tdim, 1, false);
 	printf("zonotope1:\n");
 	ap_abstract0_fprint(stdout, man, zonotope1, NULL);
-	printf("zonotope1 is bottom: %d\n", ap_abstract0_is_bottom(man, zonotope1));
 
 	double values2[2][2] = { { 0, 0 }, { -6469, -1121 } };
 
