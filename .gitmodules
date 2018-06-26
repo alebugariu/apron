@@ -1,3 +1,6 @@
 [submodule "generic_tests"]
 	path = generic_tests
 	url = https://github.com/alebugariu/generic_tests/
+[submodule "taylor1plus"]
+	path = taylor1plus
+	url = https://github.com/alebugariu/taylor1plus.git
